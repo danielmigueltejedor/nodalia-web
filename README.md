@@ -44,7 +44,9 @@ Para generar solo un sitio: `npm run build:portal`, `npm run build:vortia`, `npm
 
 ## Publicación en Cloudflare
 
-Los cinco proyectos Pages ya fueron creados mediante **Direct Upload / Wrangler** y enlazados a sus dominios definitivos. Por tanto, **un push a GitHub no actualiza las webs automáticamente**. El workflow de CI de GitHub solo ejecuta las pruebas: no publica ni necesita tokens.
+Los cinco proyectos Pages se crearon mediante **Direct Upload / Wrangler** y están enlazados a sus dominios. El workflow `.github/workflows/validate.yml` comprueba las cinco webs en cada push y pull request; cuando se actualiza `main`, publica automáticamente las cinco carpetas `dist/portal`, `dist/vortia`, `dist/vinilo`, `dist/lienzo` y `dist/nodalix` en sus proyectos Cloudflare Pages. También se puede ejecutar manualmente desde **Actions → Validate and deploy Nodalia sites → Run workflow**.
+
+**Configuración inicial obligatoria (una sola vez):** en **GitHub → nodalia-web → Settings → Secrets and variables → Actions**, añade el secreto `CLOUDFLARE_API_TOKEN` (token de Cloudflare con permiso **Account → Cloudflare Pages → Edit**, limitado a tu cuenta) y la variable `CLOUDFLARE_ACCOUNT_ID` (ID de cuenta Cloudflare). El ID puede configurarse como secreto del mismo nombre si lo prefieres. Los secretos de `danielmigueltejedor.com` no se comparten automáticamente con este repositorio. Si faltan, las pruebas pasan pero el job de despliegue falla deliberadamente con instrucciones; así no se anuncia una publicación que no ocurrió.
 
 Para publicar manualmente los cinco sitios desde el repositorio clonado, con Wrangler autenticado:
 
@@ -58,7 +60,7 @@ npx wrangler pages deploy dist/lienzo --project-name nodalia-lienzo --branch mai
 npx wrangler pages deploy dist/nodalix --project-name nodalia-nodalix --branch main
 ~~~
 
-Para automatizar el despliegue en el futuro, configurar GitHub Actions con credenciales limitadas de Cloudflare Pages, guardadas como *GitHub Actions Secrets* y nunca en el código. No es necesario modificar DNS, los otros subdominios privados de Cloudflare ni los registros de correo.
+Los despliegues automáticos se ejecutan solamente después de superar las pruebas; los pull requests se validan sin publicar. Wrangler está fijado a una versión conocida. No hace falta cambiar DNS, los subdominios privados de Cloudflare ni los registros de correo. Los secretos no deben guardarse en los archivos del repositorio.
 
 ## Nodalix OS: ISO
 
