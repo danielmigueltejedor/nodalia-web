@@ -21,20 +21,19 @@ const safeUrl = (s) => {
 const A = (url, text, className = '', external = false) => `<a href="${safeUrl(url)}" class="${e(className)}"${external ? ' target="_blank" rel="noopener noreferrer"' : ''}>${text}</a>`;
 const iconImg = (app, cls = 'app-icon') => `<img class="${e(cls)}" src="${safeUrl(app.icon)}" alt="Icono de ${e(app.name)}" loading="lazy" decoding="async" />`;
 const nav = (active = '') => `<header class="topbar"><div class="container topbar-inner">
-  ${A(brand.portal, '<img src="/nodalia-wordmark.svg" alt="Nodalia" width="150" height="40"/>', 'brand')}
+  ${A(brand.portal, '<img src="/nodalia-wordmark.svg" alt="Nodalia" width="160" height="44"/>', 'brand')}
   <nav class="nav" aria-label="Navegación principal">
-    ${A(`${brand.portal}/#aplicaciones`, 'Proyectos', active === 'portal' ? '' : 'optional')}
+    ${A(`${brand.portal}/#proyectos`, 'Proyectos', active === 'portal' ? '' : 'optional')}
     ${A('https://nodalix.getnodalia.com', 'Nodalix OS', 'optional')}
     ${A(brand.github, 'GitHub ↗', 'outline', true)}
   </nav>
 </div></header>`;
 const footer = () => `<footer class="footer"><div class="container footer-content">
-  <div><a class="brand" href="${safeUrl(brand.portal)}"><img src="/nodalia-wordmark.svg" width="210" height="58" alt="Nodalia"/></a>
-    <p>Software independiente. Consulta el progreso de cada proyecto en sus repositorios.</p>
-    <p>© ${new Date().getUTCFullYear()} Nodalia</p>
+  <div><a class="brand" href="${safeUrl(brand.portal)}"><img src="/nodalia-wordmark.svg" alt="Nodalia" width="184" height="52"/></a>
+    <p>Vortia · Vinilo · Lienzo · Nodalix OS</p><p>© ${new Date().getUTCFullYear()} Nodalia. Software independiente.</p>
   </div>
-  <nav class="footer-links" aria-label="Enlaces del pie de página">
-    ${A(`${brand.portal}/#aplicaciones`, 'Proyectos')}
+  <nav class="footer-links" aria-label="Enlaces de pie de página">
+    ${A(`${brand.portal}/#proyectos`, 'Proyectos')}
     ${A('https://nodalix.getnodalia.com', 'Nodalix OS')}
     ${A(brand.github, 'GitHub ↗', '', true)}
     ${A(`mailto:${brand.email}`, 'Contacto')}
@@ -43,7 +42,7 @@ const footer = () => `<footer class="footer"><div class="container footer-conten
 const shell = ({title, description, canonical, content, accent = '', preview = '', active = ''}) => `<!doctype html>
 <html lang="es"><head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<meta name="theme-color" content="#f7f7f3"/><meta name="color-scheme" content="light"/>
+<meta name="theme-color" content="#f6f6f2"/><meta name="color-scheme" content="light"/>
 <title>${e(title)}</title><meta name="description" content="${e(description)}"/>
 <link rel="canonical" href="${safeUrl(canonical)}"/>
 <meta property="og:type" content="website"/><meta property="og:title" content="${e(title)}"/>
@@ -56,108 +55,112 @@ ${preview ? `<meta property="og:image" content="${safeUrl(preview)}"/>` : ''}
 ${nav(active)}<main id="contenido">${content}</main>${footer()}</body></html>`;
 
 function home() {
-  const rows = apps.map((app, i) => `<article class="project-row">
-    <span class="project-number">${String(i+1).padStart(2, '0')}</span>
-    <div class="project-title">
-      ${iconImg(app)}
-      <div><h3>${e(app.name)}</h3><span class="project-category">${e(app.category)}</span></div>
-    </div>
-    <p>${e(app.description)}</p>
-    <span class="project-state">${e(app.status)}</span>
-    <a class="project-link" href="${safeUrl(app.domain)}" aria-label="Ver la web de ${e(app.name)}">↗</a>
-  </article>`).join('');
-  const os = apps.find((app) => app.id === 'nodalix');
+  const byId = Object.fromEntries(apps.map((app) => [app.id, app]));
+  const vinilo = byId.vinilo, lienzo = byId.lienzo, nodalix = byId.nodalix;
+  const showcase = (app, cls) => `<div class="preview-feature ${cls}">
+    <div class="preview-heading"><strong>${e(app.name)}</strong><span>CAPTURA REAL · ${e(app.category.toUpperCase())}</span></div>
+    <div class="preview-image"><img src="${safeUrl(app.previews[0][0])}" alt="${e(app.previews[0][1])}" decoding="async" loading="eager" width="1200" height="675"/></div>
+    <div class="preview-bottom"><span>${e(app.technology)}</span><span aria-hidden="true">↗</span></div>
+    <a href="${safeUrl(app.domain)}" aria-label="Descubrir ${e(app.name)}"></a>
+  </div>`;
+  const cards = ['nodalix','vinilo','lienzo','vortia'].map((id,i) => {
+    const app = byId[id];
+    const visual = app.previews.length
+      ? `<img class="real-preview" src="${safeUrl(app.previews[0][0])}" alt="${e(app.previews[0][1])}" loading="lazy" decoding="async"/>`
+      : iconImg(app);
+    return `<article class="project-card" data-product="${e(app.id)}">
+      <div class="project-visual">${visual}</div>
+      <div class="project-body">
+        <div class="project-meta"><span>${String(i+1).padStart(2,'0')} / ${e(app.category)}</span><span>${e(app.platforms.split(' · ')[0])}</span></div>
+        <h3>${e(app.name)}</h3><p>${e(app.description)}</p>
+        <div class="project-bottom"><span>${e(app.status)}</span>${A(app.domain,'Ver proyecto ↗')}</div>
+      </div>
+    </article>`;
+  }).join('');
   return shell({
     title: 'Nodalia — Nodalix OS, Vortia, Vinilo y Lienzo',
-    description: 'Nodalia reúne cuatro proyectos abiertos: Nodalix OS, Vortia, Vinilo y Lienzo. Descubre el código, las funciones y las versiones disponibles.',
+    description: 'Un sistema operativo Linux y tres aplicaciones de escritorio: Nodalix OS, Vortia, Vinilo y Lienzo. Código, documentación y descargas oficiales.',
     canonical: brand.portal + '/',
-    active: 'portal',
-    content: `<section class="home-hero"><div class="container">
-      <div class="intro-meta"><span>NODALIA / SOFTWARE INDEPENDIENTE</span><span>2026 — EN DESARROLLO</span></div>
-      <div class="intro-main">
-        <h1>Un Linux.<br/><em>Tres aplicaciones.</em></h1>
-        <div class="intro-copy">
-          <p>Nodalix OS, Vortia, Vinilo y Lienzo. Cuatro proyectos de software que se desarrollan de forma abierta. Sin promesas de funciones que aún no existen.</p>
-          <div class="actions">
-            ${A(`${brand.portal}/#aplicaciones`, 'Ver los proyectos ↘', 'btn btn-primary')}
-            ${A(brand.github, 'Código en GitHub ↗', 'btn btn-secondary', true)}
-          </div>
+    preview: vinilo.previews[0][0],
+    active:'portal',
+    content:`<section class="home-hero"><div class="container">
+      <div class="hero-upper">
+        <div><span class="kicker">NODALIA · SOFTWARE INDEPENDIENTE</span>
+          <h1 class="hero-title">Un Linux.<br/>Tres apps.<br/><em>Sin rodeos.</em></h1>
+        </div>
+        <div class="hero-aside"><p>Un sistema operativo, un editor de imágenes, un reproductor de música y una herramienta CFD. Cuatro proyectos reales, desarrollados de forma abierta y con objetivos distintos.</p>
+          <div class="actions">${A(`${brand.portal}/#proyectos`,'Explorar proyectos ↓','btn btn-primary')}${A(brand.github,'Ver el código ↗','btn btn-secondary',true)}</div>
         </div>
       </div>
-      <div class="intro-bottom"><span>DESARROLLO ABIERTO / VERSIONES Y CÓDIGO DISPONIBLES EN CADA REPOSITORIO</span><span>DESLIZA ↓</span></div>
-    </div></section>
-    <section id="aplicaciones" class="project-index"><div class="container">
-      <div class="section-heading">
-        <div><span class="eyebrow">01 — CATÁLOGO</span><h2>Los proyectos.</h2></div>
-        <p>Cada producto tiene su propio ritmo de desarrollo. Consulta su estado, la documentación y las versiones que realmente están publicadas.</p>
+      <div class="hero-lower">
+        ${showcase(vinilo,'preview-feature--vinilo')}
+        ${showcase(lienzo,'preview-feature--lienzo')}
       </div>
-      <div class="project-list">${rows}</div>
+      <div class="feature-caption"><span>CAPTURAS PUBLICADAS EN LOS REPOSITORIOS ORIGINALES</span><span>NINGUNA INTERFAZ GENERADA O SIMULADA</span></div>
     </div></section>
-    <section class="nodalix-feature"><div class="container">
-      <div class="nodalix-feature-inner">
-        <div>
-          <span class="eyebrow">02 — NODALIX OS</span>
-          <h2>Un escritorio Linux. Un proyecto completo.</h2>
-          <p>Basado en Arch Linux. GNOME, Wayland, herramientas del sistema y un instalador para PC x86_64. Consulta las ISO disponibles y los requisitos antes de instalar.</p>
-          ${A(os.domain, 'Nodalix OS y sus descargas ↗', 'btn btn-primary')}
-        </div>
-        <div class="nodalix-feature-aside"><img src="${safeUrl(os.icon)}" alt="Icono de Nodalix OS"/><span>ARCH LINUX<br/>GNOME / WAYLAND<br/>X86_64</span></div>
+    <section class="catalogue" id="proyectos"><div class="container">
+      <div class="section-head"><div><span class="eyebrow">01 / PROYECTOS</span><h2>Software en desarrollo.</h2></div>
+        <p>Desde Linux hasta herramientas de ingeniería y creatividad. Cada página explica qué hace el proyecto, en qué estado está y cómo acceder a su código.</p></div>
+      <div class="project-grid">${cards}</div>
+    </div></section>
+    <section class="os-feature"><div class="container os-feature-grid">
+      <div><span class="eyebrow">02 / NODALIX OS</span><h2>El escritorio también importa.</h2>
+        <p>Nodalix OS integra GNOME, Wayland y sus herramientas en una distribución basada en Arch Linux. Consulta las versiones disponibles, los requisitos de arranque y cómo preparar un USB.</p>
+        <div class="actions">${A(nodalix.domain,'Nodalix OS y descargas ↗','btn btn-primary')}</div>
       </div>
+      <div class="os-specimen"><img src="${safeUrl(nodalix.icon)}" alt="Emblema de Nodalix OS" loading="lazy"/>
+        <span>LINUX / ARCH<br/>GNOME · WAYLAND<br/>PC · X86_64</span></div>
     </div></section>
     <div class="value-band"><div class="container value-row">
-      <div><h3>Repositorios públicos</h3><p>Consulta el código, los cambios y los problemas abiertos sin depender de una presentación comercial.</p></div>
-      <div><h3>Software de escritorio</h3><p>Aplicaciones desarrolladas con tecnologías nativas y objetivos concretos, no interfaces web disfrazadas.</p></div>
-      <div><h3>Estado transparente</h3><p>Las limitaciones, dependencias y versiones se documentan en la página de cada proyecto.</p></div>
+      <div><h3>Versiones verificables</h3><p>Los enlaces llevan a publicaciones reales. No mostramos descargas de aplicaciones que todavía no estén disponibles.</p></div>
+      <div><h3>Código accesible</h3><p>Los proyectos tienen repositorios abiertos con documentación, incidencias y un historial de desarrollo público.</p></div>
+      <div><h3>Escritorio primero</h3><p>Software desarrollado alrededor de experiencias de escritorio, no simples envoltorios de páginas web.</p></div>
     </div></div>`
   });
 }
 function product(app) {
-  const headlines = {
-    vortia: 'CFD con OpenFOAM.',
-    vinilo: 'Tu música, en Linux.',
-    lienzo: 'Un editor de imágenes con capas.',
-    nodalix: 'Linux, con un escritorio integrado.'
+  const titles = {
+    vortia: 'Ingeniería de fluidos, en tu escritorio.',
+    vinilo: 'Escucha tu música. Sin salir de GNOME.',
+    lienzo: 'Edición por capas. Control local.',
+    nodalix: 'Una experiencia Linux integrada.'
   };
-  const preview = app.previews.length
-    ? `<figure><img src="${safeUrl(app.previews[0][0])}" alt="${e(app.previews[0][1])}" loading="eager" decoding="async"/><figcaption>${e(app.previews[0][1])} · Captura del repositorio del proyecto</figcaption></figure>`
-    : `<div class="product-placeholder">
-        <span class="placeholder-kicker">${e(app.platforms)} / ${e(app.technology)}</span>
-        <div><img src="${safeUrl(app.icon)}" alt=""/><strong>${e(app.name)}</strong>
-        <p>No hay capturas oficiales disponibles en la documentación del proyecto. Consulta el repositorio para conocer su estado actual.</p></div>
+  const showcase=app.previews.length
+    ? `<figure><img src="${safeUrl(app.previews[0][0])}" alt="${e(app.previews[0][1])}" decoding="async" loading="eager"/><figcaption>${e(app.previews[0][1])} · Imagen del repositorio del proyecto</figcaption></figure>`
+    : `<div class="product-brand-panel"><span class="kicker" style="color:#b8c9bb">${e(app.category.toUpperCase())} / ${e(app.platforms)}</span>
+        <div>${iconImg(app,'product-mark')}<strong>${e(app.name)}</strong><p>No se han publicado capturas oficiales en el repositorio. Consulta el estado de desarrollo y los cambios en GitHub.</p></div>
       </div>`;
   return shell({
-    title: `${app.name} — ${app.eyebrow} | Nodalia`,
-    description: app.description,
-    canonical: app.domain + '/',
-    preview: app.previews[0]?.[0] || app.icon,
-    accent: app.accent,
-    content: `<section class="product-hero"><div class="container hero-grid">
-      <div>
-        <div class="product-heading">${iconImg(app, '')}<div><strong>${e(app.name)}</strong><span class="status-text">${e(app.status)}</span></div></div>
+    title:`${app.name} — ${app.eyebrow} | Nodalia`,
+    description:app.description,
+    canonical:app.domain+'/',
+    preview:app.previews[0]?.[0]||app.icon,
+    accent:app.accent,
+    content:`<section class="product-hero"><div class="container product-layout">
+      <div><div class="product-identity">${iconImg(app,'product-icon')}
+        <div><strong>${e(app.name)}</strong><span>${e(app.status)}</span></div></div>
         <span class="eyebrow">${e(app.eyebrow)}</span>
-        <h1>${e(headlines[app.id] ?? app.headline)}</h1>
+        <h1>${e(titles[app.id]||app.headline)}</h1>
         <p class="lede">${e(app.description)}</p>
-        <div class="actions">${app.id === 'nodalix' ? '<a href="#descargas" class="btn btn-primary">Ir a las descargas ↓</a>' : A(app.repo, e(app.cta) + ' ↗', 'btn btn-primary', true)}
-          ${A(`${brand.portal}/#aplicaciones`, 'Otros proyectos', 'btn btn-secondary')}
-        </div>
+        <div class="actions">${app.id==='nodalix' ? '<a href="#descargas" class="btn btn-primary">Consultar ISO ↓</a>' : A(app.repo,e(app.cta)+' ↗','btn btn-primary',true)}${A(`${brand.portal}/#proyectos`,'Ver otras aplicaciones','btn btn-secondary')}</div>
         <div class="product-meta"><span class="pill">${e(app.platforms)}</span><span class="pill">${e(app.technology)}</span></div>
       </div>
-      <div class="product-preview">${preview}</div>
+      <div class="product-showcase">${showcase}</div>
     </div></section>
-    <section class="section"><div class="container">
-      <span class="eyebrow">01 — FUNCIONES</span><h2>Qué incluye.</h2>
-      <div class="feature-grid">${app.features.map(([h,d],i) => `<article class="feature"><span class="num">${String(i+1).padStart(2,'0')} / ${e(app.name.toUpperCase())}</span><h3>${e(h)}</h3><p>${e(d)}</p></article>`).join('')}</div>
+    <section class="section features-section"><div class="container">
+      <span class="eyebrow">01 / CAPACIDADES</span><h2>Lo que ofrece ${e(app.name)}.</h2>
+      <div class="feature-grid">${app.features.map(([title,desc],i)=>`<article class="feature"><span class="num">${String(i+1).padStart(2,'0')} / ${e(app.name.toUpperCase())}</span><h3>${e(title)}</h3><p>${e(desc)}</p></article>`).join('')}</div>
       <div class="notice"><strong>Estado y requisitos.</strong> ${e(app.limitation)}</div>
     </div></section>
-    ${app.id === 'nodalix' ? nodalixDownloads(app) : ''}
-    ${app.previews.length ? `<section class="section"><div class="container"><span class="eyebrow">02 — CAPTURAS REALES</span><h2>Dentro de ${e(app.name)}.</h2>
-      <div class="gallery">${app.previews.map(([url,alt]) => `<figure><img src="${safeUrl(url)}" alt="${e(alt)}" loading="lazy" decoding="async"/><figcaption>${e(alt)}</figcaption></figure>`).join('')}</div>
+    ${app.id==='nodalix' ? nodalixDownloads(app) : ''}
+    ${app.previews.length ? `<section class="section"><div class="container">
+      <span class="eyebrow">02 / INTERFAZ REAL</span><h2>Vistas de ${e(app.name)}.</h2>
+      <div class="gallery">${app.previews.map(([url,alt])=>`<figure><img src="${safeUrl(url)}" alt="${e(alt)}" loading="lazy" decoding="async"/><figcaption>${e(alt)}</figcaption></figure>`).join('')}</div>
     </div></section>` : ''}
-    <section class="section"><div class="container">
-      <span class="eyebrow">CÓDIGO Y VERSIONES</span>
-      <h2>Consulta el proyecto.</h2>
-      <p>El repositorio contiene el código, la documentación y el historial de desarrollo. Comprueba las publicaciones disponibles antes de descargar o instalar.</p>
-      <div class="actions">${A(app.repo, 'Código y documentación ↗', 'btn btn-primary', true)}${A(`${app.repo}/releases`, 'Versiones publicadas ↗', 'btn btn-secondary', true)}</div>
+    <section class="section product-outro"><div class="container">
+      <span class="eyebrow">DOCUMENTACIÓN / DESARROLLO</span><h2>Seguir el proyecto.</h2>
+      <p>Consulta el código, la documentación y las versiones publicadas directamente en GitHub. La disponibilidad de instaladores varía según el estado de cada aplicación.</p>
+      <div class="actions">${A(app.repo,'Abrir repositorio ↗','btn btn-primary',true)}${A(`${app.repo}/releases`,'Versiones y descargas ↗','btn btn-secondary',true)}</div>
     </div></section>`
   });
 }

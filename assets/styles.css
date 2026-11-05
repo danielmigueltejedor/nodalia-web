@@ -1,227 +1,245 @@
-/* Nodalia — design system / editorial, accessible, no decorative UI simulations. */
-:root {
-  color-scheme: light;
-  --paper: #f7f7f3;
-  --surface: #fff;
-  --ink: #171816;
-  --muted: #62645f;
-  --soft: #8b8d87;
-  --line: #d7d8d1;
-  --line-strong: #a6a8a1;
-  --dark: #171816;
-  --accent: #353b35;
-  --wide: 1280px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-*,*::before,*::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 78px; }
-body { margin: 0; background: var(--paper); color: var(--ink); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
-img { max-width: 100%; }
-a { color: inherit; text-decoration: none; }
-a:hover { text-decoration-color: currentColor; }
-a:focus-visible,button:focus-visible { outline: 3px solid #606963; outline-offset: 4px; }
-h1,h2,h3,p,figure { margin-top: 0; }
-h1,h2,h3 { font-weight: 500; letter-spacing: -.06em; line-height: 1.06; }
-h1 { font-size: clamp(3.9rem, 8.4vw, 8.8rem); }
-h2 { font-size: clamp(2.4rem, 5vw, 5.5rem); }
-h3 { font-size: clamp(1.5rem, 2.4vw, 2.6rem); }
-p { color: var(--muted); }
-.container { width: min(var(--wide),calc(100% - 96px)); margin-inline: auto; }
-.mono,.eyebrow,.project-number,.project-category,.project-state,.project-link,.index-counter,.intro-meta,.feature .num,.release-spec dt,.small-label {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  letter-spacing: .03em;
-}
-.eyebrow { display: block; color: var(--muted); text-transform: uppercase; font-size: 11px; font-weight: 600; margin-bottom: 26px; }
-.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.topbar { background: var(--paper); border-bottom: 1px solid var(--line); position: relative; z-index: 10; }
-.topbar-inner { min-height: 84px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
-.brand { display: inline-flex; align-items: center; flex-shrink: 0; }
-.brand img { display: block; width: 150px; height: auto; filter: invert(1); }
-.nav { display: flex; align-items: center; gap: clamp(16px,2.5vw,36px); font-size: 13px; font-weight: 500; }
-.nav a { padding: 10px 0; }
-.nav a:hover, .footer a:hover, .text-link:hover { text-decoration: underline; text-underline-offset: 5px; }
-.nav .outline { border: 1px solid var(--ink); padding: 11px 19px; transition: background .18s,color .18s; }
-.nav .outline:hover { background: var(--ink); color: var(--surface); text-decoration: none; }
-.actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 14px; min-height: 51px; border: 1px solid var(--ink); padding: 12px 21px; font-size: 13px; font-weight: 600; transition: background .18s,color .18s; }
-.btn-primary { background: var(--ink); color: #fff; }
-.btn-primary:hover { background: #3b403b; border-color: #3b403b; }
-.btn-secondary { background: transparent; color: var(--ink); }
-.btn-secondary:hover { background: #e9e9e4; }
-.text-link { font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
-.note,.small-label { font-size: 12px; color: var(--soft); }
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
-/* Home: editorial instead of decorative cards or simulated desktop windows */
-.home-hero { padding: 38px 0 0; }
-.intro-meta { display: flex; justify-content: space-between; align-items: center; gap: 18px; color: var(--muted); font-size: 11px; text-transform: uppercase; padding-bottom: 24px; }
-.intro-main { border-top: 1px solid var(--ink); display: grid; grid-template-columns: minmax(0,1.55fr) minmax(240px,.45fr); gap: clamp(32px,4vw,72px); padding: clamp(70px,9vw,132px) 0 clamp(85px,10vw,148px); align-items: end; }
-.intro-main h1 { font-size: clamp(4.8rem, 8.7vw, 9.5rem); line-height: .96; margin-bottom: 0; letter-spacing: -.085em; max-width: 1000px; }
-.intro-main h1 em { font-family: Georgia, "Times New Roman", serif; font-weight: 400; letter-spacing: -.075em; }
-.intro-copy { padding-bottom: 8px; }
-.intro-copy p { max-width: 340px; font-size: 17px; line-height: 1.6; }
-.intro-copy .actions { margin-top: 35px; }
-.intro-bottom { display: flex; justify-content: space-between; border-top: 1px solid var(--ink); padding: 17px 0; font-size: 12px; color: var(--muted); }
-.intro-bottom span:last-child { color: var(--ink); }
-.project-index { padding: 116px 0 132px; }
-.section-heading { display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 32px; padding-bottom: 35px; }
-.section-heading h2 { margin: 0; }
-.section-heading p { max-width: 420px; margin: 0 0 6px auto; font-size: 16px; }
-.project-list { border-top: 1px solid var(--ink); }
-.project-row { display: grid; grid-template-columns: 54px minmax(220px,1.25fr) minmax(210px,1fr) minmax(125px,.55fr) 40px; gap: 18px; align-items: center; padding: 36px 0; border-bottom: 1px solid var(--line); transition: padding-left .18s,background .18s; }
-.project-row:hover { padding-left: 12px; background: #efefeb; }
-.project-number { color: var(--soft); align-self: start; padding-top: 19px; font-size: 11px; }
-.project-title { display: flex; align-items: center; gap: 22px; }
-.project-title img { width: 60px; height: 60px; object-fit: contain; flex-shrink: 0; }
-.project-title h3 { margin: 0 0 3px; font-size: clamp(2rem,3.5vw,3.7rem); letter-spacing: -.075em; }
-.project-category { font-size: 11px; color: var(--muted); text-transform: uppercase; }
-.project-row p { margin: 0; font-size: 14px; line-height: 1.6; max-width: 365px; }
-.project-state { font-size: 10px; color: var(--muted); text-transform: uppercase; }
-.project-link { font-size: 27px; text-align: right; transition: transform .18s; }
-.project-row:hover .project-link { transform: translate(3px,-3px); }
-.project-row:focus-within { outline: 2px solid var(--ink); outline-offset: -2px; }
-.nodalix-feature { padding: 0 0 132px; }
-.nodalix-feature-inner { background: var(--ink); color: #f8f8f5; min-height: 390px; display: grid; grid-template-columns: 1fr minmax(220px,.43fr); align-items: center; gap: 60px; padding: clamp(38px,5vw,70px); }
-.nodalix-feature .eyebrow { color: #aaaead; }
-.nodalix-feature h2 { margin: 0 0 22px; max-width: 760px; font-size: clamp(3rem,5.4vw,6rem); }
-.nodalix-feature p { color: #b4b8b3; max-width: 560px; font-size: 16px; margin: 0; }
-.nodalix-feature .btn { background: #f9f9f6; color: var(--ink); border-color: #f9f9f6; margin-top: 32px; }
-.nodalix-feature .btn:hover { background: #d8d9d3; }
-.nodalix-feature-aside { display: flex; flex-direction: column; justify-content: space-between; gap: 35px; border-left: 1px solid #535953; min-height: 230px; padding-left: 36px; }
-.nodalix-feature-aside img { width: 92px; height: 92px; object-fit: contain; }
-.nodalix-feature-aside span { color: #c9cec9; font-size: 12px; line-height: 1.8; text-transform: uppercase; }
-.value-band { background: #eeefea; border-top: 1px solid var(--line); }
-.value-row { display: grid; grid-template-columns: repeat(3,1fr); padding: 64px 0; gap: 36px; }
-.value-row > div { border-top: 1px solid var(--line-strong); padding-top: 22px; }
-.value-row h3 { font-size: 20px; letter-spacing: -.035em; margin-bottom: 10px; }
-.value-row p { font-size: 14px; line-height: 1.65; max-width: 330px; }
+/* Nodalia — purposeful product design. One stylesheet, one coherent system. */
+:root{
+  color-scheme:light;
+  --paper:#f6f6f2;
+  --white:#fff;
+  --ink:#1a211d;
+  --ink-soft:#39433d;
+  --muted:#657169;
+  --line:#d9dcd5;
+  --dark:#18221f;
+  --green:#dce8ce;
+  --max:1240px;
+  font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{margin:0;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:3px solid #758c69;outline-offset:4px}
+img{display:block;max-width:100%}
+h1,h2,h3,p,figure{margin:0}
+h1,h2,h3{letter-spacing:-.056em;line-height:1.09}
+h1,h2{font-weight:600}
+h3{font-weight:600}
+p{color:var(--muted)}
+.container{width:min(var(--max),calc(100% - 88px));margin:0 auto}
+.kicker,.eyebrow,.micro,.project-no,.project-type,.project-meta,.pill,.feature .num,.release-spec dt,.small-label{
+  font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+.kicker,.eyebrow{color:var(--muted);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+.visually-hidden{clip:rect(0,0,0,0);clip-path:inset(50%);position:absolute;width:1px;height:1px;overflow:hidden;white-space:nowrap}
+.topbar{position:sticky;top:0;z-index:40;background:#f6f6f2f5;border-bottom:1px solid var(--line);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.topbar-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:inline-flex;align-items:center;flex-shrink:0}
+.brand img{width:160px;height:44px;object-fit:contain;object-position:left center;filter:brightness(0)}
+.nav{display:flex;align-items:center;gap:32px;font-size:13px;font-weight:600}
+.nav a:not(.outline):hover{color:#607767}
+.nav .outline{border:1px solid #29372e;padding:10px 17px;transition:background .18s,color .18s}
+.nav .outline:hover{background:var(--ink);color:white}
+.btn{border:1px solid var(--ink);min-height:51px;padding:12px 21px;display:inline-flex;align-items:center;justify-content:center;gap:12px;font:600 13px 'DM Sans',sans-serif;transition:background .18s,color .18s,transform .18s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{background:#3d5446;border-color:#3d5446}
+.btn-secondary{background:transparent;color:var(--ink)}
+.btn-secondary:hover{background:#e9ebe5}
+.actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:29px}
+.text-link{text-decoration:underline;text-underline-offset:5px;font-weight:600}
+.text-link:hover{text-decoration-thickness:2px}
+.note,.small-label{font-size:12px;color:var(--muted)}
+.section{padding:108px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:34px}
+.section-head h2,.section h2{font-size:clamp(37px,4.8vw,66px);max-width:840px}
+.section-head p{max-width:410px;font-size:15px;line-height:1.8}
+.rule{height:1px;background:var(--line)}
 
-/* Product pages use real screenshots; unreleased imagery is not faked */
-.product-hero { padding: 70px 0 105px; border-bottom: 1px solid var(--line); }
-.hero-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,.94fr); gap: clamp(40px,5vw,86px); align-items: center; }
-.product-heading { display: flex; align-items: center; gap: 14px; border-bottom: 1px solid var(--line); padding-bottom: 17px; margin-bottom: 55px; }
-.product-heading img { width: 52px; height: 52px; object-fit: contain; }
-.product-heading strong { display: block; font-size: 17px; }
-.product-heading .status-text { display: block; font-size: 12px; color: var(--muted); margin-top: 3px; }
-.product-hero h1 { font-size: clamp(3.7rem,6.2vw,7.3rem); line-height: 1.01; margin-bottom: 26px; letter-spacing: -.07em; }
-.product-hero .lede { font-size: clamp(16px,1.45vw,19px); line-height: 1.62; max-width: 570px; }
-.product-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; }
-.pill { border: 1px solid var(--line-strong); color: #555852; padding: 7px 11px; font-size: 11px; }
-.product-preview { display: flex; align-items: center; justify-content: center; min-height: 360px; border: 1px solid var(--line); background: #e9eae5; padding: 25px; overflow: hidden; }
-.product-preview > img { display: block; width: 100%; max-height: 540px; object-fit: contain; border: 1px solid #c7c9c2; }
-.product-preview figure { width: 100%; margin: 0; }
-.product-preview figure img { width: 100%; height: auto; display: block; border: 1px solid #c7c9c2; }
-.product-preview figcaption { margin-top: 12px; color: var(--muted); font-size: 11px; }
-.product-placeholder { background: #20231f; color: #f6f6f3; min-height: 440px; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(26px,3vw,48px); width: 100%; }
-.product-placeholder img { width: 66px; height: 66px; object-fit: contain; filter: none; }
-.product-placeholder .placeholder-kicker { font-size: 11px; color: #b3b9b2; font-family: ui-monospace, monospace; text-transform: uppercase; }
-.product-placeholder strong { display: block; font-size: clamp(3rem,4.2vw,5.5rem); letter-spacing: -.07em; line-height: 1; margin-bottom: 15px; }
-.product-placeholder p { color: #d0d6cf; font-size: 13px; margin: 0; max-width: 360px; }
-.section { padding: 110px 0; }
-.section h2 { max-width: 920px; margin-bottom: 28px; }
-.section .eyebrow { margin-bottom: 16px; }
-.feature-grid { display: grid; grid-template-columns: repeat(3,1fr); margin-top: 35px; border-top: 1px solid var(--ink); }
-.feature { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 32px 30px 30px 0; min-width: 0; }
-.feature + .feature { padding-left: 30px; }
-.feature:last-child { border-right: 0; }
-.feature .num { color: var(--soft); font-size: 11px; margin-bottom: 50px; display: block; }
-.feature h3 { font-size: clamp(1.55rem,2.2vw,2.2rem); margin-bottom: 15px; }
-.feature p { font-size: 14px; line-height: 1.65; margin: 0; }
-.gallery { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
-.gallery figure { margin: 0; }
-.gallery img { display: block; aspect-ratio: 4/3; object-fit: cover; width: 100%; background: #e9eae5; border: 1px solid var(--line); }
-.gallery figcaption { margin-top: 11px; font-size: 12px; color: var(--muted); }
-.notice { margin-top: 32px; padding: 20px 23px; border: 1px solid var(--line-strong); color: #42453f; font-size: 14px; background: #efefe9; line-height: 1.7; }
-.notice strong { color: var(--ink); }
-.section p:not(.small-label) { line-height: 1.7; }
-.footer { background: #e9eae5; border-top: 1px solid var(--line); padding: 75px 0 62px; }
-.footer-content { display: flex; align-items: start; justify-content: space-between; gap: 36px; }
-.footer .brand img { width: 210px; }
-.footer p { font-size: 12px; margin: 15px 0 0; max-width: 480px; }
-.footer-links { display: flex; flex-wrap: wrap; gap: 24px; font-size: 13px; }
-.spacer { height: 10px; }
+/* Hero: clear typography and real in-product screenshots */
+.home-hero{padding:74px 0 70px}
+.hero-upper{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(260px,.7fr);gap:76px;align-items:end}
+.hero-title{font-size:clamp(4rem,8vw,7.65rem);font-weight:600;letter-spacing:-.08em;line-height:.99;margin:28px 0 0}
+.hero-title em{font-style:normal;color:#657c69}
+.hero-aside{padding-bottom:10px}
+.hero-aside p{font-size:clamp(16px,1.7vw,19px);line-height:1.65;color:var(--ink-soft);max-width:400px}
+.hero-aside .actions{margin-top:32px}
+.hero-lower{margin-top:80px;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(250px,1fr);gap:17px}
+.preview-feature{background:var(--dark);color:#fff;position:relative;min-width:0;overflow:hidden}
+.preview-feature--vinilo{padding:26px 28px 0}
+.preview-feature--lienzo{padding:26px 28px 0;background:#dce4d9;color:var(--ink)}
+.preview-feature .preview-heading{display:flex;align-items:baseline;justify-content:space-between;gap:15px;padding-bottom:18px}
+.preview-heading strong{font-size:19px;letter-spacing:-.035em}
+.preview-heading span{font:11px 'IBM Plex Mono',monospace;color:#adb9ae}
+.preview-feature--lienzo .preview-heading span{color:#506356}
+.preview-feature .preview-image{aspect-ratio:16/9;overflow:hidden;border:1px solid #ffffff24;background:#272e2b}
+.preview-feature--lienzo .preview-image{border-color:#a5b6a4;background:#c5d0c3}
+.preview-image img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .45s ease}
+.preview-feature:hover img{transform:scale(1.025)}
+.preview-bottom{display:flex;justify-content:space-between;align-items:center;padding:17px 0 19px;font:11px 'IBM Plex Mono',monospace;color:#bec8bf}
+.preview-feature--lienzo .preview-bottom{color:#506356}
+.preview-bottom span:last-child{font-size:17px}
+.preview-feature a{position:absolute;inset:0;z-index:2}
+.preview-feature a:focus-visible{outline-offset:-4px}
+.feature-caption{display:flex;align-items:center;justify-content:space-between;gap:14px;border-bottom:1px solid var(--line);padding:19px 0;color:var(--muted);font:11px 'IBM Plex Mono',monospace}
 
-/* Nodalix installer and release metadata */
-.iso-section { background: #e9eae5; }
-.iso-intro { max-width: 720px; font-size: 16px; }
-.download-panel { border: 1px solid var(--ink); background: var(--paper); padding: clamp(25px,3.5vw,50px); margin-top: 35px; }
-.download-panel h3 { font-size: clamp(1.6rem,3.5vw,3.6rem); margin: 20px 0 10px; }
-.download-panel p { margin-bottom: 0; }
-.download-panel .tag { display: inline-block; border: 1px solid var(--line-strong); color: var(--ink); padding: 6px 12px; font-size: 11px; }
-.release-spec { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); border-top: 1px solid var(--line); margin: 32px 0 0; padding-top: 24px; gap: 18px; }
-.release-spec div { min-width: 0; }
-.release-spec dt { color: var(--soft); font-size: 11px; text-transform: uppercase; }
-.release-spec dd { margin: 4px 0 0; font-size: 17px; font-weight: 600; }
-.checksum { margin-top: 24px; border-top: 1px solid var(--line); padding-top: 20px; }
-.checksum[hidden] { display: none; }
-.checksum strong { font-size: 13px; }
-.checksum code { display: block; overflow-wrap: anywhere; font-size: 13px; margin: 8px 0; }
-.checksum p { font-size: 12px; }
-.download-links { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; margin-top: 26px; }
-.download-links p { flex: 0 0 100%; font-size: 13px; margin: 0; }
-.install-section code { overflow-wrap: anywhere; }
-@media(max-width:1100px) {
-  .container { width: min(var(--wide),calc(100% - 64px)); }
-  .project-row { grid-template-columns: 38px minmax(190px,1.2fr) minmax(210px,1fr) 34px; }
-  .project-state { display: none; }
-  .intro-main { grid-template-columns: 1fr minmax(220px,.43fr); }
+/* Actual product data, no invented UI mockups */
+.catalogue{padding:108px 0 120px}
+.project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.project-card{display:flex;flex-direction:column;min-width:0;border:1px solid var(--line);background:#fff;transition:border-color .2s,transform .2s}
+.project-card:hover{transform:translateY(-3px);border-color:#8e9d90}
+.project-visual{height:278px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#e8eee6}
+.project-card[data-product="nodalix"] .project-visual{background:#172323}
+.project-card[data-product="vortia"] .project-visual{background:#e8f0f2}
+.project-card[data-product="vinilo"] .project-visual{background:#e7e3e9}
+.project-card[data-product="lienzo"] .project-visual{background:#e1e7df}
+.project-visual img{max-width:82%;height:auto;max-height:195px;object-fit:contain}
+.project-visual img.real-preview{width:100%;height:100%;max-height:none;max-width:none;object-fit:cover;object-position:top}
+.project-card[data-product="nodalix"] .project-visual img{max-height:154px}
+.project-body{padding:29px 30px 27px;display:flex;flex-direction:column;flex:1}
+.project-meta{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:10px;text-transform:uppercase}
+.project-body h3{font-size:clamp(34px,3vw,45px);margin:25px 0 10px}
+.project-body p{font-size:14px;line-height:1.75;max-width:510px;flex:1}
+.project-bottom{border-top:1px solid var(--line);margin-top:33px;padding-top:19px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.project-bottom span{font-size:12px;color:var(--muted)}
+.project-bottom a{font-weight:600;font-size:13px;white-space:nowrap}
+.project-bottom a:hover{text-decoration:underline;text-underline-offset:4px}
+
+/* One intentionally strong block rather than floating glows and faux UI */
+.os-feature{background:#15211e;color:#fff;padding:90px 0}
+.os-feature-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:70px;align-items:center}
+.os-feature .eyebrow{color:#a8b8ac}
+.os-feature h2{font-size:clamp(3rem,5.2vw,5.8rem);max-width:780px;margin:25px 0}
+.os-feature p{color:#cad4cc;font-size:17px;max-width:620px;line-height:1.65}
+.os-feature .btn{background:#ecf0e7;border-color:#ecf0e7;color:#19251c}
+.os-feature .btn:hover{background:#d4e2ce}
+.os-specimen{min-height:330px;border:1px solid #506054;display:flex;flex-direction:column;justify-content:space-between;padding:28px}
+.os-specimen img{width:104px;height:104px;object-fit:contain}
+.os-specimen span{font:12px/2 'IBM Plex Mono',monospace;color:#ced8d0;letter-spacing:.04em}
+.value-band{background:#e9eee7;border-top:1px solid #d1d9ce}
+.value-row{display:grid;grid-template-columns:repeat(3,1fr);gap:35px;padding:59px 0}
+.value-row >div{border-top:1px solid #aeb9ac;padding-top:19px}
+.value-row h3{font-size:19px;letter-spacing:-.04em;margin-bottom:12px}
+.value-row p{font-size:13px;line-height:1.7;max-width:320px}
+
+/* Individual products */
+.product-hero{padding:85px 0 95px}
+.product-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.98fr);gap:clamp(30px,5vw,80px);align-items:center}
+.product-identity{display:flex;align-items:center;gap:16px;padding-bottom:23px;border-bottom:1px solid var(--line);margin-bottom:45px}
+.product-identity img{width:58px;height:58px;object-fit:contain}
+.product-identity strong{display:block;font-size:18px}
+.product-identity span{font-size:12px;color:var(--muted)}
+.product-hero h1{font-size:clamp(3.5rem,5.8vw,6.4rem);letter-spacing:-.07em;line-height:1.03;margin:17px 0 27px}
+.product-hero .lede{font-size:18px;line-height:1.7;max-width:560px;color:var(--ink-soft)}
+.product-meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:30px}
+.pill{border:1px solid #c0cbc0;font-size:11px;padding:8px 11px;color:#526152;letter-spacing:0}
+.product-showcase{background:#e6ebe4;min-height:455px;padding:23px;display:flex;align-items:center;justify-content:center}
+.product-showcase figure{margin:0;width:100%}
+.product-showcase figure img{width:100%;height:auto;max-height:500px;object-fit:contain;border:1px solid #cbd4c9}
+.product-showcase figcaption{padding-top:12px;font-size:11px;color:var(--muted)}
+.product-brand-panel{width:100%;height:400px;background:#162322;color:#fff;padding:37px;display:flex;flex-direction:column;justify-content:space-between}
+.product-brand-panel img{width:100px;height:100px;object-fit:contain}
+.product-brand-panel strong{font-size:clamp(40px,4vw,66px);letter-spacing:-.065em}
+.product-brand-panel p{font-size:13px;color:#bac8be;max-width:310px}
+.features-section{border-top:1px solid var(--line)}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);margin-top:34px}
+.feature{border-right:1px solid var(--line);padding:33px 28px 33px 0}
+.feature + .feature{padding-left:28px}
+.feature:last-child{border-right:0}
+.feature .num{font-size:11px;color:var(--muted);display:block;margin-bottom:44px}
+.feature h3{font-size:clamp(21px,2.1vw,29px);margin-bottom:16px}
+.feature p{font-size:14px;line-height:1.7}
+.notice{padding:22px 24px;border:1px solid #cbd2c8;background:#eaf0e8;margin-top:32px;color:#475448;font-size:14px;line-height:1.75}
+.notice strong{color:var(--ink)}
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.gallery figure{margin:0}
+.gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;border:1px solid var(--line)}
+.gallery figcaption{font-size:12px;color:var(--muted);margin-top:10px}
+.product-outro{background:#e9eee7;border-top:1px solid var(--line)}
+.product-outro p{max-width:650px}
+
+/* Existing Nodalix GitHub releases / SHA verification UI */
+.iso-section{background:#e9eee7;border-top:1px solid var(--line)}
+.iso-intro{max-width:780px;font-size:16px}
+.download-panel{border:1px solid #9da99d;background:var(--paper);padding:clamp(24px,4vw,45px);margin-top:31px}
+.download-panel h3{font-size:clamp(25px,3vw,43px);margin:17px 0 8px}
+.download-panel p{font-size:14px}
+.tag{display:inline-block;padding:7px 11px;border:1px solid var(--line);font:11px 'IBM Plex Mono',monospace;color:var(--muted)}
+.release-spec{border-top:1px solid var(--line);margin:30px 0 0;padding-top:23px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.release-spec dt{font-size:11px;color:var(--muted);text-transform:uppercase}
+.release-spec dd{margin:4px 0 0;font-weight:600}
+.checksum{border-top:1px solid var(--line);margin-top:26px;padding-top:20px}
+.checksum[hidden]{display:none}
+.checksum strong{font-size:13px}
+.checksum code{font-size:13px;overflow-wrap:anywhere;display:block;margin-top:8px}
+.checksum p{font-size:12px}
+.download-links{display:flex;align-items:center;flex-wrap:wrap;gap:15px 24px;margin-top:24px}
+.download-links p{flex-basis:100%;margin-bottom:0}
+.install-section code{overflow-wrap:anywhere}
+.footer{background:#e9eee7;border-top:1px solid #cfd7cc;padding:65px 0}
+.footer-content{display:flex;align-items:flex-start;justify-content:space-between;gap:45px}
+.footer .brand img{width:184px}
+.footer p{font-size:12px;margin-top:14px;max-width:460px}
+.footer-links{display:flex;flex-wrap:wrap;gap:25px;font-size:13px;font-weight:600}
+.footer-links a:hover{text-decoration:underline;text-underline-offset:5px}
+@media(max-width:1040px){
+ .container{width:min(var(--max),calc(100% - 56px))}
+ .hero-upper{gap:40px}
+ .hero-title{font-size:clamp(3.6rem,8vw,6.2rem)}
+ .os-feature-grid{grid-template-columns:minmax(0,1fr) 250px;gap:30px}
+ .os-specimen{min-height:275px}
 }
-@media(max-width:850px) {
-  .container { width: min(var(--wide),calc(100% - 44px)); }
-  .intro-main,.hero-grid,.nodalix-feature-inner { grid-template-columns: 1fr; }
-  .intro-main { padding: 85px 0 90px; gap: 40px; }
-  .intro-main h1 { font-size: clamp(4.2rem,10.5vw,7rem); }
-  .intro-copy p { max-width: 600px; }
-  .section-heading { grid-template-columns: 1fr; gap: 18px; }
-  .section-heading p { margin: 0; }
-  .project-row { grid-template-columns: 32px 1fr 36px; gap: 14px; padding: 29px 0; }
-  .project-row p { grid-column: 2; max-width: 540px; }
-  .project-link { grid-column: 3; grid-row: 1 / span 2; }
-  .project-number { grid-row: 1 / span 2; }
-  .nodalix-feature-aside { display: none; }
-  .feature-grid { grid-template-columns: 1fr; }
-  .feature,.feature + .feature { border-right: 0; padding: 28px 0; }
-  .feature .num { margin-bottom: 22px; }
-  .gallery { grid-template-columns: repeat(2,1fr); }
-  .value-row { grid-template-columns: 1fr 1fr; }
-  .product-preview { min-height: 320px; }
+@media(max-width:800px){
+ .hero-upper,.product-layout{grid-template-columns:1fr;gap:35px}
+ .hero-upper h1{max-width:680px}
+ .hero-aside p{max-width:620px}
+ .hero-lower{margin-top:55px}
+ .project-grid{gap:12px}
+ .project-visual{height:210px}
+ .os-feature-grid{grid-template-columns:1fr}
+ .os-specimen{min-height:0;flex-direction:row;align-items:center}
+ .section-head{display:block}
+ .section-head p{margin-top:22px}
+ .feature-grid{grid-template-columns:1fr}
+ .feature,.feature + .feature{padding:25px 0;border-right:0;border-bottom:1px solid var(--line)}
+ .feature .num{margin-bottom:19px}
+ .gallery{grid-template-columns:repeat(2,1fr)}
+ .value-row{grid-template-columns:1fr 1fr}
+ .product-showcase{min-height:300px}
 }
-@media(max-width:600px) {
-  html { scroll-padding-top: 60px; }
-  .container { width: calc(100% - 36px); }
-  .topbar-inner { min-height: 70px; }
-  .brand img { width: 119px; }
-  .nav { gap: 13px; font-size: 12px; }
-  .nav .optional { display: none; }
-  .nav .outline { padding: 8px 10px; }
-  .home-hero { padding-top: 22px; }
-  .intro-meta { font-size: 9px; }
-  .intro-main { padding: 60px 0 75px; }
-  .intro-main h1 { font-size: clamp(3.3rem,13vw,5.4rem); letter-spacing: -.075em; }
-  .intro-copy p { font-size: 16px; }
-  .intro-bottom { font-size: 10px; }
-  .project-index { padding: 76px 0 85px; }
-  .section-heading { padding-bottom: 23px; }
-  .project-title { gap: 12px; }
-  .project-title img { width: 46px; height: 46px; }
-  .project-title h3 { font-size: clamp(1.75rem,7vw,2.8rem); }
-  .project-category { font-size: 10px; }
-  .project-number { padding-top: 13px; }
-  .project-row p { font-size: 13px; }
-  .project-link { font-size: 24px; }
-  .nodalix-feature { padding-bottom: 85px; }
-  .nodalix-feature-inner { min-height: 0; padding: 34px 24px; }
-  .nodalix-feature h2 { font-size: clamp(2.7rem,10vw,4rem); }
-  .value-row { grid-template-columns: 1fr; padding: 46px 0; }
-  .product-hero { padding: 42px 0 75px; }
-  .product-heading { margin-bottom: 37px; }
-  .product-hero h1 { font-size: clamp(3.3rem,11vw,5rem); }
-  .product-preview { min-height: 220px; padding: 12px; }
-  .product-placeholder { min-height: 330px; }
-  .section { padding: 75px 0; }
-  .gallery { grid-template-columns: 1fr; }
-  .footer { padding: 52px 0; }
-  .footer-content { display: block; }
-  .footer-links { margin-top: 27px; }
-  .release-spec { grid-template-columns: 1fr 1fr; }
+@media(max-width:600px){
+ .container{width:calc(100% - 36px)}
+ .topbar-inner{height:66px}
+ .brand img{width:122px;height:34px}
+ .nav{gap:15px;font-size:12px}
+ .nav .optional{display:none}
+ .nav .outline{padding:8px 12px}
+ .home-hero{padding:48px 0 52px}
+ .hero-title{font-size:clamp(3.35rem,13vw,5.2rem);margin-top:17px}
+ .hero-aside p{font-size:16px}
+ .hero-lower{grid-template-columns:1fr;margin-top:43px}
+ .preview-feature--vinilo,.preview-feature--lienzo{padding:17px 17px 0}
+ .feature-caption{font-size:10px;line-height:1.7}
+ .section,.catalogue{padding:72px 0}
+ .section h2,.section-head h2{font-size:clamp(36px,10vw,51px)}
+ .project-grid,.value-row{grid-template-columns:1fr}
+ .project-visual{height:225px}
+ .project-body{padding:23px}
+ .project-body h3{font-size:37px;margin-top:18px}
+ .os-feature{padding:68px 0}
+ .os-feature h2{font-size:clamp(3rem,11vw,4rem)}
+ .os-specimen{padding:22px}
+ .os-specimen img{width:70px;height:70px}
+ .product-hero{padding:52px 0 72px}
+ .product-hero h1{font-size:clamp(3rem,12vw,5rem)}
+ .product-hero .lede{font-size:16px}
+ .product-showcase{min-height:240px;padding:13px}
+ .product-brand-panel{height:340px;padding:26px}
+ .gallery{grid-template-columns:1fr}
+ .footer-content{display:block}
+ .footer-links{margin-top:28px}
+ .release-spec{grid-template-columns:1fr 1fr}
 }
-@media(prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *,*::before,*::after { transition: none !important; } }
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*::before,*::after{transition:none!important;animation:none!important}
+}
