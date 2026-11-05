@@ -21,18 +21,29 @@ const safeUrl = (s) => {
 const A = (url, text, className = '', external = false) => `<a href="${safeUrl(url)}" class="${e(className)}"${external ? ' target="_blank" rel="noopener noreferrer"' : ''}>${text}</a>`;
 const iconImg = (app, cls = 'app-icon') => `<img class="${e(cls)}" src="${safeUrl(app.icon)}" alt="Icono de ${e(app.name)}" loading="lazy" decoding="async" />`;
 const nav = (active = '') => `<header class="topbar"><div class="container topbar-inner">
-  ${A(brand.portal, `<img src="/nodalia-wordmark.svg" alt="Nodalia" width="178" height="48"/>`, 'brand')}
+  ${A(brand.portal, '<img src="/nodalia-wordmark.svg" alt="Nodalia" width="150" height="40"/>', 'brand')}
   <nav class="nav" aria-label="Navegación principal">
-   ${A(`${brand.portal}/#aplicaciones`, 'Aplicaciones', active === 'portal' ? '' : 'optional')}
-   ${A(brand.github, 'GitHub', 'optional', true)}
-   ${A(brand.portal, 'Explorar', 'outline')}
+    ${A(`${brand.portal}/#aplicaciones`, 'Proyectos', active === 'portal' ? '' : 'optional')}
+    ${A('https://nodalix.getnodalia.com', 'Nodalix OS', 'optional')}
+    ${A(brand.github, 'GitHub ↗', 'outline', true)}
   </nav>
- </div></header>`;
-const footer = () => `<footer class="footer"><div class="container footer-content"><div><div class="brand"><img src="/nodalia-wordmark.svg" alt="Nodalia" width="210" height="62"/></div><p>Software creado con cuidado, abierto a nuevas ideas.</p><p>© ${new Date().getUTCFullYear()} Nodalia · Proyectos independientes, no afiliados a marcas de terceros.</p></div><div class="footer-links">${A(brand.portal, 'Inicio')}${A(brand.github, 'GitHub', '', true)}${A(`mailto:${brand.email}`, 'Contacto')}</div></div></footer>`;
+</div></header>`;
+const footer = () => `<footer class="footer"><div class="container footer-content">
+  <div><a class="brand" href="${safeUrl(brand.portal)}"><img src="/nodalia-wordmark.svg" width="210" height="58" alt="Nodalia"/></a>
+    <p>Software independiente. Consulta el progreso de cada proyecto en sus repositorios.</p>
+    <p>© ${new Date().getUTCFullYear()} Nodalia</p>
+  </div>
+  <nav class="footer-links" aria-label="Enlaces del pie de página">
+    ${A(`${brand.portal}/#aplicaciones`, 'Proyectos')}
+    ${A('https://nodalix.getnodalia.com', 'Nodalix OS')}
+    ${A(brand.github, 'GitHub ↗', '', true)}
+    ${A(`mailto:${brand.email}`, 'Contacto')}
+  </nav>
+</div></footer>`;
 const shell = ({title, description, canonical, content, accent = '', preview = '', active = ''}) => `<!doctype html>
 <html lang="es"><head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<meta name="theme-color" content="#090a0b"/><meta name="color-scheme" content="dark"/>
+<meta name="theme-color" content="#f7f7f3"/><meta name="color-scheme" content="light"/>
 <title>${e(title)}</title><meta name="description" content="${e(description)}"/>
 <link rel="canonical" href="${safeUrl(canonical)}"/>
 <meta property="og:type" content="website"/><meta property="og:title" content="${e(title)}"/>
@@ -45,50 +56,109 @@ ${preview ? `<meta property="og:image" content="${safeUrl(preview)}"/>` : ''}
 ${nav(active)}<main id="contenido">${content}</main>${footer()}</body></html>`;
 
 function home() {
-  const card = (app) => `<article class="app-card"><div>${iconImg(app)}</div><span class="category">${e(app.category)}</span><h3>${e(app.name)}</h3><p>${e(app.description)}</p><div class="card-foot"><span class="tag ${e(app.statusKind)}">${e(app.status)}</span>${A(app.domain, '<span class="arrow" aria-hidden="true">↗</span><span class="visually-hidden">Visitar '+e(app.name)+'</span>')}</div></article>`;
-  const tile = (app) => `<div class="art-tile">${iconImg(app, '')}<div><b>${e(app.name)}</b><span>${e(app.category)}</span></div></div>`;
+  const rows = apps.map((app, i) => `<article class="project-row">
+    <span class="project-number">${String(i+1).padStart(2, '0')}</span>
+    <div class="project-title">
+      ${iconImg(app)}
+      <div><h3>${e(app.name)}</h3><span class="project-category">${e(app.category)}</span></div>
+    </div>
+    <p>${e(app.description)}</p>
+    <span class="project-state">${e(app.status)}</span>
+    <a class="project-link" href="${safeUrl(app.domain)}" aria-label="Ver la web de ${e(app.name)}">↗</a>
+  </article>`).join('');
+  const os = apps.find((app) => app.id === 'nodalix');
   return shell({
-    title: 'Nodalia — Software y sistemas operativos con identidad propia',
-    description: 'Descubre las aplicaciones y sistemas operativos de Nodalia: Vortia, Vinilo, Lienzo y Nodalix OS para Linux.',
+    title: 'Nodalia — Nodalix OS, Vortia, Vinilo y Lienzo',
+    description: 'Nodalia reúne cuatro proyectos abiertos: Nodalix OS, Vortia, Vinilo y Lienzo. Descubre el código, las funciones y las versiones disponibles.',
     canonical: brand.portal + '/',
     active: 'portal',
-    content: `<section class="hero"><div class="container hero-grid"><div>
-      <span class="eyebrow">NODALIA / SOFTWARE INDEPENDIENTE</span>
-      <h1>Software para hacer más.</h1>
-      <p class="lede">Herramientas independientes para crear, investigar y disfrutar. Un ecosistema de aplicaciones nativas y un sistema operativo Linux, sin complicaciones.</p>
-      <div class="actions">${A(`${brand.portal}/#aplicaciones`, 'Descubrir aplicaciones <span aria-hidden="true">↗</span>', 'btn btn-primary')}${A('https://nodalix.getnodalia.com', 'Conocer Nodalix OS <span aria-hidden="true">↗</span>', 'btn btn-secondary')}</div>
-      <p class="note">Proyectos open source · Desarrollo continuo</p></div>
-      <div class="hero-art" aria-label="Vista del catálogo de aplicaciones Nodalia"><div class="orb"></div><div class="art-panel"><div class="panel-top"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span class="panel-label">NODALIA / APPS</span></div><div class="art-grid">${apps.map(tile).join('')}</div></div><div class="floating-chip">HECHO CON INTENCIÓN / 2026</div></div>
+    content: `<section class="home-hero"><div class="container">
+      <div class="intro-meta"><span>NODALIA / SOFTWARE INDEPENDIENTE</span><span>2026 — EN DESARROLLO</span></div>
+      <div class="intro-main">
+        <h1>Un Linux.<br/><em>Tres aplicaciones.</em></h1>
+        <div class="intro-copy">
+          <p>Nodalix OS, Vortia, Vinilo y Lienzo. Cuatro proyectos de software que se desarrollan de forma abierta. Sin promesas de funciones que aún no existen.</p>
+          <div class="actions">
+            ${A(`${brand.portal}/#aplicaciones`, 'Ver los proyectos ↘', 'btn btn-primary')}
+            ${A(brand.github, 'Código en GitHub ↗', 'btn btn-secondary', true)}
+          </div>
+        </div>
+      </div>
+      <div class="intro-bottom"><span>DESARROLLO ABIERTO / VERSIONES Y CÓDIGO DISPONIBLES EN CADA REPOSITORIO</span><span>DESLIZA ↓</span></div>
     </div></section>
-    <section class="section" id="aplicaciones"><div class="container"><div class="section-head"><div><span class="eyebrow">El catálogo</span><h2>Herramientas para cada idea.</h2></div><p>Cuatro proyectos, cuatro formas de hacer las cosas. Conoce cada producto y su estado real de desarrollo.</p></div><div class="app-grid">${apps.map(card).join('')}</div></div></section>
-    <section class="nodalix-feature"><div class="container"><div class="nodalix-feature-inner"><div><span class="eyebrow">UN SISTEMA OPERATIVO DIFERENTE</span><h2>Linux, hecho para sentirse propio.</h2><p>Descubre Nodalix OS, su escritorio integrado y las imágenes oficiales para instalarlo desde USB.</p></div>${A('https://nodalix.getnodalia.com', 'Explorar Nodalix OS ↗', 'btn btn-primary')}</div></div></section>
-    <div class="value-band"><div class="container value-row"><div><span class="value-icon">◇</span><h3>Código abierto</h3><p>Consulta el código, sigue el desarrollo y participa en los proyectos.</p></div><div><span class="value-icon">◎</span><h3>Experiencias nativas</h3><p>Aplicaciones construidas pensando en las posibilidades del escritorio.</p></div><div><span class="value-icon">✧</span><h3>En evolución</h3><p>Las funciones, plataformas y versiones dependen del estado de cada proyecto.</p></div></div></div>`
+    <section id="aplicaciones" class="project-index"><div class="container">
+      <div class="section-heading">
+        <div><span class="eyebrow">01 — CATÁLOGO</span><h2>Los proyectos.</h2></div>
+        <p>Cada producto tiene su propio ritmo de desarrollo. Consulta su estado, la documentación y las versiones que realmente están publicadas.</p>
+      </div>
+      <div class="project-list">${rows}</div>
+    </div></section>
+    <section class="nodalix-feature"><div class="container">
+      <div class="nodalix-feature-inner">
+        <div>
+          <span class="eyebrow">02 — NODALIX OS</span>
+          <h2>Un escritorio Linux. Un proyecto completo.</h2>
+          <p>Basado en Arch Linux. GNOME, Wayland, herramientas del sistema y un instalador para PC x86_64. Consulta las ISO disponibles y los requisitos antes de instalar.</p>
+          ${A(os.domain, 'Nodalix OS y sus descargas ↗', 'btn btn-primary')}
+        </div>
+        <div class="nodalix-feature-aside"><img src="${safeUrl(os.icon)}" alt="Icono de Nodalix OS"/><span>ARCH LINUX<br/>GNOME / WAYLAND<br/>X86_64</span></div>
+      </div>
+    </div></section>
+    <div class="value-band"><div class="container value-row">
+      <div><h3>Repositorios públicos</h3><p>Consulta el código, los cambios y los problemas abiertos sin depender de una presentación comercial.</p></div>
+      <div><h3>Software de escritorio</h3><p>Aplicaciones desarrolladas con tecnologías nativas y objetivos concretos, no interfaces web disfrazadas.</p></div>
+      <div><h3>Estado transparente</h3><p>Las limitaciones, dependencias y versiones se documentan en la página de cada proyecto.</p></div>
+    </div></div>`
   });
 }
 function product(app) {
-  const preview = app.id === 'nodalix'
-    ? `<div class="nodalix-concept" role="img" aria-label="Ilustración conceptual del escritorio Nodalix OS, no una captura real"><div class="desktop-top"><span>●</span><span>NODALIX / WAYLAND</span><span>◈ ◦ ●</span></div><div class="desktop-centre"><img src="${safeUrl(app.icon)}" alt=""/><strong>Nodalix OS</strong><span>Linux, integrado.</span></div><span class="desktop-caption">Concepto visual · No es una captura del sistema</span></div>`
-    : app.previews.length
-    ? `<img src="${safeUrl(app.previews[0][0])}" alt="${e(app.previews[0][1])}" loading="eager" decoding="async"/>`
-    : `<div class="concept" role="img" aria-label="Ilustración conceptual abstracta de una malla de simulación"><div class="concept-header"><i></i><i></i><i></i></div><div class="concept-main"><div class="concept-geometry"></div></div><span class="concept-caption">Visualización conceptual · No es una captura del programa</span></div>`;
+  const headlines = {
+    vortia: 'CFD con OpenFOAM.',
+    vinilo: 'Tu música, en Linux.',
+    lienzo: 'Un editor de imágenes con capas.',
+    nodalix: 'Linux, con un escritorio integrado.'
+  };
+  const preview = app.previews.length
+    ? `<figure><img src="${safeUrl(app.previews[0][0])}" alt="${e(app.previews[0][1])}" loading="eager" decoding="async"/><figcaption>${e(app.previews[0][1])} · Captura del repositorio del proyecto</figcaption></figure>`
+    : `<div class="product-placeholder">
+        <span class="placeholder-kicker">${e(app.platforms)} / ${e(app.technology)}</span>
+        <div><img src="${safeUrl(app.icon)}" alt=""/><strong>${e(app.name)}</strong>
+        <p>No hay capturas oficiales disponibles en la documentación del proyecto. Consulta el repositorio para conocer su estado actual.</p></div>
+      </div>`;
   return shell({
     title: `${app.name} — ${app.eyebrow} | Nodalia`,
     description: app.description,
     canonical: app.domain + '/',
     preview: app.previews[0]?.[0] || app.icon,
     accent: app.accent,
-    content: `<section class="product-hero"><div class="container hero-grid"><div>
-      <div class="product-heading">${iconImg(app, '')}<div><strong>${e(app.name)}</strong><span class="status-text">${e(app.status)}</span></div></div>
-      <span class="eyebrow">${e(app.eyebrow)}</span>
-      <h1>${e(app.headline)}</h1><p class="lede">${e(app.description)}</p>
-      <div class="actions">${app.id === 'nodalix' ? '<a href="#descargas" class="btn btn-primary">Descargar ISO <span aria-hidden="true">↓</span></a>' : A(app.repo, e(app.cta) + ' <span aria-hidden="true">↗</span>', 'btn btn-primary', true)}${A(brand.portal, 'Más aplicaciones', 'btn btn-secondary')}</div>
-      <div class="product-meta"><span class="pill">${e(app.platforms)}</span><span class="pill">${e(app.technology)}</span></div></div>
-      <div class="product-preview">${preview}</div></div></section>
-      <section class="section"><div class="container"><span class="eyebrow">Pensado para tu escritorio</span><h2>Lo que hace diferente a ${e(app.name)}</h2><div class="feature-grid">${app.features.map(([h, d], i) => `<article class="feature"><span class="num">0${i + 1} / CARACTERÍSTICA</span><h3>${e(h)}</h3><p>${e(d)}</p></article>`).join('')}</div>
-      <div class="notice"><strong>Estado y requisitos:</strong> ${e(app.limitation)}</div></div></section>
-      ${app.id === 'nodalix' ? nodalixDownloads(app) : ''}
-      ${app.previews.length ? `<section class="section"><div class="container"><span class="eyebrow">La aplicación por dentro</span><h2>Una mirada a ${e(app.name)}</h2><div class="gallery">${app.previews.map(([url, alt]) => `<figure><img src="${safeUrl(url)}" alt="${e(alt)}" loading="lazy" decoding="async"/><figcaption>${e(alt)}</figcaption></figure>`).join('')}</div></div></section>` : ''}
-      <section class="section"><div class="container"><span class="eyebrow">Participa</span><h2>Construido de forma abierta.</h2><p>Lee la documentación, consulta las versiones disponibles y sigue el desarrollo directamente en el repositorio.</p><div class="actions">${A(app.repo, 'Abrir repositorio ↗', 'btn btn-primary', true)}${A(`${app.repo}/releases`, 'Ver versiones', 'btn btn-secondary', true)}</div><p class="small-label">La disponibilidad de descargas compiladas varía según la aplicación.</p></div></section>`
+    content: `<section class="product-hero"><div class="container hero-grid">
+      <div>
+        <div class="product-heading">${iconImg(app, '')}<div><strong>${e(app.name)}</strong><span class="status-text">${e(app.status)}</span></div></div>
+        <span class="eyebrow">${e(app.eyebrow)}</span>
+        <h1>${e(headlines[app.id] ?? app.headline)}</h1>
+        <p class="lede">${e(app.description)}</p>
+        <div class="actions">${app.id === 'nodalix' ? '<a href="#descargas" class="btn btn-primary">Ir a las descargas ↓</a>' : A(app.repo, e(app.cta) + ' ↗', 'btn btn-primary', true)}
+          ${A(`${brand.portal}/#aplicaciones`, 'Otros proyectos', 'btn btn-secondary')}
+        </div>
+        <div class="product-meta"><span class="pill">${e(app.platforms)}</span><span class="pill">${e(app.technology)}</span></div>
+      </div>
+      <div class="product-preview">${preview}</div>
+    </div></section>
+    <section class="section"><div class="container">
+      <span class="eyebrow">01 — FUNCIONES</span><h2>Qué incluye.</h2>
+      <div class="feature-grid">${app.features.map(([h,d],i) => `<article class="feature"><span class="num">${String(i+1).padStart(2,'0')} / ${e(app.name.toUpperCase())}</span><h3>${e(h)}</h3><p>${e(d)}</p></article>`).join('')}</div>
+      <div class="notice"><strong>Estado y requisitos.</strong> ${e(app.limitation)}</div>
+    </div></section>
+    ${app.id === 'nodalix' ? nodalixDownloads(app) : ''}
+    ${app.previews.length ? `<section class="section"><div class="container"><span class="eyebrow">02 — CAPTURAS REALES</span><h2>Dentro de ${e(app.name)}.</h2>
+      <div class="gallery">${app.previews.map(([url,alt]) => `<figure><img src="${safeUrl(url)}" alt="${e(alt)}" loading="lazy" decoding="async"/><figcaption>${e(alt)}</figcaption></figure>`).join('')}</div>
+    </div></section>` : ''}
+    <section class="section"><div class="container">
+      <span class="eyebrow">CÓDIGO Y VERSIONES</span>
+      <h2>Consulta el proyecto.</h2>
+      <p>El repositorio contiene el código, la documentación y el historial de desarrollo. Comprueba las publicaciones disponibles antes de descargar o instalar.</p>
+      <div class="actions">${A(app.repo, 'Código y documentación ↗', 'btn btn-primary', true)}${A(`${app.repo}/releases`, 'Versiones publicadas ↗', 'btn btn-secondary', true)}</div>
+    </div></section>`
   });
 }
 function nodalixDownloads(app) {

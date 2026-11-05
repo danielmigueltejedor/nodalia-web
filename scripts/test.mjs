@@ -24,12 +24,22 @@ for (const app of apps) {
 const portal = await readFile(path.join(root, 'dist/portal/index.html'), 'utf8');
 assert.match(portal, /Nodalix OS/);
 assert.match(portal, /nodalix-feature/);
+assert.match(portal, /class="project-index"/);
+assert.match(portal, /class="project-row"/);
+assert.match(portal, /Un Linux/);
+assert.doesNotMatch(portal, /art-panel|floating-chip|hero-art/);
 assert.match(portal, /nodalix\.getnodalia\.com/);
 const iso = await readFile(path.join(root, 'dist/nodalix/index.html'), 'utf8');
 assert.match(iso, /id="descargas"/);
 assert.match(iso, /id="release-actions"/);
 assert.match(iso, /nodalix-releases\.js/);
 assert.match(iso, /Secure Boot/);
+assert.doesNotMatch(iso, /nodalix-concept|desktop-top/);
+const css = await readFile(path.join(root, 'dist/portal/styles.css'), 'utf8');
+assert.match(css, /\.project-row/);
+assert.match(css, /\.intro-main/);
+assert.doesNotMatch(css, /\.orb\b|\.art-panel\b|radial-gradient/);
+assert.match(css, /prefers-reduced-motion/);
 const releases = JSON.parse(await readFile(path.join(root, 'dist/nodalix/releases.json'), 'utf8'));
 assert.equal(releases.schema, 1);
 assert.ok(Array.isArray(releases.isos));
@@ -38,4 +48,4 @@ for (const item of releases.isos) {
   assert.ok(item.sizeBytes > 0);
   assert.match(item.url, /^https:\/\/(downloads\.getnodalia\.com|github\.com)\//);
 }
-console.log('✓ 5 webs generadas; Nodalix y descargas comprobadas; manifiesto validado.');
+console.log('✓ 5 webs generadas; diseño editorial, Nodalix y descargas comprobadas.');
