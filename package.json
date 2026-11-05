@@ -3,13 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Web principal y páginas de aplicaciones de Nodalia",
+  "description": "Sitios oficiales Nodalia: portal, aplicaciones y Nodalix OS",
   "scripts": {
     "build": "node scripts/build.mjs",
     "build:portal": "node scripts/build.mjs portal",
     "build:vortia": "node scripts/build.mjs vortia",
     "build:vinilo": "node scripts/build.mjs vinilo",
-    "build:lienzo": "node scripts/build.mjs lienzo"
+    "build:lienzo": "node scripts/build.mjs lienzo",
+    "build:nodalix": "node scripts/build.mjs nodalix",
+    "test": "node scripts/test.mjs"
   },
-  "engines": {"node": ">=20"}
+  "engines": {
+    "node": ">=20"
+  }
 }
