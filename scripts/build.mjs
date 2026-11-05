@@ -21,25 +21,25 @@ const safeUrl = (s) => {
 const A = (url, text, className = '', external = false) => `<a href="${safeUrl(url)}" class="${e(className)}"${external ? ' target="_blank" rel="noopener noreferrer"' : ''}>${text}</a>`;
 const iconImg = (app, cls = 'app-icon') => `<img class="${e(cls)}" src="${safeUrl(app.icon)}" alt="Icono de ${e(app.name)}" loading="lazy" decoding="async" />`;
 const nav = (active = '') => `<header class="topbar"><div class="container topbar-inner">
-  ${A(brand.portal, `<img src="/logo.svg" alt="" width="38" height="38"/><span>Nodalia</span><small>APPS</small>`, 'brand')}
+  ${A(brand.portal, `<img src="/nodalia-wordmark.svg" alt="Nodalia" width="178" height="48"/>`, 'brand')}
   <nav class="nav" aria-label="Navegación principal">
    ${A(`${brand.portal}/#aplicaciones`, 'Aplicaciones', active === 'portal' ? '' : 'optional')}
    ${A(brand.github, 'GitHub', 'optional', true)}
    ${A(brand.portal, 'Explorar', 'outline')}
   </nav>
  </div></header>`;
-const footer = () => `<footer class="footer"><div class="container footer-content"><div><div class="brand"><img src="/logo.svg" alt="" width="38" height="38"/><span>Nodalia</span></div><p>Software creado con cuidado, abierto a nuevas ideas.</p><p>© ${new Date().getUTCFullYear()} Nodalia · Proyectos independientes, no afiliados a marcas de terceros.</p></div><div class="footer-links">${A(brand.portal, 'Inicio')}${A(brand.github, 'GitHub', '', true)}${A(`mailto:${brand.email}`, 'Contacto')}</div></div></footer>`;
+const footer = () => `<footer class="footer"><div class="container footer-content"><div><div class="brand"><img src="/nodalia-wordmark.svg" alt="Nodalia" width="210" height="62"/></div><p>Software creado con cuidado, abierto a nuevas ideas.</p><p>© ${new Date().getUTCFullYear()} Nodalia · Proyectos independientes, no afiliados a marcas de terceros.</p></div><div class="footer-links">${A(brand.portal, 'Inicio')}${A(brand.github, 'GitHub', '', true)}${A(`mailto:${brand.email}`, 'Contacto')}</div></div></footer>`;
 const shell = ({title, description, canonical, content, accent = '', preview = '', active = ''}) => `<!doctype html>
 <html lang="es"><head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<meta name="theme-color" content="#070a13"/><meta name="color-scheme" content="dark"/>
+<meta name="theme-color" content="#090a0b"/><meta name="color-scheme" content="dark"/>
 <title>${e(title)}</title><meta name="description" content="${e(description)}"/>
 <link rel="canonical" href="${safeUrl(canonical)}"/>
 <meta property="og:type" content="website"/><meta property="og:title" content="${e(title)}"/>
 <meta property="og:description" content="${e(description)}"/><meta property="og:url" content="${safeUrl(canonical)}"/>
 ${preview ? `<meta property="og:image" content="${safeUrl(preview)}"/>` : ''}
 <meta name="twitter:card" content="${preview ? 'summary_large_image' : 'summary'}"/>
-<link rel="icon" type="image/svg+xml" href="/logo.svg"/>
+<link rel="icon" type="image/svg+xml" href="/nodalia-mark.svg"/>
 <link rel="stylesheet" href="/styles.css"/>
 </head><body class="${e(accent ? `accent-${accent}` : '')}"><a class="visually-hidden" href="#contenido">Saltar al contenido</a>
 ${nav(active)}<main id="contenido">${content}</main>${footer()}</body></html>`;
@@ -53,14 +53,15 @@ function home() {
     canonical: brand.portal + '/',
     active: 'portal',
     content: `<section class="hero"><div class="container hero-grid"><div>
-      <span class="eyebrow">Software con identidad propia</span>
-      <h1>Una nueva forma de hacer las cosas.</h1>
-      <p class="lede">Software para crear, investigar, disfrutar y trabajar. Desde aplicaciones de escritorio hasta un sistema operativo Linux completo.</p>
-      <div class="actions">${A(`${brand.portal}/#aplicaciones`, 'Descubrir aplicaciones <span aria-hidden="true">↗</span>', 'btn btn-primary')}${A(brand.github, 'Explorar GitHub', 'btn btn-secondary', true)}</div>
+      <span class="eyebrow">NODALIA / SOFTWARE INDEPENDIENTE</span>
+      <h1>Software para hacer más.</h1>
+      <p class="lede">Herramientas independientes para crear, investigar y disfrutar. Un ecosistema de aplicaciones nativas y un sistema operativo Linux, sin complicaciones.</p>
+      <div class="actions">${A(`${brand.portal}/#aplicaciones`, 'Descubrir aplicaciones <span aria-hidden="true">↗</span>', 'btn btn-primary')}${A('https://nodalix.getnodalia.com', 'Conocer Nodalix OS <span aria-hidden="true">↗</span>', 'btn btn-secondary')}</div>
       <p class="note">Proyectos open source · Desarrollo continuo</p></div>
-      <div class="hero-art" aria-label="Vista del catálogo de aplicaciones Nodalia"><div class="orb"></div><div class="art-panel"><div class="panel-top"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span class="panel-label">NODALIA / APPS</span></div><div class="art-grid">${apps.map(tile).join('')}</div></div><div class="floating-chip">Un ecosistema en crecimiento ✦</div></div>
+      <div class="hero-art" aria-label="Vista del catálogo de aplicaciones Nodalia"><div class="orb"></div><div class="art-panel"><div class="panel-top"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span class="panel-label">NODALIA / APPS</span></div><div class="art-grid">${apps.map(tile).join('')}</div></div><div class="floating-chip">HECHO CON INTENCIÓN / 2026</div></div>
     </div></section>
-    <section class="section" id="aplicaciones"><div class="container"><div class="section-head"><div><span class="eyebrow">El catálogo</span><h2>Aplicaciones y sistemas operativos</h2></div><p>Cada proyecto tiene su propia identidad, documentación abierta, descargas y un espacio dentro de Nodalia.</p></div><div class="app-grid">${apps.map(card).join('')}</div></div></section>
+    <section class="section" id="aplicaciones"><div class="container"><div class="section-head"><div><span class="eyebrow">El catálogo</span><h2>Herramientas para cada idea.</h2></div><p>Cuatro proyectos, cuatro formas de hacer las cosas. Conoce cada producto y su estado real de desarrollo.</p></div><div class="app-grid">${apps.map(card).join('')}</div></div></section>
+    <section class="nodalix-feature"><div class="container"><div class="nodalix-feature-inner"><div><span class="eyebrow">UN SISTEMA OPERATIVO DIFERENTE</span><h2>Linux, hecho para sentirse propio.</h2><p>Descubre Nodalix OS, su escritorio integrado y las imágenes oficiales para instalarlo desde USB.</p></div>${A('https://nodalix.getnodalia.com', 'Explorar Nodalix OS ↗', 'btn btn-primary')}</div></div></section>
     <div class="value-band"><div class="container value-row"><div><span class="value-icon">◇</span><h3>Código abierto</h3><p>Consulta el código, sigue el desarrollo y participa en los proyectos.</p></div><div><span class="value-icon">◎</span><h3>Experiencias nativas</h3><p>Aplicaciones construidas pensando en las posibilidades del escritorio.</p></div><div><span class="value-icon">✧</span><h3>En evolución</h3><p>Las funciones, plataformas y versiones dependen del estado de cada proyecto.</p></div></div></div>`
   });
 }
@@ -132,6 +133,8 @@ async function build(site) {
     writeFile(path.join(dir, 'sitemap.xml'), sitemap(baseUrl), 'utf8'),
     writeFile(path.join(dir, '404.html'), shell({title:'Página no encontrada | Nodalia',description:'No hemos encontrado esa página.',canonical:baseUrl+'/',content:`<section class="hero"><div class="container"><span class="eyebrow">Error 404</span><h1>Esta página no existe.</h1><p>Prueba a volver al catálogo de aplicaciones.</p><div class="actions">${A(brand.portal, 'Volver al inicio','btn btn-primary')}</div></div></section>`}), 'utf8'),
     copyFile(path.join(root, 'assets', 'logo.svg'), path.join(dir, 'logo.svg')),
+    copyFile(path.join(root, 'assets', 'nodalia-wordmark.svg'), path.join(dir, 'nodalia-wordmark.svg')),
+    copyFile(path.join(root, 'assets', 'nodalia-mark.svg'), path.join(dir, 'nodalia-mark.svg')),
     copyFile(path.join(root, 'assets', 'styles.css'), path.join(dir, 'styles.css')),
     ...(site === 'nodalix' ? [
       copyFile(path.join(root, 'assets', 'nodalix-releases.js'), path.join(dir, 'nodalix-releases.js')),

@@ -10,6 +10,11 @@ for (const app of apps) {
   const base = path.join(root, 'dist', app);
   const page = await readFile(path.join(base, 'index.html'), 'utf8');
   const sitemap = await readFile(path.join(base, 'sitemap.xml'), 'utf8');
+  const wordmark = await readFile(path.join(base, 'nodalia-wordmark.svg'), 'utf8');
+  const mark = await readFile(path.join(base, 'nodalia-mark.svg'), 'utf8');
+  assert.match(wordmark, /<svg[^>]+viewBox/);
+  assert.match(mark, /<svg[^>]+viewBox/);
+  assert.match(page, /nodalia-wordmark\.svg/);
   assert.match(page, /<html lang="es">/);
   assert.match(page, /<meta name="description"/);
   assert.match(page, /rel="canonical"/);
@@ -18,6 +23,7 @@ for (const app of apps) {
 }
 const portal = await readFile(path.join(root, 'dist/portal/index.html'), 'utf8');
 assert.match(portal, /Nodalix OS/);
+assert.match(portal, /nodalix-feature/);
 assert.match(portal, /nodalix\.getnodalia\.com/);
 const iso = await readFile(path.join(root, 'dist/nodalix/index.html'), 'utf8');
 assert.match(iso, /id="descargas"/);
