@@ -108,6 +108,14 @@ function product(app) {
   const preview = app.previews.length
     ? `<figure><img src="${safeUrl(app.previews[0][0])}" alt="${e(app.previews[0][1])}" loading="eager" decoding="async"/><figcaption>${e(app.previews[0][1])} · Captura publicada por el proyecto</figcaption></figure>`
     : `<div class="product-placeholder"><span class="kicker">${e(app.technology)}</span><div>${iconImg(app,'placeholder-icon')}<strong>${e(app.name)}</strong><p>Proyecto en desarrollo. No se presenta una captura artificial de la aplicación.</p></div></div>`;
+  const primaryDownload = app.id === 'vortia'
+    ? '<a id="vortia-primary-download" class="btn btn-primary" href="https://github.com/danielmigueltejedor/vortia/releases/latest" rel="noopener noreferrer"><img id="vortia-primary-icon" class="vortia-platform-icon" src="/platform-linux.svg" alt="" width="20" height="20" hidden/><span id="vortia-primary-title">Ver versiones y descargas</span><span class="btn-icon" aria-hidden="true">↓</span></a>'
+    : app.id === 'nodalix'
+      ? '<a href="#descargas" class="btn btn-primary">Descargas de Nodalix OS <span class="btn-icon" aria-hidden="true">↓</span></a>'
+      : A(app.repo + '/releases', 'Ver versiones y descargas <span class="btn-icon" aria-hidden="true">↗</span>', 'btn btn-primary', true);
+  const primaryHint = app.id === 'vortia'
+    ? '<p class="vortia-primary-detail" id="vortia-primary-detail" role="status" aria-live="polite">Se elegirá el instalador compatible con tu sistema operativo.</p>'
+    : '';
   return shell({
     title: `${app.name} — ${app.eyebrow} | Nodalia`,
     description: app.description,
@@ -117,15 +125,59 @@ function product(app) {
     content: `<section class="product-hero"><div class="container product-hero-inner"><div>
       <div class="product-heading">${iconImg(app,'product-icon')}<div><strong>${e(app.name)}</strong><span class="status-text">${e(app.status)}</span></div></div>
       <span class="eyebrow">${e(app.eyebrow)}</span><h1>${e(title)}</h1><p class="lede">${e(app.description)}</p>
-      <div class="actions">${app.id==='nodalix' ? '<a href="#descargas" class="btn btn-primary">Descargas de Nodalix OS <span class="btn-icon" aria-hidden="true">↓</span></a>' : A(`${app.repo}/releases`, 'Ver versiones y descargas <span class="btn-icon" aria-hidden="true">↗</span>', 'btn btn-primary', true)}${A(app.repo, 'Código en GitHub', 'btn btn-secondary', true)}</div>
-      <div class="product-meta"><span class="pill">${e(app.platforms)}</span><span class="pill">${e(app.technology)}</span></div></div>
+      <div class="actions">${primaryDownload}${A(app.repo, 'Código en GitHub', 'btn btn-secondary', true)}</div>
+      ${primaryHint}<div class="product-meta"><span class="pill">${e(app.platforms)}</span><span class="pill">${e(app.technology)}</span></div></div>
       <div class="product-preview">${preview}</div></div></section>
       <section class="section features"><div class="container"><span class="eyebrow">FUNCIONES DEL PROYECTO</span><h2>Diseñado para hacer más.</h2><div class="feature-grid">${app.features.map(([h,d],i)=>`<article class="feature"><span class="num">0${i+1} / ${e(app.name.toUpperCase())}</span><h3>${e(h)}</h3><p>${e(d)}</p></article>`).join('')}</div><div class="notice"><strong>Estado y requisitos:</strong> ${e(app.limitation)}</div></div></section>
+      ${app.id==='vortia' ? vortiaDownloads() : ''}
       ${app.id==='nodalix' ? nodalixDownloads(app) : ''}
       ${app.previews.length ? `<section class="section"><div class="container"><span class="eyebrow">VISTAS DE LA APLICACIÓN</span><h2>Conoce ${e(app.name)}.</h2><div class="gallery">${app.previews.map(([url,alt])=>`<figure><img src="${safeUrl(url)}" alt="${e(alt)}" loading="lazy" decoding="async"/><figcaption>${e(alt)}</figcaption></figure>`).join('')}</div></div></section>` : ''}
       <section class="section product-outro"><div class="container"><span class="eyebrow">CÓDIGO Y DOCUMENTACIÓN</span><h2>Forma parte del desarrollo.</h2><p>Consulta el código, los cambios y las publicaciones reales en GitHub. La disponibilidad de paquetes instalables depende del estado de cada aplicación.</p><div class="actions">${A(app.repo,'Explorar repositorio ↗','btn btn-primary',true)}${A(`${app.repo}/releases`,'Versiones publicadas','btn btn-secondary',true)}</div></div></section>`
   });
 }
+function vortiaDownloads() {
+  return `<section class="section vortia-download-section" id="descargas">
+    <div class="container">
+      <div class="vortia-download-head">
+        <div><span class="eyebrow">INSTALADORES OFICIALES</span>
+          <h2>Descarga Vortia.</h2>
+          <p>El botón superior selecciona automáticamente Linux o macOS. También puedes elegir un paquete manualmente y comprobar su integridad con SHA-256.</p>
+        </div>
+        <div class="vortia-version-info">
+          <span class="kicker">ÚLTIMA PUBLICACIÓN ESTABLE</span>
+          <strong id="vortia-release-version">v0.1.1</strong>
+          <span id="vortia-release-source">Consultando GitHub Releases…</span>
+        </div>
+      </div>
+      <div id="vortia-downloads" class="vortia-download-grid">
+        <article class="vortia-package" data-platform="linux">
+          <div class="vortia-package-head"><img src="/platform-linux.svg" alt="" width="38" height="38"/>
+            <div><h3>Linux</h3><p>AppImage · x86_64</p></div>
+          </div>
+          <p class="vortia-package-desc">Archivo ejecutable para distribuciones Linux de 64 bits con arquitectura x86_64.</p>
+          <p class="vortia-package-size" id="vortia-linux-size">105,2 MB</p>
+          <a class="btn btn-primary" id="vortia-linux-link" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.1.1/Vortia-0.1.1-linux-x86_64.AppImage">Descargar AppImage ↓</a>
+          <a class="vortia-checksum" id="vortia-linux-sha" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.1.1/Vortia-0.1.1-linux-x86_64.AppImage.sha256">SHA-256 ↗</a>
+        </article>
+        <article class="vortia-package" data-platform="mac">
+          <div class="vortia-package-head"><img src="/platform-apple.svg" alt="" width="38" height="38"/>
+            <div><h3>macOS</h3><p>DMG · Apple Silicon (arm64)</p></div>
+          </div>
+          <p class="vortia-package-desc">Para Macs con procesadores Apple Silicon. El DMG publicado no es compatible con Macs Intel.</p>
+          <p class="vortia-package-size" id="vortia-mac-size">57,6 MB</p>
+          <a class="btn btn-primary" id="vortia-mac-link" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.1.1/Vortia-0.1.1-macos-arm64.dmg">Descargar DMG ↓</a>
+          <a class="vortia-checksum" id="vortia-mac-sha" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.1.1/Vortia-0.1.1-macos-arm64.dmg.sha256">SHA-256 ↗</a>
+        </article>
+      </div>
+      <div class="vortia-download-footer">
+        <p>Los instaladores se descargan directamente de GitHub Releases. En macOS el navegador no siempre permite identificar si el procesador es Intel o Apple Silicon.</p>
+        <a class="text-link" href="https://github.com/danielmigueltejedor/vortia/releases" target="_blank" rel="noopener noreferrer">Ver todas las versiones ↗</a>
+      </div>
+    </div>
+  </section>
+  <script src="/vortia-download.js" defer></script>`;
+}
+
 function nodalixDownloads(app) {
   return `<section class="section iso-section" id="descargas"><div class="container">
     <span class="eyebrow">Nodalix OS / x86_64</span>
@@ -172,6 +224,11 @@ async function build(site) {
     copyFile(path.join(root, 'assets', 'nodalia-mark.svg'), path.join(dir, 'nodalia-mark.svg')),
     copyFile(path.join(root, 'assets', 'styles.css'), path.join(dir, 'styles.css')),
     writeFile(path.join(dir, cssFileName), cssSource),
+    ...(site === 'vortia' ? [
+      copyFile(path.join(root, 'assets', 'vortia-download.js'), path.join(dir, 'vortia-download.js')),
+      copyFile(path.join(root, 'assets', 'platform-apple.svg'), path.join(dir, 'platform-apple.svg')),
+      copyFile(path.join(root, 'assets', 'platform-linux.svg'), path.join(dir, 'platform-linux.svg')),
+    ] : []),
     ...(site === 'nodalix' ? [
       copyFile(path.join(root, 'assets', 'nodalix-releases.js'), path.join(dir, 'nodalix-releases.js')),
       copyFile(path.join(root, 'data', 'nodalix-iso-releases.json'), path.join(dir, 'releases.json')),

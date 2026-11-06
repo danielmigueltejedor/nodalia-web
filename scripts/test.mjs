@@ -63,4 +63,17 @@ for(const item of releases.isos){
  assert.ok(item.sizeBytes>0);
  assert.match(item.url,/^https:\/\/(downloads\.getnodalia\.com|github\.com)\//);
 }
-console.log('✓ Cinco webs, CSS con hash anti-caché, recursos y descargas ISO validados.');
+const vortiaHtml = await readFile(path.join(root, 'dist/vortia/index.html'), 'utf8');
+for (const id of [
+  'vortia-primary-download', 'vortia-downloads', 'vortia-linux-link',
+  'vortia-mac-link', 'vortia-linux-sha', 'vortia-mac-sha'
+]) {
+  assert.ok(vortiaHtml.includes('id="' + id + '"'), 'Vortia UI missing ' + id);
+}
+assert.match(vortiaHtml, /vortia-download\.js/);
+assert.match(vortiaHtml, /Apple Silicon/);
+for (const asset of ['vortia-download.js', 'platform-apple.svg', 'platform-linux.svg']) {
+  assert.ok((await stat(path.join(root, 'dist/vortia', asset))).size > 100);
+}
+await import('./test-vortia-download.mjs');
+console.log('✓ Cinco webs, CSS con hash anti-caché, recursos y descargas ISO/Vortia validados.');

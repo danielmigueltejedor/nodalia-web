@@ -62,6 +62,16 @@ npx wrangler pages deploy dist/nodalix --project-name nodalia-nodalix --branch m
 
 Los despliegues automáticos se ejecutan solamente después de superar las pruebas; los pull requests se validan sin publicar. Wrangler está fijado a una versión conocida. No hace falta cambiar DNS, los subdominios privados de Cloudflare ni los registros de correo. Los secretos no deben guardarse en los archivos del repositorio.
 
+## Vortia: descargas por sistema operativo
+
+La web `vortia.getnodalia.com` identifica de manera orientativa el sistema operativo del navegador y ofrece un botón directo con el icono de Linux (AppImage x86_64) o Apple (DMG arm64). La sección de descargas siempre muestra **ambas plataformas**, los tamaños y los checksums SHA-256 que existan en la publicación.
+
+`assets/vortia-download.js` consulta `https://api.github.com/repos/danielmigueltejedor/vortia/releases/latest` para mostrar los instaladores de la última publicación estable, sin cambiar el sitio cada vez que se publica Vortia. En caso de error de red o límite de la API, usa como respaldo los archivos oficiales verificados de `v0.1.1` y avisa de que pueden no ser los más recientes.
+
+No se ofrecen DMG para Mac Intel ni AppImage para Linux ARM64 cuando no hay un paquete compatible. Los navegadores, especialmente Safari, **no siempre permiten identificar la arquitectura de un Mac**: el botón de macOS indica explícitamente que el DMG es para Apple Silicon. Los enlaces siempre apuntan a GitHub Releases y se comprueba su origen antes de usarlos.
+
+Los SVG de las marcas Apple y Linux proceden de [Simple Icons](https://github.com/simple-icons/simple-icons), proyecto bajo licencia CC0; sus marcas pertenecen a sus respectivos titulares.
+
 ## Nodalix OS: ISO
 
 La página Nodalix OS consulta las publicaciones oficiales de [Nodalix OS en GitHub](https://github.com/danielmigueltejedor/nodalix-os/releases). Si la versión estable contiene una ISO completa, enlaza a ella; si se distribuye en partes, enlaza al descargador oficial y a las verificaciones disponibles. Nunca muestra un botón ficticio de descarga directa.
