@@ -44,12 +44,13 @@ assert.match(portal,/hero-stage/);
 assert.match(portal,/class="hero-title"/);
 assert.match(sourceCss,/\.hero-title\{/);
 assert.match(portal,/width="120" height="120"/);
-assert.match(portal,/window-main/);
+assert.match(portal,/shot-main/);
+assert.match(portal,/shot-secondary/);
 assert.match(portal,/product-grid/);
 assert.match(portal,/spotlight/);
 assert.match(portal,/docs\/screenshots\/library\.webp/);
 assert.match(portal,/docs\/images\/screenshots\/levels\.png/);
-assert.doesNotMatch(portal,/floating-chip|art-panel|concept-geometry/);
+assert.doesNotMatch(portal,/floating-chip|art-panel|concept-geometry|window-bar/);
 const iso=await readFile(path.join(root,'dist/nodalix/index.html'),'utf8');
 assert.match(iso,/id="descargas"/);
 assert.match(iso,/id="release-actions"/);
@@ -75,5 +76,11 @@ assert.match(vortiaHtml, /Apple Silicon/);
 for (const asset of ['vortia-download.js', 'platform-apple.svg', 'platform-linux.svg']) {
   assert.ok((await stat(path.join(root, 'dist/vortia', asset))).size > 100);
 }
+assert.ok((await stat(path.join(root, 'dist/portal/_headers'))).size > 40);
+assert.ok((await stat(path.join(root, 'dist/vortia/_headers'))).size > 40);
+assert.doesNotMatch(sourceCss, /fonts\.googleapis/);
+assert.match(vortiaHtml, /type="module" src="\/vortia-download\.js"/);
+assert.match(iso, /type="module" src="\/nodalix-releases\.js"/);
 await import('./test-vortia-download.mjs');
-console.log('✓ Cinco webs, CSS con hash anti-caché, recursos y descargas ISO/Vortia validados.');
+await import('./test-nodalix-releases.mjs');
+console.log('✓ Cinco webs, CSS con hash anti-caché, cabeceras, módulos ES y descargas ISO/Vortia validados.');

@@ -91,10 +91,16 @@ function home() {
         <div class="hero-trust"><span><strong>04</strong> proyectos independientes</span><span>·</span><span>Código abierto</span><span>·</span><span>Desarrollo activo</span></div>
       </div>
       <div class="hero-stage" aria-label="Capturas de las aplicaciones Vinilo y Lienzo">
-        <div class="stage-halo"></div>
-        <div class="window window-main"><div class="window-bar"><i></i><i></i><i></i><b>Vinilo</b><span class="window-label">Reproductor para Linux</span></div><div class="window-body"><img src="${previewUrl(vinilo)}" alt="Captura real de la biblioteca musical de Vinilo" decoding="async" loading="eager"/></div></div>
-        <div class="window window-small"><div class="window-bar"><i></i><i></i><i></i><b>Lienzo</b></div><div class="window-body"><img src="${previewUrl(lienzo)}" alt="Captura real de la herramienta de niveles de Lienzo" decoding="async" loading="eager"/></div></div>
-        <div class="stage-caption"><strong>Aplicaciones reales.</strong> Capturas de los repositorios oficiales.</div>
+        <div class="stage-halo" aria-hidden="true"></div>
+        <figure class="shot shot-main">
+          <img src="${previewUrl(vinilo)}" alt="Captura real de la biblioteca musical de Vinilo" decoding="async" loading="eager" width="1280" height="800"/>
+          <figcaption>Vinilo · biblioteca musical</figcaption>
+        </figure>
+        <figure class="shot shot-secondary">
+          <img src="${previewUrl(lienzo)}" alt="Captura real de la herramienta de niveles de Lienzo" decoding="async" loading="eager" width="1280" height="800"/>
+          <figcaption>Lienzo · niveles</figcaption>
+        </figure>
+        <p class="stage-caption"><strong>Aplicaciones reales.</strong> Capturas de los repositorios oficiales.</p>
       </div>
     </div></section>
     <div class="hero-stats"><div class="container hero-stats-inner"><div class="hero-stat"><b>04</b><span>proyectos en desarrollo</span></div><div class="hero-stat"><b>01</b><span>distribución Linux</span></div><div class="hero-stat"><b>100%</b><span>repositorios públicos</span></div></div></div>
@@ -175,7 +181,7 @@ function vortiaDownloads() {
       </div>
     </div>
   </section>
-  <script src="/vortia-download.js" defer></script>`;
+  <script type="module" src="/vortia-download.js"></script>`;
 }
 
 function nodalixDownloads(app) {
@@ -203,7 +209,7 @@ function nodalixDownloads(app) {
     <div class="notice"><strong>Antes de instalar:</strong> realiza una copia de seguridad. Nodalix necesita Internet durante la instalación y su ISO actual no permite arrancar con Secure Boot activado. Una instalación sobre el disco equivocado puede borrar datos.</div>
     <p class="small-label">Verificación en Linux: <code>sha256sum archivo.iso</code> · macOS: <code>shasum -a 256 archivo.iso</code> · Windows PowerShell: <code>Get-FileHash archivo.iso -Algorithm SHA256</code></p>
   </div></section>
-  <script src="/nodalix-releases.js" defer></script>`;
+  <script type="module" src="/nodalix-releases.js"></script>`;
 }
 
 function sitemap(domain) {return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${e(domain)}/</loc></url></urlset>\n`}
@@ -223,6 +229,7 @@ async function build(site) {
     copyFile(path.join(root, 'assets', 'nodalia-wordmark.svg'), path.join(dir, 'nodalia-wordmark.svg')),
     copyFile(path.join(root, 'assets', 'nodalia-mark.svg'), path.join(dir, 'nodalia-mark.svg')),
     copyFile(path.join(root, 'assets', 'styles.css'), path.join(dir, 'styles.css')),
+    copyFile(path.join(root, 'assets', '_headers'), path.join(dir, '_headers')),
     writeFile(path.join(dir, cssFileName), cssSource),
     ...(site === 'vortia' ? [
       copyFile(path.join(root, 'assets', 'vortia-download.js'), path.join(dir, 'vortia-download.js')),
