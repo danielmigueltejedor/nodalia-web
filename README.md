@@ -36,11 +36,11 @@ npm run preview
 
 `npm run preview` genera el portal y lo sirve en `http://127.0.0.1:4317/` con el servidor HTTP de Python. Otras vistas: `npm run preview:vortia`, `npm run preview:nodalix`. También puedes generar un sitio concreto con `npm run build:portal`, `npm run build:vortia`, `npm run build:vinilo`, `npm run build:lienzo` o `npm run build:nodalix`.
 
-## Calidad y SonarQube
+## Calidad y SonarCloud
 
 El proyecto está vinculado a SonarCloud (`danielmigueltejedor_nodalia-web`). La configuración local está en `sonar-project.properties`.
 
-Los módulos de descarga se prueban importando funciones exportadas (sin `vm.runInNewContext`), para evitar la vulnerabilidad crítica `javascript:S1523`. Ejecuta `npm test` antes de cada análisis o despliegue.
+Los módulos de descarga se prueban importando funciones exportadas (sin `vm.runInNewContext`), para eliminar el uso de ejecución dinámica asociado a `javascript:S1523`, una regla de tipo Security Hotspot. Ejecuta `npm test` antes de cada análisis o despliegue.
 
 ## Publicación en Cloudflare
 
