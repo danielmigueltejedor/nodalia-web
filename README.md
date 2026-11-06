@@ -14,11 +14,13 @@ Web oficial de [Nodalia](https://getnodalia.com) y páginas independientes de pr
 
 Dirección visual editorial: colores neutros, tipografía de sistema, estructura basada en jerarquía y líneas; sin mockups falsos, gradientes decorativos, ventanas simuladas ni promesas de funciones no publicadas. Las capturas disponibles se enlazan desde los repositorios oficiales y se identifican como tales. Si un proyecto aún no dispone de capturas oficiales, se muestra una ficha de estado.
 
-- `assets/styles.css`: único sistema de estilos.
+- `assets/styles.css`: único sistema de estilos (sin CDN de tipografías).
+- `assets/_headers`: cabeceras de seguridad y caché para Cloudflare Pages.
 - `assets/nodalia-wordmark.svg` / `assets/nodalia-mark.svg`: identidad compartida.
-- `scripts/data.mjs`: nombres, estados, enlaces y capturas reales de cada producto.
+- `data/apps.json` + `scripts/data.mjs`: catálogo de productos y resolución de URLs oficiales.
 - `scripts/build.mjs`: páginas, metadatos, SEO, sitemap y recursos.
-- `scripts/test.mjs`: validación de los cinco sitios y del manifiesto ISO.
+- `scripts/test.mjs`: validación de los cinco sitios, módulos de descarga y manifiesto ISO.
+- `assets/vortia-download.js` / `assets/nodalix-releases.js`: módulos ES exportables y comprobados en Node.
 
 No hay framework ni dependencia npm de ejecución. Las páginas no contienen trackers, analítica ni cookies propios. Los iconos y capturas de los proyectos provienen de GitHub; algunos recursos externos pueden registrar solicitudes según sus propias políticas.
 
@@ -29,18 +31,16 @@ Requiere Node.js 20 o superior.
 ~~~bash
 npm test
 npm run build
+npm run preview
 ~~~
 
-Para previsualizar, por ejemplo, el portal:
+`npm run preview` genera el portal y lo sirve en `http://127.0.0.1:4317/` con el servidor HTTP de Python. Otras vistas: `npm run preview:vortia`, `npm run preview:nodalix`. También puedes generar un sitio concreto con `npm run build:portal`, `npm run build:vortia`, `npm run build:vinilo`, `npm run build:lienzo` o `npm run build:nodalix`.
 
-~~~bash
-cd dist/portal
-python3 -m http.server 8080
-~~~
+## Calidad y SonarCloud
 
-Abre http://localhost:8080. Otras carpetas generadas: `dist/vortia`, `dist/vinilo`, `dist/lienzo`, `dist/nodalix`.
+El proyecto está vinculado a SonarCloud (`danielmigueltejedor_nodalia-web`). La configuración local está en `sonar-project.properties`.
 
-Para generar solo un sitio: `npm run build:portal`, `npm run build:vortia`, `npm run build:vinilo`, `npm run build:lienzo` o `npm run build:nodalix`.
+Los módulos de descarga se prueban importando funciones exportadas (sin `vm.runInNewContext`), para eliminar el uso de ejecución dinámica asociado a `javascript:S1523`, una regla de tipo Security Hotspot. Ejecuta `npm test` antes de cada análisis o despliegue.
 
 ## Publicación en Cloudflare
 
@@ -87,3 +87,4 @@ No subir imágenes ISO a Cloudflare Pages: sus límites de tamaño por archivo s
 - No añadas tokens, claves, contraseñas, sesiones ni configuraciones de Home Assistant.
 - Antes de publicar: ejecuta `npm test`, revisa cambios visuales en escritorio y móvil, y comprueba los enlaces de descarga.
 - Las imágenes de las aplicaciones se enlazan desde las ramas oficiales de sus repositorios, no se generan artificialmente.
+- Las cabeceras HTTP de seguridad se definen en `assets/_headers` y se copian a cada sitio generado.

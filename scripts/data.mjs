@@ -1,117 +1,32 @@
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const GH_USER = 'danielmigueltejedor';
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const githubRepo = (name) => `https://github.com/${GH_USER}/${name}`;
+const rawAsset = (repo, assetPath) =>
+  `https://raw.githubusercontent.com/${GH_USER}/${repo}/main/${assetPath}`;
+const productDomain = (subdomain) => `https://${subdomain}.getnodalia.com`;
+
 export const brand = {
   name: 'Nodalia',
   email: 'hola@getnodalia.com',
-  github: 'https://github.com/danielmigueltejedor',
+  github: `https://github.com/${GH_USER}`,
   portal: 'https://getnodalia.com',
 };
 
-export const apps = [
-  {
-    id: 'vortia',
-    name: 'Vortia',
-    domain: 'https://vortia.getnodalia.com',
-    category: 'Ingeniería',
-    status: 'En desarrollo · pre-MVP',
-    statusKind: 'early',
-    eyebrow: 'Simulación CFD',
-    headline: 'La dinámica de fluidos, sin barreras.',
-    tagline: 'Engineering the Flow.',
-    description: 'Un entorno abierto para preparar geometrías, generar mallas, configurar física, ejecutar simulaciones con OpenFOAM y explorar resultados 3D.',
-    platforms: 'Escritorio · compilación desde código fuente',
-    technology: 'C++20 · Qt 6 · VTK · OpenFOAM',
-    repo: 'https://github.com/danielmigueltejedor/vortia',
-    icon: 'https://raw.githubusercontent.com/danielmigueltejedor/vortia/main/resources/icons/vortia.png',
-    previews: [],
-    features: [
-      ['Flujo de trabajo integrado', 'Del planteamiento del caso al análisis de resultados en una sola aplicación.'],
-      ['Motor OpenFOAM', 'Aprovecha las herramientas abiertas de simulación de fluidos.'],
-      ['Visualización 3D', 'Una interfaz de escritorio para inspeccionar modelos y resultados.'],
-    ],
-    limitation: 'Vortia se encuentra en desarrollo inicial (pre-MVP). Las capacidades están evolucionando y requieren validación antes de uso de ingeniería crítico.',
-    cta: 'Ver el proyecto',
-    accent: 'cyan',
-  },
-  {
-    id: 'vinilo',
-    name: 'Vinilo',
-    domain: 'https://vinilo.getnodalia.com',
-    category: 'Música',
-    status: 'Desarrollo activo',
-    statusKind: 'active',
-    eyebrow: 'Tu música en Linux',
-    headline: 'Toda tu música. Un lugar propio.',
-    tagline: 'Escucha sin salir de tu escritorio.',
-    description: 'Un reproductor musical nativo para GNOME, construido con GTK4, libadwaita y Rust. Reúne archivos locales y servicios de música en una experiencia de escritorio.',
-    platforms: 'Linux · x86_64 para Apple Music',
-    technology: 'Rust · GTK4 · libadwaita',
-    repo: 'https://github.com/danielmigueltejedor/vinilo',
-    icon: 'https://raw.githubusercontent.com/danielmigueltejedor/vinilo/main/data/icons/hicolor/512x512/apps/dev.danielmiguelt.Vinilo.png',
-    previews: [
-      ['https://raw.githubusercontent.com/danielmigueltejedor/vinilo/main/docs/screenshots/library.webp', 'Biblioteca musical de Vinilo'],
-      ['https://raw.githubusercontent.com/danielmigueltejedor/vinilo/main/docs/screenshots/player.webp', 'Reproductor de Vinilo'],
-      ['https://raw.githubusercontent.com/danielmigueltejedor/vinilo/main/docs/screenshots/playlist.webp', 'Listas de reproducción en Vinilo'],
-    ],
-    features: [
-      ['Integración GNOME', 'Controles multimedia, teclas del sistema e interfaz adaptada al escritorio.'],
-      ['Varias fuentes', 'Biblioteca local, Spotify, Apple Music y servicios adicionales con soporte en evolución.'],
-      ['Reproducción continua', 'El motor sigue reproduciendo música aunque cierres la ventana.'],
-    ],
-    limitation: 'Apple Music requiere suscripción, conexión continua y Linux x86_64. Algunas integraciones de servicios permanecen en beta o alfa. Consulta los requisitos de instalación en GitHub.',
-    cta: 'Instalar desde GitHub',
-    accent: 'violet',
-  },
-  {
-    id: 'lienzo',
-    name: 'Lienzo',
-    domain: 'https://lienzo.getnodalia.com',
-    category: 'Creatividad',
-    status: 'En desarrollo',
-    statusKind: 'early',
-    eyebrow: 'Edición de imagen',
-    headline: 'Tu espacio para crear, capa a capa.',
-    tagline: 'Edición creativa con control local.',
-    description: 'Editor de imágenes de escritorio, basado en C++ y Qt, centrado en documentos con capas, flujos PSD/PSB y automatización local.',
-    platforms: 'Windows · macOS · Linux',
-    technology: 'C++ · Qt 6',
-    repo: 'https://github.com/danielmigueltejedor/lienzo',
-    icon: 'https://raw.githubusercontent.com/danielmigueltejedor/lienzo/main/src/ui/icons/lienzo-app.png',
-    previews: [
-      ['https://raw.githubusercontent.com/danielmigueltejedor/lienzo/main/docs/images/screenshots/levels.png', 'Herramienta de niveles en Lienzo'],
-      ['https://raw.githubusercontent.com/danielmigueltejedor/lienzo/main/docs/images/screenshots/layer_styles.png', 'Estilos de capa en Lienzo'],
-      ['https://raw.githubusercontent.com/danielmigueltejedor/lienzo/main/docs/images/screenshots/smart_objects.png', 'Objetos inteligentes en Lienzo'],
-    ],
-    features: [
-      ['Trabajo con capas', 'Documentos editables, máscaras, ajustes y composición no destructiva.'],
-      ['Interoperabilidad PSD', 'Herramientas orientadas a importar, editar y guardar flujos PSD/PSB.'],
-      ['Automatización local', 'Scripting y control externo sin convertir la edición en un servicio remoto.'],
-    ],
-    limitation: 'Lienzo está en desarrollo activo. La compatibilidad con funciones y formatos depende de la versión y no equivale a una sustitución completa de Photoshop.',
-    cta: 'Ver versiones y código',
-    accent: 'rose',
-  },
-  {
-    id: 'nodalix',
-    name: 'Nodalix OS',
-    domain: 'https://nodalix.getnodalia.com',
-    category: 'Sistema operativo',
-    status: 'Desarrollo activo · ISO x86_64',
-    statusKind: 'active',
-    eyebrow: 'Un escritorio Linux diferente',
-    headline: 'Tu ordenador. A tu manera.',
-    tagline: 'Un sistema Linux integrado, pensado para todos.',
-    description: 'Una distribución de Linux basada en Arch, con experiencia GNOME integrada, escritorio Wayland e instalador propio. Descarga la ISO verificada y crea un USB de instalación.',
-    platforms: 'PC · x86_64 · BIOS / UEFI',
-    technology: 'Linux · Arch · GNOME · Wayland',
-    repo: 'https://github.com/danielmigueltejedor/nodalix-os',
-    icon: 'https://raw.githubusercontent.com/danielmigueltejedor/nodalix-os/main/docs/images/nodalix-readme-logo.svg',
-    previews: [],
-    features: [
-      ['Diseñado como un sistema', 'La shell, las preferencias y las herramientas de actualización forman una experiencia integrada.'],
-      ['Instalación desde USB', 'Imagen ISO con sesión live e instalador. Elige el disco y confirma los cambios antes de escribirlo.'],
-      ['Actualizaciones unificadas', 'Un actualizador que descubre versiones, comprueba integridad y gestiona componentes del sistema.'],
-    ],
-    limitation: 'Nodalix OS continúa en desarrollo. La ISO está orientada a ordenadores x86_64, necesita conexión a Internet durante la instalación y actualmente no está firmada para Secure Boot.',
-    cta: 'Descargar Nodalix OS',
-    accent: 'blue',
-  }
-];
+function defineApp(entry) {
+  const { id, repo, icon, previews = [], ...rest } = entry;
+  return {
+    ...rest,
+    id,
+    domain: productDomain(id),
+    repo: githubRepo(repo),
+    icon: rawAsset(repo, icon),
+    previews: previews.map(([assetPath, alt]) => [rawAsset(repo, assetPath), alt]),
+  };
+}
+
+const catalog = JSON.parse(readFileSync(path.join(root, 'data', 'apps.json'), 'utf8'));
+export const apps = catalog.map(defineApp);
