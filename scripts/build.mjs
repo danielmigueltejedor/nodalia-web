@@ -1,4 +1,5 @@
-import { mkdir, rm, writeFile, copyFile } from 'node:fs/promises';
+import { mkdir, rm, writeFile, copyFile, readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { apps, brand } from './data.mjs';
@@ -12,6 +13,11 @@ if (target && !sites.includes(target)) {
 }
 const selected = target ? [target] : sites;
 
+// Unique CSS URL per release prevents cached styles from breaking newer HTML layouts.
+const cssSource = await readFile(path.join(root, 'assets', 'styles.css'));
+const cssHash = createHash('sha256').update(cssSource).digest('hex').slice(0, 12);
+const cssFileName = `styles.${cssHash}.css`;
+
 const e = (s) => String(s ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
 const safeUrl = (s) => {
   const u = new URL(s);
@@ -19,7 +25,7 @@ const safeUrl = (s) => {
   return e(u.href);
 };
 const A = (url, text, className = '', external = false) => `<a href="${safeUrl(url)}" class="${e(className)}"${external ? ' target="_blank" rel="noopener noreferrer"' : ''}>${text}</a>`;
-const iconImg = (app, cls = 'app-icon') => `<img class="${e(cls)}" src="${safeUrl(app.icon)}" alt="Icono de ${e(app.name)}" loading="lazy" decoding="async" />`;
+const iconImg = (app, cls = 'app-icon') => `<img class="${e(cls)}" src="${safeUrl(app.icon)}" alt="Icono de ${e(app.name)}" width="80" height="80" loading="lazy" decoding="async" />`;
 const nav = (active = '') => `<header class="topbar"><div class="container topbar-inner">
   ${A(brand.portal, '<img src="/nodalia-wordmark.svg" alt="Nodalia" width="154" height="46"/>', 'brand')}
   <nav class="nav" aria-label="Navegación principal">
@@ -49,7 +55,7 @@ const shell = ({title, description, canonical, content, accent = '', preview = '
 ${preview ? `<meta property="og:image" content="${safeUrl(preview)}"/>` : ''}
 <meta name="twitter:card" content="${preview ? 'summary_large_image' : 'summary'}"/>
 <link rel="icon" type="image/svg+xml" href="/nodalia-mark.svg"/>
-<link rel="stylesheet" href="/styles.css"/>
+<link rel="stylesheet" href="/${cssFileName}"/>
 </head><body class="${e(accent ? `accent-${accent}` : '')}"><a class="visually-hidden" href="#contenido">Saltar al contenido</a>
 ${nav(active)}<main id="contenido">${content}</main>${footer()}</body></html>`;
 
@@ -60,7 +66,7 @@ function home() {
   const card = (app) => {
     const screen = app.previews.length
       ? `<img class="screen" src="${previewUrl(app)}" alt="${e(app.previews[0][1])}" loading="lazy" decoding="async"/>`
-      : `<img src="${safeUrl(app.icon)}" alt="" loading="lazy" decoding="async"/>`;
+      : `<img src="${safeUrl(app.icon)}" alt="" width="120" height="120" loading="lazy" decoding="async"/>`;
     const headline = ({nodalix:'Tu ordenador. Con otra perspectiva.',vortia:'Ingeniería de fluidos sin cajas negras.',vinilo:'Escucha como tú quieras.',lienzo:'Un espacio para crear.'})[app.id];
     return `<article class="product-card product-card--${e(app.id)}">
       <div class="product-card-inner"><div class="product-card-top"><div class="product-id">${iconImg(app, 'card-icon')}<div><strong>${e(app.name)}</strong><span>${e(app.category)}</span></div></div><span class="tag ${e(app.statusKind)}">${e(app.statusKind==='active'?'En desarrollo':'Experimental')}</span></div>
@@ -93,7 +99,7 @@ function home() {
     </div></section>
     <div class="hero-stats"><div class="container hero-stats-inner"><div class="hero-stat"><b>04</b><span>proyectos en desarrollo</span></div><div class="hero-stat"><b>01</b><span>distribución Linux</span></div><div class="hero-stat"><b>100%</b><span>repositorios públicos</span></div></div></div>
     <section class="catalogue" id="aplicaciones"><div class="container"><div class="catalogue-top"><div><span class="eyebrow">NUESTRO SOFTWARE</span><h2>Cuatro ideas.<br/>Una forma de hacerlas.</h2></div><p>Aplicaciones que resuelven problemas concretos. Conoce cada proyecto, comprueba su estado real y accede a la documentación.</p></div><div class="product-grid">${['nodalix','vinilo','vortia','lienzo'].map(id=>card(data[id])).join('')}</div></div></section>
-    <section class="spotlight"><div class="container spotlight-content"><div><span class="eyebrow">NODALIX OS / LINUX PARA PERSONAS</span><h2>El sistema operativo también cuenta.</h2><p>Un escritorio GNOME integrado sobre Arch Linux, con herramientas propias y una ISO para instalarlo desde USB. Sin ocultar los requisitos ni el estado de desarrollo.</p><div class="actions">${A(nodalix.domain, 'Conocer Nodalix OS <span class="btn-icon" aria-hidden="true">↗</span>', 'btn btn-primary')}${A(`${nodalix.domain}/#descargas`, 'Descargas e instalación', 'btn btn-secondary')}</div></div><div class="spotlight-art"><div class="ring"></div><img src="${safeUrl(nodalix.icon)}" alt="Logo de Nodalix OS" loading="lazy"/><span class="technical">ARCH LINUX / GNOME / WAYLAND</span></div></div></section>
+    <section class="spotlight"><div class="container spotlight-content"><div><span class="eyebrow">NODALIX OS / LINUX PARA PERSONAS</span><h2>El sistema operativo también cuenta.</h2><p>Un escritorio GNOME integrado sobre Arch Linux, con herramientas propias y una ISO para instalarlo desde USB. Sin ocultar los requisitos ni el estado de desarrollo.</p><div class="actions">${A(nodalix.domain, 'Conocer Nodalix OS <span class="btn-icon" aria-hidden="true">↗</span>', 'btn btn-primary')}${A(`${nodalix.domain}/#descargas`, 'Descargas e instalación', 'btn btn-secondary')}</div></div><div class="spotlight-art"><div class="ring"></div><img src="${safeUrl(nodalix.icon)}" alt="Logo de Nodalix OS" width="160" height="160" loading="lazy"/><span class="technical">ARCH LINUX / GNOME / WAYLAND</span></div></div></section>
     <section class="values"><div class="container value-row"><div class="value"><b>Código abierto.</b><p>El desarrollo, las incidencias y las versiones se pueden seguir directamente en GitHub.</p></div><div class="value"><b>Diseñado para escritorio.</b><p>Herramientas pensadas para el ordenador, no simples envoltorios web.</p></div><div class="value"><b>Sin promesas vacías.</b><p>El estado de cada proyecto y sus limitaciones se explican antes de descargarlo.</p></div></div></section>`
   });
 }
@@ -165,6 +171,7 @@ async function build(site) {
     copyFile(path.join(root, 'assets', 'nodalia-wordmark.svg'), path.join(dir, 'nodalia-wordmark.svg')),
     copyFile(path.join(root, 'assets', 'nodalia-mark.svg'), path.join(dir, 'nodalia-mark.svg')),
     copyFile(path.join(root, 'assets', 'styles.css'), path.join(dir, 'styles.css')),
+    writeFile(path.join(dir, cssFileName), cssSource),
     ...(site === 'nodalix' ? [
       copyFile(path.join(root, 'assets', 'nodalix-releases.js'), path.join(dir, 'nodalix-releases.js')),
       copyFile(path.join(root, 'data', 'nodalix-iso-releases.json'), path.join(dir, 'releases.json')),

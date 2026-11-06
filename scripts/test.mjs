@@ -2,14 +2,20 @@ import { strict as assert } from 'node:assert';
 import { readFile, stat } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 execFileSync(process.execPath, ['scripts/build.mjs'], { cwd: root, stdio: 'pipe' });
+const sourceCss = await readFile(path.join(root, 'assets', 'styles.css'), 'utf8');
+const hash = createHash('sha256').update(sourceCss).digest('hex').slice(0, 12);
+const versionedCss = `styles.${hash}.css`;
 for (const id of ['portal','vortia','vinilo','lienzo','nodalix']) {
   const dir = path.join(root,'dist',id);
   const page = await readFile(path.join(dir,'index.html'),'utf8');
-  const css = await readFile(path.join(dir,'styles.css'),'utf8');
+  const css = await readFile(path.join(dir, versionedCss),'utf8');
+  assert.ok(page.includes(`href="/${versionedCss}"`), `Stale or missing CSS reference in ${id}`);
+  assert.equal(css, sourceCss, `Unexpected CSS content in ${id}`);
   const sitemap = await readFile(path.join(dir,'sitemap.xml'),'utf8');
   const wordmark = await readFile(path.join(dir,'nodalia-wordmark.svg'),'utf8');
   const mark = await readFile(path.join(dir,'nodalia-mark.svg'),'utf8');
@@ -35,6 +41,9 @@ for (const id of ['portal','vortia','vinilo','lienzo','nodalix']) {
 const portal=await readFile(path.join(root,'dist/portal/index.html'),'utf8');
 for(const name of ['Vortia','Vinilo','Lienzo','Nodalix OS'])assert.match(portal,new RegExp(name));
 assert.match(portal,/hero-stage/);
+assert.match(portal,/class="hero-title"/);
+assert.match(sourceCss,/\.hero-title\{/);
+assert.match(portal,/width="120" height="120"/);
 assert.match(portal,/window-main/);
 assert.match(portal,/product-grid/);
 assert.match(portal,/spotlight/);
@@ -54,4 +63,4 @@ for(const item of releases.isos){
  assert.ok(item.sizeBytes>0);
  assert.match(item.url,/^https:\/\/(downloads\.getnodalia\.com|github\.com)\//);
 }
-console.log('✓ Cinco webs, identidad visual, capturas reales y descargas ISO validadas.');
+console.log('✓ Cinco webs, CSS con hash anti-caché, recursos y descargas ISO validados.');
