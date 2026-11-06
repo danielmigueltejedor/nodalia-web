@@ -17,7 +17,7 @@ Dirección visual editorial: colores neutros, tipografía de sistema, estructura
 - `assets/styles.css`: único sistema de estilos (sin CDN de tipografías).
 - `assets/_headers`: cabeceras de seguridad y caché para Cloudflare Pages.
 - `assets/nodalia-wordmark.svg` / `assets/nodalia-mark.svg`: identidad compartida.
-- `scripts/data.mjs`: nombres, estados, enlaces y capturas reales de cada producto.
+- `data/apps.json` + `scripts/data.mjs`: catálogo de productos y resolución de URLs oficiales.
 - `scripts/build.mjs`: páginas, metadatos, SEO, sitemap y recursos.
 - `scripts/test.mjs`: validación de los cinco sitios, módulos de descarga y manifiesto ISO.
 - `assets/vortia-download.js` / `assets/nodalix-releases.js`: módulos ES exportables y comprobados en Node.
@@ -34,7 +34,7 @@ npm run build
 npm run preview
 ~~~
 
-`npm run preview` sirve `dist/portal` en `http://127.0.0.1:4317/`. Otras vistas: `npm run preview:vortia`, `npm run preview:nodalix`. También puedes generar un sitio concreto con `npm run build:portal`, `npm run build:vortia`, `npm run build:vinilo`, `npm run build:lienzo` o `npm run build:nodalix`.
+`npm run preview` genera el portal y lo sirve en `http://127.0.0.1:4317/` con el servidor HTTP de Python. Otras vistas: `npm run preview:vortia`, `npm run preview:nodalix`. También puedes generar un sitio concreto con `npm run build:portal`, `npm run build:vortia`, `npm run build:vinilo`, `npm run build:lienzo` o `npm run build:nodalix`.
 
 ## Calidad y SonarQube
 

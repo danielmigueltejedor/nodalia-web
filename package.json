@@ -1,6 +1,6 @@
 {
   "name": "nodalia-web",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "type": "module",
   "description": "Sitios oficiales Nodalia: portal, aplicaciones y Nodalix OS",
@@ -12,9 +12,9 @@
     "build:lienzo": "node scripts/build.mjs lienzo",
     "build:nodalix": "node scripts/build.mjs nodalix",
     "test": "node scripts/test.mjs",
-    "preview": "node scripts/build.mjs portal && node scripts/preview.mjs",
-    "preview:vortia": "node scripts/build.mjs vortia && node scripts/preview.mjs vortia",
-    "preview:nodalix": "node scripts/build.mjs nodalix && node scripts/preview.mjs nodalix"
+    "preview": "node scripts/build.mjs portal && python3 -m http.server 4317 --bind 127.0.0.1 --directory dist/portal",
+    "preview:vortia": "node scripts/build.mjs vortia && python3 -m http.server 4317 --bind 127.0.0.1 --directory dist/vortia",
+    "preview:nodalix": "node scripts/build.mjs nodalix && python3 -m http.server 4317 --bind 127.0.0.1 --directory dist/nodalix"
   },
   "engines": {
     "node": ">=20"
