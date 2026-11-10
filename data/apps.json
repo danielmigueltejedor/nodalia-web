@@ -14,7 +14,24 @@
     "license": "GPL-3.0",
     "repo": "vortia",
     "icon": "resources/icons/vortia.png",
-    "previews": [],
+    "previews": [
+      [
+        "docs/screenshots/results-speed-dark.webp",
+        "Campo de velocidad de un chorro en Vortia"
+      ],
+      [
+        "docs/screenshots/results-temperature-light.webp",
+        "Campo de temperatura en Vortia, modo claro"
+      ],
+      [
+        "docs/screenshots/geometry-dark.webp",
+        "Editor de croquis 2D de Vortia"
+      ],
+      [
+        "docs/screenshots/physics-light.webp",
+        "Modelos físicos y material en Vortia"
+      ]
+    ],
     "features": [
       [
         "Flujo de trabajo integrado",

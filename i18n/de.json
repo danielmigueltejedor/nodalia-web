@@ -458,5 +458,13 @@
  "Navegador web para GNOME": "Webbrowser für GNOME",
  "Correo electrónico": "E-Mail",
  "Sin repositorio aún": "Noch kein Repository",
- "Cada icono es un personaje histórico ligado a lo que hace la aplicación.": "Jedes Symbol zeigt eine historische Persönlichkeit, die mit der Aufgabe der App verbunden ist."
+ "Cada icono es un personaje histórico ligado a lo que hace la aplicación.": "Jedes Symbol zeigt eine historische Persönlichkeit, die mit der Aufgabe der App verbunden ist.",
+ "Campo de velocidad de un chorro en Vortia": "Geschwindigkeitsfeld eines Strahls in Vortia",
+ "Campo de velocidad de un chorro en Vortia (abrir imagen completa)": "Geschwindigkeitsfeld eines Strahls in Vortia (vollständiges Bild öffnen)",
+ "Campo de temperatura en Vortia, modo claro": "Temperaturfeld in Vortia, heller Modus",
+ "Campo de temperatura en Vortia, modo claro (abrir imagen completa)": "Temperaturfeld in Vortia, heller Modus (vollständiges Bild öffnen)",
+ "Editor de croquis 2D de Vortia": "2D-Skizzeneditor von Vortia",
+ "Editor de croquis 2D de Vortia (abrir imagen completa)": "2D-Skizzeneditor von Vortia (vollständiges Bild öffnen)",
+ "Modelos físicos y material en Vortia": "Physikmodelle und Material in Vortia",
+ "Modelos físicos y material en Vortia (abrir imagen completa)": "Physikmodelle und Material in Vortia (vollständiges Bild öffnen)"
 }
