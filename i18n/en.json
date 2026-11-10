@@ -467,5 +467,10 @@
  "Croquis acotado de una tobera en Vortia (abrir imagen completa)": "Dimensioned sketch of a nozzle in Vortia (open full image)",
  "Otros paquetes: .deb, .rpm, Flatpak": "Other packages: .deb, .rpm, Flatpak",
  "AppImage, .deb, .rpm, Flatpak o desde el código": "AppImage, .deb, .rpm, Flatpak or from source",
- "Apple Music requiere suscripción, conexión continua y Linux x86_64. YouTube Music está en beta y Tidal en alfa. Vinilo se descarga como AppImage o como paquete para tu distribución desde GitHub.": "Apple Music requires a subscription, a continuous connection and Linux x86_64. YouTube Music is in beta and Tidal in alpha. Vinilo is available as an AppImage or as a package for your distribution on GitHub."
+ "Apple Music requiere suscripción, conexión continua y Linux x86_64. YouTube Music está en beta y Tidal en alfa. Vinilo se descarga como AppImage o como paquete para tu distribución desde GitHub.": "Apple Music requires a subscription, a continuous connection and Linux x86_64. YouTube Music is in beta and Tidal in alpha. Vinilo is available as an AppImage or as a package for your distribution on GitHub.",
+ "Visor de capturas": "Screenshot viewer",
+ "Cerrar": "Close",
+ "Imagen anterior": "Previous image",
+ "Imagen siguiente": "Next image",
+ "{n} de {total}": "{n} of {total}"
 }
