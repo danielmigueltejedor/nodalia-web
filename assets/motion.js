@@ -20,36 +20,13 @@ function setupReveal() {
         element.removeAttribute('data-reveal');
         element.classList.remove('in');
         element.style.removeProperty('--i');
-      }, 1100 + index * 90);
+      }, 800 + index * 70);
     }
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
   for (const element of document.querySelectorAll('[data-reveal]')) {
     element.style.setProperty('--i', staggerIndex(element));
     observer.observe(element);
   }
-}
-
-function setupCounters() {
-  const observer = new IntersectionObserver((entries) => {
-    for (const entry of entries) {
-      if (!entry.isIntersecting) continue;
-      const element = entry.target;
-      observer.unobserve(element);
-      const target = Number(element.dataset.count);
-      const suffix = element.dataset.suffix || '';
-      if (!Number.isFinite(target) || target === 0) continue;
-      const start = performance.now();
-      const duration = 1100;
-      const tick = (now) => {
-        const progress = clamp((now - start) / duration, 0, 1);
-        const eased = 1 - (1 - progress) ** 3;
-        element.textContent = `${Math.round(target * eased)}${suffix}`;
-        if (progress < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    }
-  }, { threshold: 0.6 });
-  for (const element of document.querySelectorAll('[data-count]')) observer.observe(element);
 }
 
 function setupScrollEffects() {
@@ -99,7 +76,6 @@ function setupSectionSpy() {
 if (typeof window !== 'undefined' && root.classList.contains('js')) {
   window.__nodaliaMotion = true;
   setupReveal();
-  setupCounters();
   setupScrollEffects();
   setupSectionSpy();
 }

@@ -51,7 +51,7 @@ const fontFiles = ['sora-latin-wght.woff2', 'inter-latin-wght.woff2'];
 const motionBoot = `<script>(function(d){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('js');setTimeout(function(){if(!window.__nodaliaMotion)d.classList.remove('js')},2500)})(document.documentElement)</script>`;
 const faqSchema = (items) => ({'@type':'FAQPage',mainEntity:items.map(([q, a]) => ({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))});
 const faqBlock = (items) => `<section class="section faq-section" id="faq"><div class="container faq-layout">
-  <div data-reveal="left"><span class="eyebrow">Preguntas frecuentes</span><h2>Lo que conviene saber.</h2><p>¿No encuentras tu duda? Escribe a ${A(`mailto:${brand.email}`, e(brand.email), 'text-link')}</p></div>
+  <div data-reveal="left"><h2>Preguntas frecuentes</h2><p>¿No encuentras tu duda? Escribe a ${A(`mailto:${brand.email}`, e(brand.email), 'text-link')}</p></div>
   <div class="faq">${items.map(([q, a]) => `<details class="faq-item" data-reveal><summary>${e(q)}<span class="faq-mark" aria-hidden="true"></span></summary><p>${e(a)}</p></details>`).join('')}</div>
 </div></section>`;
 const table = (head, rows) => `<div class="table-wrap" data-reveal><table class="table"><thead><tr>${head.map((h) => `<th scope="col">${e(h)}</th>`).join('')}</tr></thead><tbody>${rows.map((row) => `<tr>${row.map((cell, i) => (i === 0 ? `<th scope="row">${e(cell)}</th>` : `<td>${e(cell)}</td>`)).join('')}</tr>`).join('')}</tbody></table></div>`;
@@ -90,7 +90,7 @@ const footer = () => `<footer class="footer"><div class="container">
   </div>
   <div class="footer-meta"><span>© ${new Date().getUTCFullYear()} Nodalia · Creado por ${A(site.author.website, e(site.author.name), '', true)}</span><span>Sin cookies ni analítica propia.</span></div>
 </div></footer>`;
-const shell = ({title, description, canonical, content, accent = '', preview = '', previewAlt = '', active = '', schema = null}) => `<!doctype html>
+const shell = ({title, description, canonical, content, accent = '', preview = '', previewAlt = '', active = '', schema = null, scripts = ''}) => `<!doctype html>
 <html lang="es"><head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <meta name="theme-color" content="#07080c"/><meta name="color-scheme" content="dark"/>
@@ -111,9 +111,9 @@ ${preview ? `<meta property="og:image" content="${safeUrl(preview)}"/>${previewA
 ${motionBoot}
 ${schema ? jsonLd({'@context':'https://schema.org','@graph':[].concat(schema)}) : ''}
 </head><body class="${e(accent ? `accent-${accent}` : '')}"><a class="visually-hidden" href="#contenido">Saltar al contenido</a>
-<div class="scroll-progress" aria-hidden="true"></div>${nav(active)}<main id="contenido">${content}</main>${footer()}<script type="module" src="${motionSrc}"></script></body></html>`;
+<div class="scroll-progress" aria-hidden="true"></div>${nav(active)}<main id="contenido">${content}</main>${footer()}<script type="module" src="${motionSrc}"></script>${scripts}</body></html>`;
 
-function home() {
+async function home() {
   const vinilo = byId.vinilo, lienzo = byId.lienzo, nodalix = byId.nodalix;
   const previewUrl = (app, i = 0) => safeUrl(app.previews[i][0]);
   const headlines = {nodalix:'Tu ordenador. Con otra perspectiva.',vortia:'Ingeniería de fluidos sin cajas negras.',vinilo:'Escucha como tú quieras.',lienzo:'Un espacio para crear.'};
@@ -144,11 +144,11 @@ function home() {
     preview: vinilo.previews[0][0],
     previewAlt: vinilo.previews[0][1],
     active: 'portal',
+    scripts: `<script type="module" src="/releases.js?v=${await assetVersion('releases.js')}"></script>`,
     schema: [{'@type':'Organization',name:brand.name,url:brand.portal,logo:`${brand.portal}/logo.svg`,email:brand.email,sameAs:[brand.github],founder:{'@type':'Person',name:site.author.name,url:site.author.website,sameAs:[brand.github]}}, faqSchema(site.faq)],
     content: `<section class="home-hero"><div class="container hero-layout">
       <div class="hero-copy">
-        <span class="kicker" data-reveal>Software independiente · Código abierto</span>
-        <h1 class="hero-title" data-reveal>Software que se siente <span>propio.</span></h1>
+        <h1 class="hero-title" data-reveal>Software que se siente propio.<span class="caret" aria-hidden="true"></span></h1>
         <p class="hero-lead" data-reveal>Nodalia crea un sistema operativo Linux y aplicaciones de escritorio para escuchar, crear y simular. Software nativo, hecho con cuidado y desarrollado en público.</p>
         <div class="actions" data-reveal>${A(`${brand.portal}/#aplicaciones`, 'Explorar productos', 'btn btn-primary')}${A(nodalix.domain, `Descubrir Nodalix OS ${icon.arrow}`, 'btn btn-secondary')}</div>
         <nav class="hero-products" data-reveal aria-label="Productos de Nodalia">${ordered.map((app) => `<a href="${safeUrl(app.domain)}"><img src="${safeUrl(app.icon)}" alt="" width="24" height="24" decoding="async"/>${e(app.name)}</a>`).join('')}</nav>
@@ -166,23 +166,20 @@ function home() {
         <p class="stage-caption"><strong>Aplicaciones reales.</strong> Capturas de los repositorios oficiales.</p>
       </div>
     </div></section>
-    <div class="hero-stats"><div class="container hero-stats-inner">
-      <div class="hero-stat" data-reveal><b data-count="4">4</b><span>productos de escritorio en desarrollo</span></div>
-      <div class="hero-stat" data-reveal><b data-count="100" data-suffix="%">100%</b><span>desarrollo público en GitHub</span></div>
-      <div class="hero-stat" data-reveal><b data-count="3">3</b><span>plataformas: Linux, macOS y Windows</span></div>
-      <div class="hero-stat" data-reveal><b>0</b><span>rastreadores, analítica o cookies</span></div>
+    <div class="release-strip"><div class="container release-strip-inner"><span class="release-label">Últimas versiones</span>
+      <ul>${site.releases.map(([name, repo, tag]) => `<li><a href="${safeUrl(`${repoUrl(repo)}/releases/latest`)}" target="_blank" rel="noopener noreferrer"><span>${e(name)}</span><b data-release="${e(repo)}">${e(tag)}</b><time></time></a></li>`).join('')}</ul>
     </div></div>
     <section class="catalogue" id="aplicaciones"><div class="container">
-      <div class="section-head"><div data-reveal><span class="eyebrow">Nuestro software</span><h2 data-reveal>Cuatro ideas.<br/>Una forma de hacerlas.</h2></div><p data-reveal>Un sistema operativo y tres aplicaciones, cada una con un problema concreto que resolver. Todas indican su estado real antes de que descargues nada.</p></div>
+      <div class="section-head"><div data-reveal><h2 data-reveal>Cuatro ideas.<br/>Una forma de hacerlas.</h2></div><p data-reveal>Un sistema operativo y tres aplicaciones, cada una con un problema concreto que resolver. Todas indican su estado real antes de que descargues nada.</p></div>
       <div class="product-grid">${ordered.map(card).join('')}</div>
     </div></section>
     <section class="spotlight"><div class="container spotlight-content">
-      <div data-reveal="left"><span class="eyebrow">Nodalix OS · Linux para personas</span><h2 data-reveal>El sistema operativo también cuenta.</h2><p>Un escritorio GNOME sobre Arch Linux desarrollado como un solo sistema: instalador y actualizador propios, paquetes ajustados a tu procesador e integración con iPhone desde el primer arranque.</p><div class="actions">${A(nodalix.domain, `Conocer Nodalix OS ${icon.arrow}`, 'btn btn-primary')}${A(`${nodalix.domain}/#descargas`, 'Descargas e instalación', 'btn btn-secondary')}</div></div>
+      <div data-reveal="left"><h2 data-reveal>El sistema operativo también cuenta.</h2><p>Un escritorio GNOME sobre Arch Linux desarrollado como un solo sistema: instalador y actualizador propios, paquetes ajustados a tu procesador e integración con iPhone desde el primer arranque.</p><div class="actions">${A(nodalix.domain, `Conocer Nodalix OS ${icon.arrow}`, 'btn btn-primary')}${A(`${nodalix.domain}/#descargas`, 'Descargas e instalación', 'btn btn-secondary')}</div></div>
       <div class="spec-card" data-reveal="right"><div class="spec-card-head"><img src="${safeUrl(nodalix.icon)}" alt="Logo de Nodalix OS" width="60" height="60" loading="lazy" decoding="async"/><div><strong>${e(nodalix.name)}</strong><span>${e(nodalix.tagline)}</span></div></div>
         <dl class="spec-list">${specs.map(([k, v]) => `<div><dt>${e(k)}</dt><dd>${e(v)}</dd></div>`).join('')}</dl></div>
     </div></section>
     <section class="section eco" id="ecosistema"><div class="container">
-      <div class="section-head"><div data-reveal><span class="eyebrow">También para tu casa</span><h2>Nodalia en Home Assistant.</h2></div><p data-reveal>Además del escritorio, Nodalia publica componentes para paneles domóticos. Es su proyecto con más recorrido en la comunidad.</p></div>
+      <div class="section-head"><div data-reveal><h2>Nodalia en Home Assistant.</h2></div><p data-reveal>Además del escritorio, Nodalia publica componentes para paneles domóticos. Es su proyecto con más recorrido en la comunidad.</p></div>
       <div class="eco-card" data-reveal>
         <div class="eco-copy"><span class="kicker">${e(eco.featured.kicker)}</span><h3>${e(eco.featured.name)}</h3><p class="eco-headline">${e(eco.featured.headline)}</p><p>${e(eco.featured.description)}</p>
           <ul class="check-list">${eco.featured.points.map((point) => `<li>${icon.tick}${e(point)}</li>`).join('')}</ul>
@@ -192,20 +189,21 @@ function home() {
       <div class="more-grid">${eco.more.map(([name, repo, text]) => `<a class="more-card more-card--text" data-reveal href="${safeUrl(repoUrl(repo))}" target="_blank" rel="noopener noreferrer"><div><strong>${e(name)}</strong><span>${e(text)}</span></div>${icon.arrow}</a>`).join('')}</div>
     </div></section>
     <section class="values" id="principios"><div class="container">
-      <div class="section-head"><div data-reveal><span class="eyebrow">Principios</span><h2 data-reveal>Cómo hacemos software.</h2></div><p data-reveal>Tres compromisos que se aplican a todos los proyectos de Nodalia, desde el sistema operativo hasta la aplicación más pequeña.</p></div>
-      <div class="value-row">${values.map(([ico, h, d]) => `<div class="value" data-reveal><span class="value-icon">${ico}</span><b>${e(h)}</b><p>${e(d)}</p></div>`).join('')}</div>
+      <div class="section-head"><div data-reveal><h2 data-reveal>Cómo hacemos software.</h2></div><p data-reveal>Tres compromisos que se aplican a todos los proyectos de Nodalia, desde el sistema operativo hasta la aplicación más pequeña.</p></div>
+      <ul class="principles">${values.map(([, h, d]) => `<li data-reveal><h3>${e(h)}</h3><p>${e(d)}</p></li>`).join('')}</ul>
     </div></section>
     <section class="section author" id="autor"><div class="container author-layout">
       <div class="author-card" data-reveal="left"><img src="${safeUrl(author.avatar)}" alt="Retrato de ${e(author.name)}" width="120" height="120" loading="lazy" decoding="async"/><strong>${e(author.name)}</strong><span>${e(author.role)}</span>
         <ul class="chips">${author.topics.map((topic) => `<li class="chip">${e(topic)}</li>`).join('')}</ul></div>
-      <div data-reveal="right"><span class="eyebrow">Quién está detrás</span><h2>Una persona, muchos proyectos.</h2>${author.bio.map((text) => `<p>${e(text)}</p>`).join('')}
+      <div data-reveal="right"><h2>Quién hace Nodalia</h2>${author.bio.map((text) => `<p>${e(text)}</p>`).join('')}
         <div class="actions">${A(author.website, `danielmigueltejedor.com ${icon.arrow}`, 'btn btn-primary', true)}${A(brand.github, `${icon.github}Perfil en GitHub`, 'btn btn-secondary', true)}</div></div>
     </div></section>
     ${faqBlock(site.faq)}
-    <section class="cta"><div class="container"><div class="cta-box" data-reveal="scale">
-      <div><h2>Desarrollado a la vista de todos.</h2><p>El código, las incidencias y las versiones de cada proyecto están en GitHub. ¿Dudas o propuestas? Escríbenos.</p></div>
-      <div class="actions">${A(brand.github, `${icon.github}Ver en GitHub`, 'btn btn-primary', true)}${A(`mailto:${brand.email}`, `${icon.mail}${e(brand.email)}`, 'btn btn-secondary')}</div>
-    </div></div></section>`
+    <section class="contact"><div class="container">
+      <p class="contact-lead" data-reveal>¿Una duda, una idea o un fallo que contar?</p>
+      <a class="contact-mail" data-reveal href="${safeUrl(`mailto:${brand.email}`)}">${e(brand.email)}<span class="caret" aria-hidden="true"></span></a>
+      <p class="contact-links" data-reveal>${A(brand.github, `GitHub ${icon.arrow}`, 'text-link', true)}${A(author.website, `danielmigueltejedor.com ${icon.arrow}`, 'text-link', true)}</p>
+    </div></section>`
   });
 }
 function product(app) {
@@ -233,7 +231,7 @@ function product(app) {
         ? `<div data-reveal="right"><h3 class="detail-title">Formatos compatibles</h3><ul class="chips chips--lg">${app.formats.map((f) => `<li class="chip">${e(f)}</li>`).join('')}</ul><p class="credit">${e(app.credit)}</p></div>`
         : `<div><h3 class="detail-title" data-reveal>Del caso al resultado</h3><ol class="flow">${app.flow.map(([name, text], i) => `<li data-reveal><span class="flow-num">${i + 1}</span><div><strong>${e(name)}</strong><span>${e(text)}</span></div></li>`).join('')}</ol></div>`;
   const installBlock = app.install
-    ? `<section class="section install-section" id="instalacion"><div class="container"><span class="eyebrow" data-reveal>Instalación</span><h2 data-reveal>${e(app.install.title)}</h2><p class="iso-intro" data-reveal>${e(app.install.intro)}</p><pre class="code" data-reveal tabindex="0"><code>${app.install.commands.map((line) => e(line)).join('\n')}</code></pre><p class="small-label">Guía completa, actualización y otras distribuciones en ${A(app.repo + '#installation', 'el repositorio', 'text-link', true)}.</p></div></section>`
+    ? `<section class="section install-section" id="instalacion"><div class="container"><h2 data-reveal>${e(app.install.title)}</h2><p class="iso-intro" data-reveal>${e(app.install.intro)}</p><pre class="code" data-reveal tabindex="0"><code>${app.install.commands.map((line) => e(line)).join('\n')}</code></pre><p class="small-label">Guía completa, actualización y otras distribuciones en ${A(app.repo + '#installation', 'el repositorio', 'text-link', true)}.</p></div></section>`
     : '';
   const others = ordered.filter((item) => item.id !== app.id);
   return shell({
@@ -252,23 +250,22 @@ function product(app) {
       <div class="actions">${primaryDownload}${A(app.repo, `${icon.github}Código en GitHub`, 'btn btn-secondary', true)}</div>
       ${primaryHint}<div class="product-meta"><span class="pill">${e(app.platforms)}</span><span class="pill">${e(app.technology)}</span></div></div>
       <div class="product-preview" data-reveal="right">${preview}</div></div></section>
-      <section class="section features" id="funciones"><div class="container"><span class="eyebrow" data-reveal>Funciones del proyecto</span><h2 data-reveal>Qué hace ${e(app.name)}.</h2><div class="feature-grid">${app.features.map(([h,d],i)=>`<article class="feature" data-reveal><span class="num">0${i+1}</span><h3>${e(h)}</h3><p>${e(d)}</p></article>`).join('')}</div><div class="notice" data-reveal>${icon.alert}<p><strong>Estado y requisitos:</strong> ${e(app.limitation)}</p></div></div></section>
-      <section class="section" id="ficha"><div class="container"><span class="eyebrow" data-reveal>Ficha técnica</span><h2 data-reveal>${e(app.name)}, en detalle.</h2><div class="detail-grid">${specCard(app)}${detail}</div></div></section>
+      <section class="section features" id="funciones"><div class="container"><h2 data-reveal>Qué hace ${e(app.name)}.</h2><div class="feature-grid">${app.features.map(([h,d],i)=>`<article class="feature" data-reveal><h3>${e(h)}</h3><p>${e(d)}</p></article>`).join('')}</div><div class="notice" data-reveal>${icon.alert}<p><strong>Estado y requisitos:</strong> ${e(app.limitation)}</p></div></div></section>
+      <section class="section" id="ficha"><div class="container"><h2 data-reveal>Ficha técnica</h2><div class="detail-grid">${specCard(app)}${detail}</div></div></section>
       ${app.id==='vortia' ? vortiaDownloads() : ''}
       ${installBlock}
       ${app.id==='nodalix' ? nodalixDownloads(app) : ''}
-      ${app.previews.length ? `<section class="section" id="capturas"><div class="container"><span class="eyebrow" data-reveal>Vistas de la aplicación</span><h2 data-reveal>Conoce ${e(app.name)}.</h2><div class="gallery">${app.previews.map(([url,alt])=>`<figure data-reveal="scale"><a href="${safeUrl(url)}" target="_blank" rel="noopener noreferrer" aria-label="${e(alt)} (abrir imagen completa)"><img src="${safeUrl(url)}" alt="${e(alt)}" loading="lazy" decoding="async"/></a><figcaption>${e(alt)}</figcaption></figure>`).join('')}</div></div></section>` : ''}
+      ${app.previews.length ? `<section class="section" id="capturas"><div class="container"><h2 data-reveal>Capturas</h2><div class="gallery">${app.previews.map(([url,alt])=>`<figure data-reveal="scale"><a href="${safeUrl(url)}" target="_blank" rel="noopener noreferrer" aria-label="${e(alt)} (abrir imagen completa)"><img src="${safeUrl(url)}" alt="${e(alt)}" loading="lazy" decoding="async"/></a><figcaption>${e(alt)}</figcaption></figure>`).join('')}</div></div></section>` : ''}
       ${faqBlock(app.faq)}
-      <section class="section product-outro" id="codigo"><div class="container"><span class="eyebrow" data-reveal>Código y documentación</span><h2 data-reveal>Forma parte del desarrollo.</h2><p>Consulta el código, los cambios y las publicaciones reales en GitHub. La disponibilidad de paquetes instalables depende del estado de cada aplicación.</p><div class="actions">${A(app.repo,`Explorar repositorio ${icon.arrow}`,'btn btn-primary',true)}${A(`${app.repo}/releases`,'Versiones publicadas','btn btn-secondary',true)}</div></div></section>
-      <section class="section"><div class="container"><span class="eyebrow" data-reveal>Más de Nodalia</span><h2 data-reveal>Otros productos.</h2><div class="more-grid">${others.map((item) => `<a class="more-card" data-reveal href="${safeUrl(item.domain)}">${iconImg(item, 'more-icon', 48)}<div><strong>${e(item.name)}</strong><span>${e(item.category)}</span></div>${icon.arrow}</a>`).join('')}</div></div></section>`
+      <section class="section product-outro" id="codigo"><div class="container"><h2 data-reveal>Forma parte del desarrollo.</h2><p>Consulta el código, los cambios y las publicaciones reales en GitHub. La disponibilidad de paquetes instalables depende del estado de cada aplicación.</p><div class="actions">${A(app.repo,`Explorar repositorio ${icon.arrow}`,'btn btn-primary',true)}${A(`${app.repo}/releases`,'Versiones publicadas','btn btn-secondary',true)}</div></div></section>
+      <section class="section"><div class="container"><h2 data-reveal>Más de Nodalia</h2><div class="more-grid">${others.map((item) => `<a class="more-card" data-reveal href="${safeUrl(item.domain)}">${iconImg(item, 'more-icon', 48)}<div><strong>${e(item.name)}</strong><span>${e(item.category)}</span></div>${icon.arrow}</a>`).join('')}</div></div></section>`
   });
 }
 function vortiaDownloads() {
   return `<section class="section vortia-download-section" id="descargas">
     <div class="container">
       <div class="vortia-download-head">
-        <div><span class="eyebrow">Instaladores oficiales</span>
-          <h2>Descarga Vortia.</h2>
+        <div><h2>Descarga Vortia.</h2>
           <p>El botón superior selecciona automáticamente Linux o macOS. También puedes elegir un paquete manualmente y comprobar su integridad con SHA-256.</p>
         </div>
         <div class="vortia-version-info" data-reveal="right">
@@ -308,7 +305,6 @@ function vortiaDownloads() {
 
 function nodalixDownloads(app) {
   return `<section class="section iso-section" id="descargas"><div class="container">
-    <span class="eyebrow">Nodalix OS / x86_64</span>
     <h2>Descarga la imagen de instalación</h2>
     <p class="iso-intro">Consigue la ISO oficial, comprueba su integridad y grábala en una memoria USB. Las versiones se consultan directamente en la publicación oficial de Nodalix OS.</p>
     <div class="download-panel" data-reveal aria-live="polite">
@@ -322,7 +318,7 @@ function nodalixDownloads(app) {
       ${A(`${app.repo}/releases`, 'Ver todas las versiones y betas ↗', 'text-link', true)}
       ${A(`${app.repo}/blob/main/docs/iso.md`, 'Documentación oficial de las ISO ↗', 'text-link', true)}</div>
   </div></section>
-  <section class="section install-section" id="instalacion"><div class="container"><span class="eyebrow" data-reveal>Instalación</span><h2 data-reveal>De la descarga al primer arranque</h2>
+  <section class="section install-section" id="instalacion"><div class="container"><h2 data-reveal>De la descarga al primer arranque</h2>
     <div class="feature-grid">
       <article class="feature" data-reveal><span class="num">01 · Descargar</span><h3>Obtén la ISO completa</h3><p>Descarga la imagen verificada. Si GitHub la distribuye en partes, utiliza el descargador oficial para reconstruirla.</p></article>
       <article class="feature" data-reveal><span class="num">02 · Grabar USB</span><h3>Crea tu USB de arranque</h3><p>Usa una herramienta de grabación de imágenes, como Balena Etcher o Rufus. Al grabar se borrará el contenido de la unidad USB.</p></article>
@@ -340,7 +336,7 @@ async function build(site) {
   await rm(dir, { recursive: true, force: true });
   await mkdir(path.join(dir, 'fonts'), { recursive: true });
   const app = apps.find((item) => item.id === site);
-  const content = site === 'portal' ? home() : product(app);
+  const content = site === 'portal' ? await home() : product(app);
   const baseUrl = site === 'portal' ? brand.portal : app.domain;
   await Promise.all([
     writeFile(path.join(dir, 'index.html'), content, 'utf8'),
@@ -356,6 +352,7 @@ async function build(site) {
     ...['favicon.svg', 'favicon.ico', 'apple-touch-icon.png'].map((file) => copyFile(path.join(root, 'assets', file), path.join(dir, file))),
     ...fontFiles.map((file) => copyFile(path.join(root, 'assets', 'fonts', file), path.join(dir, 'fonts', file))),
     writeFile(path.join(dir, cssFileName), cssSource),
+    ...(site === 'portal' ? [copyFile(path.join(root, 'assets', 'releases.js'), path.join(dir, 'releases.js'))] : []),
     ...(site === 'vortia' ? [
       copyFile(path.join(root, 'assets', 'vortia-download.js'), path.join(dir, 'vortia-download.js')),
       copyFile(path.join(root, 'assets', 'platform-apple.svg'), path.join(dir, 'platform-apple.svg')),

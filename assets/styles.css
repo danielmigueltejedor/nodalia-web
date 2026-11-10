@@ -22,8 +22,8 @@
   --ok:#8fd9b2;
   --warn:#e2c08a;
   --max:1200px;
-  --radius:18px;
-  --radius-sm:10px;
+  --radius:12px;
+  --radius-sm:8px;
   --bar:68px;
   --ease:cubic-bezier(.2,.7,.2,1);
   --display:"Sora","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
@@ -567,3 +567,92 @@ html:not(.js) .scroll-progress{display:none}
   [data-parallax]{translate:none!important}
   *,*::before,*::after{transition:none!important;animation:none!important}
 }
+
+/* ================================================================
+   Carácter: menos efectos de plantilla, más sistema propio.
+   Motivo recurrente: el cursor de bloque del logo.
+   ================================================================ */
+.caret{display:inline-block;width:.4em;height:.74em;margin-left:.12em;border-radius:.05em;background:var(--accent);vertical-align:baseline;animation:caret-blink 1.15s steps(1) infinite}
+@keyframes caret-blink{0%,55%{opacity:1}56%,100%{opacity:0}}
+
+/* Etiquetas: una línea discreta con el cuadrado del logo, sin mayúsculas monoespaciadas */
+.eyebrow,.kicker{font-family:var(--sans);font-size:14px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--muted)}
+.eyebrow::before,.kicker::before{content:"";display:inline-block;width:8px;height:8px;margin-right:10px;border-radius:2px;background:var(--accent)}
+.js .eyebrow{position:static}
+
+/* Fondos planos: sin rejilla ni halos */
+.home-hero::before,.home-hero::after,.spotlight::before{content:none}
+.stage-halo{display:none}
+.product-hero{background:none}
+.eco-card,.author-card,.download-panel,.cta-box{background:var(--surface)}
+.product-preview{background:var(--surface);box-shadow:none}
+.spec-card{background:var(--surface);box-shadow:none}
+.shot{box-shadow:0 30px 70px -30px rgba(0,0,0,.9)}
+.scroll-progress{background:var(--accent)}
+.eco-art b{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--ink)}
+
+/* Formas: esquinas más secas, sin brillos al pasar */
+.btn{border-radius:8px}
+.btn-primary,.btn-primary:hover{box-shadow:none}
+.tag{border-radius:6px}
+.product-card{border-radius:14px;background:color-mix(in srgb,rgb(var(--card-rgb)) 7%,var(--surface))}
+.product-card::before{content:none}
+.product-card:hover{transform:none;box-shadow:none;border-color:rgba(var(--card-rgb),.55)}
+.cover-link:focus-visible{border-radius:14px}
+.eco-card,.author-card,.spec-card,.download-panel,.vortia-package,.product-preview{border-radius:14px}
+.faq-item{border-radius:10px}
+.gallery figure:hover,.more-card:hover{transform:none}
+.hero-copy{padding-top:8px}
+.hero-title span{color:inherit}
+
+/* Franja de versiones reales en lugar de cifras */
+.release-strip{border-block:1px solid var(--line);background:var(--bg-2)}
+.release-strip-inner{display:flex;align-items:center;gap:32px;min-height:64px}
+.release-label{flex:none;font-size:13px;color:var(--soft)}
+.release-label::before{content:"";display:inline-block;width:8px;height:8px;margin-right:10px;border-radius:2px;background:var(--accent)}
+.release-strip ul{display:flex;flex:1;flex-wrap:wrap;gap:6px 34px}
+.release-strip a{display:inline-flex;align-items:baseline;gap:9px;padding:8px 0;font-size:14px;color:var(--muted);transition:color .2s}
+.release-strip a:hover{color:var(--ink)}
+.release-strip b{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--ink)}
+.release-strip time{font-size:12px;color:var(--soft)}
+.release-strip time:empty{display:none}
+
+/* Principios: filas tipográficas, sin iconos ni tarjetas */
+.principles{border-top:1px solid var(--line-2)}
+.principles li{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px;align-items:baseline;padding:34px 0;border-bottom:1px solid var(--line-2)}
+.principles h3{font-size:clamp(26px,3vw,40px);letter-spacing:-.035em}
+.principles p{font-size:18px;line-height:1.65;max-width:520px}
+
+/* Funciones: lista con filetes en vez de tarjetas numeradas */
+.feature-grid{gap:0 40px}
+.feature,.feature:hover{padding:26px 0 30px;border:0;border-top:1px solid var(--line-2);border-radius:0;background:none}
+.feature h3{font-size:20px}
+.install-section .feature .num{margin-bottom:14px;color:var(--muted)}
+
+/* Cierre: el correo, en grande */
+.contact{padding:120px 0 130px;border-top:1px solid var(--line)}
+.contact-lead{font-size:18px;color:var(--muted)}
+.contact-mail{display:inline-block;margin:14px 0 30px;font-family:var(--display);font-size:clamp(30px,6.4vw,88px);font-weight:600;letter-spacing:-.045em;line-height:1.05;color:var(--ink);overflow-wrap:anywhere;background:linear-gradient(var(--accent),var(--accent)) 0 100%/0 3px no-repeat;transition:background-size .5s var(--ease)}
+.contact-mail:hover{background-size:100% 3px}
+.contact-links{display:flex;flex-wrap:wrap;gap:14px 30px}
+
+/* Movimiento: entradas cortas y sin desenfoque */
+.js [data-reveal]{transform:translateY(18px);filter:none;transition:opacity .6s var(--ease),transform .6s var(--ease);transition-delay:calc(var(--i,0)*70ms)}
+.js [data-reveal="left"]{transform:translateX(-24px)}
+.js [data-reveal="right"]{transform:translateX(24px)}
+.js [data-reveal="scale"]{transform:scale(.97)}
+.js [data-reveal].in{transform:none}
+
+@media(max-width:860px){
+  .release-strip-inner{flex-direction:column;align-items:flex-start;gap:6px;padding:16px 0}
+  .principles li{grid-template-columns:1fr;gap:10px;padding:26px 0}
+  .principles p{font-size:16px}
+  .contact{padding:84px 0 92px}
+  .js [data-reveal="left"],.js [data-reveal="right"]{transform:translateY(18px)}
+}
+@media(max-width:600px){
+  .release-strip ul{gap:0 22px}
+  .feature,.feature:hover{padding:20px 0 22px}
+  .contact{padding:64px 0 72px}
+}
+@media(prefers-reduced-motion:reduce){.caret{animation:none}}
