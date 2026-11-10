@@ -95,3 +95,9 @@ No subir imágenes ISO a Cloudflare Pages: sus límites de tamaño por archivo s
 - Antes de publicar: ejecuta `npm test`, revisa cambios visuales en escritorio y móvil, y comprueba los enlaces de descarga.
 - Las imágenes de las aplicaciones se enlazan desde las ramas oficiales de sus repositorios, no se generan artificialmente.
 - Las cabeceras HTTP de seguridad se definen en `assets/_headers` y se copian a cada sitio generado.
+
+## Logotipos para otros repositorios
+
+`assets/brand/` contiene el logotipo de Nodalia en blanco y en negro. No se publican en las webs; los
+README de las aplicaciones los enlazan desde este repositorio para mostrar el logotipo en el tema claro
+y en el oscuro de GitHub.
