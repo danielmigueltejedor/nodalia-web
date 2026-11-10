@@ -1,6 +1,5 @@
 import { t, formatNumber } from './i18n.js';
 /* Vortia downloads: official GitHub Releases, platform-aware with safe fallback. */
-'use strict';
 
 export const OWNER = 'danielmigueltejedor';
 export const REPO = 'vortia';
