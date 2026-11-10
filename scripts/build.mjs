@@ -62,6 +62,7 @@ const fontFiles = ['sora-latin-wght.woff2', 'inter-latin-wght.woff2'];
 // Activa las animaciones solo con JavaScript y sin reduced-motion; si motion.js no carga, el contenido vuelve a mostrarse.
 const motionBoot = `<script>(function(d){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('js');setTimeout(function(){if(!window.__nodaliaMotion)d.classList.remove('js')},2500)})(document.documentElement)</script>`;
 const identitySrc = `/identity.js?v=${await assetVersion('identity.js')}`;
+const gallerySrc = `/gallery.js?v=${await assetVersion('gallery.js')}`;
 
 // Firmas visuales: un elemento propio por producto en la cabecera. Todas son legibles sin JavaScript.
 // Vortia: flujo potencial alrededor de un cilindro. Las líneas de corriente se calculan aquí; identity.js añade trazadores y sonda.
@@ -351,7 +352,7 @@ function product(app) {
       ${app.id==='vortia' ? vortiaDownloads() : ''}
       ${installBlock}
       ${app.id==='nodalix' ? nodalixDownloads(app) : ''}
-      ${app.previews.length ? `<section class="section" id="capturas"><div class="container"><h2 data-reveal>Capturas</h2><div class="gallery">${app.previews.map(([url,alt])=>`<figure data-reveal="scale"><a href="${safeUrl(url)}" target="_blank" rel="noopener noreferrer" aria-label="${e(alt)} (abrir imagen completa)"><img src="${safeUrl(url)}" alt="${e(alt)}" loading="lazy" decoding="async"/></a><figcaption>${e(alt)}</figcaption></figure>`).join('')}</div></div></section>` : ''}
+      ${app.previews.length ? `<section class="section" id="capturas"><div class="container"><h2 data-reveal>Capturas</h2><div class="gallery">${app.previews.map(([url,alt])=>`<figure data-reveal="scale"><a href="${safeUrl(url)}" target="_blank" rel="noopener noreferrer" aria-label="${e(alt)} (abrir imagen completa)"><img src="${safeUrl(url)}" alt="${e(alt)}" loading="lazy" decoding="async"/></a><figcaption>${e(alt)}</figcaption></figure>`).join('')}</div></div><script type="module" src="${gallerySrc}"></script></section>` : ''}
       ${faqBlock(app.faq)}
       <section class="section product-outro" id="codigo"><div class="container"><h2 data-reveal>Forma parte del desarrollo.</h2><p>Consulta el código, los cambios y las publicaciones reales en GitHub. La disponibilidad de paquetes instalables depende del estado de cada aplicación.</p><div class="actions">${A(app.repo,`Explorar repositorio ${icon.arrow}`,'btn btn-primary',true)}${A(`${app.repo}/releases`,'Versiones publicadas','btn btn-secondary',true)}</div></div></section>
       <section class="section"><div class="container"><h2 data-reveal>Más de Nodalia</h2><div class="more-grid">${others.map((item) => `<a class="more-card" data-reveal href="${safeUrl(item.domain)}">${iconImg(item, 'more-icon', 48)}<div><strong>${e(item.name)}</strong><span>${e(item.category)}</span></div>${icon.arrow}</a>`).join('')}</div></div></section>`
@@ -433,7 +434,7 @@ async function build(site) {
   await mkdir(path.join(dir, 'fonts'), { recursive: true });
   if (site === 'portal') await mkdir(path.join(dir, 'app-icons'), { recursive: true });
   const app = apps.find((item) => item.id === site);
-  const clientScripts = { vortia: ['vortia-download.js'], nodalix: ['nodalix-releases.js'] }[site] || [];
+  const clientScripts = [...({ vortia: ['vortia-download.js'], nodalix: ['nodalix-releases.js'] }[site] || []), ...(app?.previews.length ? ['gallery.js'] : [])];
   const keys = (await Promise.all(clientScripts.map((file) => readFile(path.join(root, 'assets', file), 'utf8')))).flatMap(clientKeys);
   const pages = [];
   for (const code of localeCodes) {
@@ -461,6 +462,7 @@ async function build(site) {
     copyFile(path.join(root, 'assets', '_headers'), path.join(dir, '_headers')),
     copyFile(path.join(root, 'assets', 'motion.js'), path.join(dir, 'motion.js')),
     ...(site === 'portal' ? [] : [copyFile(path.join(root, 'assets', 'identity.js'), path.join(dir, 'identity.js'))]),
+    ...(app?.previews.length ? [copyFile(path.join(root, 'assets', 'gallery.js'), path.join(dir, 'gallery.js'))] : []),
     ...['favicon.svg', 'favicon.ico', 'apple-touch-icon.png'].map((file) => copyFile(path.join(root, 'assets', file), path.join(dir, file))),
     ...fontFiles.map((file) => copyFile(path.join(root, 'assets', 'fonts', file), path.join(dir, 'fonts', file))),
     writeFile(path.join(dir, cssFileName), cssSource),
