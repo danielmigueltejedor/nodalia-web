@@ -9,28 +9,28 @@ export const ASSET_PREFIX = `https://github.com/${OWNER}/${REPO}/releases/downlo
 
 /** Last verified stable assets, used only when the public GitHub API is unavailable. */
 export const FALLBACK = {
-  tag_name: 'v0.4.0',
-  html_url: `${RELEASES}/tag/v0.4.0`,
+  tag_name: 'v0.5.0',
+  html_url: `${RELEASES}/tag/v0.5.0`,
   assets: [
     {
-      name: 'Vortia-0.4.0-linux-x86_64.AppImage',
-      size: 292596216,
-      browser_download_url: `${ASSET_PREFIX}v0.4.0/Vortia-0.4.0-linux-x86_64.AppImage`,
+      name: 'Vortia-0.5.0-linux-x86_64.AppImage',
+      size: 292604408,
+      browser_download_url: `${ASSET_PREFIX}v0.5.0/Vortia-0.5.0-linux-x86_64.AppImage`,
     },
     {
-      name: 'Vortia-0.4.0-linux-x86_64.AppImage.sha256',
+      name: 'Vortia-0.5.0-linux-x86_64.AppImage.sha256',
       size: 101,
-      browser_download_url: `${ASSET_PREFIX}v0.4.0/Vortia-0.4.0-linux-x86_64.AppImage.sha256`,
+      browser_download_url: `${ASSET_PREFIX}v0.5.0/Vortia-0.5.0-linux-x86_64.AppImage.sha256`,
     },
     {
-      name: 'Vortia-0.4.0-macos-arm64.dmg',
-      size: 408565816,
-      browser_download_url: `${ASSET_PREFIX}v0.4.0/Vortia-0.4.0-macos-arm64.dmg`,
+      name: 'Vortia-0.5.0-macos-arm64.dmg',
+      size: 414414151,
+      browser_download_url: `${ASSET_PREFIX}v0.5.0/Vortia-0.5.0-macos-arm64.dmg`,
     },
     {
-      name: 'Vortia-0.4.0-macos-arm64.dmg.sha256',
+      name: 'Vortia-0.5.0-macos-arm64.dmg.sha256',
       size: 95,
-      browser_download_url: `${ASSET_PREFIX}v0.4.0/Vortia-0.4.0-macos-arm64.dmg.sha256`,
+      browser_download_url: `${ASSET_PREFIX}v0.5.0/Vortia-0.5.0-macos-arm64.dmg.sha256`,
     },
   ],
 };
