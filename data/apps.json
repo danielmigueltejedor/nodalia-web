@@ -45,7 +45,7 @@
     ],
     "limitation": "Vortia es experimental. Sus capacidades evolucionan en cada versión y los resultados requieren validación antes de cualquier uso de ingeniería crítico. Ejecutar simulaciones necesita OpenFOAM instalado aparte.",
     "cta": "Ver el proyecto",
-    "accent": "cyan"
+    "accent": "azure"
   },
   {
     "id": "vinilo",

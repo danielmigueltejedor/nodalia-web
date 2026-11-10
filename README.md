@@ -18,6 +18,7 @@ Dirección visual editorial: colores neutros, tipografía Sora + Inter autoaloja
 - `assets/fonts/`: Sora (titulares) e Inter (texto), variables, subconjunto latino, autoalojadas. Licencia SIL OFL 1.1.
 - `assets/releases.js`: franja de últimas versiones del portal; consulta GitHub Releases y conserva el valor de `data/site.json` si no hay respuesta.
 - `assets/motion.js`: animaciones de scroll (aparición, parallax, barra de progreso, sección activa). Se desactivan con `prefers-reduced-motion` y el contenido es visible sin JavaScript.
+- `assets/identity.js`: firma visual de cada producto en la cabecera. Vortia: flujo potencial alrededor de un cilindro con trazadores y sonda (las líneas de corriente se generan en `build.mjs`). Lienzo: dimensiones reales de la captura en la selección. Nodalix OS (arranque) y Vinilo (disco a 33⅓ rpm) son solo HTML y CSS.
 - `assets/_headers`: cabeceras de seguridad y caché para Cloudflare Pages.
 - `assets/nodalia-wordmark.svg` / `assets/nodalia-mark.svg`: identidad compartida.
 - `data/apps.json` + `scripts/data.mjs`: catálogo de productos y resolución de URLs oficiales.
