@@ -424,5 +424,21 @@
  "En macOS la aplicación no está notarizada por Apple: la primera vez, haz clic derecho sobre ella y elige Abrir. En Linux, da permiso de ejecución a la AppImage antes de abrirla.": "Sur macOS, l'application n'est pas notarisée par Apple : la première fois, faites un clic droit dessus et choisissez Ouvrir. Sous Linux, donnez le droit d'exécution à l'AppImage avant de l'ouvrir.",
  "Vortia es experimental y no tiene paridad con las suites CFD comerciales. Comprueba siempre convergencia, balance de masa y dependencia de malla, y consulta la validación y las limitaciones conocidas del repositorio antes de confiar en un resultado.": "Vortia est expérimental et n'est pas à parité avec les suites CFD commerciales. Vérifiez toujours la convergence, le bilan de masse et la dépendance au maillage, et consultez la validation et les limites connues du dépôt avant de vous fier à un résultat.",
  "¿Qué queda fuera?": "Qu'est-ce qui n'est pas couvert ?",
- "LES y DES, transferencia de calor, multifase, combustión, mallas móviles y geometría 3D general con mallado automático de volumen. El flujo compresible para toberas es experimental y no está disponible en la AppImage de Linux.": "LES et DES, transfert de chaleur, multiphasique, combustion, maillages mobiles et géométrie 3D générale avec maillage volumique automatique. L'écoulement compressible pour tuyères est expérimental et n'est pas disponible dans l'AppImage Linux."
+ "LES y DES, transferencia de calor, multifase, combustión, mallas móviles y geometría 3D general con mallado automático de volumen. El flujo compresible para toberas es experimental y no está disponible en la AppImage de Linux.": "LES et DES, transfert de chaleur, multiphasique, combustion, maillages mobiles et géométrie 3D générale avec maillage volumique automatique. L'écoulement compressible pour tuyères est expérimental et n'est pas disponible dans l'AppImage Linux.",
+ "Un marco de código abierto para que los agentes de IA investiguen, escriban, verifiquen y maqueten libros de estudio. Funciona con la IA que ya uses.": "Un framework open source pour que les agents IA recherchent, rédigent, vérifient et mettent en page des livres d'étude. Il fonctionne avec l'IA que vous utilisez déjà.",
+ "Alfa · en desarrollo": "Alpha · en développement",
+ "El modelo no es la fuente de verdad.": "Le modèle n'est pas la source de vérité.",
+ "Studium separa la redacción asistida por IA de la verificación: registra las fuentes, reproduce los cálculos y deja marcado lo que no está comprobado. El resultado es un libro en LaTeX y PDF.": "Studium sépare la rédaction assistée par IA de la vérification : il enregistre les sources, reproduit les calculs et signale ce qui n'a pas été vérifié. Le résultat est un livre en LaTeX et PDF.",
+ "Funciona con Claude, ChatGPT, Codex, Cursor y cualquier cliente compatible con MCP": "Fonctionne avec Claude, ChatGPT, Codex, Cursor et tout client compatible MCP",
+ "Comprobación matemática con SymPy y análisis dimensional con Pint": "Vérification mathématique avec SymPy et analyse dimensionnelle avec Pint",
+ "Evidencia por párrafo y auditorías ligadas a cada revisión del contenido": "Preuves par paragraphe et audits liés à chaque révision du contenu",
+ "Licencia Apache-2.0": "Licence Apache-2.0",
+ "Descargar Studium": "Télécharger Studium",
+ "v1.0.0a1 · código fuente en .zip · Python 3.11 o superior": "v1.0.0a1 · code source en .zip · Python 3.11 ou ultérieur",
+ "Instalación y conexión con tu IA": "Installation et connexion à votre IA",
+ "El último comando arranca el servicio MCP. Configura tu cliente de IA para lanzarlo como servidor MCP local.": "La dernière commande démarre le service MCP. Configurez votre client IA pour le lancer comme serveur MCP local.",
+ "Necesitas Git y, para generar el PDF, un compilador de LaTeX (pdflatex o tectonic).": "Il vous faut Git et, pour générer le PDF, un compilateur LaTeX (pdflatex ou tectonic).",
+ "Guías para cada cliente": "Guides pour chaque client",
+ "Ver la interfaz provisional": "Voir l'interface provisoire",
+ "La interfaz web es provisional y todavía está en desarrollo.": "L'interface web est provisoire et encore en développement."
 }

@@ -424,5 +424,21 @@
  "En macOS la aplicación no está notarizada por Apple: la primera vez, haz clic derecho sobre ella y elige Abrir. En Linux, da permiso de ejecución a la AppImage antes de abrirla.": "Unter macOS ist die App nicht von Apple notarisiert: Klicke beim ersten Mal mit der rechten Maustaste darauf und wähle Öffnen. Unter Linux gibst du dem AppImage vor dem Öffnen das Ausführungsrecht.",
  "Vortia es experimental y no tiene paridad con las suites CFD comerciales. Comprueba siempre convergencia, balance de masa y dependencia de malla, y consulta la validación y las limitaciones conocidas del repositorio antes de confiar en un resultado.": "Vortia ist experimentell und hat keine Parität mit kommerziellen CFD-Suiten. Prüfe immer Konvergenz, Massenbilanz und Netzabhängigkeit und lies die Validierung und die bekannten Einschränkungen im Repository, bevor du einem Ergebnis vertraust.",
  "¿Qué queda fuera?": "Was ist nicht enthalten?",
- "LES y DES, transferencia de calor, multifase, combustión, mallas móviles y geometría 3D general con mallado automático de volumen. El flujo compresible para toberas es experimental y no está disponible en la AppImage de Linux.": "LES und DES, Wärmeübertragung, Mehrphasenströmung, Verbrennung, bewegte Netze und allgemeine 3D-Geometrie mit automatischer Volumenvernetzung. Die kompressible Strömung für Düsen ist experimentell und im Linux-AppImage nicht verfügbar."
+ "LES y DES, transferencia de calor, multifase, combustión, mallas móviles y geometría 3D general con mallado automático de volumen. El flujo compresible para toberas es experimental y no está disponible en la AppImage de Linux.": "LES und DES, Wärmeübertragung, Mehrphasenströmung, Verbrennung, bewegte Netze und allgemeine 3D-Geometrie mit automatischer Volumenvernetzung. Die kompressible Strömung für Düsen ist experimentell und im Linux-AppImage nicht verfügbar.",
+ "Un marco de código abierto para que los agentes de IA investiguen, escriban, verifiquen y maqueten libros de estudio. Funciona con la IA que ya uses.": "Ein Open-Source-Framework, mit dem KI-Agenten Lehrbücher recherchieren, schreiben, verifizieren und setzen. Es funktioniert mit der KI, die du bereits nutzt.",
+ "Alfa · en desarrollo": "Alpha · in Entwicklung",
+ "El modelo no es la fuente de verdad.": "Das Modell ist nicht die Quelle der Wahrheit.",
+ "Studium separa la redacción asistida por IA de la verificación: registra las fuentes, reproduce los cálculos y deja marcado lo que no está comprobado. El resultado es un libro en LaTeX y PDF.": "Studium trennt das KI-gestützte Schreiben von der Verifikation: Es erfasst die Quellen, rechnet die Ergebnisse nach und markiert, was nicht geprüft ist. Das Ergebnis ist ein Buch in LaTeX und PDF.",
+ "Funciona con Claude, ChatGPT, Codex, Cursor y cualquier cliente compatible con MCP": "Funktioniert mit Claude, ChatGPT, Codex, Cursor und jedem MCP-kompatiblen Client",
+ "Comprobación matemática con SymPy y análisis dimensional con Pint": "Mathematische Prüfung mit SymPy und Dimensionsanalyse mit Pint",
+ "Evidencia por párrafo y auditorías ligadas a cada revisión del contenido": "Belege pro Absatz und Audits, die an jede Inhaltsrevision gebunden sind",
+ "Licencia Apache-2.0": "Apache-2.0-Lizenz",
+ "Descargar Studium": "Studium herunterladen",
+ "v1.0.0a1 · código fuente en .zip · Python 3.11 o superior": "v1.0.0a1 · Quellcode als .zip · Python 3.11 oder neuer",
+ "Instalación y conexión con tu IA": "Installation und Verbindung mit deiner KI",
+ "El último comando arranca el servicio MCP. Configura tu cliente de IA para lanzarlo como servidor MCP local.": "Der letzte Befehl startet den MCP-Dienst. Konfiguriere deinen KI-Client so, dass er ihn als lokalen MCP-Server startet.",
+ "Necesitas Git y, para generar el PDF, un compilador de LaTeX (pdflatex o tectonic).": "Du brauchst Git und, um das PDF zu erzeugen, einen LaTeX-Compiler (pdflatex oder tectonic).",
+ "Guías para cada cliente": "Anleitungen für jeden Client",
+ "Ver la interfaz provisional": "Vorläufige Oberfläche ansehen",
+ "La interfaz web es provisional y todavía está en desarrollo.": "Die Weboberfläche ist vorläufig und noch in Entwicklung."
 }

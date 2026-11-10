@@ -95,5 +95,29 @@
       "nodalia-cards",
       "v3.0.5"
     ]
-  ]
+  ],
+  "studium": {
+    "name": "Studium",
+    "repo": "studium",
+    "version": "v1.0.0a1",
+    "preview": "https://studium-estudio-daniel.violetpark17.chatgpt.site/",
+    "kicker": "Alfa · en desarrollo",
+    "intro": "Un marco de código abierto para que los agentes de IA investiguen, escriban, verifiquen y maqueten libros de estudio. Funciona con la IA que ya uses.",
+    "headline": "El modelo no es la fuente de verdad.",
+    "description": "Studium separa la redacción asistida por IA de la verificación: registra las fuentes, reproduce los cálculos y deja marcado lo que no está comprobado. El resultado es un libro en LaTeX y PDF.",
+    "points": [
+      "Funciona con Claude, ChatGPT, Codex, Cursor y cualquier cliente compatible con MCP",
+      "Comprobación matemática con SymPy y análisis dimensional con Pint",
+      "Evidencia por párrafo y auditorías ligadas a cada revisión del contenido",
+      "Licencia Apache-2.0"
+    ],
+    "commands": [
+      "git clone https://github.com/danielmigueltejedor/studium.git",
+      "cd studium",
+      "python -m venv venv",
+      "source venv/bin/activate",
+      "pip install -e \".[dev]\"",
+      "studium mcp"
+    ]
+  }
 }

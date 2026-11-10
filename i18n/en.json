@@ -424,5 +424,21 @@
  "En macOS la aplicación no está notarizada por Apple: la primera vez, haz clic derecho sobre ella y elige Abrir. En Linux, da permiso de ejecución a la AppImage antes de abrirla.": "On macOS the app is not notarised by Apple: the first time, right-click it and choose Open. On Linux, give the AppImage execute permission before opening it.",
  "Vortia es experimental y no tiene paridad con las suites CFD comerciales. Comprueba siempre convergencia, balance de masa y dependencia de malla, y consulta la validación y las limitaciones conocidas del repositorio antes de confiar en un resultado.": "Vortia is experimental and does not have parity with commercial CFD suites. Always check convergence, mass balance and mesh dependence, and consult the validation and known limitations in the repository before trusting a result.",
  "¿Qué queda fuera?": "What is left out?",
- "LES y DES, transferencia de calor, multifase, combustión, mallas móviles y geometría 3D general con mallado automático de volumen. El flujo compresible para toberas es experimental y no está disponible en la AppImage de Linux.": "LES and DES, heat transfer, multiphase, combustion, moving meshes and general 3D geometry with automatic volume meshing. Compressible flow for nozzles is experimental and is not available in the Linux AppImage."
+ "LES y DES, transferencia de calor, multifase, combustión, mallas móviles y geometría 3D general con mallado automático de volumen. El flujo compresible para toberas es experimental y no está disponible en la AppImage de Linux.": "LES and DES, heat transfer, multiphase, combustion, moving meshes and general 3D geometry with automatic volume meshing. Compressible flow for nozzles is experimental and is not available in the Linux AppImage.",
+ "Un marco de código abierto para que los agentes de IA investiguen, escriban, verifiquen y maqueten libros de estudio. Funciona con la IA que ya uses.": "An open source framework for AI agents to research, write, verify and typeset study books. It works with the AI you already use.",
+ "Alfa · en desarrollo": "Alpha · in development",
+ "El modelo no es la fuente de verdad.": "The model is not the source of truth.",
+ "Studium separa la redacción asistida por IA de la verificación: registra las fuentes, reproduce los cálculos y deja marcado lo que no está comprobado. El resultado es un libro en LaTeX y PDF.": "Studium separates AI-assisted writing from verification: it records the sources, reproduces the calculations and flags what has not been checked. The result is a book in LaTeX and PDF.",
+ "Funciona con Claude, ChatGPT, Codex, Cursor y cualquier cliente compatible con MCP": "Works with Claude, ChatGPT, Codex, Cursor and any MCP-compatible client",
+ "Comprobación matemática con SymPy y análisis dimensional con Pint": "Mathematical checking with SymPy and dimensional analysis with Pint",
+ "Evidencia por párrafo y auditorías ligadas a cada revisión del contenido": "Paragraph-level evidence and audits tied to each content revision",
+ "Licencia Apache-2.0": "Apache-2.0 licence",
+ "Descargar Studium": "Download Studium",
+ "v1.0.0a1 · código fuente en .zip · Python 3.11 o superior": "v1.0.0a1 · source code as .zip · Python 3.11 or later",
+ "Instalación y conexión con tu IA": "Installation and connecting your AI",
+ "El último comando arranca el servicio MCP. Configura tu cliente de IA para lanzarlo como servidor MCP local.": "The last command starts the MCP service. Configure your AI client to launch it as a local MCP server.",
+ "Necesitas Git y, para generar el PDF, un compilador de LaTeX (pdflatex o tectonic).": "You need Git and, to generate the PDF, a LaTeX compiler (pdflatex or tectonic).",
+ "Guías para cada cliente": "Guides for each client",
+ "Ver la interfaz provisional": "View the provisional interface",
+ "La interfaz web es provisional y todavía está en desarrollo.": "The web interface is provisional and still in development."
 }

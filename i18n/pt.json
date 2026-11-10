@@ -424,5 +424,21 @@
  "En macOS la aplicación no está notarizada por Apple: la primera vez, haz clic derecho sobre ella y elige Abrir. En Linux, da permiso de ejecución a la AppImage antes de abrirla.": "No macOS a aplicação não está notarizada pela Apple: da primeira vez, clica com o botão direito sobre ela e escolhe Abrir. Em Linux, dá permissão de execução à AppImage antes de a abrir.",
  "Vortia es experimental y no tiene paridad con las suites CFD comerciales. Comprueba siempre convergencia, balance de masa y dependencia de malla, y consulta la validación y las limitaciones conocidas del repositorio antes de confiar en un resultado.": "O Vortia é experimental e não tem paridade com as suítes CFD comerciais. Verifica sempre a convergência, o balanço de massa e a dependência da malha, e consulta a validação e as limitações conhecidas do repositório antes de confiares num resultado.",
  "¿Qué queda fuera?": "O que fica de fora?",
- "LES y DES, transferencia de calor, multifase, combustión, mallas móviles y geometría 3D general con mallado automático de volumen. El flujo compresible para toberas es experimental y no está disponible en la AppImage de Linux.": "LES e DES, transferência de calor, multifásico, combustão, malhas móveis e geometria 3D geral com geração automática de malha de volume. O escoamento compressível para tubeiras é experimental e não está disponível na AppImage de Linux."
+ "LES y DES, transferencia de calor, multifase, combustión, mallas móviles y geometría 3D general con mallado automático de volumen. El flujo compresible para toberas es experimental y no está disponible en la AppImage de Linux.": "LES e DES, transferência de calor, multifásico, combustão, malhas móveis e geometria 3D geral com geração automática de malha de volume. O escoamento compressível para tubeiras é experimental e não está disponível na AppImage de Linux.",
+ "Un marco de código abierto para que los agentes de IA investiguen, escriban, verifiquen y maqueten libros de estudio. Funciona con la IA que ya uses.": "Uma framework de código aberto para que os agentes de IA investiguem, escrevam, verifiquem e paginem livros de estudo. Funciona com a IA que já usas.",
+ "Alfa · en desarrollo": "Alfa · em desenvolvimento",
+ "El modelo no es la fuente de verdad.": "O modelo não é a fonte da verdade.",
+ "Studium separa la redacción asistida por IA de la verificación: registra las fuentes, reproduce los cálculos y deja marcado lo que no está comprobado. El resultado es un libro en LaTeX y PDF.": "O Studium separa a escrita assistida por IA da verificação: regista as fontes, reproduz os cálculos e deixa assinalado o que não foi verificado. O resultado é um livro em LaTeX e PDF.",
+ "Funciona con Claude, ChatGPT, Codex, Cursor y cualquier cliente compatible con MCP": "Funciona com Claude, ChatGPT, Codex, Cursor e qualquer cliente compatível com MCP",
+ "Comprobación matemática con SymPy y análisis dimensional con Pint": "Verificação matemática com SymPy e análise dimensional com Pint",
+ "Evidencia por párrafo y auditorías ligadas a cada revisión del contenido": "Evidência por parágrafo e auditorias ligadas a cada revisão do conteúdo",
+ "Licencia Apache-2.0": "Licença Apache-2.0",
+ "Descargar Studium": "Descarregar o Studium",
+ "v1.0.0a1 · código fuente en .zip · Python 3.11 o superior": "v1.0.0a1 · código-fonte em .zip · Python 3.11 ou superior",
+ "Instalación y conexión con tu IA": "Instalação e ligação à tua IA",
+ "El último comando arranca el servicio MCP. Configura tu cliente de IA para lanzarlo como servidor MCP local.": "O último comando arranca o serviço MCP. Configura o teu cliente de IA para o lançar como servidor MCP local.",
+ "Necesitas Git y, para generar el PDF, un compilador de LaTeX (pdflatex o tectonic).": "Precisas do Git e, para gerar o PDF, de um compilador de LaTeX (pdflatex ou tectonic).",
+ "Guías para cada cliente": "Guias para cada cliente",
+ "Ver la interfaz provisional": "Ver a interface provisória",
+ "La interfaz web es provisional y todavía está en desarrollo.": "A interface web é provisória e ainda está em desenvolvimento."
 }

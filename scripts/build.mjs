@@ -115,6 +115,7 @@ const nav = (active = '', base = brand.portal + '/') => `<header class="topbar">
   <nav class="nav" aria-label="Navegación principal">
     ${A(`${brand.portal}/#aplicaciones`, 'Productos', active === 'portal' ? '' : 'optional')}
     ${A(byId.nodalix.domain, 'Nodalix OS', 'optional')}
+    ${A(`${brand.portal}/#studium`, 'Studium', 'optional')}
     ${A(`${brand.portal}/#ecosistema`, 'Home Assistant', 'optional')}
     ${A(`${brand.portal}/#autor`, 'Autor', 'optional')}
     ${A(brand.github, `${icon.github}GitHub`, 'outline', true)}
@@ -127,6 +128,7 @@ const footer = () => `<footer class="footer"><div class="container">
       <p>Software independiente desarrollado en público: un sistema operativo Linux, aplicaciones de escritorio y componentes para Home Assistant.</p></div>
     <div class="footer-col"><h2>Productos</h2><nav class="footer-links" aria-label="Productos">
       ${ordered.map((app) => A(app.domain, e(app.name))).join('')}
+      ${A(`${brand.portal}/#studium`, 'Studium')}
     </nav></div>
     <div class="footer-col"><h2>Home Assistant</h2><nav class="footer-links" aria-label="Home Assistant">
       ${A(repoUrl(site.ecosystem.featured.repo), e(site.ecosystem.featured.name), '', true)}
@@ -184,6 +186,7 @@ async function home() {
   };
   const specs = [['Base', 'Arch Linux'], ['Escritorio', 'GNOME · Wayland'], ['Arquitectura', 'x86_64 · BIOS / UEFI'], ['Teléfono', 'Phone Link para iPhone'], ['Instalación', 'ISO verificada con SHA-256']];
   const eco = site.ecosystem, author = site.author;
+  const studium = site.studium;
   const cardNames = ['Luz', 'Clima', 'Persiana', 'Cerradura', 'Alarma', 'Multimedia', 'Aspirador', 'Gráfica', 'Flujo de energía', 'Tiempo', 'Calendario', 'Cámara', 'Notificaciones', 'Navegación', 'Resumen de sala', 'Escenas'];
   const values = [
     [icon.code, 'Código abierto.', 'El desarrollo, las incidencias y las versiones se pueden seguir directamente en GitHub.'],
@@ -240,6 +243,21 @@ async function home() {
         <div class="eco-art" aria-hidden="true"><b>25</b><span>tarjetas</span><ul class="chips">${cardNames.map((name) => `<li class="chip">${e(name)}</li>`).join('')}</ul></div>
       </div>
       <div class="more-grid">${eco.more.map(([name, repo, text]) => `<a class="more-card more-card--text" data-reveal href="${safeUrl(repoUrl(repo))}" target="_blank" rel="noopener noreferrer"><div><strong>${e(name)}</strong><span>${e(text)}</span></div>${icon.arrow}</a>`).join('')}</div>
+    </div></section>
+    <section class="section studium" id="studium"><div class="container">
+      <div class="section-head"><div data-reveal><h2>Studium.</h2></div><p data-reveal>${e(studium.intro)}</p></div>
+      <div class="eco-card" data-reveal>
+        <div class="eco-copy"><span class="kicker">${e(studium.kicker)}</span><h3>${e(studium.name)}</h3><p class="eco-headline">${e(studium.headline)}</p><p>${e(studium.description)}</p>
+          <ul class="check-list">${studium.points.map((point) => `<li>${icon.tick}${e(point)}</li>`).join('')}</ul>
+          <div class="actions">${A(`${repoUrl(studium.repo)}/archive/refs/tags/${studium.version}.zip`, `Descargar Studium ${icon.down}`, 'btn btn-primary')}${A(repoUrl(studium.repo), `${icon.github}Código en GitHub`, 'btn btn-secondary', true)}</div>
+          <p class="small-label">${e(studium.version)} · código fuente en .zip · Python 3.11 o superior</p></div>
+        <div class="studium-steps"><h4>Instalación y conexión con tu IA</h4>
+          <pre class="code" tabindex="0"><code>${studium.commands.map((line) => e(line)).join('\n')}</code></pre>
+          <p>El último comando arranca el servicio MCP. Configura tu cliente de IA para lanzarlo como servidor MCP local.</p>
+          <p>Necesitas Git y, para generar el PDF, un compilador de LaTeX (pdflatex o tectonic).</p>
+          <p class="studium-links">${A(`${repoUrl(studium.repo)}/tree/main/integrations`, `Guías para cada cliente ${icon.arrow}`, 'text-link', true)}${A(studium.preview, `Ver la interfaz provisional ${icon.arrow}`, 'text-link', true)}</p>
+          <p class="small-label">La interfaz web es provisional y todavía está en desarrollo.</p></div>
+      </div>
     </div></section>
     <section class="values" id="principios"><div class="container">
       <div class="section-head"><div data-reveal><h2 data-reveal>Cómo hacemos software.</h2></div><p data-reveal>Tres compromisos que se aplican a todos los proyectos de Nodalia, desde el sistema operativo hasta la aplicación más pequeña.</p></div>

@@ -747,3 +747,14 @@ html:not(.js) .scroll-progress{display:none}
 .lang a:hover{background:rgba(255,255,255,.06);color:var(--ink)}
 .lang a[aria-current]{color:var(--ink)}
 .lang a[aria-current]::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+
+/* Studium: descarga e instrucciones */
+.studium{--accent:#7fb2ff;--accent-rgb:127,178,255}
+.studium-steps{display:flex;flex-direction:column;gap:14px;min-width:0;padding:48px;border-left:1px solid var(--line);background:rgba(255,255,255,.015)}
+.studium-steps h4{font-family:var(--display);font-size:18px;font-weight:600;color:var(--ink)}
+.studium-steps .code{margin:0}
+.studium-steps p{font-size:14.5px;line-height:1.65;color:var(--text)}
+.studium-links{display:flex;flex-wrap:wrap;gap:8px 22px}
+.eco-copy .small-label{margin-top:14px}
+@media(max-width:1040px){.studium-steps{padding:32px;border-left:0;border-top:1px solid var(--line)}}
+@media(max-width:600px){.studium-steps{padding:22px}}
