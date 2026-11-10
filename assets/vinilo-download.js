@@ -58,5 +58,6 @@ export async function bootViniloDownload({ document: doc, fetch: fetchImpl = fet
 }
 
 if (typeof document !== 'undefined' && typeof document.getElementById === 'function') {
-  bootViniloDownload({ document, fetch });
+  // Failures already leave the static AppImage link in place.
+  bootViniloDownload({ document, fetch }).catch(() => false);
 }
