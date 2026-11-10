@@ -119,7 +119,7 @@ for (const id of ['portal', 'vortia', 'vinilo', 'lienzo', 'nodalix']) {
     assert.ok(page.includes(`<link rel="canonical" href="${base}/${code}/"/>`), `${id}/${code} sin canonical propio`);
     for (const other of i18n.localeCodes) assert.ok(page.includes(`hreflang="${other}" href="${base}${i18n.localePath(other)}"`), `${id}/${code} sin alternate ${other}`);
     assert.ok(page.includes(`hreflang="x-default" href="${base}/"`));
-    assert.ok(!/href="https:\/\/(?:[a-z]+\.)?getnodalia\.com\/(?:#[^"]*)?"(?![^>]*hreflang)/.test(page.replace(/<[^>]*hreflang[^>]*>/g, '')), `${id}/${code} enlaza a la versión en español`);
+    assert.ok(!/href="https:\/\/(?:[a-z]+\.)?getnodalia\.com\/(?:#[^"]*)?"/.test(page.split('<').filter((tag) => !tag.includes('hreflang')).join('<')), `${id}/${code} enlaza a la versión en español`);
     assert.notEqual(page.match(/<h1[^>]*>([^<]*)/)[1], spanish.match(/<h1[^>]*>([^<]*)/)[1], `${id}/${code} con titular sin traducir`);
     JSON.parse(page.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
   }
