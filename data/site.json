@@ -119,5 +119,88 @@
       "pip install -e \".[dev]\"",
       "studium mcp"
     ]
+  },
+  "upcoming": {
+    "intro": "Además de lo publicado, Nodalia prepara una suite completa de aplicaciones de escritorio. Parten de motores de código abierto y todavía no tienen versión descargable.",
+    "apps": [
+      [
+        "Luz",
+        "luz",
+        "Revelado RAW y biblioteca fotográfica",
+        "luz"
+      ],
+      [
+        "Pulso",
+        "pulso",
+        "Composición y motion graphics",
+        "pulso"
+      ],
+      [
+        "Pliego",
+        "pliego",
+        "Maquetación editorial",
+        "pliego"
+      ],
+      [
+        "Pluma",
+        "pluma",
+        "Editor vectorial",
+        "pluma"
+      ],
+      [
+        "Toma",
+        "toma",
+        "Editor de vídeo",
+        "toma"
+      ],
+      [
+        "Papel",
+        "papel",
+        "Editor de documentos PDF",
+        "papel"
+      ],
+      [
+        "Letra",
+        "letra",
+        "Procesador de textos",
+        "letra"
+      ],
+      [
+        "Celdas",
+        "celdas",
+        "Hojas de cálculo",
+        "celdas"
+      ],
+      [
+        "Lámina",
+        "lamina",
+        "Presentaciones",
+        "lamina"
+      ],
+      [
+        "Forja",
+        "forja",
+        "CAD 2D y planos DWG y DXF",
+        "forja"
+      ],
+      [
+        "Torno",
+        "torno",
+        "CAD paramétrico 3D",
+        "torno"
+      ],
+      [
+        "Brújula",
+        "brujula",
+        "Navegador web para GNOME",
+        "brujula"
+      ],
+      [
+        "Buzón",
+        "buzon",
+        "Correo electrónico",
+        null
+      ]
+    ]
   }
 }

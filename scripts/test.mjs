@@ -43,6 +43,8 @@ const portal=await readFile(path.join(root,'dist/portal/index.html'),'utf8');
 for(const name of ['Vortia','Vinilo','Lienzo','Nodalix OS'])assert.match(portal,new RegExp(name));
 assert.match(portal,/hero-stage/);
 for (const id of ['ecosistema','autor','faq']) assert.ok(portal.includes(`id="${id}"`), `Portal sin sección ${id}`);
+assert.ok(portal.includes('id="en-camino"'), 'Portal sin la sección de apps en camino');
+for (const key of ['luz','pulso','pliego','pluma','toma','papel','letra','celdas','lamina','forja','torno','brujula','buzon']) { assert.ok(portal.includes(`/app-icons/${key}.png`), `Falta ${key} en apps en camino`); assert.ok((await stat(path.join(root, 'dist/portal/app-icons', `${key}.png`))).size > 1000, `Falta el icono de ${key}`); }
 assert.ok(portal.includes('id="studium"') && portal.includes('/studium/archive/refs/tags/') && portal.includes('studium mcp'), 'Portal sin descarga o instrucciones de Studium');
 assert.match(portal,/href="\/favicon\.svg\?v=[0-9a-f]+"/);
 assert.match(portal,/"@type":"FAQPage"/);
@@ -132,6 +134,9 @@ for (const id of ['portal', 'vortia', 'vinilo', 'lienzo', 'nodalix']) {
 const vortiaDe = await readFile(path.join(root, 'dist/vortia/de/index.html'), 'utf8');
 assert.equal(JSON.parse(vortiaDe.match(/<script type="application\/json" id="i18n">([\s\S]*?)<\/script>/)[1])['Descargar para Linux'], 'Für Linux herunterladen');
 assert.equal(i18n.translateHtml('<p title="Hola mundo">Hola <b>mundo</b></p><code>Hola</code>', 'en', { lookup: (key) => ({ 'Hola mundo': 'Hello world', Hola: 'Hello', mundo: 'world' })[key] }), '<p title="Hello world">Hello <b>world</b></p><code>Hola</code>');
+assert.equal(i18n.translateHtml('<b translate="no">Luz</b> <i>Luz</i>', 'en', { lookup: (key) => ({ Luz: 'Light' })[key] }), '<b translate="no">Luz</b> <i>Light</i>');
+const portalEn = await readFile(path.join(root, 'dist/portal/en/index.html'), 'utf8');
+assert.ok(portalEn.includes('<strong translate="no">Luz</strong>'), 'El nombre de la app Luz no debe traducirse');
 const clientI18n = await import('../assets/i18n.js');
 assert.equal(clientI18n.t('Descargar {type} ↓', { type: 'DMG' }), 'Descargar DMG ↓');
 const releasesModule = await import('../assets/releases.js');

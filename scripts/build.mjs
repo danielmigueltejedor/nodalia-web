@@ -55,6 +55,8 @@ const A = (url, text, className = '', external = false) => `<a href="${safeUrl(u
 const iconImg = (app, cls = 'app-icon', size = 80) => `<img class="${e(cls)}" src="${safeUrl(app.icon)}" alt="Icono de ${e(app.name)}" width="${size}" height="${size}" loading="lazy" decoding="async" />`;
 const chips = (app) => `<ul class="chips" aria-label="Tecnología">${app.technology.split(' · ').map((t) => `<li class="chip">${e(t)}</li>`).join('')}</ul>`;
 const jsonLd = (data) => `<script type="application/ld+json">${JSON.stringify(data).replaceAll('<', '\\u003c')}</script>`;
+// Iconos de las apps en camino: se sirven desde la portada porque no todas tienen repositorio.
+const upcomingIcons = site.upcoming.apps.map(([, key]) => `${key}.png`);
 const fontFiles = ['sora-latin-wght.woff2', 'inter-latin-wght.woff2'];
 // Activa las animaciones solo con JavaScript y sin reduced-motion; si motion.js no carga, el contenido vuelve a mostrarse.
 const motionBoot = `<script>(function(d){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('js');setTimeout(function(){if(!window.__nodaliaMotion)d.classList.remove('js')},2500)})(document.documentElement)</script>`;
@@ -247,6 +249,14 @@ async function home() {
       </div>
       <div class="more-grid">${eco.more.map(([name, repo, text]) => `<a class="more-card more-card--text" data-reveal href="${safeUrl(repoUrl(repo))}" target="_blank" rel="noopener noreferrer"><div><strong>${e(name)}</strong><span>${e(text)}</span></div>${icon.arrow}</a>`).join('')}</div>
     </div></section>
+    <section class="section soon" id="en-camino"><div class="container">
+      <div class="section-head"><div data-reveal><h2>Más en camino.</h2></div><p data-reveal>${e(site.upcoming.intro)}</p></div>
+      <ul class="soon-grid">${site.upcoming.apps.map(([name, key, what, repo]) => {
+        const inner = `<img src="/app-icons/${e(key)}.png" alt="" width="64" height="64" loading="lazy" decoding="async"/><div><strong translate="no">${e(name)}</strong><span>${e(what)}</span></div>`;
+        return `<li data-reveal>${repo ? `<a class="soon-card" href="${safeUrl(repoUrl(repo))}" target="_blank" rel="noopener noreferrer">${inner}${icon.arrow}</a>` : `<div class="soon-card soon-card--plain">${inner}<em>Sin repositorio aún</em></div>`}</li>`;
+      }).join('')}</ul>
+      <p class="small-label" data-reveal>Cada icono es un personaje histórico ligado a lo que hace la aplicación.</p>
+    </div></section>
     <section class="section studium" id="studium"><div class="container">
       <div class="section-head"><div data-reveal><h2>Studium.</h2></div><p data-reveal>${e(studium.intro)}</p></div>
       <div class="eco-card" data-reveal>
@@ -416,6 +426,7 @@ async function build(site) {
   const dir = path.join(root, 'dist', site);
   await rm(dir, { recursive: true, force: true });
   await mkdir(path.join(dir, 'fonts'), { recursive: true });
+  if (site === 'portal') await mkdir(path.join(dir, 'app-icons'), { recursive: true });
   const app = apps.find((item) => item.id === site);
   const clientScripts = { vortia: ['vortia-download.js'], nodalix: ['nodalix-releases.js'] }[site] || [];
   const keys = (await Promise.all(clientScripts.map((file) => readFile(path.join(root, 'assets', file), 'utf8')))).flatMap(clientKeys);
@@ -449,6 +460,7 @@ async function build(site) {
     ...fontFiles.map((file) => copyFile(path.join(root, 'assets', 'fonts', file), path.join(dir, 'fonts', file))),
     writeFile(path.join(dir, cssFileName), cssSource),
     ...(site === 'portal' ? [copyFile(path.join(root, 'assets', 'releases.js'), path.join(dir, 'releases.js'))] : []),
+    ...(site === 'portal' ? upcomingIcons.map((file) => copyFile(path.join(root, 'assets', 'app-icons', file), path.join(dir, 'app-icons', file))) : []),
     ...(site === 'vortia' ? [
       copyFile(path.join(root, 'assets', 'vortia-download.js'), path.join(dir, 'vortia-download.js')),
       copyFile(path.join(root, 'assets', 'platform-apple.svg'), path.join(dir, 'platform-apple.svg')),
