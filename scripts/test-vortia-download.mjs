@@ -130,7 +130,7 @@ const offline = await simulate({
   userAgent: 'Mozilla/5.0 (X11; Linux x86_64)',
   fail: true,
 });
-assert.match(offline['vortia-primary-download'].href, /v0\.1\.1\/Vortia-0\.1\.1-linux-x86_64\.AppImage$/);
+assert.match(offline['vortia-primary-download'].href, /v0\.4\.0\/Vortia-0\.4\.0-linux-x86_64\.AppImage$/);
 assert.match(offline['vortia-release-source'].textContent, /Referencia local/);
 
 console.log('✓ Vortia: Linux, macOS, Intel, ARM64, Windows, versiones nuevas y fallback offline.');

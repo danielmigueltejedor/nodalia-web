@@ -330,7 +330,7 @@ function vortiaDownloads() {
         </div>
         <div class="vortia-version-info" data-reveal="right">
           <span class="kicker">Última publicación estable</span>
-          <strong id="vortia-release-version">v0.1.1</strong>
+          <strong id="vortia-release-version">v0.4.0</strong>
           <span id="vortia-release-source">Consultando GitHub Releases…</span>
         </div>
       </div>
@@ -339,19 +339,19 @@ function vortiaDownloads() {
           <div class="vortia-package-head"><img src="/platform-linux.svg" alt="" width="38" height="38"/>
             <div><h3>Linux</h3><p>AppImage · x86_64</p></div>
           </div>
-          <p class="vortia-package-desc">Archivo ejecutable para distribuciones Linux de 64 bits con arquitectura x86_64.</p>
-          <p class="vortia-package-size" id="vortia-linux-size">105,2 MB</p>
-          <a class="btn btn-primary" id="vortia-linux-link" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.1.1/Vortia-0.1.1-linux-x86_64.AppImage">Descargar AppImage ↓</a>
-          <a class="vortia-checksum" id="vortia-linux-sha" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.1.1/Vortia-0.1.1-linux-x86_64.AppImage.sha256">SHA-256 ↗</a>
+          <p class="vortia-package-desc">Para distribuciones Linux de 64 bits (x86_64) con glibc 2.31 o posterior. Incluye OpenFOAM y el mallador.</p>
+          <p class="vortia-package-size" id="vortia-linux-size">292,6 MB</p>
+          <a class="btn btn-primary" id="vortia-linux-link" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.4.0/Vortia-0.4.0-linux-x86_64.AppImage">Descargar AppImage ↓</a>
+          <a class="vortia-checksum" id="vortia-linux-sha" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.4.0/Vortia-0.4.0-linux-x86_64.AppImage.sha256">SHA-256 ↗</a>
         </article>
         <article class="vortia-package" data-reveal data-platform="mac">
           <div class="vortia-package-head"><img src="/platform-apple.svg" alt="" width="38" height="38"/>
             <div><h3>macOS</h3><p>DMG · Apple Silicon (arm64)</p></div>
           </div>
-          <p class="vortia-package-desc">Para Macs con procesadores Apple Silicon. El DMG publicado no es compatible con Macs Intel.</p>
-          <p class="vortia-package-size" id="vortia-mac-size">57,6 MB</p>
-          <a class="btn btn-primary" id="vortia-mac-link" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.1.1/Vortia-0.1.1-macos-arm64.dmg">Descargar DMG ↓</a>
-          <a class="vortia-checksum" id="vortia-mac-sha" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.1.1/Vortia-0.1.1-macos-arm64.dmg.sha256">SHA-256 ↗</a>
+          <p class="vortia-package-desc">Para Macs con Apple Silicon y macOS 14 o posterior. Incluye OpenFOAM y el mallador. No es compatible con Macs Intel.</p>
+          <p class="vortia-package-size" id="vortia-mac-size">408,6 MB</p>
+          <a class="btn btn-primary" id="vortia-mac-link" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.4.0/Vortia-0.4.0-macos-arm64.dmg">Descargar DMG ↓</a>
+          <a class="vortia-checksum" id="vortia-mac-sha" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.4.0/Vortia-0.4.0-macos-arm64.dmg.sha256">SHA-256 ↗</a>
         </article>
       </div>
       <div class="vortia-download-footer">

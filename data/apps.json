@@ -8,7 +8,7 @@
     "eyebrow": "Simulación CFD",
     "headline": "La dinámica de fluidos, sin barreras.",
     "tagline": "Engineering the Flow.",
-    "description": "Una aplicación de escritorio libre para simulación de fluidos con OpenFOAM: de la geometría al posproceso 3D sin tocar la terminal.",
+    "description": "Una aplicación de escritorio libre para simulación de fluidos con OpenFOAM integrado: de la geometría al posproceso 3D sin tocar la terminal ni instalar nada más.",
     "platforms": "Linux x86_64 · macOS Apple Silicon",
     "technology": "C++20 · Qt 6 · VTK · OpenFOAM",
     "license": "GPL-3.0",
@@ -16,34 +16,102 @@
     "icon": "resources/icons/vortia.png",
     "previews": [],
     "features": [
-      ["Flujo de trabajo integrado", "Geometría, malla, física, ejecución supervisada y posproceso en una sola aplicación."],
-      ["Motor OpenFOAM", "Vortia prepara y lanza los casos con OpenFOAM como motor externo. Compatible con ESI v2412+ y Foundation 11+."],
-      ["Visualización 3D", "Inspecciona modelos, mallas y resultados con VTK sin salir de la interfaz."],
-      ["Cálculo en paralelo", "De 1 a 8 procesos de CPU con MPI. Cambiar el ajuste conserva la malla y los campos guardados."],
-      ["Validación a la vista", "Casos de referencia, limitaciones conocidas y estado de implementación documentados en el repositorio."],
-      ["Instaladores verificables", "AppImage para Linux y DMG para macOS, cada uno con su suma SHA-256."]
+      [
+        "Flujo de trabajo integrado",
+        "Geometría, malla, física, ejecución supervisada y posproceso en una sola aplicación, con las herramientas de cada etapa siempre en el mismo sitio."
+      ],
+      [
+        "OpenFOAM y mallador dentro",
+        "Los instaladores incluyen OpenFOAM, MPI y el mallador (Python y Gmsh). No hay que instalar ni configurar nada aparte."
+      ],
+      [
+        "Laminar y turbulento",
+        "Flujo incompresible laminar, transitorio o estacionario, y turbulencia k-ω SST estacionaria con funciones de pared."
+      ],
+      [
+        "Visualización 3D",
+        "Inspecciona modelos, mallas y resultados con VTK sin salir de la interfaz, con contornos, perfiles e informes."
+      ],
+      [
+        "Verificación a la vista",
+        "Tres casos se ejecutan con OpenFOAM real y se comparan con su referencia: Poiseuille, cavidad de Ghia y placa plana turbulenta."
+      ],
+      [
+        "Instaladores que abren a la primera",
+        "AppImage probada en nueve distribuciones Linux y DMG para macOS, cada uno con su suma SHA-256."
+      ]
     ],
     "flow": [
-      ["Geometría", "Prepara el modelo del caso."],
-      ["Malla", "Genera y revisa la malla."],
-      ["Física", "Configura el flujo y sus condiciones."],
-      ["Ejecución", "Lanza el cálculo y supervísalo."],
-      ["Posproceso", "Explora los resultados en 3D."]
+      [
+        "Geometría",
+        "Prepara el modelo del caso."
+      ],
+      [
+        "Malla",
+        "Genera y revisa la malla."
+      ],
+      [
+        "Física",
+        "Configura el flujo y sus condiciones."
+      ],
+      [
+        "Ejecución",
+        "Lanza el cálculo y supervísalo."
+      ],
+      [
+        "Posproceso",
+        "Explora los resultados en 3D."
+      ]
     ],
     "specs": [
-      ["Licencia", "GPL-3.0"],
-      ["Instaladores", "AppImage (Linux x86_64) · DMG (macOS arm64)"],
-      ["Motor de cálculo", "OpenFOAM ESI v2412+ o Foundation 11+ (externo)"],
-      ["Tecnología", "C++20 · Qt 6 · VTK"],
-      ["Compilación", "CMake 3.24 · Qt 6.5 · VTK 9.2"]
+      [
+        "Licencia",
+        "GPL-3.0"
+      ],
+      [
+        "Instaladores",
+        "AppImage (Linux x86_64) · DMG (macOS arm64)"
+      ],
+      [
+        "Motor de cálculo",
+        "OpenFOAM integrado: v2606 en macOS, v2412 en Linux"
+      ],
+      [
+        "Requisitos",
+        "macOS 14 o posterior · Linux con glibc 2.31 o posterior"
+      ],
+      [
+        "Tecnología",
+        "C++20 · Qt 6 · VTK"
+      ]
     ],
     "faq": [
-      ["¿Necesito instalar OpenFOAM?", "Sí, para ejecutar simulaciones. Vortia lo utiliza como motor externo; no hace falta para abrir la aplicación. En macOS OpenFOAM no es nativo: se usa mediante Docker o una máquina Linux."],
-      ["¿Puedo usarlo en trabajo de ingeniería real?", "Vortia es experimental. Comprueba siempre convergencia, balance de masa y dependencia de malla, y consulta la validación y las limitaciones conocidas del repositorio antes de confiar en un resultado."],
-      ["¿Funciona en Windows o en Mac con Intel?", "No hay instalador para esas plataformas. Los paquetes publicados son para Linux x86_64 y macOS con Apple Silicon; en el resto puedes intentar compilar desde el código fuente."],
-      ["¿Tiene relación con ANSYS?", "No. Vortia es una marca y una implementación originales, sin relación con ANSYS, Inc."]
+      [
+        "¿Necesito instalar OpenFOAM?",
+        "No. Desde la versión 0.3.0 los instaladores incluyen OpenFOAM, MPI y el mallador. Puedes comprobar la instalación con vortia --verify-engine, que ejecuta un caso real en serie y en paralelo."
+      ],
+      [
+        "¿Qué tengo que hacer la primera vez que lo abro?",
+        "En macOS la aplicación no está notarizada por Apple: la primera vez, haz clic derecho sobre ella y elige Abrir. En Linux, da permiso de ejecución a la AppImage antes de abrirla."
+      ],
+      [
+        "¿Puedo usarlo en trabajo de ingeniería real?",
+        "Vortia es experimental y no tiene paridad con las suites CFD comerciales. Comprueba siempre convergencia, balance de masa y dependencia de malla, y consulta la validación y las limitaciones conocidas del repositorio antes de confiar en un resultado."
+      ],
+      [
+        "¿Qué queda fuera?",
+        "LES y DES, transferencia de calor, multifase, combustión, mallas móviles y geometría 3D general con mallado automático de volumen. El flujo compresible para toberas es experimental y no está disponible en la AppImage de Linux."
+      ],
+      [
+        "¿Funciona en Windows o en Mac con Intel?",
+        "No hay instalador para esas plataformas. Los paquetes publicados son para Linux x86_64 y macOS con Apple Silicon; en el resto puedes intentar compilar desde el código fuente."
+      ],
+      [
+        "¿Tiene relación con ANSYS?",
+        "No. Vortia es una marca y una implementación originales, sin relación con ANSYS, Inc."
+      ]
     ],
-    "limitation": "Vortia es experimental. Sus capacidades evolucionan en cada versión y los resultados requieren validación antes de cualquier uso de ingeniería crítico. Ejecutar simulaciones necesita OpenFOAM instalado aparte.",
+    "limitation": "Vortia es experimental. Sus capacidades evolucionan en cada versión y los resultados requieren validación antes de cualquier uso de ingeniería crítico. Los casos verificados son comprobación numérica, no validación de un diseño.",
     "cta": "Ver el proyecto",
     "accent": "azure"
   },
@@ -63,25 +131,75 @@
     "repo": "vinilo",
     "icon": "data/icons/hicolor/512x512/apps/dev.danielmiguelt.Vinilo.png",
     "previews": [
-      ["docs/screenshots/library.webp", "Biblioteca musical de Vinilo"],
-      ["docs/screenshots/player.webp", "Reproductor de Vinilo"],
-      ["docs/screenshots/playlist.webp", "Listas de reproducción en Vinilo"],
-      ["docs/screenshots/albums.webp", "Álbumes en Vinilo"]
+      [
+        "docs/screenshots/library.webp",
+        "Biblioteca musical de Vinilo"
+      ],
+      [
+        "docs/screenshots/player.webp",
+        "Reproductor de Vinilo"
+      ],
+      [
+        "docs/screenshots/playlist.webp",
+        "Listas de reproducción en Vinilo"
+      ],
+      [
+        "docs/screenshots/albums.webp",
+        "Álbumes en Vinilo"
+      ]
     ],
     "features": [
-      ["Una aplicación GNOME de verdad", "Interfaz GTK4 y libadwaita, no una web metida en una ventana."],
-      ["Varias fuentes, una cola", "Archivos locales, Apple Music, Spotify, YouTube Music y Tidal, con búsqueda desde un mismo sitio."],
-      ["Reproducción cuidada", "Sin pausas entre pistas, fundido cruzado y cola de reproducción."],
-      ["Letras y karaoke", "Letras y modo karaoke con control del nivel de voz en las pistas de catálogo."],
-      ["Integrado en el escritorio", "Controles en la barra superior, la pantalla de bloqueo y las teclas multimedia. La música sigue al cerrar la ventana."],
-      ["Estadísticas en tu equipo", "Recuento de escuchas guardado en local y scrobbling opcional a Last.fm."]
+      [
+        "Una aplicación GNOME de verdad",
+        "Interfaz GTK4 y libadwaita, no una web metida en una ventana."
+      ],
+      [
+        "Varias fuentes, una cola",
+        "Archivos locales, Apple Music, Spotify, YouTube Music y Tidal, con búsqueda desde un mismo sitio."
+      ],
+      [
+        "Reproducción cuidada",
+        "Sin pausas entre pistas, fundido cruzado y cola de reproducción."
+      ],
+      [
+        "Letras y karaoke",
+        "Letras y modo karaoke con control del nivel de voz en las pistas de catálogo."
+      ],
+      [
+        "Integrado en el escritorio",
+        "Controles en la barra superior, la pantalla de bloqueo y las teclas multimedia. La música sigue al cerrar la ventana."
+      ],
+      [
+        "Estadísticas en tu equipo",
+        "Recuento de escuchas guardado en local y scrobbling opcional a Last.fm."
+      ]
     ],
     "sources": [
-      ["Apple Music", "Estable", "Suscripción activa, x86_64 y conexión en cada reproducción"],
-      ["Este equipo", "Estable", "Archivos MP3, FLAC, Ogg o WAV"],
-      ["Spotify", "Estable", "Inicio de sesión"],
-      ["YouTube Music", "Beta", "Inicio de sesión"],
-      ["Tidal", "Alfa", "Inicio de sesión"]
+      [
+        "Apple Music",
+        "Estable",
+        "Suscripción activa, x86_64 y conexión en cada reproducción"
+      ],
+      [
+        "Este equipo",
+        "Estable",
+        "Archivos MP3, FLAC, Ogg o WAV"
+      ],
+      [
+        "Spotify",
+        "Estable",
+        "Inicio de sesión"
+      ],
+      [
+        "YouTube Music",
+        "Beta",
+        "Inicio de sesión"
+      ],
+      [
+        "Tidal",
+        "Alfa",
+        "Inicio de sesión"
+      ]
     ],
     "install": {
       "title": "Instalación en Arch Linux",
@@ -94,17 +212,44 @@
       ]
     },
     "specs": [
-      ["Licencia", "GPL-3.0"],
-      ["Interfaces", "Aplicación GNOME y cliente de terminal (aguja)"],
-      ["Formatos locales", "MP3 · FLAC · Ogg · WAV"],
-      ["Idiomas", "Español e inglés"],
-      ["Instalación", "Compilación desde el código"]
+      [
+        "Licencia",
+        "GPL-3.0"
+      ],
+      [
+        "Interfaces",
+        "Aplicación GNOME y cliente de terminal (aguja)"
+      ],
+      [
+        "Formatos locales",
+        "MP3 · FLAC · Ogg · WAV"
+      ],
+      [
+        "Idiomas",
+        "Español e inglés"
+      ],
+      [
+        "Instalación",
+        "Compilación desde el código"
+      ]
     ],
     "faq": [
-      ["¿Puedo descargar música de Apple Music para escucharla sin conexión?", "No. Widevine en Linux no permite conservar licencias sin conexión, así que Apple Music necesita red en cada reproducción."],
-      ["¿Necesito una cuenta para escuchar mis archivos?", "No. La fuente «Este equipo» reproduce tus archivos por sí sola, sin cuenta ni procesos adicionales."],
-      ["¿Por qué Apple Music usa un proceso de Chromium?", "Apple Music exige el reproductor de Apple y el módulo Widevine de Google. Vinilo mantiene ese proceso oculto solo para esa fuente; los archivos locales nunca pasan por él."],
-      ["¿Hay un paquete listo para instalar?", "Todavía no. Se instala compilando el repositorio con make install; Arch Linux es la distribución recomendada."]
+      [
+        "¿Puedo descargar música de Apple Music para escucharla sin conexión?",
+        "No. Widevine en Linux no permite conservar licencias sin conexión, así que Apple Music necesita red en cada reproducción."
+      ],
+      [
+        "¿Necesito una cuenta para escuchar mis archivos?",
+        "No. La fuente «Este equipo» reproduce tus archivos por sí sola, sin cuenta ni procesos adicionales."
+      ],
+      [
+        "¿Por qué Apple Music usa un proceso de Chromium?",
+        "Apple Music exige el reproductor de Apple y el módulo Widevine de Google. Vinilo mantiene ese proceso oculto solo para esa fuente; los archivos locales nunca pasan por él."
+      ],
+      [
+        "¿Hay un paquete listo para instalar?",
+        "Todavía no. Se instala compilando el repositorio con make install; Arch Linux es la distribución recomendada."
+      ]
     ],
     "limitation": "Apple Music requiere suscripción, conexión continua y Linux x86_64. YouTube Music está en beta y Tidal en alfa. Vinilo se instala compilando el código; consulta los requisitos en GitHub.",
     "cta": "Instalar desde GitHub",
@@ -125,37 +270,116 @@
     "license": "MIT",
     "repo": "lienzo",
     "icon": "src/ui/icons/lienzo-app.png",
-    "primaryCta": ["Código y compilación", "#building-from-source"],
+    "primaryCta": [
+      "Código y compilación",
+      "#building-from-source"
+    ],
     "previews": [
-      ["docs/images/screenshots/levels.png", "Herramienta de niveles en Lienzo"],
-      ["docs/images/screenshots/layer_styles.png", "Estilos de capa en Lienzo"],
-      ["docs/images/screenshots/smart_objects.png", "Objetos inteligentes en Lienzo"],
-      ["docs/images/screenshots/brush_dynamics.png", "Dinámica de pincel en Lienzo"],
-      ["docs/images/screenshots/vector_tools.png", "Herramientas vectoriales en Lienzo"],
-      ["docs/images/screenshots/camera_raw.png", "Revelado Camera Raw en Lienzo"]
+      [
+        "docs/images/screenshots/levels.png",
+        "Herramienta de niveles en Lienzo"
+      ],
+      [
+        "docs/images/screenshots/layer_styles.png",
+        "Estilos de capa en Lienzo"
+      ],
+      [
+        "docs/images/screenshots/smart_objects.png",
+        "Objetos inteligentes en Lienzo"
+      ],
+      [
+        "docs/images/screenshots/brush_dynamics.png",
+        "Dinámica de pincel en Lienzo"
+      ],
+      [
+        "docs/images/screenshots/vector_tools.png",
+        "Herramientas vectoriales en Lienzo"
+      ],
+      [
+        "docs/images/screenshots/camera_raw.png",
+        "Revelado Camera Raw en Lienzo"
+      ]
     ],
     "features": [
-      ["Documentos por capas", "Abre PSD y PSB con capas, grupos, máscaras, modos de fusión y texto editable."],
-      ["Edición no destructiva", "Objetos inteligentes, filtros inteligentes con máscara, capas de ajuste y estilos de capa."],
-      ["Herramientas de pintura y retoque", "Pinceles sensibles a la presión, tampón de clonar, correctores, selecciones y máscara rápida."],
-      ["Vector y tipografía", "Trazados con pluma, capas de forma, importación y exportación SVG y texto deformado."],
-      ["Automatización local", "Scripts en JavaScript, uso por línea de comandos y un conector MCP para asistentes de IA que trabajan en tu equipo."],
-      ["Privado por diseño", "Los documentos se quedan en tu ordenador. Sin cuenta, sin servicio en la nube y sin telemetría."]
+      [
+        "Documentos por capas",
+        "Abre PSD y PSB con capas, grupos, máscaras, modos de fusión y texto editable."
+      ],
+      [
+        "Edición no destructiva",
+        "Objetos inteligentes, filtros inteligentes con máscara, capas de ajuste y estilos de capa."
+      ],
+      [
+        "Herramientas de pintura y retoque",
+        "Pinceles sensibles a la presión, tampón de clonar, correctores, selecciones y máscara rápida."
+      ],
+      [
+        "Vector y tipografía",
+        "Trazados con pluma, capas de forma, importación y exportación SVG y texto deformado."
+      ],
+      [
+        "Automatización local",
+        "Scripts en JavaScript, uso por línea de comandos y un conector MCP para asistentes de IA que trabajan en tu equipo."
+      ],
+      [
+        "Privado por diseño",
+        "Los documentos se quedan en tu ordenador. Sin cuenta, sin servicio en la nube y sin telemetría."
+      ]
     ],
-    "formats": ["PSD", "PSB", "PNG", "JPEG", "TIFF", "WebP", "BMP", "TGA", "GIF", "SVG", "Aseprite", "Camera RAW"],
+    "formats": [
+      "PSD",
+      "PSB",
+      "PNG",
+      "JPEG",
+      "TIFF",
+      "WebP",
+      "BMP",
+      "TGA",
+      "GIF",
+      "SVG",
+      "Aseprite",
+      "Camera RAW"
+    ],
     "specs": [
-      ["Licencia", "MIT"],
-      ["Paquetes previstos", "Instalador Windows · DMG macOS · Flatpak Linux"],
-      ["Versión publicada", "Todavía ninguna: se compila desde el código"],
-      ["Tecnología", "C++ · Qt 6"],
-      ["Base", "Proyecto de código abierto Patchy"]
+      [
+        "Licencia",
+        "MIT"
+      ],
+      [
+        "Paquetes previstos",
+        "Instalador Windows · DMG macOS · Flatpak Linux"
+      ],
+      [
+        "Versión publicada",
+        "Todavía ninguna: se compila desde el código"
+      ],
+      [
+        "Tecnología",
+        "C++ · Qt 6"
+      ],
+      [
+        "Base",
+        "Proyecto de código abierto Patchy"
+      ]
     ],
     "credit": "Lienzo parte del código abierto de Patchy, creado por Seth A. Robinson. Añade identidad, empaquetado e interfaz propios y conserva el motor de edición y las pruebas de compatibilidad del proyecto original.",
     "faq": [
-      ["¿Sustituye a Photoshop?", "No por completo. Faltan, entre otras cosas, un flujo completo en CMYK y Lab, la edición a 16 y 32 bits y la aceleración por GPU. El repositorio detalla las limitaciones actuales."],
-      ["¿Dónde lo descargo?", "Aún no hay una versión de Lienzo publicada. De momento se compila desde el código fuente; los paquetes previstos son instalador para Windows, DMG para macOS y Flatpak para Linux."],
-      ["¿Mis archivos salen de mi equipo?", "No. La edición es local y la aplicación no necesita cuenta ni servidor."],
-      ["¿Puedo usar plugins de Photoshop?", "Los filtros clásicos .8bf funcionan solo en Windows. Las acciones de Photoshop y los paneles UXP o JSX no son compatibles."]
+      [
+        "¿Sustituye a Photoshop?",
+        "No por completo. Faltan, entre otras cosas, un flujo completo en CMYK y Lab, la edición a 16 y 32 bits y la aceleración por GPU. El repositorio detalla las limitaciones actuales."
+      ],
+      [
+        "¿Dónde lo descargo?",
+        "Aún no hay una versión de Lienzo publicada. De momento se compila desde el código fuente; los paquetes previstos son instalador para Windows, DMG para macOS y Flatpak para Linux."
+      ],
+      [
+        "¿Mis archivos salen de mi equipo?",
+        "No. La edición es local y la aplicación no necesita cuenta ni servidor."
+      ],
+      [
+        "¿Puedo usar plugins de Photoshop?",
+        "Los filtros clásicos .8bf funcionan solo en Windows. Las acciones de Photoshop y los paneles UXP o JSX no son compatibles."
+      ]
     ],
     "limitation": "Lienzo está en desarrollo y aún no tiene una versión publicada: se compila desde el código. No es un sustituto completo de Photoshop; la compatibilidad con funciones y formatos depende de la versión.",
     "cta": "Ver versiones y código",
@@ -178,34 +402,100 @@
     "icon": "docs/images/nodalix-readme-logo.svg",
     "previews": [],
     "features": [
-      ["Diseñado como un sistema", "Shell, ajustes, gestión de aplicaciones e identidad visual se versionan y publican juntos."],
-      ["Phone Link para iPhone", "Notificaciones, contactos, mensajes y llamadas de tu iPhone por Bluetooth, sin aplicaciones de terceros."],
-      ["Actualizaciones unificadas", "Versiones de Nodalix, paquetes de Arch, aplicaciones y firmware desde Ajustes o con nodalix-updater."],
-      ["Ajustado a tu procesador", "Detecta la CPU y elige paquetes optimizados (x86-64-v3, v4 o Zen 4/5). Conserva el kernel estándar de Arch como recuperación."],
-      ["Dos formas de instalar", "ISO con sesión live e instalador para un equipo limpio, o instalación sobre un Arch Linux ya existente."],
-      ["Publicaciones verificables", "Cada versión incluye un manifiesto y sumas SHA-256 que se comprueban antes de instalar."]
+      [
+        "Diseñado como un sistema",
+        "Shell, ajustes, gestión de aplicaciones e identidad visual se versionan y publican juntos."
+      ],
+      [
+        "Phone Link para iPhone",
+        "Notificaciones, contactos, mensajes y llamadas de tu iPhone por Bluetooth, sin aplicaciones de terceros."
+      ],
+      [
+        "Actualizaciones unificadas",
+        "Versiones de Nodalix, paquetes de Arch, aplicaciones y firmware desde Ajustes o con nodalix-updater."
+      ],
+      [
+        "Ajustado a tu procesador",
+        "Detecta la CPU y elige paquetes optimizados (x86-64-v3, v4 o Zen 4/5). Conserva el kernel estándar de Arch como recuperación."
+      ],
+      [
+        "Dos formas de instalar",
+        "ISO con sesión live e instalador para un equipo limpio, o instalación sobre un Arch Linux ya existente."
+      ],
+      [
+        "Publicaciones verificables",
+        "Cada versión incluye un manifiesto y sumas SHA-256 que se comprueban antes de instalar."
+      ]
     ],
     "components": [
-      ["Nodalix GNOME", "Sesión GNOME, pantalla de inicio de sesión, portales e integraciones nativas"],
-      ["Nodalix Apps", "Gestión e integración de aplicaciones distribuidas o adaptadas para Nodalix"],
-      ["Phone Link", "Integración con iPhone: notificaciones, contactos, mensajes y llamadas"],
-      ["Nodalix Updater", "Búsqueda, validación e instalación de versiones y canales de actualización"],
-      ["Nodalix Installer", "Instalación desde la ISO o sobre sistemas Arch compatibles"],
-      ["Nodalix Wallpapers", "Fondos de pantalla y recursos visuales del escritorio"]
+      [
+        "Nodalix GNOME",
+        "Sesión GNOME, pantalla de inicio de sesión, portales e integraciones nativas"
+      ],
+      [
+        "Nodalix Apps",
+        "Gestión e integración de aplicaciones distribuidas o adaptadas para Nodalix"
+      ],
+      [
+        "Phone Link",
+        "Integración con iPhone: notificaciones, contactos, mensajes y llamadas"
+      ],
+      [
+        "Nodalix Updater",
+        "Búsqueda, validación e instalación de versiones y canales de actualización"
+      ],
+      [
+        "Nodalix Installer",
+        "Instalación desde la ISO o sobre sistemas Arch compatibles"
+      ],
+      [
+        "Nodalix Wallpapers",
+        "Fondos de pantalla y recursos visuales del escritorio"
+      ]
     ],
     "specs": [
-      ["Base", "Arch Linux"],
-      ["Escritorio", "GNOME Shell y Mutter sobre Wayland"],
-      ["Arquitectura", "x86_64 · BIOS / UEFI"],
-      ["Canales", "Estable y preview"],
-      ["Secure Boot", "No compatible con la ISO actual"]
+      [
+        "Base",
+        "Arch Linux"
+      ],
+      [
+        "Escritorio",
+        "GNOME Shell y Mutter sobre Wayland"
+      ],
+      [
+        "Arquitectura",
+        "x86_64 · BIOS / UEFI"
+      ],
+      [
+        "Canales",
+        "Estable y preview"
+      ],
+      [
+        "Secure Boot",
+        "No compatible con la ISO actual"
+      ]
     ],
     "faq": [
-      ["¿Funciona con Secure Boot?", "La ISO actual no está firmada, así que hay que desactivar Secure Boot para arrancar el instalador. Después de instalar puedes configurar claves propias."],
-      ["¿Puedo instalarlo sobre mi Arch Linux actual?", "Sí. El repositorio incluye un instalador para sistemas Arch actualizados. Descárgalo y revísalo antes de ejecutarlo."],
-      ["¿Perderé mis datos al instalar?", "La instalación desde la ISO escribe en el disco que elijas y confirmes. Haz una copia de seguridad antes y revisa bien el disco de destino."],
-      ["¿Funciona en ARM o en Mac con Apple Silicon?", "No. Nodalix OS está orientado a ordenadores x86_64."],
-      ["¿Cómo se actualiza?", "Desde Ajustes → Sistema → Actualizaciones, o en la terminal con nodalix-updater. Puedes elegir entre el canal estable y el de pruebas."]
+      [
+        "¿Funciona con Secure Boot?",
+        "La ISO actual no está firmada, así que hay que desactivar Secure Boot para arrancar el instalador. Después de instalar puedes configurar claves propias."
+      ],
+      [
+        "¿Puedo instalarlo sobre mi Arch Linux actual?",
+        "Sí. El repositorio incluye un instalador para sistemas Arch actualizados. Descárgalo y revísalo antes de ejecutarlo."
+      ],
+      [
+        "¿Perderé mis datos al instalar?",
+        "La instalación desde la ISO escribe en el disco que elijas y confirmes. Haz una copia de seguridad antes y revisa bien el disco de destino."
+      ],
+      [
+        "¿Funciona en ARM o en Mac con Apple Silicon?",
+        "No. Nodalix OS está orientado a ordenadores x86_64."
+      ],
+      [
+        "¿Cómo se actualiza?",
+        "Desde Ajustes → Sistema → Actualizaciones, o en la terminal con nodalix-updater. Puedes elegir entre el canal estable y el de pruebas."
+      ]
     ],
     "limitation": "Nodalix OS continúa en desarrollo. La ISO está orientada a ordenadores x86_64, necesita conexión a Internet durante la instalación y actualmente no está firmada para Secure Boot.",
     "cta": "Descargar Nodalix OS",
