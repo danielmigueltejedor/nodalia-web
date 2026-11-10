@@ -16,7 +16,8 @@ Dirección visual editorial: colores neutros, tipografía Sora + Inter autoaloja
 
 - `assets/styles.css`: único sistema de estilos (sin CDN de tipografías).
 - `assets/fonts/`: Sora (titulares) e Inter (texto), variables, subconjunto latino, autoalojadas. Licencia SIL OFL 1.1.
-- `assets/motion.js`: animaciones de scroll (aparición, parallax, barra de progreso, contadores). Se desactivan con `prefers-reduced-motion` y el contenido es visible sin JavaScript.
+- `assets/releases.js`: franja de últimas versiones del portal; consulta GitHub Releases y conserva el valor de `data/site.json` si no hay respuesta.
+- `assets/motion.js`: animaciones de scroll (aparición, parallax, barra de progreso, sección activa). Se desactivan con `prefers-reduced-motion` y el contenido es visible sin JavaScript.
 - `assets/_headers`: cabeceras de seguridad y caché para Cloudflare Pages.
 - `assets/nodalia-wordmark.svg` / `assets/nodalia-mark.svg`: identidad compartida.
 - `data/apps.json` + `scripts/data.mjs`: catálogo de productos y resolución de URLs oficiales.
