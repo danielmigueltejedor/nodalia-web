@@ -12,9 +12,11 @@ Web oficial de [Nodalia](https://getnodalia.com) y páginas independientes de pr
 
 ## Diseño
 
-Dirección visual editorial: colores neutros, tipografía de sistema, estructura basada en jerarquía y líneas; sin mockups falsos, gradientes decorativos, ventanas simuladas ni promesas de funciones no publicadas. Las capturas disponibles se enlazan desde los repositorios oficiales y se identifican como tales. Si un proyecto aún no dispone de capturas oficiales, se muestra una ficha de estado.
+Dirección visual editorial: colores neutros, tipografía Sora + Inter autoalojada, estructura basada en jerarquía y líneas; sin mockups falsos, gradientes decorativos, ventanas simuladas ni promesas de funciones no publicadas. Las capturas disponibles se enlazan desde los repositorios oficiales y se identifican como tales. Si un proyecto aún no dispone de capturas oficiales, se muestra una ficha de estado.
 
 - `assets/styles.css`: único sistema de estilos (sin CDN de tipografías).
+- `assets/fonts/`: Sora (titulares) e Inter (texto), variables, subconjunto latino, autoalojadas. Licencia SIL OFL 1.1.
+- `assets/motion.js`: animaciones de scroll (aparición, parallax, barra de progreso, contadores). Se desactivan con `prefers-reduced-motion` y el contenido es visible sin JavaScript.
 - `assets/_headers`: cabeceras de seguridad y caché para Cloudflare Pages.
 - `assets/nodalia-wordmark.svg` / `assets/nodalia-mark.svg`: identidad compartida.
 - `data/apps.json` + `scripts/data.mjs`: catálogo de productos y resolución de URLs oficiales.
