@@ -43,6 +43,7 @@ const portal=await readFile(path.join(root,'dist/portal/index.html'),'utf8');
 for(const name of ['Vortia','Vinilo','Lienzo','Nodalix OS'])assert.match(portal,new RegExp(name));
 assert.match(portal,/hero-stage/);
 for (const id of ['ecosistema','autor','faq']) assert.ok(portal.includes(`id="${id}"`), `Portal sin sección ${id}`);
+assert.ok(portal.includes('id="studium"') && portal.includes('/studium/archive/refs/tags/') && portal.includes('studium mcp'), 'Portal sin descarga o instrucciones de Studium');
 assert.match(portal,/href="\/favicon\.svg\?v=[0-9a-f]+"/);
 assert.match(portal,/"@type":"FAQPage"/);
 for (const asset of ['favicon.svg','favicon.ico','apple-touch-icon.png','motion.js']) assert.ok((await stat(path.join(root,'dist/portal',asset))).size>100, `Falta ${asset}`);
