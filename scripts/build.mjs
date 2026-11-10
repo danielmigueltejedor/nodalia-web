@@ -29,6 +29,7 @@ let locale = DEFAULT_LOCALE;
 let clientStrings = null;
 const missing = {};
 const motionSrc = `/motion.js?v=${await assetVersion('motion.js')}`;
+const viniloDownloadVersion = await assetVersion('vinilo-download.js');
 
 const e = (s) => String(s ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
 const safeUrl = (s) => {
@@ -304,6 +305,8 @@ function product(app) {
   })[app.id]();
   const primaryDownload = app.id === 'vortia'
     ? '<a id="vortia-primary-download" class="btn btn-primary" href="https://github.com/danielmigueltejedor/vortia/releases/latest" rel="noopener noreferrer"><img id="vortia-primary-icon" class="vortia-platform-icon" src="/platform-linux.svg" alt="" width="20" height="20" hidden/><span id="vortia-primary-title">Ver versiones y descargas</span><span class="btn-icon" aria-hidden="true">↓</span></a>'
+    : app.id === 'vinilo'
+      ? `<a id="vinilo-primary-download" class="btn btn-primary" href="${safeUrl('https://github.com/danielmigueltejedor/vinilo/releases/download/v1.1.5/Vinilo-1.1.5-x86_64.AppImage')}" rel="noopener noreferrer">Descargar AppImage ↓</a>`
     : app.id === 'nodalix'
       ? `<a href="#descargas" class="btn btn-primary">Descargar Nodalix OS ${icon.down}</a>`
       : app.primaryCta
@@ -311,7 +314,9 @@ function product(app) {
         : A(app.repo + '/releases', `Ver versiones y descargas ${icon.arrow}`, 'btn btn-primary', true);
   const primaryHint = app.id === 'vortia'
     ? '<p class="vortia-primary-detail" id="vortia-primary-detail" role="status" aria-live="polite">Se elegirá el instalador compatible con tu sistema operativo.</p>'
-    : '';
+    : app.id === 'vinilo'
+      ? `<p class="vortia-primary-detail" id="vinilo-primary-detail"><span>AppImage x86_64</span> · <span id="vinilo-primary-version">v1.1.5</span> · ${A(app.repo + '/releases/latest', 'Otros paquetes: .deb, .rpm, Flatpak', 'text-link', true)}</p><script type="module" src="/vinilo-download.js?v=${viniloDownloadVersion}"></script>`
+      : '';
   const sections = [['funciones', 'Funciones'], ['ficha', 'Ficha técnica'], ...(hasDownloads ? [['descargas', 'Descargas']] : []), ...(app.id === 'nodalix' || app.install ? [['instalacion', 'Instalación']] : []), ...(app.previews.length ? [['capturas', 'Capturas']] : []), ['faq', 'Preguntas'], ['codigo', 'Código']];
   const detail = app.sources
     ? `<div><h3 class="detail-title" data-reveal>Fuentes de música</h3>${table(['Fuente', 'Canal', 'Qué necesitas'], app.sources)}</div>`
@@ -466,6 +471,7 @@ async function build(site) {
       copyFile(path.join(root, 'assets', 'platform-apple.svg'), path.join(dir, 'platform-apple.svg')),
       copyFile(path.join(root, 'assets', 'platform-linux.svg'), path.join(dir, 'platform-linux.svg')),
     ] : []),
+    ...(site === 'vinilo' ? [copyFile(path.join(root, 'assets', 'vinilo-download.js'), path.join(dir, 'vinilo-download.js'))] : []),
     ...(site === 'nodalix' ? [
       copyFile(path.join(root, 'assets', 'nodalix-releases.js'), path.join(dir, 'nodalix-releases.js')),
       copyFile(path.join(root, 'data', 'nodalix-iso-releases.json'), path.join(dir, 'releases.json')),

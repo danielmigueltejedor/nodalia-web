@@ -233,9 +233,7 @@
  "Controles en la barra superior, la pantalla de bloqueo y las teclas multimedia. La música sigue al cerrar la ventana.": "Controls in the top bar, the lock screen and the media keys. Music keeps playing when you close the window.",
  "Estadísticas en tu equipo": "Statistics on your machine",
  "Recuento de escuchas guardado en local y scrobbling opcional a Last.fm.": "Play counts stored locally and optional scrobbling to Last.fm.",
- "Apple Music requiere suscripción, conexión continua y Linux x86_64. YouTube Music está en beta y Tidal en alfa. Vinilo se instala compilando el código; consulta los requisitos en GitHub.": "Apple Music requires a subscription, a continuous connection and Linux x86_64. YouTube Music is in beta and Tidal in alpha. Vinilo is installed by building the code; check the requirements on GitHub.",
  "Interfaces": "Interfaces",
- "Aplicación GNOME y cliente de terminal (aguja)": "GNOME app and terminal client (aguja)",
  "Formatos locales": "Local formats",
  "Idiomas": "Languages",
  "Español e inglés": "Spanish and English",
@@ -458,5 +456,8 @@
  "Navegador web para GNOME": "Web browser for GNOME",
  "Correo electrónico": "Email",
  "Sin repositorio aún": "No repository yet",
- "Cada icono es un personaje histórico ligado a lo que hace la aplicación.": "Each icon is a historical figure linked to what the app does."
+ "Cada icono es un personaje histórico ligado a lo que hace la aplicación.": "Each icon is a historical figure linked to what the app does.",
+ "Otros paquetes: .deb, .rpm, Flatpak": "Other packages: .deb, .rpm, Flatpak",
+ "AppImage, .deb, .rpm, Flatpak o desde el código": "AppImage, .deb, .rpm, Flatpak or from source",
+ "Apple Music requiere suscripción, conexión continua y Linux x86_64. YouTube Music está en beta y Tidal en alfa. Vinilo se descarga como AppImage o como paquete para tu distribución desde GitHub.": "Apple Music requires a subscription, a continuous connection and Linux x86_64. YouTube Music is in beta and Tidal in alpha. Vinilo is available as an AppImage or as a package for your distribution on GitHub."
 }

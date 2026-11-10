@@ -233,9 +233,7 @@
  "Controles en la barra superior, la pantalla de bloqueo y las teclas multimedia. La música sigue al cerrar la ventana.": "Commandes dans la barre supérieure, sur l'écran de verrouillage et via les touches multimédia. La musique continue quand vous fermez la fenêtre.",
  "Estadísticas en tu equipo": "Statistiques sur votre machine",
  "Recuento de escuchas guardado en local y scrobbling opcional a Last.fm.": "Compteur d'écoutes enregistré en local et scrobbling optionnel vers Last.fm.",
- "Apple Music requiere suscripción, conexión continua y Linux x86_64. YouTube Music está en beta y Tidal en alfa. Vinilo se instala compilando el código; consulta los requisitos en GitHub.": "Apple Music nécessite un abonnement, une connexion permanente et Linux x86_64. YouTube Music est en bêta et Tidal en alpha. Vinilo s'installe en compilant le code ; consultez les prérequis sur GitHub.",
  "Interfaces": "Interfaces",
- "Aplicación GNOME y cliente de terminal (aguja)": "Application GNOME et client en terminal (aguja)",
  "Formatos locales": "Formats locaux",
  "Idiomas": "Langues",
  "Español e inglés": "Espagnol et anglais",
@@ -458,5 +456,8 @@
  "Navegador web para GNOME": "Navigateur web pour GNOME",
  "Correo electrónico": "Courrier électronique",
  "Sin repositorio aún": "Pas encore de dépôt",
- "Cada icono es un personaje histórico ligado a lo que hace la aplicación.": "Chaque icône est un personnage historique lié à ce que fait l'application."
+ "Cada icono es un personaje histórico ligado a lo que hace la aplicación.": "Chaque icône est un personnage historique lié à ce que fait l'application.",
+ "Otros paquetes: .deb, .rpm, Flatpak": "Autres paquets : .deb, .rpm, Flatpak",
+ "AppImage, .deb, .rpm, Flatpak o desde el código": "AppImage, .deb, .rpm, Flatpak ou depuis les sources",
+ "Apple Music requiere suscripción, conexión continua y Linux x86_64. YouTube Music está en beta y Tidal en alfa. Vinilo se descarga como AppImage o como paquete para tu distribución desde GitHub.": "Apple Music nécessite un abonnement, une connexion permanente et Linux x86_64. YouTube Music est en bêta et Tidal en alpha. Vinilo se télécharge en AppImage ou en paquet pour votre distribution depuis GitHub."
 }
