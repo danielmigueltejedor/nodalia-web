@@ -321,7 +321,7 @@
  "Descargar Nodalix OS": "Télécharger Nodalix OS",
  "Componentes de Nodalix OS": "Composants de Nodalix OS",
  "GNOME Shell y Mutter sobre Wayland": "GNOME Shell et Mutter sur Wayland",
- "Ilustración con los componentes reales del sistema. Capturas oficiales aún no publicadas.": "Illustration avec les composants réels du système. Captures officielles pas encore publiées.",
+ "Ilustración con los componentes reales del sistema. Las capturas reales están en la sección Capturas.": "Illustration avec les vrais composants du système. Les vraies captures sont dans la section Captures.",
  "Qué hace Nodalix OS.": "Ce que fait Nodalix OS.",
  "Diseñado como un sistema": "Conçu comme un système",
  "Shell, ajustes, gestión de aplicaciones e identidad visual se versionan y publican juntos.": "Shell, réglages, gestion des applications et identité visuelle sont versionnés et publiés ensemble.",
@@ -472,5 +472,13 @@
  "Cerrar": "Fermer",
  "Imagen anterior": "Image précédente",
  "Imagen siguiente": "Image suivante",
- "{n} de {total}": "{n} sur {total}"
+ "{n} de {total}": "{n} sur {total}",
+ "Escritorio de Nodalix OS con el dock flotante": "Bureau de Nodalix OS avec le dock flottant",
+ "Escritorio de Nodalix OS con el dock flotante (abrir imagen completa)": "Bureau de Nodalix OS avec le dock flottant (ouvrir l’image en taille réelle)",
+ "Ajustes rápidos de Nodalix OS": "Réglages rapides de Nodalix OS",
+ "Ajustes rápidos de Nodalix OS (abrir imagen completa)": "Réglages rapides de Nodalix OS (ouvrir l’image en taille réelle)",
+ "Actualizaciones de todo el sistema desde Configuración": "Mises à jour de tout le système depuis les Paramètres",
+ "Actualizaciones de todo el sistema desde Configuración (abrir imagen completa)": "Mises à jour de tout le système depuis les Paramètres (ouvrir l’image en taille réelle)",
+ "Apariencia: estilo, color de resaltado y fondos de Nodalix": "Apparence : style, couleur d’accentuation et fonds d’écran Nodalix",
+ "Apariencia: estilo, color de resaltado y fondos de Nodalix (abrir imagen completa)": "Apparence : style, couleur d’accentuation et fonds d’écran Nodalix (ouvrir l’image en taille réelle)"
 }

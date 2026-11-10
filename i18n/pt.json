@@ -321,7 +321,7 @@
  "Descargar Nodalix OS": "Descarregar o Nodalix OS",
  "Componentes de Nodalix OS": "Componentes do Nodalix OS",
  "GNOME Shell y Mutter sobre Wayland": "GNOME Shell e Mutter sobre Wayland",
- "Ilustración con los componentes reales del sistema. Capturas oficiales aún no publicadas.": "Ilustração com os componentes reais do sistema. Capturas oficiais ainda não publicadas.",
+ "Ilustración con los componentes reales del sistema. Las capturas reales están en la sección Capturas.": "Ilustração com os componentes reais do sistema. As capturas reais estão na secção Capturas.",
  "Qué hace Nodalix OS.": "O que faz o Nodalix OS.",
  "Diseñado como un sistema": "Desenhado como um sistema",
  "Shell, ajustes, gestión de aplicaciones e identidad visual se versionan y publican juntos.": "Shell, definições, gestão de aplicações e identidade visual são versionados e publicados em conjunto.",
@@ -472,5 +472,13 @@
  "Cerrar": "Fechar",
  "Imagen anterior": "Imagem anterior",
  "Imagen siguiente": "Imagem seguinte",
- "{n} de {total}": "{n} de {total}"
+ "{n} de {total}": "{n} de {total}",
+ "Escritorio de Nodalix OS con el dock flotante": "Ambiente de trabalho do Nodalix OS com a dock flutuante",
+ "Escritorio de Nodalix OS con el dock flotante (abrir imagen completa)": "Ambiente de trabalho do Nodalix OS com a dock flutuante (abrir imagem completa)",
+ "Ajustes rápidos de Nodalix OS": "Definições rápidas do Nodalix OS",
+ "Ajustes rápidos de Nodalix OS (abrir imagen completa)": "Definições rápidas do Nodalix OS (abrir imagem completa)",
+ "Actualizaciones de todo el sistema desde Configuración": "Atualizações de todo o sistema a partir das Definições",
+ "Actualizaciones de todo el sistema desde Configuración (abrir imagen completa)": "Atualizações de todo o sistema a partir das Definições (abrir imagem completa)",
+ "Apariencia: estilo, color de resaltado y fondos de Nodalix": "Aparência: estilo, cor de destaque e fundos do Nodalix",
+ "Apariencia: estilo, color de resaltado y fondos de Nodalix (abrir imagen completa)": "Aparência: estilo, cor de destaque e fundos do Nodalix (abrir imagem completa)"
 }

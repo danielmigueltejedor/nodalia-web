@@ -165,7 +165,7 @@ console.log('✓ Cinco webs, CSS con hash anti-caché, cabeceras, módulos ES y 
   assert.equal(step(0, 1, 0), 0);
   assert.equal(opensViewer({ button: 0 }), true);
   for (const modified of [{ button: 1 }, { button: 0, ctrlKey: true }, { button: 0, metaKey: true }, { button: 0, shiftKey: true }, { button: 0, altKey: true }]) assert.equal(opensViewer(modified), false);
-  for (const site of ['vortia', 'vinilo', 'lienzo']) {
+  for (const site of ['vortia', 'vinilo', 'lienzo', 'nodalix']) {
     const html = await readFile(path.join(root, 'dist', site, 'index.html'), 'utf8');
     assert.match(html, /<script type="module" src="\/gallery\.js\?v=[0-9a-f]+"><\/script>/, `${site}: falta el visor de capturas`);
     assert.ok((await stat(path.join(root, 'dist', site, 'gallery.js'))).size > 1000);
@@ -174,7 +174,7 @@ console.log('✓ Cinco webs, CSS con hash anti-caché, cabeceras, módulos ES y 
     const english = await readFile(path.join(root, 'dist', site, 'en', 'index.html'), 'utf8');
     for (const text of ['Screenshot viewer', 'Previous image', 'Next image', 'Close', '{n} of {total}']) assert.ok(english.includes(JSON.stringify(text).slice(1, -1)), `${site}/en: falta "${text}"`);
   }
-  for (const site of ['portal', 'nodalix']) assert.ok(!(await readFile(path.join(root, 'dist', site, 'index.html'), 'utf8')).includes('gallery.js'), `${site}: no tiene capturas`);
+  for (const site of ['portal']) assert.ok(!(await readFile(path.join(root, 'dist', site, 'index.html'), 'utf8')).includes('gallery.js'), `${site}: no tiene capturas`);
   const css = await readFile(path.join(root, 'assets/styles.css'), 'utf8');
   for (const rule of ['.lightbox::backdrop', '.lightbox-close', '.lightbox-previous', '.lightbox-next', '.lightbox-button:focus-visible']) assert.ok(css.includes(rule), `Falta el estilo ${rule}`);
   console.log('✓ Visor de capturas: navegación circular, clics modificados, páginas con y sin capturas, textos traducidos.');
