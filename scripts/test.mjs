@@ -36,11 +36,16 @@ for (const id of ['portal','vortia','vinilo','lienzo','nodalix']) {
     assert.match(page,/class="product-hero"/);
     assert.match(page,/class="product-preview"/);
     assert.match(page,/Estado y requisitos/);
+    assert.ok(page.includes('id="ficha"') && page.includes('id="faq"'), `Faltan ficha o FAQ en ${id}`);
   }
 }
 const portal=await readFile(path.join(root,'dist/portal/index.html'),'utf8');
 for(const name of ['Vortia','Vinilo','Lienzo','Nodalix OS'])assert.match(portal,new RegExp(name));
 assert.match(portal,/hero-stage/);
+for (const id of ['ecosistema','autor','faq']) assert.ok(portal.includes(`id="${id}"`), `Portal sin sección ${id}`);
+assert.match(portal,/href="\/favicon\.svg\?v=[0-9a-f]+"/);
+assert.match(portal,/"@type":"FAQPage"/);
+for (const asset of ['favicon.svg','favicon.ico','apple-touch-icon.png','motion.js']) assert.ok((await stat(path.join(root,'dist/portal',asset))).size>100, `Falta ${asset}`);
 assert.match(portal,/class="hero-title"/);
 assert.match(sourceCss,/\.hero-title\{/);
 assert.match(portal,/width="120" height="120"/);

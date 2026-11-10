@@ -20,6 +20,8 @@ Dirección visual editorial: colores neutros, tipografía Sora + Inter autoaloja
 - `assets/_headers`: cabeceras de seguridad y caché para Cloudflare Pages.
 - `assets/nodalia-wordmark.svg` / `assets/nodalia-mark.svg`: identidad compartida.
 - `data/apps.json` + `scripts/data.mjs`: catálogo de productos y resolución de URLs oficiales.
+- `data/site.json`: contenido del portal (autor, ecosistema Home Assistant y preguntas frecuentes).
+- `assets/favicon.svg`: favicon transparente que cambia de color con el tema del navegador; `favicon.ico` y `apple-touch-icon.png` son los respaldos.
 - `scripts/build.mjs`: páginas, metadatos, SEO, sitemap y recursos.
 - `scripts/test.mjs`: validación de los cinco sitios, módulos de descarga y manifiesto ISO.
 - `assets/vortia-download.js` / `assets/nodalix-releases.js`: módulos ES exportables y comprobados en Node.

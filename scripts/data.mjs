@@ -30,3 +30,5 @@ function defineApp(entry) {
 
 const catalog = JSON.parse(readFileSync(path.join(root, 'data', 'apps.json'), 'utf8'));
 export const apps = catalog.map(defineApp);
+export const site = JSON.parse(readFileSync(path.join(root, 'data', 'site.json'), 'utf8'));
+export const repoUrl = githubRepo;
