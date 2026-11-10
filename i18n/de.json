@@ -233,9 +233,7 @@
  "Controles en la barra superior, la pantalla de bloqueo y las teclas multimedia. La música sigue al cerrar la ventana.": "Steuerung in der oberen Leiste, auf dem Sperrbildschirm und über die Medientasten. Die Musik läuft weiter, wenn du das Fenster schließt.",
  "Estadísticas en tu equipo": "Statistiken auf deinem Rechner",
  "Recuento de escuchas guardado en local y scrobbling opcional a Last.fm.": "Lokal gespeicherte Wiedergabezähler und optionales Scrobbling zu Last.fm.",
- "Apple Music requiere suscripción, conexión continua y Linux x86_64. YouTube Music está en beta y Tidal en alfa. Vinilo se instala compilando el código; consulta los requisitos en GitHub.": "Apple Music erfordert ein Abo, eine dauerhafte Verbindung und Linux x86_64. YouTube Music ist in der Beta- und Tidal in der Alpha-Phase. Vinilo wird durch Kompilieren des Codes installiert; die Voraussetzungen findest du auf GitHub.",
  "Interfaces": "Oberflächen",
- "Aplicación GNOME y cliente de terminal (aguja)": "GNOME-App und Terminal-Client (aguja)",
  "Formatos locales": "Lokale Formate",
  "Idiomas": "Sprachen",
  "Español e inglés": "Spanisch und Englisch",
@@ -268,7 +266,7 @@
  "¿Por qué Apple Music usa un proceso de Chromium?": "Warum verwendet Apple Music einen Chromium-Prozess?",
  "Apple Music exige el reproductor de Apple y el módulo Widevine de Google. Vinilo mantiene ese proceso oculto solo para esa fuente; los archivos locales nunca pasan por él.": "Apple Music verlangt den Player von Apple und das Widevine-Modul von Google. Vinilo hält diesen Prozess nur für diese Quelle verborgen; lokale Dateien laufen nie darüber.",
  "¿Hay un paquete listo para instalar?": "Gibt es ein fertiges Installationspaket?",
- "Todavía no. Se instala compilando el repositorio con make install; Arch Linux es la distribución recomendada.": "Noch nicht. Die Installation erfolgt durch Kompilieren des Repositorys mit make install; Arch Linux ist die empfohlene Distribution.",
+ "Sí. El botón de descarga te da la AppImage, que funciona en cualquier distribución x86_64; en GitHub también hay paquetes .deb, .rpm y Flatpak. Compilar con make install sigue siendo posible.": "Ja. Der Download-Button liefert das AppImage, das auf jeder x86_64-Distribution läuft; auf GitHub gibt es außerdem .deb-, .rpm- und Flatpak-Pakete. Kompilieren mit make install ist weiterhin möglich.",
  "Lienzo — Edición de imagen | Nodalia": "Lienzo — Bildbearbeitung | Nodalia",
  "Secciones de Lienzo": "Abschnitte von Lienzo",
  "Edición de imagen": "Bildbearbeitung",
@@ -466,5 +464,8 @@
  "Monitores de cálculo en Vortia": "Rechenmonitore in Vortia",
  "Monitores de cálculo en Vortia (abrir imagen completa)": "Rechenmonitore in Vortia (vollständiges Bild öffnen)",
  "Croquis acotado de una tobera en Vortia": "Bemaßte Skizze einer Düse in Vortia",
- "Croquis acotado de una tobera en Vortia (abrir imagen completa)": "Bemaßte Skizze einer Düse in Vortia (vollständiges Bild öffnen)"
+ "Croquis acotado de una tobera en Vortia (abrir imagen completa)": "Bemaßte Skizze einer Düse in Vortia (vollständiges Bild öffnen)",
+ "Otros paquetes: .deb, .rpm, Flatpak": "Weitere Pakete: .deb, .rpm, Flatpak",
+ "AppImage, .deb, .rpm, Flatpak o desde el código": "AppImage, .deb, .rpm, Flatpak oder aus dem Quellcode",
+ "Apple Music requiere suscripción, conexión continua y Linux x86_64. YouTube Music está en beta y Tidal en alfa. Vinilo se descarga como AppImage o como paquete para tu distribución desde GitHub.": "Apple Music erfordert ein Abonnement, eine ständige Verbindung und Linux x86_64. YouTube Music ist in der Beta, Tidal in der Alpha. Vinilo gibt es als AppImage oder als Paket für deine Distribution auf GitHub."
 }
