@@ -80,7 +80,7 @@ export function translateHtml(html, code, { lookup = () => undefined, collect = 
     if (!token.startsWith('<')) {
       const parent = stack[stack.length - 1];
       if (parent === 'script:ld') out += JSON.stringify(deep(JSON.parse(token))).replaceAll('<', '\\u003c');
-      else out += stack.some((name) => SKIPPED_ELEMENTS.has(name.split(':')[0])) ? token : translate(token);
+      else out += stack.some((name) => SKIPPED_ELEMENTS.has(name.split(':')[0]) || name.endsWith(':keep')) ? token : translate(token);
       continue;
     }
     if (token.startsWith('<!')) { out += token; continue; }
@@ -108,7 +108,9 @@ export function translateHtml(html, code, { lookup = () => undefined, collect = 
     }
     out += tag;
     const voidElement = /\/>$/.test(token) || ['meta', 'link', 'img', 'br', 'hr', 'input'].includes(name);
-    if (!voidElement) stack.push(name === 'script' && /application\/ld\+json/.test(token) ? 'script:ld' : name);
+    // translate="no" marks names that must stay as written (an app called Luz is not the word "luz").
+    const keepText = /\stranslate="no"/.test(token);
+    if (!voidElement) stack.push(name === 'script' && /application\/ld\+json/.test(token) ? 'script:ld' : keepText ? `${name}:keep` : name);
   }
   return out;
 }
