@@ -758,3 +758,9 @@ html:not(.js) .scroll-progress{display:none}
 .eco-copy .small-label{margin-top:14px}
 @media(max-width:1040px){.studium-steps{padding:32px;border-left:0;border-top:1px solid var(--line)}}
 @media(max-width:600px){.studium-steps{padding:22px}}
+
+/* Redes sociales en el pie */
+.social{display:flex;gap:8px;margin-top:18px}
+.social a{display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--line-2);border-radius:10px;color:var(--text);transition:color .2s,border-color .2s,background .2s}
+.social a:hover{color:var(--ink);border-color:rgba(var(--accent-rgb),.5);background:rgba(255,255,255,.04)}
+.social .i{width:18px;height:18px}

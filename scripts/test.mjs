@@ -46,6 +46,7 @@ for (const id of ['ecosistema','autor','faq']) assert.ok(portal.includes(`id="${
 assert.ok(portal.includes('id="studium"') && portal.includes('/studium/archive/refs/tags/') && portal.includes('studium mcp'), 'Portal sin descarga o instrucciones de Studium');
 assert.match(portal,/href="\/favicon\.svg\?v=[0-9a-f]+"/);
 assert.match(portal,/"@type":"FAQPage"/);
+for (const url of ['https://www.instagram.com/getnodalia/', 'https://x.com/getnodalia']) assert.ok(portal.split(url).length > 3, `Falta el enlace a ${url} en pie, contacto o metadatos`);
 for (const asset of ['favicon.svg','favicon.ico','apple-touch-icon.png','motion.js']) assert.ok((await stat(path.join(root,'dist/portal',asset))).size>100, `Falta ${asset}`);
 assert.match(portal,/class="hero-title"/);
 assert.match(sourceCss,/\.hero-title\{/);

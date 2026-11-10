@@ -440,5 +440,6 @@
  "Necesitas Git y, para generar el PDF, un compilador de LaTeX (pdflatex o tectonic).": "You need Git and, to generate the PDF, a LaTeX compiler (pdflatex or tectonic).",
  "Guías para cada cliente": "Guides for each client",
  "Ver la interfaz provisional": "View the provisional interface",
- "La interfaz web es provisional y todavía está en desarrollo.": "The web interface is provisional and still in development."
+ "La interfaz web es provisional y todavía está en desarrollo.": "The web interface is provisional and still in development.",
+ "Redes sociales": "Social media"
 }
