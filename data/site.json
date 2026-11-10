@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Daniel Miguel Tejedor",
+    "role": "Estudiante de Ingeniería Aeroespacial · Universidad de León",
+    "avatar": "https://github.com/danielmigueltejedor.png?size=240",
+    "website": "https://danielmigueltejedor.com",
+    "bio": [
+      "Nodalia es el trabajo de Daniel Miguel Tejedor, estudiante de Ingeniería Aeroespacial en la Universidad de León y desarrollador de software de código abierto.",
+      "Trabaja en sistemas operativos, aplicaciones nativas, Home Assistant e integración entre dispositivos, con especial atención a la arquitectura, el rendimiento y el mantenimiento a largo plazo."
+    ],
+    "topics": ["Linux", "Aplicaciones nativas", "Home Assistant", "Herramientas creativas", "Infraestructura"]
+  },
+  "ecosystem": {
+    "featured": {
+      "name": "Nodalia Cards",
+      "repo": "nodalia-cards",
+      "kicker": "Home Assistant",
+      "headline": "Un mismo diseño para todo tu panel.",
+      "description": "Una colección de 25 tarjetas para Home Assistant que comparten lenguaje visual, interacciones y editor de configuración. Se adaptan a escritorio, tableta y móvil y respetan tu tema.",
+      "points": [
+        "25 tarjetas: luces, clima, persianas, cámaras, aspiradores, gráficas, energía y navegación",
+        "Editor visual con los selectores nativos de Home Assistant",
+        "Instalación desde HACS",
+        "Licencia MIT"
+      ]
+    },
+    "more": [
+      ["Nodalia Cards Engine", "nodalia-cards-engine", "Backend opcional para las funciones avanzadas de Nodalia Cards."],
+      ["Nodalia Apps", "apps-nodalia", "Repositorio de aplicaciones para Home Assistant, con Tailscale y Matter Hub."],
+      ["Roborock Custom Map", "nodalia-roborock-custom-map", "Integración que expone datos de mapa enriquecidos para tarjetas de aspirador."]
+    ]
+  },
+  "faq": [
+    ["¿Qué es Nodalia?", "Un proyecto independiente de software: un sistema operativo Linux, aplicaciones de escritorio y componentes para Home Assistant, desarrollados en público."],
+    ["¿Cuánto cuesta?", "Nada. Las descargas son gratuitas y el código de cada proyecto está publicado en GitHub."],
+    ["¿Quién lo desarrolla?", "Daniel Miguel Tejedor, con aportaciones de la comunidad a través de GitHub."],
+    ["¿Está listo para el uso diario?", "Depende del producto. Cada página indica su estado real y sus limitaciones antes de que descargues nada."],
+    ["¿Recogéis datos de quien visita la web?", "No. Estas páginas no usan cookies, analítica ni rastreadores propios. Los iconos y las capturas se cargan desde GitHub, que aplica su propia política."],
+    ["¿Cómo puedo colaborar?", "Abre una incidencia, propón un cambio o ayuda con las traducciones en el repositorio de cada proyecto. También puedes escribir a hola@getnodalia.com."]
+  ]
+}
