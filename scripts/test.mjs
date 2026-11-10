@@ -99,10 +99,44 @@ for (const [id, marker] of [['vortia', 'data-identity="flow"'], ['nodalix', 'cla
   assert.match(page, /src="\/identity\.js\?v=[0-9a-f]+"/);
   assert.ok((await stat(path.join(root, 'dist', id, 'identity.js'))).size > 100);
 }
+// Idiomas: cada sitio se publica en cinco idiomas, sin textos pendientes de traducir.
+const i18n = await import('./i18n.mjs');
+assert.deepEqual(JSON.parse(await readFile(path.join(root, 'dist/i18n-missing.json'), 'utf8')), {}, 'Hay textos sin traducir: revisa dist/i18n-missing.json');
+for (const code of i18n.localeCodes.filter((item) => item !== 'es')) {
+  for (const [key, value] of Object.entries(i18n.dictionaries[code])) {
+    assert.ok(value.trim(), `Traducción vacía (${code}): ${key}`);
+    assert.deepEqual((value.match(/\{\w+\}/g) || []).sort(), (key.match(/\{\w+\}/g) || []).sort(), `Marcadores distintos (${code}): ${key}`);
+  }
+}
+for (const id of ['portal', 'vortia', 'vinilo', 'lienzo', 'nodalix']) {
+  const base = id === 'portal' ? 'https://getnodalia.com' : `https://${id}.getnodalia.com`;
+  const spanish = await readFile(path.join(root, 'dist', id, 'index.html'), 'utf8');
+  assert.match(spanish, /<html lang="es">/);
+  assert.ok(spanish.includes('class="lang"') && spanish.includes('nodalia-lang'), `Falta el selector de idioma en ${id}`);
+  for (const code of i18n.localeCodes.filter((item) => item !== 'es')) {
+    const page = await readFile(path.join(root, 'dist', id, code, 'index.html'), 'utf8');
+    assert.ok(page.includes(`<html lang="${code}">`), `${id}/${code} sin lang`);
+    assert.ok(page.includes(`<link rel="canonical" href="${base}/${code}/"/>`), `${id}/${code} sin canonical propio`);
+    for (const other of i18n.localeCodes) assert.ok(page.includes(`hreflang="${other}" href="${base}${i18n.localePath(other)}"`), `${id}/${code} sin alternate ${other}`);
+    assert.ok(page.includes(`hreflang="x-default" href="${base}/"`));
+    assert.ok(!/href="https:\/\/(?:[a-z]+\.)?getnodalia\.com\/(?:#[^"]*)?"(?![^>]*hreflang)/.test(page.replace(/<[^>]*hreflang[^>]*>/g, '')), `${id}/${code} enlaza a la versión en español`);
+    assert.notEqual(page.match(/<h1[^>]*>([^<]*)/)[1], spanish.match(/<h1[^>]*>([^<]*)/)[1], `${id}/${code} con titular sin traducir`);
+    JSON.parse(page.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+  }
+  assert.ok((await stat(path.join(root, 'dist', id, 'i18n.js'))).size > 100);
+  const map = await readFile(path.join(root, 'dist', id, 'sitemap.xml'), 'utf8');
+  for (const code of i18n.localeCodes) assert.ok(map.includes(`<loc>${base}${i18n.localePath(code)}</loc>`));
+}
+const vortiaDe = await readFile(path.join(root, 'dist/vortia/de/index.html'), 'utf8');
+assert.equal(JSON.parse(vortiaDe.match(/<script type="application\/json" id="i18n">([\s\S]*?)<\/script>/)[1])['Descargar para Linux'], 'Für Linux herunterladen');
+assert.equal(i18n.translateHtml('<p title="Hola mundo">Hola <b>mundo</b></p><code>Hola</code>', 'en', { lookup: (key) => ({ 'Hola mundo': 'Hello world', Hola: 'Hello', mundo: 'world' })[key] }), '<p title="Hello world">Hello <b>world</b></p><code>Hola</code>');
+const clientI18n = await import('../assets/i18n.js');
+assert.equal(clientI18n.t('Descargar {type} ↓', { type: 'DMG' }), 'Descargar DMG ↓');
 const releasesModule = await import('../assets/releases.js');
 assert.equal(releasesModule.isTag('v1.2.3'), true);
 assert.equal(releasesModule.isTag('<img src=x>'), false);
 assert.equal(releasesModule.relativeDate('2026-01-01T00:00:00Z', Date.parse('2026-01-04T00:00:00Z')), 'hace 3 días');
+assert.equal(releasesModule.relativeDate('2026-01-01T00:00:00Z', Date.parse('2026-01-04T00:00:00Z'), 'en'), '3 days ago');
 assert.match(portal, /data-release="nodalix-os"/);
 assert.ok((await stat(path.join(root, 'dist/portal/releases.js'))).size > 100);
 await import('./test-vortia-download.mjs');

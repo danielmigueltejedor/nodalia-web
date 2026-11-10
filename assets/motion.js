@@ -79,3 +79,28 @@ if (typeof window !== 'undefined' && root.classList.contains('js')) {
   setupScrollEffects();
   setupSectionSpy();
 }
+
+// Idiomas: recuerda el elegido en el selector y lo transmite a los demás sitios de Nodalia,
+// que al estar en otro subdominio no comparten almacenamiento.
+export function setupLanguage(doc = document, storage = localStorage, here = location) {
+  const KEY = 'nodalia-lang';
+  const menu = doc.querySelector('.lang');
+  if (!menu) return;
+  for (const link of menu.querySelectorAll('a[data-lang]')) {
+    link.addEventListener('click', () => { try { storage.setItem(KEY, link.dataset.lang); } catch { /* sin almacenamiento */ } });
+  }
+  doc.addEventListener('click', (event) => { if (menu.open && !menu.contains(event.target)) menu.open = false; });
+  doc.addEventListener('keydown', (event) => { if (event.key === 'Escape') menu.open = false; });
+  let chosen = null;
+  try { chosen = storage.getItem(KEY); } catch { /* sin almacenamiento */ }
+  if (!chosen || chosen !== doc.documentElement.lang) return;
+  for (const link of doc.querySelectorAll('a[href^="https://"]')) {
+    if (link.closest('.lang')) continue;
+    const url = new URL(link.href);
+    if (url.origin === here.origin || !/(^|\.)getnodalia\.com$/.test(url.hostname)) continue;
+    url.searchParams.set('hl', chosen);
+    link.href = url.href;
+  }
+}
+
+if (typeof window !== 'undefined') setupLanguage();
