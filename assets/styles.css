@@ -292,7 +292,7 @@ html:not(.js) .scroll-progress{display:none}
 .gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:44px}
 .gallery figure{overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);transition:border-color .25s,transform .3s var(--ease)}
 .gallery figure:hover{border-color:rgba(var(--accent-rgb),.4);transform:translateY(-3px)}
-.gallery a{display:block;cursor:zoom-in}
+.gallery a{display:block}
 /* Visor de capturas (gallery.js): la imagen se abre sobre la página. */
 .lightbox-open{overflow:hidden}
 .lightbox{position:fixed;inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;background:transparent;color:var(--text);overflow:hidden}
