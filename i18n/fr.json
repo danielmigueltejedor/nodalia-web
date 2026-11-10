@@ -266,7 +266,7 @@
  "¿Por qué Apple Music usa un proceso de Chromium?": "Pourquoi Apple Music utilise-t-il un processus Chromium ?",
  "Apple Music exige el reproductor de Apple y el módulo Widevine de Google. Vinilo mantiene ese proceso oculto solo para esa fuente; los archivos locales nunca pasan por él.": "Apple Music exige le lecteur d'Apple et le module Widevine de Google. Vinilo garde ce processus caché pour cette seule source ; les fichiers locaux n'y passent jamais.",
  "¿Hay un paquete listo para instalar?": "Existe-t-il un paquet prêt à installer ?",
- "Todavía no. Se instala compilando el repositorio con make install; Arch Linux es la distribución recomendada.": "Pas encore. Il s'installe en compilant le dépôt avec make install ; Arch Linux est la distribution recommandée.",
+ "Sí. El botón de descarga te da la AppImage, que funciona en cualquier distribución x86_64; en GitHub también hay paquetes .deb, .rpm y Flatpak. Compilar con make install sigue siendo posible.": "Oui. Le bouton de téléchargement fournit l'AppImage, qui fonctionne sur toute distribution x86_64 ; GitHub propose aussi des paquets .deb, .rpm et Flatpak. Compiler avec make install reste possible.",
  "Lienzo — Edición de imagen | Nodalia": "Lienzo — Retouche d'image | Nodalia",
  "Secciones de Lienzo": "Sections de Lienzo",
  "Edición de imagen": "Retouche d'image",

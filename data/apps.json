@@ -244,7 +244,7 @@
       ],
       [
         "¿Hay un paquete listo para instalar?",
-        "Todavía no. Se instala compilando el repositorio con make install; Arch Linux es la distribución recomendada."
+        "Sí. El botón de descarga te da la AppImage, que funciona en cualquier distribución x86_64; en GitHub también hay paquetes .deb, .rpm y Flatpak. Compilar con make install sigue siendo posible."
       ]
     ],
     "limitation": "Apple Music requiere suscripción, conexión continua y Linux x86_64. YouTube Music está en beta y Tidal en alfa. Vinilo se descarga como AppImage o como paquete para tu distribución desde GitHub.",
