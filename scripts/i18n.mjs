@@ -34,6 +34,22 @@ const META_CONTENT = /(?:name="description"|property="og:(?:title|description|im
 const SKIPPED_ELEMENTS = new Set(['script', 'style', 'code', 'pre']);
 const INTERNAL_ROOT = /^(https:\/\/(?:[a-z0-9-]+\.)?getnodalia\.com)\/?(#[^"]*)?$/;
 
+// Separa el documento en etiquetas y texto sin expresiones regulares.
+function tokenize(html) {
+  const tokens = [];
+  let position = 0;
+  while (position < html.length) {
+    const open = html.indexOf('<', position);
+    if (open === -1) { tokens.push(html.slice(position)); break; }
+    const close = html.indexOf('>', open + 2);
+    if (close === -1) { tokens.push(html.slice(position)); break; }
+    if (open > position) tokens.push(html.slice(position, open));
+    tokens.push(html.slice(open, close + 1));
+    position = close + 1;
+  }
+  return tokens;
+}
+
 /**
  * Traduce un documento HTML. `lookup(key)` devuelve la traducción o undefined.
  * Con `collect` se registran las claves encontradas (para extraer textos o detectar los que faltan).
@@ -55,7 +71,7 @@ export function translateHtml(html, code, { lookup = () => undefined, collect = 
     return value;
   };
 
-  const tokens = html.split(/(<[^>]+>)/);
+  const tokens = tokenize(html);
   const stack = [];
   let out = '';
   for (let i = 0; i < tokens.length; i += 1) {
