@@ -1,3 +1,4 @@
+import { t, formatNumber } from './i18n.js';
 /* Vortia downloads: official GitHub Releases, platform-aware with safe fallback. */
 'use strict';
 
@@ -84,7 +85,7 @@ export async function detectArchitecture(nav) {
 }
 
 export function formatMegabytes(bytes) {
-  return bytes ? `${(bytes / 1e6).toFixed(1).replace('.', ',')} MB` : 'Tamaño no disponible';
+  return bytes ? `${formatNumber(bytes / 1e6)} MB` : t('Tamaño no disponible');
 }
 
 export function releaseUrl(release) {
@@ -112,8 +113,8 @@ function setOption(get, platformId, asset, checksum, release) {
   if (!link || !size || !sha) return;
   const fileType = platformId === 'linux' ? 'AppImage' : 'DMG';
   link.href = asset ? asset.url : releaseUrl(release);
-  link.textContent = asset ? `Descargar ${fileType} ↓` : 'Consultar en GitHub ↗';
-  size.textContent = asset ? formatMegabytes(asset.size) : 'No disponible en esta versión';
+  link.textContent = asset ? t('Descargar {type} ↓', { type: fileType }) : t('Consultar en GitHub ↗');
+  size.textContent = asset ? formatMegabytes(asset.size) : t('No disponible en esta versión');
   sha.hidden = !checksum;
   if (checksum) sha.href = checksum.url;
 }
@@ -122,15 +123,15 @@ export function renderRelease(get, release, os, arch, isFallback) {
   const version =
     typeof release.tag_name === 'string' && /^v?[0-9]/.test(release.tag_name)
       ? release.tag_name
-      : 'Versión disponible';
+      : t('Versión disponible');
   const packages = findPlatformAssets(release);
   const versionEl = get('vortia-release-version');
   const sourceEl = get('vortia-release-source');
   if (versionEl) versionEl.textContent = version;
   if (sourceEl) {
     sourceEl.textContent = isFallback
-      ? 'Referencia local: comprueba en GitHub si hay una versión más reciente.'
-      : 'Versión estable más reciente publicada en GitHub Releases.';
+      ? t('Referencia local: comprueba en GitHub si hay una versión más reciente.')
+      : t('Versión estable más reciente publicada en GitHub Releases.');
   }
 
   setOption(get, 'linux', packages.linux, packages.linuxSha, release);
@@ -138,31 +139,31 @@ export function renderRelease(get, release, os, arch, isFallback) {
 
   let selected = null;
   let icon = '';
-  let label = 'Ver versiones y descargas';
-  let detail = 'Selecciona Linux o macOS en las opciones de descarga.';
+  let label = t('Ver versiones y descargas');
+  let detail = t('Selecciona Linux o macOS en las opciones de descarga.');
 
   if (os === 'linux') {
     icon = '/platform-linux.svg';
     if (arch === 'arm') {
-      detail = 'No hay AppImage Linux ARM64 en esta versión. La descarga publicada es para x86_64.';
+      detail = t('No hay AppImage Linux ARM64 en esta versión. La descarga publicada es para x86_64.');
     } else if (packages.linux) {
       selected = packages.linux;
-      label = 'Descargar para Linux';
+      label = t('Descargar para Linux');
       detail = `AppImage x86_64 · ${formatMegabytes(selected.size)} · ${version}`;
     } else {
-      detail = 'No hay AppImage Linux x86_64 en la última versión.';
+      detail = t('No hay AppImage Linux x86_64 en la última versión.');
     }
   } else if (os === 'mac') {
     icon = '/platform-apple.svg';
     const universal = packages.mac && /universal/i.test(packages.mac.name);
     if (arch === 'x86' && !universal) {
-      detail = 'No hay DMG compatible con Mac Intel en esta versión. El publicado es para Apple Silicon.';
+      detail = t('No hay DMG compatible con Mac Intel en esta versión. El publicado es para Apple Silicon.');
     } else if (packages.mac) {
       selected = packages.mac;
-      label = 'Descargar para macOS';
-      detail = `${universal ? 'DMG universal' : 'DMG para Apple Silicon (M1/M2/M3/M4 y posteriores)'} · ${formatMegabytes(selected.size)} · ${version}`;
+      label = t('Descargar para macOS');
+      detail = `${universal ? t('DMG universal') : t('DMG para Apple Silicon (M1/M2/M3/M4 y posteriores)')} · ${formatMegabytes(selected.size)} · ${version}`;
     } else {
-      detail = 'No hay DMG para macOS en la última versión.';
+      detail = t('No hay DMG para macOS en la última versión.');
     }
   }
 

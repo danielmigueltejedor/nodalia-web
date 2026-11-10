@@ -1,18 +1,17 @@
+import { lang } from './i18n.js';
 // Muestra la última versión publicada de cada proyecto. Si GitHub no responde se conserva el valor incluido en la página.
 const API = 'https://api.github.com/repos/danielmigueltejedor/';
 
 export const isTag = (value) => typeof value === 'string' && /^v?\d+(\.\d+){1,3}([-.][0-9A-Za-z.]+)?$/.test(value);
 
-export function relativeDate(iso, now = Date.now()) {
+export function relativeDate(iso, now = Date.now(), locale = lang()) {
   const days = Math.floor((now - Date.parse(iso)) / 86400000);
   if (!Number.isFinite(days) || days < 0) return '';
-  if (days === 0) return 'hoy';
-  if (days === 1) return 'ayer';
-  if (days < 30) return `hace ${days} días`;
+  const format = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' });
+  if (days < 30) return format.format(-days, 'day');
   const months = Math.floor(days / 30);
-  if (months < 12) return `hace ${months} ${months === 1 ? 'mes' : 'meses'}`;
-  const years = Math.floor(days / 365);
-  return `hace ${years} ${years === 1 ? 'año' : 'años'}`;
+  if (months < 12) return format.format(-months, 'month');
+  return format.format(-Math.floor(days / 365), 'year');
 }
 
 async function latest(repo) {

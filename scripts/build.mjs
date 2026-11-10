@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { apps, brand, site, repoUrl } from './data.mjs';
+import { DEFAULT_LOCALE, locales, localeCodes, localePath, localize, dictionaries, clientKeys } from './i18n.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const target = process.argv[2];
@@ -21,6 +22,12 @@ const cssFileName = `styles.${cssHash}.css`;
 const assetVersion = async (name) => createHash('sha256').update(await readFile(path.join(root, 'assets', name))).digest('hex').slice(0, 10);
 const wordmarkSrc = `/nodalia-wordmark.svg?v=${await assetVersion('nodalia-wordmark.svg')}`;
 const faviconSrc = `/favicon.svg?v=${await assetVersion('favicon.svg')}`;
+const i18nSrc = `/i18n.js?v=${await assetVersion('i18n.js')}`;
+// Idioma de la página que se está generando. La plantilla se escribe en español; localize() traduce el resultado.
+let locale = DEFAULT_LOCALE;
+// Traducciones que necesitan los scripts del navegador de la página en curso (null en español).
+let clientStrings = null;
+const missing = {};
 const motionSrc = `/motion.js?v=${await assetVersion('motion.js')}`;
 
 const e = (s) => String(s ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
@@ -99,7 +106,11 @@ const order = ['nodalix', 'vinilo', 'vortia', 'lienzo'];
 const byId = Object.fromEntries(apps.map((app) => [app.id, app]));
 const ordered = order.map((id) => byId[id]);
 
-const nav = (active = '') => `<header class="topbar"><div class="container topbar-inner">
+const globe = svg('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.8 3.9 5.8 3.9 9s-1.3 6.2-3.9 9c-2.6-2.8-3.9-5.8-3.9-9S9.4 5.8 12 3z"/>');
+const langSelect = (base) => `<details class="lang"><summary aria-label="Idioma">${globe}<span>${locale.toUpperCase()}</span></summary><ul>${locales.map(({ code, name }) => `<li><a href="${safeUrl(base + localePath(code).slice(1))}" hreflang="${code}" lang="${code}" data-lang="${code}"${code === locale ? ' aria-current="true"' : ''}>${name}</a></li>`).join('')}</ul></details>`;
+// Antes de pintar: guarda el idioma elegido (?hl=) y, solo en la portada en español y sin elección previa, lleva al idioma del navegador.
+const langBoot = () => `<script>(function(){try{var s=${JSON.stringify(localeCodes)},l=location,q=new URLSearchParams(l.search),h=q.get('hl'),k='nodalia-lang';if(h&&s.indexOf(h)!==-1){localStorage.setItem(k,h);q.delete('hl');var r=q.toString();history.replaceState(null,'',l.pathname+(r?'?'+r:'')+l.hash)}var p=localStorage.getItem(k);if(!p&&!/bot|crawl|spider|slurp|lighthouse|preview/i.test(navigator.userAgent)){(navigator.languages||[navigator.language]).some(function(n){var b=String(n||'').slice(0,2).toLowerCase();if(s.indexOf(b)!==-1){p=b;return true}return false})}if(${JSON.stringify(locale)}==='es'&&p&&p!=='es'&&s.indexOf(p)!==-1&&l.pathname==='/')l.replace('/'+p+'/'+l.search+l.hash)}catch(e){}})()</script>`;
+const nav = (active = '', base = brand.portal + '/') => `<header class="topbar"><div class="container topbar-inner">
   ${A(brand.portal, `<img src="${wordmarkSrc}" alt="Nodalia" width="118" height="30"/>`, 'brand')}
   <nav class="nav" aria-label="Navegación principal">
     ${A(`${brand.portal}/#aplicaciones`, 'Productos', active === 'portal' ? '' : 'optional')}
@@ -108,6 +119,7 @@ const nav = (active = '') => `<header class="topbar"><div class="container topba
     ${A(`${brand.portal}/#autor`, 'Autor', 'optional')}
     ${A(brand.github, `${icon.github}GitHub`, 'outline', true)}
   </nav>
+  ${langSelect(base)}
 </div></header>`;
 const footer = () => `<footer class="footer"><div class="container">
   <div class="footer-content">
@@ -127,17 +139,18 @@ const footer = () => `<footer class="footer"><div class="container">
       ${A(`mailto:${brand.email}`, 'Contacto')}
     </nav></div>
   </div>
-  <div class="footer-meta"><span>© ${new Date().getUTCFullYear()} Nodalia · Creado por ${A(site.author.website, e(site.author.name), '', true)}</span><span>Sin cookies ni analítica propia.</span></div>
+  <div class="footer-meta"><span>© <span>${new Date().getUTCFullYear()}</span> Nodalia · Creado por ${A(site.author.website, e(site.author.name), '', true)}</span><span>Sin cookies ni analítica propia.</span></div>
 </div></footer>`;
 const shell = ({title, description, canonical, content, accent = '', preview = '', previewAlt = '', active = '', schema = null, scripts = '', identity = false}) => `<!doctype html>
-<html lang="es"><head>
+<html lang="${locale}"><head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <meta name="theme-color" content="#07080c"/><meta name="color-scheme" content="dark"/>
 <title>${e(title)}</title><meta name="description" content="${e(description)}"/>
-<link rel="canonical" href="${safeUrl(canonical)}"/>
-<meta property="og:type" content="website"/><meta property="og:site_name" content="Nodalia"/><meta property="og:locale" content="es_ES"/>
+<link rel="canonical" href="${safeUrl(canonical + localePath(locale).slice(1))}"/>
+${locales.map(({ code }) => `<link rel="alternate" hreflang="${code}" href="${safeUrl(canonical + localePath(code).slice(1))}"/>`).join('')}<link rel="alternate" hreflang="x-default" href="${safeUrl(canonical)}"/>
+<meta property="og:type" content="website"/><meta property="og:site_name" content="Nodalia"/><meta property="og:locale" content="${locales.find(({ code }) => code === locale).og}"/>
 <meta property="og:title" content="${e(title)}"/>
-<meta property="og:description" content="${e(description)}"/><meta property="og:url" content="${safeUrl(canonical)}"/>
+<meta property="og:description" content="${e(description)}"/><meta property="og:url" content="${safeUrl(canonical + localePath(locale).slice(1))}"/>
 ${preview ? `<meta property="og:image" content="${safeUrl(preview)}"/>${previewAlt ? `<meta property="og:image:alt" content="${e(previewAlt)}"/>` : ''}` : ''}
 <meta name="twitter:card" content="${preview ? 'summary_large_image' : 'summary'}"/>
 <link rel="icon" href="/favicon.ico" sizes="32x32"/>
@@ -147,10 +160,11 @@ ${preview ? `<meta property="og:image" content="${safeUrl(preview)}"/>${previewA
 <link rel="preload" href="/fonts/sora-latin-wght.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href="/fonts/inter-latin-wght.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="stylesheet" href="/${cssFileName}"/>
-${motionBoot}
+${langBoot()}${motionBoot}
+${clientStrings ? `<script type="application/json" id="i18n">${JSON.stringify(clientStrings).replaceAll('<', '\\u003c')}</script>` : ''}
 ${schema ? jsonLd({'@context':'https://schema.org','@graph':[].concat(schema)}) : ''}
 </head><body class="${e(accent ? `accent-${accent}` : '')}"><a class="visually-hidden" href="#contenido">Saltar al contenido</a>
-<div class="scroll-progress" aria-hidden="true"></div>${nav(active)}<main id="contenido">${content}</main>${footer()}<script type="module" src="${motionSrc}"></script>${identity ? `<script type="module" src="${identitySrc}"></script>` : ''}${scripts}</body></html>`;
+<div class="scroll-progress" aria-hidden="true"></div>${nav(active, canonical)}<main id="contenido">${content}</main>${footer()}<script type="module" src="${motionSrc}"></script>${identity ? `<script type="module" src="${identitySrc}"></script>` : ''}${scripts}</body></html>`;
 
 async function home() {
   const vinilo = byId.vinilo, lienzo = byId.lienzo, nodalix = byId.nodalix;
@@ -376,16 +390,30 @@ function nodalixDownloads(app) {
   <script type="module" src="/nodalix-releases.js"></script>`;
 }
 
-function sitemap(domain) {return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${e(domain)}/</loc></url></urlset>\n`}
+function sitemap(domain) {return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${localeCodes.map((code) => `<url><loc>${e(domain)}${localePath(code)}</loc></url>`).join('')}</urlset>\n`}
 async function build(site) {
   const dir = path.join(root, 'dist', site);
   await rm(dir, { recursive: true, force: true });
   await mkdir(path.join(dir, 'fonts'), { recursive: true });
   const app = apps.find((item) => item.id === site);
-  const content = site === 'portal' ? await home() : product(app);
+  const clientScripts = { vortia: ['vortia-download.js'], nodalix: ['nodalix-releases.js'] }[site] || [];
+  const keys = (await Promise.all(clientScripts.map((file) => readFile(path.join(root, 'assets', file), 'utf8')))).flatMap(clientKeys);
+  const pages = [];
+  for (const code of localeCodes) {
+    locale = code;
+    clientStrings = code === DEFAULT_LOCALE || !keys.length ? null : Object.fromEntries(keys.filter((key) => dictionaries[code][key] !== undefined).map((key) => [key, dictionaries[code][key]]));
+    const page = localize(site === 'portal' ? await home() : product(app), code);
+    const absent = [...page.missing, ...(code === DEFAULT_LOCALE ? [] : keys.filter((key) => dictionaries[code][key] === undefined))];
+    if (absent.length) missing[code] = [...new Set([...(missing[code] || []), ...absent])];
+    pages.push([code, page.html]);
+  }
+  locale = DEFAULT_LOCALE;
+  clientStrings = null;
+  await Promise.all(localeCodes.filter((code) => code !== DEFAULT_LOCALE).map((code) => mkdir(path.join(dir, code), { recursive: true })));
   const baseUrl = site === 'portal' ? brand.portal : app.domain;
   await Promise.all([
-    writeFile(path.join(dir, 'index.html'), content, 'utf8'),
+    ...pages.map(([code, html]) => writeFile(path.join(dir, localePath(code).slice(1), 'index.html'), html, 'utf8')),
+    copyFile(path.join(root, 'assets', 'i18n.js'), path.join(dir, 'i18n.js')),
     writeFile(path.join(dir, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${baseUrl}/sitemap.xml\n`, 'utf8'),
     writeFile(path.join(dir, 'sitemap.xml'), sitemap(baseUrl), 'utf8'),
     writeFile(path.join(dir, '404.html'), shell({title:'Página no encontrada | Nodalia',description:'No hemos encontrado esa página.',canonical:baseUrl+'/',content:`<section class="hero"><div class="container"><span class="eyebrow" data-reveal>Error 404</span><h1>Esta página no existe.</h1><p>Prueba a volver al catálogo de aplicaciones.</p><div class="actions">${A(brand.portal, 'Volver al inicio','btn btn-primary')}</div></div></section>`}), 'utf8'),
@@ -413,3 +441,7 @@ async function build(site) {
   console.log(`✓ ${site}: ${path.relative(root, dir)}`);
 }
 for (const site of selected) await build(site);
+// Textos sin traducir: las pruebas fallan si este archivo no está vacío.
+await writeFile(path.join(root, 'dist', 'i18n-missing.json'), JSON.stringify(missing, null, 1), 'utf8');
+const pending = Object.values(missing).reduce((total, list) => total + list.length, 0);
+if (pending) console.warn(`! ${pending} textos sin traducir (dist/i18n-missing.json)`);

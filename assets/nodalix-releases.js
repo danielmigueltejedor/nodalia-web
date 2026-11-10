@@ -4,7 +4,7 @@
  * ISO completa opcional: data/nodalix-iso-releases.json, publicado como /releases.json.
  * El JSON NO crea enlaces ficticios; solo debe incluir objetos ya subidos y verificados.
  */
-'use strict';
+import { t, lang } from './i18n.js';
 
 export const REPO_URL = 'https://github.com/danielmigueltejedor/nodalix-os';
 export const RELEASES_API =
@@ -35,10 +35,10 @@ export function appendLinks(actions, createAnchor, ...items) {
   }
 }
 
-export function formatGibibytes(bytes, locale = 'es-ES') {
+export function formatGibibytes(bytes, locale = lang()) {
   return Number.isFinite(bytes) && bytes > 0
     ? `${(bytes / 2 ** 30).toLocaleString(locale, { maximumFractionDigits: 2 })} GiB`
-    : 'No especificado';
+    : t('No especificado');
 }
 
 export const normalizeVersion = (name) => String(name || '').replace(/^v/i, '');
@@ -124,7 +124,7 @@ export function createNodalixRenderer(doc, Url = URL) {
       nodes.checksumValue.textContent = hash.toLowerCase();
       nodes.checksum.hidden = false;
     } else if (checksumUrl) {
-      const ref = link(checksumUrl, 'Comprobar SHA-256');
+      const ref = link(checksumUrl, t('Comprobar SHA-256'));
       if (ref) nodes.actions.append(createAnchor(ref));
     }
   };
@@ -132,53 +132,53 @@ export function createNodalixRenderer(doc, Url = URL) {
   const showDirect = ({ version, url, bytes, sha256, date, checksumUrl }) => {
     nodes.title.textContent = `Nodalix OS ${version}`;
     nodes.subtitle.textContent = date
-      ? `ISO de instalación publicada el ${new Date(date).toLocaleDateString('es-ES')}.`
-      : 'ISO completa de instalación.';
+      ? t('ISO de instalación publicada el {date}.', { date: new Date(date).toLocaleDateString(lang()) })
+      : t('ISO completa de instalación.');
     nodes.size.textContent = formatGibibytes(bytes);
     nodes.versionNode.textContent = version;
     appendLinks(
       nodes.actions,
       createAnchor,
-      link(url, '↓ Descargar ISO completa', true),
-      link(`${REPO_URL}/releases`, 'Ver historial'),
+      link(url, t('↓ Descargar ISO completa'), true),
+      link(`${REPO_URL}/releases`, t('Ver historial')),
     );
     showHash(sha256, checksumUrl);
     nodes.disclaimer.textContent =
-      'Verifica el SHA-256 y realiza una copia de seguridad antes de grabar o instalar la ISO.';
+      t('Verifica el SHA-256 y realiza una copia de seguridad antes de grabar o instalar la ISO.');
   };
 
   const showParts = (release, parts, script, checksums) => {
     nodes.title.textContent = `Nodalix OS ${normalizeVersion(release.tag_name)}`;
     nodes.subtitle.textContent =
-      'La ISO se distribuye en partes: utiliza el descargador oficial para reconstruir y verificar la imagen completa.';
-    nodes.size.textContent = 'Disponible en partes';
+      t('La ISO se distribuye en partes: utiliza el descargador oficial para reconstruir y verificar la imagen completa.');
+    nodes.size.textContent = t('Disponible en partes');
     nodes.versionNode.textContent = normalizeVersion(release.tag_name);
     appendLinks(
       nodes.actions,
       createAnchor,
       script
-        ? link(script.browser_download_url, '↓ Descargar herramienta oficial', true)
-        : link(release.html_url, 'Ver descarga por partes', true),
-      link(release.html_url, `Ver ${parts.length} partes y archivos`),
+        ? link(script.browser_download_url, t('↓ Descargar herramienta oficial'), true)
+        : link(release.html_url, t('Ver descarga por partes'), true),
+      link(release.html_url, t('Ver {count} partes y archivos', { count: parts.length })),
     );
     showHash(null, checksums?.browser_download_url);
     nodes.disclaimer.textContent =
-      `Después de descargar el script, ejecútalo con Python 3: python3 nodalix-download-iso.py --version ${normalizeVersion(release.tag_name)}. Sigue la documentación oficial antes de grabar el USB.`;
+      t('Después de descargar el script, ejecútalo con Python 3: {command}. Sigue la documentación oficial antes de grabar el USB.', { command: `python3 nodalix-download-iso.py --version ${normalizeVersion(release.tag_name)}` });
   };
 
   const showUnavailable = () => {
-    nodes.title.textContent = 'ISO no disponible para descarga directa';
+    nodes.title.textContent = t('ISO no disponible para descarga directa');
     nodes.subtitle.textContent =
-      'Todavía no se ha podido identificar una ISO publicada. Consulta las versiones oficiales mientras se prepara el almacenamiento de imágenes completas.';
+      t('Todavía no se ha podido identificar una ISO publicada. Consulta las versiones oficiales mientras se prepara el almacenamiento de imágenes completas.');
     appendLinks(
       nodes.actions,
       createAnchor,
-      link(`${REPO_URL}/releases`, 'Consultar versiones oficiales', true),
+      link(`${REPO_URL}/releases`, t('Consultar versiones oficiales'), true),
     );
     nodes.size.textContent = '—';
     nodes.versionNode.textContent = '—';
     nodes.checksum.hidden = true;
-    nodes.disclaimer.textContent = 'No se ofrecen archivos ISO ni números de versión sin confirmar.';
+    nodes.disclaimer.textContent = t('No se ofrecen archivos ISO ni números de versión sin confirmar.');
   };
 
   const renderFromSources = (manifest, releases) => {
