@@ -138,12 +138,12 @@
     "category": "Música",
     "status": "Desarrollo activo",
     "statusKind": "active",
-    "eyebrow": "Tu música en Linux",
+    "eyebrow": "Tu música en Linux y macOS",
     "headline": "Toda tu música. Un lugar propio.",
     "tagline": "Escucha sin salir de tu escritorio.",
-    "description": "Un reproductor musical nativo para GNOME, hecho con Rust, GTK4 y libadwaita. Tus archivos y los servicios que ya pagas, en una sola cola.",
-    "platforms": "Linux · Apple Music solo en x86_64",
-    "technology": "Rust · GTK4 · libadwaita",
+    "description": "Un reproductor musical nativo, hecho con Rust y GTK4 en el lenguaje de diseño de Nodalia. Tus archivos y los servicios que ya pagas, en una sola cola.",
+    "platforms": "Linux · macOS Apple Silicon · Apple Music solo en Linux x86_64",
+    "technology": "Rust · GTK4 · Nodalia Design",
     "license": "GPL-3.0",
     "repo": "vinilo",
     "icon": "data/icons/hicolor/512x512/apps/dev.danielmiguelt.Vinilo.png",
@@ -167,8 +167,8 @@
     ],
     "features": [
       [
-        "Una aplicación GNOME de verdad",
-        "Interfaz GTK4 y libadwaita, no una web metida en una ventana."
+        "Una aplicación nativa de verdad",
+        "Interfaz GTK4 con el diseño de Nodalia, no una web metida en una ventana."
       ],
       [
         "Varias fuentes, una cola",
@@ -222,7 +222,7 @@
       "title": "Instalación en Arch Linux",
       "intro": "Vinilo se compila desde el repositorio y se instala en ~/.local, sin sudo. Necesita Rust 1.93 o superior.",
       "commands": [
-        "sudo pacman -S --needed base-devel pkgconf rustup gtk4 libadwaita librsvg nodejs npm libpulse alsa-lib yt-dlp ffmpeg webkitgtk-6.0",
+        "sudo pacman -S --needed base-devel pkgconf rustup gtk4 librsvg nodejs npm libpulse alsa-lib yt-dlp ffmpeg webkitgtk-6.0",
         "rustup default stable",
         "git clone https://github.com/danielmigueltejedor/vinilo.git",
         "cd vinilo && make install"
@@ -264,7 +264,7 @@
         "Sí. El botón de descarga te da la AppImage, que funciona en cualquier distribución x86_64; en GitHub también hay paquetes .deb, .rpm y Flatpak. Compilar con make install sigue siendo posible."
       ]
     ],
-    "limitation": "Apple Music requiere suscripción, conexión continua y Linux x86_64. YouTube Music está en beta y Tidal en alfa. Vinilo se descarga como AppImage o como paquete para tu distribución desde GitHub.",
+    "limitation": "Apple Music requiere suscripción, conexión continua y Linux x86_64. YouTube Music está en beta y Tidal en alfa. Vinilo se descarga como AppImage, como DMG para Mac con Apple Silicon o como paquete para tu distribución desde GitHub.",
     "cta": "Instalar desde GitHub",
     "accent": "violet"
   },
