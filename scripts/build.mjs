@@ -49,6 +49,45 @@ const jsonLd = (data) => `<script type="application/ld+json">${JSON.stringify(da
 const fontFiles = ['sora-latin-wght.woff2', 'inter-latin-wght.woff2'];
 // Activa las animaciones solo con JavaScript y sin reduced-motion; si motion.js no carga, el contenido vuelve a mostrarse.
 const motionBoot = `<script>(function(d){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('js');setTimeout(function(){if(!window.__nodaliaMotion)d.classList.remove('js')},2500)})(document.documentElement)</script>`;
+const identitySrc = `/identity.js?v=${await assetVersion('identity.js')}`;
+
+// Firmas visuales: un elemento propio por producto en la cabecera. Todas son legibles sin JavaScript.
+// Vortia: flujo potencial alrededor de un cilindro. Las líneas de corriente se calculan aquí; identity.js añade trazadores y sonda.
+const FLOW = { w: 600, h: 420, cx: 270, cy: 210, s: 70 };
+function flowStreamlines() {
+  const { w, cx, cy, s } = FLOW;
+  const levels = [0.22, 0.55, 0.95, 1.4, 1.85, 2.3, 2.75];
+  const yFor = (x, psi) => {
+    let lo = Math.abs(x) < 1 ? Math.sqrt(1 - x * x) : 0;
+    let hi = psi + 2;
+    for (let i = 0; i < 40; i += 1) {
+      const y = (lo + hi) / 2;
+      if (y * (1 - 1 / (x * x + y * y)) < psi) lo = y; else hi = y;
+    }
+    return (lo + hi) / 2;
+  };
+  const paths = [];
+  for (const psi of levels) for (const sign of [1, -1]) {
+    let d = '';
+    for (let px = -10; px <= w + 10; px += 10) {
+      const y = yFor((px - cx) / s, psi);
+      d += `${d ? 'L' : 'M'}${px} ${(cy - sign * y * s).toFixed(1)}`;
+    }
+    paths.push(`<path d="${d}"/>`);
+  }
+  paths.push(`<path d="M-10 ${cy}H${cx - s}M${cx + s} ${cy}H${w + 10}"/>`);
+  return paths.join('');
+}
+const signatureFlow = () => `<div class="sig sig-flow" data-identity="flow" data-flow="${e(JSON.stringify(FLOW))}">
+  <div class="flow-stage"><svg viewBox="0 0 ${FLOW.w} ${FLOW.h}" role="img" aria-label="Líneas de corriente del flujo potencial alrededor de un cilindro"><g class="flow-lines">${flowStreamlines()}</g><circle class="flow-body" cx="${FLOW.cx}" cy="${FLOW.cy}" r="${FLOW.s}"/><path class="flow-axis" d="M${FLOW.cx - 9} ${FLOW.cy}h18M${FLOW.cx} ${FLOW.cy - 9}v18"/></svg><canvas aria-hidden="true"></canvas><span class="flow-probe" aria-hidden="true"></span></div>
+  <div class="flow-hud"><dl class="flow-read"><div><dt>x/D</dt><dd data-probe="x">0,00</dd></div><div><dt>y/D</dt><dd data-probe="y">0,57</dd></div><div><dt>|U|/U∞</dt><dd data-probe="u">1,76</dd></div><div><dt>Cp</dt><dd data-probe="cp">−2,08</dd></div></dl><div class="flow-legend" aria-hidden="true"><span>0</span><i></i><span>2</span><b>|U|/U∞</b></div></div>
+  <p class="sig-note">Flujo potencial alrededor de un cilindro, solución analítica. Mueve el cursor para sondear. Es una ilustración, no un resultado de Vortia.</p></div>`;
+const signatureBoot = (app) => {
+  const lines = [...app.specs.slice(0, 2).map(([k, v]) => [k, v]), ...app.components.map(([name]) => [name, ''])];
+  return `<div class="sig sig-boot"><div class="boot-bar" aria-hidden="true"><span>tty1</span><span>nodalix</span></div><ol class="boot-log" aria-label="Componentes de Nodalix OS">${lines.map(([a, b], i) => `<li style="--n:${i}"><span class="boot-ok" aria-hidden="true">[  OK  ]</span><span><strong>${e(a)}</strong>${b ? ` ${e(b)}` : ''}</span></li>`).join('')}</ol><p class="boot-login" style="--n:${lines.length + 1}" aria-hidden="true">nodalix login: <span class="caret"></span></p><p class="sig-note">Ilustración con los componentes reales del sistema. Capturas oficiales aún no publicadas.</p></div>`;
+};
+const record = `<div class="record" aria-hidden="true"><div class="record-label"><svg viewBox="0 0 100 100"><defs><path id="record-ring" d="M50 50m-37 0a37 37 0 1 1 74 0a37 37 0 1 1-74 0"/></defs><text><textPath href="#record-ring">VINILO · 33⅓ RPM · LADO A · VINILO · 33⅓ RPM · LADO B ·</textPath></text></svg></div></div>`;
+const selection = `<span class="ants" aria-hidden="true"></span>${Array.from({ length: 8 }, (_, i) => `<i class="handle handle-${i}" aria-hidden="true"></i>`).join('')}<span class="sel-size" aria-hidden="true"></span>`;
 const faqSchema = (items) => ({'@type':'FAQPage',mainEntity:items.map(([q, a]) => ({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))});
 const faqBlock = (items) => `<section class="section faq-section" id="faq"><div class="container faq-layout">
   <div data-reveal="left"><h2>Preguntas frecuentes</h2><p>¿No encuentras tu duda? Escribe a ${A(`mailto:${brand.email}`, e(brand.email), 'text-link')}</p></div>
@@ -90,7 +129,7 @@ const footer = () => `<footer class="footer"><div class="container">
   </div>
   <div class="footer-meta"><span>© ${new Date().getUTCFullYear()} Nodalia · Creado por ${A(site.author.website, e(site.author.name), '', true)}</span><span>Sin cookies ni analítica propia.</span></div>
 </div></footer>`;
-const shell = ({title, description, canonical, content, accent = '', preview = '', previewAlt = '', active = '', schema = null, scripts = ''}) => `<!doctype html>
+const shell = ({title, description, canonical, content, accent = '', preview = '', previewAlt = '', active = '', schema = null, scripts = '', identity = false}) => `<!doctype html>
 <html lang="es"><head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <meta name="theme-color" content="#07080c"/><meta name="color-scheme" content="dark"/>
@@ -111,7 +150,7 @@ ${preview ? `<meta property="og:image" content="${safeUrl(preview)}"/>${previewA
 ${motionBoot}
 ${schema ? jsonLd({'@context':'https://schema.org','@graph':[].concat(schema)}) : ''}
 </head><body class="${e(accent ? `accent-${accent}` : '')}"><a class="visually-hidden" href="#contenido">Saltar al contenido</a>
-<div class="scroll-progress" aria-hidden="true"></div>${nav(active)}<main id="contenido">${content}</main>${footer()}<script type="module" src="${motionSrc}"></script>${scripts}</body></html>`;
+<div class="scroll-progress" aria-hidden="true"></div>${nav(active)}<main id="contenido">${content}</main>${footer()}<script type="module" src="${motionSrc}"></script>${identity ? `<script type="module" src="${identitySrc}"></script>` : ''}${scripts}</body></html>`;
 
 async function home() {
   const vinilo = byId.vinilo, lienzo = byId.lienzo, nodalix = byId.nodalix;
@@ -209,9 +248,15 @@ async function home() {
 function product(app) {
   const title = ({vortia:'La simulación de fluidos, a tu alcance.',vinilo:'Disfruta de toda tu música.',lienzo:'Un lugar para crear sin límites.',nodalix:'Tu ordenador. Tu sistema.'})[app.id] || app.headline;
   const hasDownloads = app.id === 'vortia' || app.id === 'nodalix';
-  const preview = app.previews.length
+  const figure = app.previews.length
     ? `<figure><img src="${safeUrl(app.previews[0][0])}" alt="${e(app.previews[0][1])}" loading="eager" fetchpriority="high" decoding="async"/><figcaption>${e(app.previews[0][1])} · Captura publicada por el proyecto</figcaption></figure>`
-    : `<div class="product-placeholder"><div class="orb">${iconImg(app, 'placeholder-icon', 132)}</div>${chips(app)}<p>Capturas oficiales aún no publicadas.</p></div>`;
+    : '';
+  const stage = ({
+    vortia: () => `<div class="product-preview product-preview--sig" data-reveal="right">${signatureFlow()}</div>`,
+    nodalix: () => `<div class="product-preview product-preview--sig" data-reveal="right">${signatureBoot(app)}</div>`,
+    vinilo: () => `<div class="sig-vinyl" data-reveal="right">${record}<div class="product-preview">${figure}</div></div>`,
+    lienzo: () => `<div class="sig-select" data-identity="select" data-reveal="right"><div class="product-preview">${figure}</div>${selection}</div>`,
+  })[app.id]();
   const primaryDownload = app.id === 'vortia'
     ? '<a id="vortia-primary-download" class="btn btn-primary" href="https://github.com/danielmigueltejedor/vortia/releases/latest" rel="noopener noreferrer"><img id="vortia-primary-icon" class="vortia-platform-icon" src="/platform-linux.svg" alt="" width="20" height="20" hidden/><span id="vortia-primary-title">Ver versiones y descargas</span><span class="btn-icon" aria-hidden="true">↓</span></a>'
     : app.id === 'nodalix'
@@ -241,6 +286,7 @@ function product(app) {
     preview: app.previews[0]?.[0] || app.icon,
     previewAlt: app.previews[0]?.[1] || `Icono de ${app.name}`,
     accent: app.accent,
+    identity: true,
     schema: [{'@type':'SoftwareApplication',name:app.name,description:app.description,url:app.domain,image:app.icon,applicationCategory:app.category,operatingSystem:app.platforms,offers:{'@type':'Offer',price:'0',priceCurrency:'EUR'},author:{'@type':'Person',name:site.author.name,url:site.author.website},publisher:{'@type':'Organization',name:brand.name,url:brand.portal}}, faqSchema(app.faq)],
     content: `<div class="subnav"><div class="container subnav-inner"><a class="subnav-id" href="#contenido">${iconImg(app, 'subnav-icon', 26)}<span>${e(app.name)}</span></a><nav aria-label="Secciones de ${e(app.name)}">${sections.map(([id, label]) => `<a href="#${id}">${label}</a>`).join('')}</nav></div></div>
       <section class="product-hero"><div class="container product-hero-inner"><div data-reveal="left">
@@ -249,7 +295,7 @@ function product(app) {
       <span class="eyebrow">${e(app.eyebrow)}</span><h1>${e(title)}</h1><p class="lede">${e(app.description)}</p>
       <div class="actions">${primaryDownload}${A(app.repo, `${icon.github}Código en GitHub`, 'btn btn-secondary', true)}</div>
       ${primaryHint}<div class="product-meta"><span class="pill">${e(app.platforms)}</span><span class="pill">${e(app.technology)}</span></div></div>
-      <div class="product-preview" data-reveal="right">${preview}</div></div></section>
+      ${stage}</div></section>
       <section class="section features" id="funciones"><div class="container"><h2 data-reveal>Qué hace ${e(app.name)}.</h2><div class="feature-grid">${app.features.map(([h,d],i)=>`<article class="feature" data-reveal><h3>${e(h)}</h3><p>${e(d)}</p></article>`).join('')}</div><div class="notice" data-reveal>${icon.alert}<p><strong>Estado y requisitos:</strong> ${e(app.limitation)}</p></div></div></section>
       <section class="section" id="ficha"><div class="container"><h2 data-reveal>Ficha técnica</h2><div class="detail-grid">${specCard(app)}${detail}</div></div></section>
       ${app.id==='vortia' ? vortiaDownloads() : ''}
@@ -349,6 +395,7 @@ async function build(site) {
     copyFile(path.join(root, 'assets', 'styles.css'), path.join(dir, 'styles.css')),
     copyFile(path.join(root, 'assets', '_headers'), path.join(dir, '_headers')),
     copyFile(path.join(root, 'assets', 'motion.js'), path.join(dir, 'motion.js')),
+    ...(site === 'portal' ? [] : [copyFile(path.join(root, 'assets', 'identity.js'), path.join(dir, 'identity.js'))]),
     ...['favicon.svg', 'favicon.ico', 'apple-touch-icon.png'].map((file) => copyFile(path.join(root, 'assets', file), path.join(dir, file))),
     ...fontFiles.map((file) => copyFile(path.join(root, 'assets', 'fonts', file), path.join(dir, 'fonts', file))),
     writeFile(path.join(dir, cssFileName), cssSource),

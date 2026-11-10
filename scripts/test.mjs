@@ -34,7 +34,7 @@ for (const id of ['portal','vortia','vinilo','lienzo','nodalix']) {
   if (id!=='portal') {
     assert.match(page,new RegExp(`https://${id}\\.getnodalia\\.com`));
     assert.match(page,/class="product-hero"/);
-    assert.match(page,/class="product-preview"/);
+    assert.match(page,/class="product-preview[ "]/);
     assert.match(page,/Estado y requisitos/);
     assert.ok(page.includes('id="ficha"') && page.includes('id="faq"'), `Faltan ficha o FAQ en ${id}`);
   }
@@ -86,6 +86,19 @@ assert.ok((await stat(path.join(root, 'dist/vortia/_headers'))).size > 40);
 assert.doesNotMatch(sourceCss, /fonts\.googleapis/);
 assert.match(vortiaHtml, /type="module" src="\/vortia-download\.js"/);
 assert.match(iso, /type="module" src="\/nodalix-releases\.js"/);
+// Firmas visuales por producto.
+const identity = await import('../assets/identity.js');
+assert.ok(Math.abs(identity.velocity(0, 1)[0] - 2) < 1e-9 && Math.abs(identity.velocity(0, 1)[1]) < 1e-9);
+assert.equal(identity.probe(0, 0.5), null);
+assert.ok(Math.abs(identity.probe(-1, 0).cp - 1) < 1e-9, 'Cp de remanso debe ser 1');
+assert.ok(Math.abs(identity.probe(0, 1).cp + 3) < 1e-9, 'Cp mínimo debe ser -3');
+assert.equal(identity.speedColor(2), 'rgb(255,255,255)');
+for (const [id, marker] of [['vortia', 'data-identity="flow"'], ['nodalix', 'class="boot-log"'], ['vinilo', 'class="record"'], ['lienzo', 'data-identity="select"']]) {
+  const page = await readFile(path.join(root, 'dist', id, 'index.html'), 'utf8');
+  assert.ok(page.includes(marker), `Falta la firma visual de ${id}`);
+  assert.match(page, /src="\/identity\.js\?v=[0-9a-f]+"/);
+  assert.ok((await stat(path.join(root, 'dist', id, 'identity.js'))).size > 100);
+}
 const releasesModule = await import('../assets/releases.js');
 assert.equal(releasesModule.isTag('v1.2.3'), true);
 assert.equal(releasesModule.isTag('<img src=x>'), false);
