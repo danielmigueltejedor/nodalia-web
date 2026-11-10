@@ -9,7 +9,7 @@
     "headline": "La dinámica de fluidos, sin barreras.",
     "tagline": "Engineering the Flow.",
     "description": "Un entorno abierto para preparar geometrías, generar mallas, configurar física, ejecutar simulaciones con OpenFOAM y explorar resultados 3D.",
-    "platforms": "Escritorio · compilación desde código fuente",
+    "platforms": "Linux x86_64 · macOS Apple Silicon",
     "technology": "C++20 · Qt 6 · VTK · OpenFOAM",
     "repo": "vortia",
     "icon": "resources/icons/vortia.png",
@@ -40,7 +40,8 @@
     "previews": [
       ["docs/screenshots/library.webp", "Biblioteca musical de Vinilo"],
       ["docs/screenshots/player.webp", "Reproductor de Vinilo"],
-      ["docs/screenshots/playlist.webp", "Listas de reproducción en Vinilo"]
+      ["docs/screenshots/playlist.webp", "Listas de reproducción en Vinilo"],
+      ["docs/screenshots/albums.webp", "Álbumes en Vinilo"]
     ],
     "features": [
       ["Integración GNOME", "Controles multimedia, teclas del sistema e interfaz adaptada al escritorio."],
@@ -68,7 +69,10 @@
     "previews": [
       ["docs/images/screenshots/levels.png", "Herramienta de niveles en Lienzo"],
       ["docs/images/screenshots/layer_styles.png", "Estilos de capa en Lienzo"],
-      ["docs/images/screenshots/smart_objects.png", "Objetos inteligentes en Lienzo"]
+      ["docs/images/screenshots/smart_objects.png", "Objetos inteligentes en Lienzo"],
+      ["docs/images/screenshots/brush_dynamics.png", "Dinámica de pincel en Lienzo"],
+      ["docs/images/screenshots/vector_tools.png", "Herramientas vectoriales en Lienzo"],
+      ["docs/images/screenshots/camera_raw.png", "Revelado Camera Raw en Lienzo"]
     ],
     "features": [
       ["Trabajo con capas", "Documentos editables, máscaras, ajustes y composición no destructiva."],
