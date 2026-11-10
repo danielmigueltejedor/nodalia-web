@@ -17,6 +17,11 @@ const selected = target ? [target] : sites;
 const cssSource = await readFile(path.join(root, 'assets', 'styles.css'));
 const cssHash = createHash('sha256').update(cssSource).digest('hex').slice(0, 12);
 const cssFileName = `styles.${cssHash}.css`;
+// Los SVG de marca y motion.js mantienen su nombre; el parámetro de versión evita que la caché sirva una versión anterior.
+const assetVersion = async (name) => createHash('sha256').update(await readFile(path.join(root, 'assets', name))).digest('hex').slice(0, 10);
+const wordmarkSrc = `/nodalia-wordmark.svg?v=${await assetVersion('nodalia-wordmark.svg')}`;
+const markSrc = `/nodalia-mark.svg?v=${await assetVersion('nodalia-mark.svg')}`;
+const motionSrc = `/motion.js?v=${await assetVersion('motion.js')}`;
 
 const e = (s) => String(s ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
 const safeUrl = (s) => {
@@ -48,7 +53,7 @@ const byId = Object.fromEntries(apps.map((app) => [app.id, app]));
 const ordered = order.map((id) => byId[id]);
 
 const nav = (active = '') => `<header class="topbar"><div class="container topbar-inner">
-  ${A(brand.portal, '<img src="/nodalia-wordmark.svg" alt="Nodalia" width="118" height="30"/>', 'brand')}
+  ${A(brand.portal, `<img src="${wordmarkSrc}" alt="Nodalia" width="118" height="30"/>`, 'brand')}
   <nav class="nav" aria-label="Navegación principal">
     ${A(`${brand.portal}/#aplicaciones`, 'Productos', active === 'portal' ? '' : 'optional')}
     ${A(byId.nodalix.domain, 'Nodalix OS', 'optional')}
@@ -58,7 +63,7 @@ const nav = (active = '') => `<header class="topbar"><div class="container topba
 </div></header>`;
 const footer = () => `<footer class="footer"><div class="container">
   <div class="footer-content">
-    <div class="footer-about"><a class="brand" href="${safeUrl(brand.portal)}"><img src="/nodalia-wordmark.svg" alt="Nodalia" width="133" height="34" loading="lazy"/></a>
+    <div class="footer-about"><a class="brand" href="${safeUrl(brand.portal)}"><img src="${wordmarkSrc}" alt="Nodalia" width="133" height="34" loading="lazy"/></a>
       <p>Software independiente y de código abierto: un sistema operativo Linux y aplicaciones de escritorio hechas con criterio.</p></div>
     <div class="footer-col"><h2>Productos</h2><nav class="footer-links" aria-label="Productos">
       ${ordered.map((app) => A(app.domain, e(app.name))).join('')}
@@ -82,7 +87,7 @@ const shell = ({title, description, canonical, content, accent = '', preview = '
 <meta property="og:description" content="${e(description)}"/><meta property="og:url" content="${safeUrl(canonical)}"/>
 ${preview ? `<meta property="og:image" content="${safeUrl(preview)}"/>${previewAlt ? `<meta property="og:image:alt" content="${e(previewAlt)}"/>` : ''}` : ''}
 <meta name="twitter:card" content="${preview ? 'summary_large_image' : 'summary'}"/>
-<link rel="icon" type="image/svg+xml" href="/nodalia-mark.svg"/>
+<link rel="icon" type="image/svg+xml" href="${markSrc}"/>
 <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin/>
 <link rel="preload" href="/fonts/sora-latin-wght.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href="/fonts/inter-latin-wght.woff2" as="font" type="font/woff2" crossorigin/>
@@ -90,7 +95,7 @@ ${preview ? `<meta property="og:image" content="${safeUrl(preview)}"/>${previewA
 ${motionBoot}
 ${schema ? jsonLd(schema) : ''}
 </head><body class="${e(accent ? `accent-${accent}` : '')}"><a class="visually-hidden" href="#contenido">Saltar al contenido</a>
-<div class="scroll-progress" aria-hidden="true"></div>${nav(active)}<main id="contenido">${content}</main>${footer()}<script type="module" src="/motion.js"></script></body></html>`;
+<div class="scroll-progress" aria-hidden="true"></div>${nav(active)}<main id="contenido">${content}</main>${footer()}<script type="module" src="${motionSrc}"></script></body></html>`;
 
 function home() {
   const vinilo = byId.vinilo, lienzo = byId.lienzo, nodalix = byId.nodalix;
