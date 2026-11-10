@@ -14,6 +14,8 @@ export const brand = {
   email: 'hola@getnodalia.com',
   github: `https://github.com/${GH_USER}`,
   portal: 'https://getnodalia.com',
+  instagram: 'https://www.instagram.com/getnodalia/',
+  x: 'https://x.com/getnodalia',
 };
 
 function defineApp(entry) {
