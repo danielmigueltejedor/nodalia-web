@@ -219,8 +219,8 @@ async function home() {
       <div class="hero-stage" aria-label="Capturas de las aplicaciones Vinilo y Lienzo">
         <div class="stage-halo" aria-hidden="true"></div>
         <figure class="shot shot-main" data-parallax style="--depth:-34px">
-          <img src="${previewUrl(vinilo)}" alt="Captura real de la biblioteca musical de Vinilo" decoding="async" loading="eager" fetchpriority="high" width="1280" height="800"/>
-          <figcaption>Vinilo · biblioteca musical</figcaption>
+          <img src="${previewUrl(vinilo)}" alt="Captura real del reproductor de Vinilo" decoding="async" loading="eager" fetchpriority="high" width="1600" height="1088"/>
+          <figcaption>Vinilo · reproductor</figcaption>
         </figure>
         <figure class="shot shot-secondary" data-parallax style="--depth:-78px">
           <img src="${previewUrl(lienzo)}" alt="Captura real de la herramienta de niveles de Lienzo" decoding="async" loading="eager" width="1280" height="800"/>

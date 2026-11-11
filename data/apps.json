@@ -21,15 +21,15 @@
       ],
       [
         "docs/screenshots/geometry-dark.webp",
-        "Croquis acotado de una tobera en Vortia"
+        "Tobera dibujada con el generador del croquis"
       ],
       [
-        "docs/screenshots/calculation-dark.webp",
-        "Monitores de cálculo en Vortia"
+        "docs/screenshots/menu-dark.webp",
+        "Menú principal de Vortia"
       ],
       [
-        "docs/screenshots/physics-light.webp",
-        "Modelos físicos y material en Vortia"
+        "docs/screenshots/preferences-dark.webp",
+        "Preferencias de Vortia con los controles de ventana"
       ]
     ],
     "features": [
@@ -149,20 +149,20 @@
     "icon": "data/icons/hicolor/512x512/apps/dev.danielmiguelt.Vinilo.png",
     "previews": [
       [
-        "docs/screenshots/library.webp",
-        "Escuchar ahora en Vinilo"
-      ],
-      [
         "docs/screenshots/player.webp",
-        "Reproductor de Vinilo con la cola"
+        "El reproductor abierto, teñido con el color de la portada"
       ],
       [
-        "docs/screenshots/playlist.webp",
-        "Listas de reproducción en Vinilo"
+        "docs/screenshots/queue.webp",
+        "La cola dentro del reproductor, en tema claro"
       ],
       [
-        "docs/screenshots/albums.webp",
-        "Página de álbum en Vinilo"
+        "docs/screenshots/preferences.webp",
+        "Preferencias de Vinilo"
+      ],
+      [
+        "docs/screenshots/about.webp",
+        "Acerca de Vinilo"
       ]
     ],
     "features": [
