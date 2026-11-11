@@ -321,7 +321,7 @@
  "Descargar Nodalix OS": "Download Nodalix OS",
  "Componentes de Nodalix OS": "Nodalix OS components",
  "GNOME Shell y Mutter sobre Wayland": "GNOME Shell and Mutter on Wayland",
- "Ilustración con los componentes reales del sistema. Capturas oficiales aún no publicadas.": "Illustration with the system's real components. Official screenshots not yet published.",
+ "Ilustración con los componentes reales del sistema. Las capturas reales están en la sección Capturas.": "Illustration with the system's real components. The real screenshots are in the Screenshots section.",
  "Qué hace Nodalix OS.": "What Nodalix OS does.",
  "Diseñado como un sistema": "Designed as a system",
  "Shell, ajustes, gestión de aplicaciones e identidad visual se versionan y publican juntos.": "Shell, settings, app management and visual identity are versioned and released together.",
@@ -472,5 +472,13 @@
  "Cerrar": "Close",
  "Imagen anterior": "Previous image",
  "Imagen siguiente": "Next image",
- "{n} de {total}": "{n} of {total}"
+ "{n} de {total}": "{n} of {total}",
+ "Escritorio de Nodalix OS con el dock flotante": "Nodalix OS desktop with the floating dock",
+ "Escritorio de Nodalix OS con el dock flotante (abrir imagen completa)": "Nodalix OS desktop with the floating dock (open full image)",
+ "Ajustes rápidos de Nodalix OS": "Nodalix OS Quick Settings",
+ "Ajustes rápidos de Nodalix OS (abrir imagen completa)": "Nodalix OS Quick Settings (open full image)",
+ "Actualizaciones de todo el sistema desde Configuración": "Whole-system updates from Settings",
+ "Actualizaciones de todo el sistema desde Configuración (abrir imagen completa)": "Whole-system updates from Settings (open full image)",
+ "Apariencia: estilo, color de resaltado y fondos de Nodalix": "Appearance: style, accent colour and Nodalix wallpapers",
+ "Apariencia: estilo, color de resaltado y fondos de Nodalix (abrir imagen completa)": "Appearance: style, accent colour and Nodalix wallpapers (open full image)"
 }

@@ -413,7 +413,24 @@
     "license": "",
     "repo": "nodalix-os",
     "icon": "docs/images/nodalix-readme-logo.svg",
-    "previews": [],
+    "previews": [
+      [
+        "docs/screenshots/desktop.webp",
+        "Escritorio de Nodalix OS con el dock flotante"
+      ],
+      [
+        "docs/screenshots/quick-settings.webp",
+        "Ajustes rápidos de Nodalix OS"
+      ],
+      [
+        "docs/screenshots/updates.webp",
+        "Actualizaciones de todo el sistema desde Configuración"
+      ],
+      [
+        "docs/screenshots/appearance.webp",
+        "Apariencia: estilo, color de resaltado y fondos de Nodalix"
+      ]
+    ],
     "features": [
       [
         "Diseñado como un sistema",
