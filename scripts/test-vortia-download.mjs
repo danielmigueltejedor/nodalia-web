@@ -8,7 +8,7 @@ import {
 } from '../assets/vortia-download.js';
 
 const ids = [
-  'vortia-downloads', 'vortia-release-version', 'vortia-release-source',
+  'vortia-downloads', 'vortia-release-config', 'vortia-release-version', 'vortia-release-source',
   'vortia-linux-link', 'vortia-linux-size', 'vortia-linux-sha',
   'vortia-mac-link', 'vortia-mac-size', 'vortia-mac-sha',
   'vortia-primary-download', 'vortia-primary-icon',
@@ -93,6 +93,7 @@ assert.equal(linux['vortia-mac-sha'].hidden, true);
 const mac = await simulate({
   platform: 'MacIntel',
   userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X)',
+  architecture: 'arm',
   release: latest,
 });
 assert.match(mac['vortia-primary-download'].href, /\.dmg$/);
@@ -132,6 +133,46 @@ const offline = await simulate({
 });
 assert.match(offline['vortia-primary-download'].href, /v0\.6\.0\/Vortia-0\.6\.0-linux-x86_64\.AppImage$/);
 assert.match(offline['vortia-release-source'].textContent, /Referencia local/);
+
+const universalRelease = {
+  ...latest,
+  assets: [
+    ...latest.assets,
+    {
+      name: 'Vortia-0.2.0-macos-universal.dmg', size: 70000000,
+      browser_download_url: 'https://github.com/danielmigueltejedor/vortia/releases/download/v0.2.0/Vortia-0.2.0-macos-universal.dmg',
+    },
+  ],
+};
+assert.match(findPlatformAssets(universalRelease).mac.name, /universal/);
+
+// Keep the primary button on GitHub until architecture detection completes, then render the built version.
+{
+  const document = createDocument();
+  document.elements['vortia-release-config'].textContent = JSON.stringify(latest);
+  let resolveArchitecture;
+  let resolveResponse;
+  const navigator = {
+    platform: 'MacIntel',
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X)',
+    userAgentData: {
+      platform: 'macOS',
+      getHighEntropyValues: () => new Promise((resolve) => { resolveArchitecture = resolve; }),
+    },
+  };
+  const pending = bootVortiaDownloads({
+    document,
+    navigator,
+    fetch: () => new Promise((resolve) => { resolveResponse = resolve; }),
+  });
+  assert.match(document.elements['vortia-primary-download'].href, /releases\/tag\/v0\.2\.0$/);
+  resolveArchitecture({ architecture: 'x86' });
+  await new Promise(setImmediate);
+  assert.match(document.elements['vortia-primary-download'].href, /releases\/tag\/v0\.2\.0$/);
+  assert.match(document.elements['vortia-primary-detail'].textContent, /Mac Intel/);
+  resolveResponse({ ok: false });
+  await pending;
+}
 
 // The release the page was built with is the offline fallback, ahead of the one in the script.
 {

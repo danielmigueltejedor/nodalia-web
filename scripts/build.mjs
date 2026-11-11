@@ -309,12 +309,12 @@ async function home() {
 // actual para Linux; app-download.js elige el paquete de tu sistema y comprueba si hay otra más nueva.
 const appDownloadConfig = (app) => ({ repo: app.repoName, patterns: app.downloads, release: releases[app.repoName] || null });
 function appDownloadButton(app) {
-  const choice = choose(releases[app.repoName], appDownloadConfig(app), 'linux');
+  const choice = choose(releases[app.repoName], appDownloadConfig(app), 'linux', 'x86');
   return `<a id="app-primary-download" class="btn btn-primary" href="${safeUrl(choice.href)}" rel="noopener noreferrer"><img id="app-primary-icon" class="vortia-platform-icon" src="${choice.icon || '/platform-linux.svg'}" alt="" width="20" height="20"${choice.icon ? '' : ' hidden'}/><span id="app-primary-title">${e(choice.title)}</span><span class="btn-icon" aria-hidden="true">↓</span></a>`;
 }
 function appDownloadHint(app) {
   const config = appDownloadConfig(app);
-  const choice = choose(config.release, config, 'linux');
+  const choice = choose(config.release, config, 'linux', 'x86');
   const defaults = { linux: 'AppImage · x86_64', mac: 'DMG · Apple Silicon', windows: 'MSI · Windows x64' };
   const alts = Object.keys(defaults).filter((os) => app.downloads[os]).map((os) => {
     const asset = choice.found[os];
@@ -395,7 +395,8 @@ function vortiaDownloads() {
   const assets = release?.assets || [];
   const find = (re) => assets.find((asset) => re.test(asset.name)) || null;
   const linux = find(/^Vortia-.+-linux-(x86_64|amd64)\.AppImage$/i);
-  const mac = find(/^Vortia-.+-macos-(arm64|aarch64|universal)\.dmg$/i);
+  const macAssets = assets.filter((asset) => /^Vortia-.+-macos-(arm64|aarch64|universal)\.dmg$/i.test(asset.name));
+  const mac = macAssets.find((asset) => /universal/i.test(asset.name)) || macAssets[0] || null;
   const sha = (asset) => (asset ? assets.find((item) => item.name === `${asset.name}.sha256`) || null : null);
   const page = release?.html_url || 'https://github.com/danielmigueltejedor/vortia/releases';
   const size = (asset) => (asset?.size ? `${(asset.size / 1e6).toLocaleString('es', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} MB` : '');

@@ -13,7 +13,7 @@ const v2 = {
 };
 
 // Linux gets the penguin and the AppImage; a Mac the apple and the DMG.
-let c = choose(v2, vinilo, 'linux');
+let c = choose(v2, vinilo, 'linux', 'x86');
 assert.equal(c.asset.name, 'Vinilo-2.0.0-x86_64.AppImage');
 assert.equal(c.icon, '/platform-linux.svg');
 assert.equal(c.title, 'Descargar para Linux');
@@ -26,7 +26,18 @@ assert.equal(c.title, 'Descargar para macOS');
 assert.equal(choose(v2, vinilo, 'mac', 'x86').asset, null);
 const universal = { ...v2, assets: [dl('vinilo', 'v2.0.0', 'Vinilo-2.0.0-macos-universal.dmg')] };
 assert.equal(choose(universal, vinilo, 'mac', 'x86').asset.name, 'Vinilo-2.0.0-macos-universal.dmg');
-assert.equal(kind('mac', choose(universal, vinilo, 'mac').asset), 'DMG · Universal');
+assert.equal(kind('mac', choose(universal, vinilo, 'mac', 'x86').asset), 'DMG · Universal');
+const armAndUniversal = {
+  ...v2,
+  assets: [
+    dl('vinilo', 'v2.0.0', 'Vinilo-2.0.0-macos-arm64.dmg'),
+    dl('vinilo', 'v2.0.0', 'Vinilo-2.0.0-macos-universal.dmg'),
+  ],
+};
+assert.equal(packages(armAndUniversal, vinilo).mac.name, 'Vinilo-2.0.0-macos-universal.dmg');
+assert.equal(choose(armAndUniversal, vinilo, 'mac', 'x86').asset.name, 'Vinilo-2.0.0-macos-universal.dmg');
+assert.equal(choose(v2, vinilo, 'mac', 'unknown').href, v2.html_url);
+assert.equal(choose(v2, vinilo, 'linux', 'unknown').href, v2.html_url);
 // Phones, Windows without an installer, ARM Linux: the release page, with no system icon.
 for (const [os, arch] of [['other', 'unknown'], ['windows', 'unknown'], ['linux', 'arm']]) {
   c = choose(v2, vinilo, os, arch);
@@ -82,6 +93,31 @@ await bootAppDownload({ document: p.doc, navigator: p.nav, fetch: async () => ({
 assert.equal(p.els['app-primary-download'].href, first.html_url);
 assert.equal(p.els['app-primary-icon'].hidden, true);
 assert.equal(render(() => null, null, lienzo, 'linux'), false);
+
+// Architecture detection updates the built release before a stalled GitHub request finishes.
+{
+  let resolveArchitecture;
+  let resolveResponse;
+  p = page({ ...vinilo, release: armAndUniversal }, {
+    platform: 'MacIntel',
+    userAgent: 'Macintosh',
+    userAgentData: {
+      platform: 'macOS',
+      getHighEntropyValues: () => new Promise((resolve) => { resolveArchitecture = resolve; }),
+    },
+  });
+  const pending = bootAppDownload({
+    document: p.doc,
+    navigator: p.nav,
+    fetch: () => new Promise((resolve) => { resolveResponse = resolve; }),
+  });
+  assert.equal(p.els['app-primary-download'].href, armAndUniversal.html_url);
+  resolveArchitecture({ architecture: 'x86' });
+  await new Promise(setImmediate);
+  assert.match(p.els['app-primary-download'].href, /Vinilo-2\.0\.0-macos-universal\.dmg$/);
+  resolveResponse({ ok: false });
+  await pending;
+}
 
 // The build keeps only what the page needs, from the app's own releases.
 assert.equal(slim('vinilo', { ...v2, draft: true }), null);

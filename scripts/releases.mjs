@@ -59,7 +59,7 @@ export async function loadReleases(repos) {
 }
 
 export function saveSnapshot(releases) {
-  const sorted = Object.fromEntries(Object.keys(releases).sort().map((repo) => [repo, releases[repo]]));
+  const sorted = Object.fromEntries(Object.keys(releases).sort((a, b) => a.localeCompare(b)).map((repo) => [repo, releases[repo]]));
   writeFileSync(snapshotPath, `${JSON.stringify(sorted, null, 1)}\n`, 'utf8');
 }
 

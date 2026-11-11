@@ -35,7 +35,12 @@ export function packages(release, config) {
   const assets = release.assets.map((asset) => safe(asset, config.repo)).filter(Boolean);
   for (const os of Object.keys(out)) {
     const pattern = config.patterns?.[os];
-    if (pattern) out[os] = assets.find((asset) => new RegExp(pattern, 'i').test(asset.name)) || null;
+    if (pattern) {
+      const matches = assets.filter((asset) => new RegExp(pattern, 'i').test(asset.name));
+      out[os] = os === 'mac'
+        ? matches.find((asset) => /universal/i.test(asset.name)) || matches[0] || null
+        : matches[0] || null;
+    }
   }
   return out;
 }
@@ -64,7 +69,8 @@ export function choose(release, config, os = 'other', arch = 'unknown') {
     : `${releasesUrl(config.repo)}/latest`;
   let target = ['linux', 'mac', 'windows'].includes(os) ? found[os] : null;
   if (target && os === 'mac' && arch === 'x86' && !/universal/i.test(target.name)) target = null;
-  if (target && os === 'linux' && arch === 'arm') target = null;
+  if (target && os === 'mac' && arch === 'unknown') target = null;
+  if (target && os === 'linux' && arch !== 'x86') target = null;
   return {
     os: target ? os : 'other',
     asset: target,
@@ -124,14 +130,20 @@ export async function bootAppDownload({ document: doc, navigator: nav, fetch: fe
   }
   const get = (id) => doc.getElementById(id);
   const os = detectPlatform(nav);
-  // The release the page was built with, adapted to this system before asking GitHub.
+  const architecturePromise = os === 'mac' || os === 'linux'
+    ? detectArchitecture(nav)
+    : Promise.resolve('unknown');
+  // Keep the primary button safe while architecture detection is still pending.
   if (config.release) render(get, config.release, config, os, 'unknown');
+  const latestPromise = Promise.resolve().then(() => fetchImpl(
+    `https://api.github.com/repos/${OWNER}/${encodeURIComponent(config.repo)}/releases/latest`,
+    { headers: { Accept: 'application/vnd.github+json' }, cache: 'no-store' },
+  )).catch(() => null);
+  const arch = await architecturePromise;
+  if (config.release) render(get, config.release, config, os, arch);
   try {
-    const [arch, response] = await Promise.all([
-      os === 'mac' || os === 'linux' ? detectArchitecture(nav) : 'unknown',
-      fetchImpl(`https://api.github.com/repos/${OWNER}/${encodeURIComponent(config.repo)}/releases/latest`, { headers: { Accept: 'application/vnd.github+json' }, cache: 'no-store' }),
-    ]);
-    if (!response.ok) return Boolean(config.release);
+    const response = await latestPromise;
+    if (!response?.ok) return Boolean(config.release);
     const latest = await response.json();
     if (render(get, latest, config, os, arch)) {
       const section = get('app-download');

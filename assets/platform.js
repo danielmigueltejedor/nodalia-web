@@ -23,5 +23,6 @@ export async function detectArchitecture(nav) {
     /* Browser architecture hints are optional. */
   }
   if (/aarch64|arm64/i.test(nav?.userAgent || '')) return 'arm';
+  if (/x86_64|amd64|x64/i.test(nav?.userAgent || '')) return 'x86';
   return 'unknown';
 }
