@@ -2,7 +2,9 @@ import { strict as assert } from 'node:assert';
 import { FALLBACK, findAppImage, findDmg, render, bootViniloDownload } from '../assets/vinilo-download.js';
 
 const elements = () => ({
-  'vinilo-primary-download': { href: FALLBACK.assets[0].browser_download_url, textContent: 'Descargar AppImage ↓' },
+  'vinilo-primary-download': { href: FALLBACK.assets[0].browser_download_url },
+  'vinilo-primary-title': { textContent: 'Descargar AppImage' },
+  'vinilo-primary-icon': { src: '/platform-linux.svg', hidden: false },
   'vinilo-primary-kind': { textContent: 'AppImage x86_64' },
   'vinilo-primary-version': { textContent: FALLBACK.tag_name },
   'vinilo-mac': { hidden: true },
@@ -65,7 +67,8 @@ assert.match(page['vinilo-mac-download'].href, /Vinilo-2\.1\.0-macos-arm64\.dmg$
 page = elements();
 assert.equal(render((id) => page[id], withMac, 'mac', 'unknown'), true);
 assert.match(page['vinilo-primary-download'].href, /Vinilo-2\.1\.0-macos-arm64\.dmg$/);
-assert.equal(page['vinilo-primary-download'].textContent, 'Descargar para macOS ↓');
+assert.equal(page['vinilo-primary-title'].textContent, 'Descargar para macOS');
+assert.equal(page['vinilo-primary-icon'].src, '/platform-apple.svg');
 assert.match(page['vinilo-primary-kind'].textContent, /Apple Silicon/);
 assert.equal(page['vinilo-mac'].hidden, true);
 
@@ -87,3 +90,10 @@ await bootViniloDownload({ document: { getElementById: (id) => page[id] }, navig
 assert.match(page['vinilo-primary-download'].href, /macos-arm64\.dmg$/);
 
 console.log('✓ Vinilo: AppImage directa, DMG en Mac, Mac Intel, versión nueva, release sin AppImage y fallback offline.');
+
+// On Linux the button keeps the penguin and the AppImage.
+page = elements();
+assert.equal(render((id) => page[id], withMac, 'linux'), true);
+assert.equal(page['vinilo-primary-icon'].src, '/platform-linux.svg');
+assert.equal(page['vinilo-primary-title'].textContent, 'Descargar AppImage');
+assert.match(page['vinilo-primary-download'].href, /AppImage$/);

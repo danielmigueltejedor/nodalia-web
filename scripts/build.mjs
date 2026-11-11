@@ -307,7 +307,7 @@ function product(app) {
   const primaryDownload = app.id === 'vortia'
     ? '<a id="vortia-primary-download" class="btn btn-primary" href="https://github.com/danielmigueltejedor/vortia/releases/latest" rel="noopener noreferrer"><img id="vortia-primary-icon" class="vortia-platform-icon" src="/platform-linux.svg" alt="" width="20" height="20" hidden/><span id="vortia-primary-title">Ver versiones y descargas</span><span class="btn-icon" aria-hidden="true">↓</span></a>'
     : app.id === 'vinilo'
-      ? `<a id="vinilo-primary-download" class="btn btn-primary" href="${safeUrl('https://github.com/danielmigueltejedor/vinilo/releases/download/v2.0.0/Vinilo-2.0.0-x86_64.AppImage')}" rel="noopener noreferrer">Descargar AppImage ↓</a>`
+      ? `<a id="vinilo-primary-download" class="btn btn-primary" href="${safeUrl('https://github.com/danielmigueltejedor/vinilo/releases/download/v2.0.0/Vinilo-2.0.0-x86_64.AppImage')}" rel="noopener noreferrer"><img id="vinilo-primary-icon" class="vortia-platform-icon" src="/platform-linux.svg" alt="" width="20" height="20"/><span id="vinilo-primary-title">Descargar AppImage</span><span class="btn-icon" aria-hidden="true">↓</span></a>`
     : app.id === 'nodalix'
       ? `<a href="#descargas" class="btn btn-primary">Descargar Nodalix OS ${icon.down}</a>`
       : app.primaryCta
@@ -377,7 +377,7 @@ function vortiaDownloads() {
             <div><h3>Linux</h3><p>AppImage · x86_64</p></div>
           </div>
           <p class="vortia-package-desc">Para distribuciones Linux de 64 bits (x86_64) con glibc 2.31 o posterior. Incluye OpenFOAM y el mallador.</p>
-          <p class="vortia-package-size" id="vortia-linux-size">292,6 MB</p>
+          <p class="vortia-package-size" id="vortia-linux-size">293,2 MB</p>
           <a class="btn btn-primary" id="vortia-linux-link" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.6.0/Vortia-0.6.0-linux-x86_64.AppImage">Descargar AppImage ↓</a>
           <a class="vortia-checksum" id="vortia-linux-sha" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.6.0/Vortia-0.6.0-linux-x86_64.AppImage.sha256">SHA-256 ↗</a>
         </article>
@@ -386,7 +386,7 @@ function vortiaDownloads() {
             <div><h3>macOS</h3><p>DMG · Apple Silicon (arm64)</p></div>
           </div>
           <p class="vortia-package-desc">Para Macs con Apple Silicon y macOS 14 o posterior. Incluye OpenFOAM y el mallador. No es compatible con Macs Intel.</p>
-          <p class="vortia-package-size" id="vortia-mac-size">414,4 MB</p>
+          <p class="vortia-package-size" id="vortia-mac-size">415,0 MB</p>
           <a class="btn btn-primary" id="vortia-mac-link" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.6.0/Vortia-0.6.0-macos-arm64.dmg">Descargar DMG ↓</a>
           <a class="vortia-checksum" id="vortia-mac-sha" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.6.0/Vortia-0.6.0-macos-arm64.dmg.sha256">SHA-256 ↗</a>
         </article>
@@ -476,6 +476,9 @@ async function build(site) {
     ] : []),
     ...(site === 'vinilo' ? [
       copyFile(path.join(root, 'assets', 'vinilo-download.js'), path.join(dir, 'vinilo-download.js')),
+      // The download button shows the system it downloads for, as on Vortia's page.
+      copyFile(path.join(root, 'assets', 'platform-apple.svg'), path.join(dir, 'platform-apple.svg')),
+      copyFile(path.join(root, 'assets', 'platform-linux.svg'), path.join(dir, 'platform-linux.svg')),
       copyFile(path.join(root, 'assets', 'platform.js'), path.join(dir, 'platform.js')),
     ] : []),
     ...(site === 'nodalix' ? [

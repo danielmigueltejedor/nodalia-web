@@ -57,6 +57,8 @@ export function render(get, release, os = 'other', arch = 'unknown') {
   if (!appImage && !dmg) return false;
   const version = typeof release.tag_name === 'string' && /^v?[0-9]/.test(release.tag_name) ? release.tag_name : '';
   const link = get('vinilo-primary-download');
+  const title = get('vinilo-primary-title');
+  const iconEl = get('vinilo-primary-icon');
   const kind = get('vinilo-primary-kind');
   const versionEl = get('vinilo-primary-version');
   const macRow = get('vinilo-mac');
@@ -67,17 +69,20 @@ export function render(get, release, os = 'other', arch = 'unknown') {
   // An Intel Mac cannot run the arm64 DMG, and the AppImage is no use there either.
   const mac = os === 'mac';
   if (mac && arch === 'x86') {
-    if (link) {
-      link.href = `${RELEASES}/latest`;
-      link.textContent = t('Ver versiones y descargas');
-    }
+    if (link) link.href = `${RELEASES}/latest`;
+    if (title) title.textContent = t('Ver versiones y descargas');
+    if (iconEl) iconEl.hidden = true;
     return true;
   }
   const chosen = mac && dmg ? dmg : appImage;
   if (!chosen) return false;
-  if (link) {
-    link.href = chosen.url;
-    if (chosen === dmg) link.textContent = `${t('Descargar para macOS')} ↓`;
+  if (link) link.href = chosen.url;
+  // The button names the system it downloads for, with its mark: the apple for the DMG, the
+  // penguin for the AppImage.
+  if (title) title.textContent = chosen === dmg ? t('Descargar para macOS') : t('Descargar AppImage');
+  if (iconEl) {
+    iconEl.src = chosen === dmg ? '/platform-apple.svg' : '/platform-linux.svg';
+    iconEl.hidden = false;
   }
   if (kind && chosen === dmg) kind.textContent = t('DMG para Apple Silicon (M1/M2/M3/M4 y posteriores)');
   if (macRow && chosen === dmg) macRow.hidden = true;
@@ -87,15 +92,16 @@ export function render(get, release, os = 'other', arch = 'unknown') {
 export async function bootViniloDownload({ document: doc, navigator: nav, fetch: fetchImpl = fetch } = globalThis) {
   if (!doc?.getElementById?.('vinilo-primary-download')) return false;
   const get = (id) => doc.getElementById(id);
+  const os = detectPlatform(nav);
+  const arch = os === 'mac' ? await detectArchitecture(nav).catch(() => 'unknown') : 'unknown';
   try {
     const response = await fetchImpl(LATEST, { headers: { Accept: 'application/vnd.github+json' }, cache: 'no-store' });
-    if (!response.ok) return false;
-    const os = detectPlatform(nav);
-    const arch = os === 'mac' ? await detectArchitecture(nav) : 'unknown';
-    return render(get, await response.json(), os, arch);
+    if (response.ok) return render(get, await response.json(), os, arch);
   } catch {
-    return false;
+    /* Offline or rate-limited: the last verified release below still picks the right system. */
   }
+  render(get, FALLBACK, os, arch);
+  return false;
 }
 
 if (typeof document !== 'undefined' && typeof document.getElementById === 'function') {

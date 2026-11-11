@@ -150,6 +150,9 @@ assert.match(viniloHtml, /id="vinilo-primary-download" class="btn btn-primary" h
 assert.match(viniloHtml, /src="\/vinilo-download\.js\?v=[0-9a-f]{10}"/);
 assert.doesNotMatch(viniloHtml, /aguja/i);
 assert.ok((await stat(path.join(root, 'dist/vinilo/vinilo-download.js'))).size > 100);
+for (const icon of ['platform-apple.svg', 'platform-linux.svg']) {
+  assert.ok((await stat(path.join(root, 'dist/vinilo', icon))).size > 50, `dist/vinilo/${icon}`);
+}
 assert.ok((await stat(path.join(root, 'dist/portal/releases.js'))).size > 100);
 await import('./test-vortia-download.mjs');
 await import('./test-vinilo-download.mjs');
