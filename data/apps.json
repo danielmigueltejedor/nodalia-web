@@ -138,23 +138,23 @@
     "category": "Música",
     "status": "Desarrollo activo",
     "statusKind": "active",
-    "eyebrow": "Tu música en Linux",
+    "eyebrow": "Tu música en Linux y macOS",
     "headline": "Toda tu música. Un lugar propio.",
     "tagline": "Escucha sin salir de tu escritorio.",
-    "description": "Un reproductor musical nativo para GNOME, hecho con Rust, GTK4 y libadwaita. Tus archivos y los servicios que ya pagas, en una sola cola.",
-    "platforms": "Linux · Apple Music solo en x86_64",
-    "technology": "Rust · GTK4 · libadwaita",
+    "description": "Un reproductor musical nativo, hecho con Rust y GTK4 en el lenguaje de diseño de Nodalia. Tus archivos y los servicios que ya pagas, en una sola cola.",
+    "platforms": "Linux · macOS Apple Silicon · Apple Music solo en Linux x86_64",
+    "technology": "Rust · GTK4 · Nodalia Design",
     "license": "GPL-3.0",
     "repo": "vinilo",
     "icon": "data/icons/hicolor/512x512/apps/dev.danielmiguelt.Vinilo.png",
     "previews": [
       [
         "docs/screenshots/library.webp",
-        "Biblioteca musical de Vinilo"
+        "Escuchar ahora en Vinilo"
       ],
       [
         "docs/screenshots/player.webp",
-        "Reproductor de Vinilo"
+        "Reproductor de Vinilo con la cola"
       ],
       [
         "docs/screenshots/playlist.webp",
@@ -162,13 +162,13 @@
       ],
       [
         "docs/screenshots/albums.webp",
-        "Álbumes en Vinilo"
+        "Página de álbum en Vinilo"
       ]
     ],
     "features": [
       [
-        "Una aplicación GNOME de verdad",
-        "Interfaz GTK4 y libadwaita, no una web metida en una ventana."
+        "El diseño propio de Nodalia",
+        "Islas redondeadas, títulos en Sora, iconos en negrita y controles de ventana propios. GTK4 nativo, sin libadwaita ni una web metida en una ventana."
       ],
       [
         "Varias fuentes, una cola",
@@ -176,7 +176,7 @@
       ],
       [
         "Reproducción cuidada",
-        "Sin pausas entre pistas, fundido cruzado y cola de reproducción."
+        "Sin pausas entre pistas, fundido cruzado y una cola que se abre arrastrando el reproductor hacia arriba."
       ],
       [
         "Letras y karaoke",
@@ -184,7 +184,7 @@
       ],
       [
         "Integrado en el escritorio",
-        "Controles en la barra superior, la pantalla de bloqueo y las teclas multimedia. La música sigue al cerrar la ventana."
+        "En Nodalix, sus menús y controles van en la barra superior; también en la pantalla de bloqueo y las teclas multimedia. La música sigue al cerrar la ventana."
       ],
       [
         "Estadísticas en tu equipo",
@@ -222,7 +222,7 @@
       "title": "Instalación en Arch Linux",
       "intro": "Vinilo se compila desde el repositorio y se instala en ~/.local, sin sudo. Necesita Rust 1.93 o superior.",
       "commands": [
-        "sudo pacman -S --needed base-devel pkgconf rustup gtk4 libadwaita librsvg nodejs npm libpulse alsa-lib yt-dlp ffmpeg webkitgtk-6.0",
+        "sudo pacman -S --needed base-devel pkgconf rustup gtk4 librsvg nodejs npm libpulse alsa-lib yt-dlp ffmpeg webkitgtk-6.0",
         "rustup default stable",
         "git clone https://github.com/danielmigueltejedor/vinilo.git",
         "cd vinilo && make install"
@@ -264,7 +264,7 @@
         "Sí. El botón de descarga te da la AppImage, que funciona en cualquier distribución x86_64; en GitHub también hay paquetes .deb, .rpm y Flatpak. Compilar con make install sigue siendo posible."
       ]
     ],
-    "limitation": "Apple Music requiere suscripción, conexión continua y Linux x86_64. YouTube Music está en beta y Tidal en alfa. Vinilo se descarga como AppImage o como paquete para tu distribución desde GitHub.",
+    "limitation": "Apple Music requiere suscripción, conexión continua y Linux x86_64. YouTube Music está en beta y Tidal en alfa. Vinilo se descarga como AppImage, como DMG para Mac con Apple Silicon o como paquete para tu distribución desde GitHub.",
     "cta": "Instalar desde GitHub",
     "accent": "violet"
   },

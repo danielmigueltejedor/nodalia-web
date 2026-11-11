@@ -316,7 +316,7 @@ function product(app) {
   const primaryHint = app.id === 'vortia'
     ? '<p class="vortia-primary-detail" id="vortia-primary-detail" role="status" aria-live="polite">Se elegirá el instalador compatible con tu sistema operativo.</p>'
     : app.id === 'vinilo'
-      ? `<p class="vortia-primary-detail" id="vinilo-primary-detail"><span>AppImage x86_64</span> · <span id="vinilo-primary-version">v1.1.5</span> · ${A(app.repo + '/releases/latest', 'Otros paquetes: .deb, .rpm, Flatpak', 'text-link', true)}</p><script type="module" src="/vinilo-download.js?v=${viniloDownloadVersion}"></script>`
+      ? `<p class="vortia-primary-detail" id="vinilo-primary-detail"><span id="vinilo-primary-kind">AppImage x86_64</span> · <span id="vinilo-primary-version">v1.1.5</span> · <span id="vinilo-mac" hidden><a id="vinilo-mac-download" class="text-link" href="${safeUrl(app.repo + '/releases/latest')}" rel="noopener noreferrer">DMG · Apple Silicon (arm64)</a> · </span>${A(app.repo + '/releases/latest', 'Otros paquetes: .deb, .rpm, Flatpak', 'text-link', true)}</p><script type="module" src="/vinilo-download.js?v=${viniloDownloadVersion}"></script>`
       : '';
   const sections = [['funciones', 'Funciones'], ['ficha', 'Ficha técnica'], ...(hasDownloads ? [['descargas', 'Descargas']] : []), ...(app.id === 'nodalix' || app.install ? [['instalacion', 'Instalación']] : []), ...(app.previews.length ? [['capturas', 'Capturas']] : []), ['faq', 'Preguntas'], ['codigo', 'Código']];
   const detail = app.sources
@@ -434,7 +434,7 @@ async function build(site) {
   await mkdir(path.join(dir, 'fonts'), { recursive: true });
   if (site === 'portal') await mkdir(path.join(dir, 'app-icons'), { recursive: true });
   const app = apps.find((item) => item.id === site);
-  const clientScripts = [...({ vortia: ['vortia-download.js'], nodalix: ['nodalix-releases.js'] }[site] || []), ...(app?.previews.length ? ['gallery.js'] : [])];
+  const clientScripts = [...({ vortia: ['vortia-download.js'], vinilo: ['vinilo-download.js'], nodalix: ['nodalix-releases.js'] }[site] || []), ...(app?.previews.length ? ['gallery.js'] : [])];
   const keys = (await Promise.all(clientScripts.map((file) => readFile(path.join(root, 'assets', file), 'utf8')))).flatMap(clientKeys);
   const pages = [];
   for (const code of localeCodes) {
@@ -470,10 +470,14 @@ async function build(site) {
     ...(site === 'portal' ? upcomingIcons.map((file) => copyFile(path.join(root, 'assets', 'app-icons', file), path.join(dir, 'app-icons', file))) : []),
     ...(site === 'vortia' ? [
       copyFile(path.join(root, 'assets', 'vortia-download.js'), path.join(dir, 'vortia-download.js')),
+      copyFile(path.join(root, 'assets', 'platform.js'), path.join(dir, 'platform.js')),
       copyFile(path.join(root, 'assets', 'platform-apple.svg'), path.join(dir, 'platform-apple.svg')),
       copyFile(path.join(root, 'assets', 'platform-linux.svg'), path.join(dir, 'platform-linux.svg')),
     ] : []),
-    ...(site === 'vinilo' ? [copyFile(path.join(root, 'assets', 'vinilo-download.js'), path.join(dir, 'vinilo-download.js'))] : []),
+    ...(site === 'vinilo' ? [
+      copyFile(path.join(root, 'assets', 'vinilo-download.js'), path.join(dir, 'vinilo-download.js')),
+      copyFile(path.join(root, 'assets', 'platform.js'), path.join(dir, 'platform.js')),
+    ] : []),
     ...(site === 'nodalix' ? [
       copyFile(path.join(root, 'assets', 'nodalix-releases.js'), path.join(dir, 'nodalix-releases.js')),
       copyFile(path.join(root, 'data', 'nodalix-iso-releases.json'), path.join(dir, 'releases.json')),
