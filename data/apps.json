@@ -150,11 +150,11 @@
     "previews": [
       [
         "docs/screenshots/library.webp",
-        "Biblioteca musical de Vinilo"
+        "Escuchar ahora en Vinilo"
       ],
       [
         "docs/screenshots/player.webp",
-        "Reproductor de Vinilo"
+        "Reproductor de Vinilo con la cola"
       ],
       [
         "docs/screenshots/playlist.webp",
@@ -162,7 +162,7 @@
       ],
       [
         "docs/screenshots/albums.webp",
-        "Álbumes en Vinilo"
+        "Página de álbum en Vinilo"
       ]
     ],
     "features": [
