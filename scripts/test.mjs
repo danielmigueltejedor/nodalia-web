@@ -57,7 +57,7 @@ assert.match(portal,/shot-main/);
 assert.match(portal,/shot-secondary/);
 assert.match(portal,/product-grid/);
 assert.match(portal,/spotlight/);
-assert.match(portal,/docs\/screenshots\/library\.webp/);
+assert.match(portal,/docs\/screenshots\/player\.webp/);
 assert.match(portal,/docs\/images\/screenshots\/levels\.png/);
 assert.doesNotMatch(portal,/floating-chip|art-panel|concept-geometry|window-bar/);
 const iso=await readFile(path.join(root,'dist/nodalix/index.html'),'utf8');
