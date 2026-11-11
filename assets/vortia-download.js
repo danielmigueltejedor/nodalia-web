@@ -12,28 +12,28 @@ export const ASSET_PREFIX = `https://github.com/${OWNER}/${REPO}/releases/downlo
 
 /** Last verified stable assets, used only when the public GitHub API is unavailable. */
 export const FALLBACK = {
-  tag_name: 'v0.5.0',
-  html_url: `${RELEASES}/tag/v0.5.0`,
+  tag_name: 'v0.6.0',
+  html_url: `${RELEASES}/tag/v0.6.0`,
   assets: [
     {
-      name: 'Vortia-0.5.0-linux-x86_64.AppImage',
-      size: 292604408,
-      browser_download_url: `${ASSET_PREFIX}v0.5.0/Vortia-0.5.0-linux-x86_64.AppImage`,
+      name: 'Vortia-0.6.0-linux-x86_64.AppImage',
+      size: 293227000,
+      browser_download_url: `${ASSET_PREFIX}v0.6.0/Vortia-0.6.0-linux-x86_64.AppImage`,
     },
     {
-      name: 'Vortia-0.5.0-linux-x86_64.AppImage.sha256',
+      name: 'Vortia-0.6.0-linux-x86_64.AppImage.sha256',
       size: 101,
-      browser_download_url: `${ASSET_PREFIX}v0.5.0/Vortia-0.5.0-linux-x86_64.AppImage.sha256`,
+      browser_download_url: `${ASSET_PREFIX}v0.6.0/Vortia-0.6.0-linux-x86_64.AppImage.sha256`,
     },
     {
-      name: 'Vortia-0.5.0-macos-arm64.dmg',
-      size: 414414151,
-      browser_download_url: `${ASSET_PREFIX}v0.5.0/Vortia-0.5.0-macos-arm64.dmg`,
+      name: 'Vortia-0.6.0-macos-arm64.dmg',
+      size: 415036235,
+      browser_download_url: `${ASSET_PREFIX}v0.6.0/Vortia-0.6.0-macos-arm64.dmg`,
     },
     {
-      name: 'Vortia-0.5.0-macos-arm64.dmg.sha256',
+      name: 'Vortia-0.6.0-macos-arm64.dmg.sha256',
       size: 95,
-      browser_download_url: `${ASSET_PREFIX}v0.5.0/Vortia-0.5.0-macos-arm64.dmg.sha256`,
+      browser_download_url: `${ASSET_PREFIX}v0.6.0/Vortia-0.6.0-macos-arm64.dmg.sha256`,
     },
   ],
 };
@@ -56,7 +56,8 @@ export function findPlatformAssets(release, Url = URL, assetPrefix = ASSET_PREFI
     ? release.assets.map((asset) => safeAsset(asset, Url, assetPrefix)).filter(Boolean)
     : [];
   const linux = assets.find((a) => /^Vortia-.+-linux-(x86_64|amd64)\.AppImage$/i.test(a.name)) || null;
-  const mac = assets.find((a) => /^Vortia-.+-macos-(arm64|aarch64|universal)\.dmg$/i.test(a.name)) || null;
+  const macAssets = assets.filter((a) => /^Vortia-.+-macos-(arm64|aarch64|universal)\.dmg$/i.test(a.name));
+  const mac = macAssets.find((a) => /universal/i.test(a.name)) || macAssets[0] || null;
   const checksum = (asset) => (asset ? assets.find((a) => a.name === `${asset.name}.sha256`) || null : null);
   return { linux, mac, linuxSha: checksum(linux), macSha: checksum(mac) };
 }
@@ -121,7 +122,9 @@ export function renderRelease(get, release, os, arch, isFallback) {
 
   if (os === 'linux') {
     icon = '/platform-linux.svg';
-    if (arch === 'arm') {
+    if (arch === 'unknown') {
+      detail = t('Selecciona Linux o macOS en las opciones de descarga.');
+    } else if (arch === 'arm') {
       detail = t('No hay AppImage Linux ARM64 en esta versión. La descarga publicada es para x86_64.');
     } else if (packages.linux) {
       selected = packages.linux;
@@ -133,7 +136,9 @@ export function renderRelease(get, release, os, arch, isFallback) {
   } else if (os === 'mac') {
     icon = '/platform-apple.svg';
     const universal = packages.mac && /universal/i.test(packages.mac.name);
-    if (arch === 'x86' && !universal) {
+    if (arch === 'unknown') {
+      detail = t('Selecciona Linux o macOS en las opciones de descarga.');
+    } else if (arch === 'x86' && !universal) {
       detail = t('No hay DMG compatible con Mac Intel en esta versión. El publicado es para Apple Silicon.');
     } else if (packages.mac) {
       selected = packages.mac;
@@ -170,6 +175,17 @@ export async function fetchLatestRelease(fetchImpl) {
   return response.json();
 }
 
+/** The release the page was generated with (#vortia-release-config), or the verified fallback. */
+export function builtRelease(doc) {
+  try {
+    const release = JSON.parse(doc?.getElementById?.('vortia-release-config')?.textContent || 'null');
+    if (isValidRelease(release)) return release;
+  } catch {
+    /* A broken block falls back to the verified release. */
+  }
+  return FALLBACK;
+}
+
 export async function bootVortiaDownloads({
   document: doc,
   navigator: nav,
@@ -178,14 +194,16 @@ export async function bootVortiaDownloads({
   if (!doc?.getElementById?.('vortia-downloads')) return null;
   const get = (id) => doc.getElementById(id);
   const os = detectPlatform(nav);
-  renderRelease(get, FALLBACK, os, 'unknown', true);
+  const built = builtRelease(doc);
+  renderRelease(get, built, os, 'unknown', true);
 
-  const [arch, latest] = await Promise.all([
-    detectArchitecture(nav),
-    fetchLatestRelease(fetchImpl).catch(() => null),
-  ]);
+  const architecturePromise = detectArchitecture(nav);
+  const latestPromise = fetchLatestRelease(fetchImpl).catch(() => null);
+  const arch = await architecturePromise;
+  renderRelease(get, built, os, arch, true);
+  const latest = await latestPromise;
   const valid = isValidRelease(latest);
-  renderRelease(get, valid ? latest : FALLBACK, os, arch, !valid);
+  renderRelease(get, valid ? latest : built, os, arch, !valid);
   return { os, arch, valid };
 }
 

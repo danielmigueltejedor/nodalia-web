@@ -16,7 +16,9 @@ Dirección visual editorial: colores neutros, tipografía Sora + Inter autoaloja
 
 - `assets/styles.css`: único sistema de estilos (sin CDN de tipografías).
 - `assets/fonts/`: Sora (titulares) e Inter (texto), variables, subconjunto latino, autoalojadas. Licencia SIL OFL 1.1.
-- `assets/releases.js`: franja de últimas versiones del portal; consulta GitHub Releases y conserva el valor de `data/site.json` si no hay respuesta.
+- `scripts/releases.mjs`: al generar, lee la última versión publicada de cada app en GitHub Releases, así las páginas salen con la versión y los enlaces de descarga actuales sin editarlas. Si GitHub no responde usa `data/releases.json`, la última lectura guardada (`npm run releases` la renueva; `NODALIA_OFFLINE=1` no consulta la red).
+- `assets/releases.js`: franja de últimas versiones del portal; consulta GitHub Releases en el navegador y muestra un proyecto en cuanto publica su primera versión.
+- `assets/app-download.js`: botón de descarga de Vinilo, Lienzo y cualquier app con `downloads` en `data/apps.json` (patrones de nombre de archivo por sistema). Ofrece el DMG con la manzana en un Mac, el AppImage con el pingüino en Linux y el instalador en Windows; parte de la versión con la que se generó la página y comprueba en GitHub si hay otra más nueva.
 - `assets/motion.js`: animaciones de scroll (aparición, parallax, barra de progreso, sección activa). Se desactivan con `prefers-reduced-motion` y el contenido es visible sin JavaScript.
 - `assets/identity.js`: firma visual de cada producto en la cabecera. Vortia: flujo potencial alrededor de un cilindro con trazadores y sonda (las líneas de corriente se generan en `build.mjs`). Lienzo: dimensiones reales de la captura en la selección. Nodalix OS (arranque) y Vinilo (disco a 33⅓ rpm) son solo HTML y CSS.
 - Idiomas: español (origen), inglés, francés, alemán y portugués. La plantilla y los datos se escriben en español; `scripts/i18n.mjs` traduce el HTML generado con `i18n/<idioma>.json` (clave = texto en español) y publica cada idioma en `/<idioma>/`. Los textos que no cambian (nombres, tecnologías) van en `i18n/keep.json`. Si falta una traducción, `npm test` falla y `dist/i18n-missing.json` dice cuál. Los scripts del navegador usan `t()` de `assets/i18n.js`. La portada en español redirige al idioma del navegador solo si no se ha elegido otro en el selector; la elección se guarda en `localStorage`.
@@ -27,7 +29,7 @@ Dirección visual editorial: colores neutros, tipografía Sora + Inter autoaloja
 - `assets/favicon.svg`: favicon transparente que cambia de color con el tema del navegador; `favicon.ico` y `apple-touch-icon.png` son los respaldos.
 - `scripts/build.mjs`: páginas, metadatos, SEO, sitemap y recursos.
 - `scripts/test.mjs`: validación de los cinco sitios, módulos de descarga y manifiesto ISO.
-- `assets/vortia-download.js` / `assets/nodalix-releases.js`: módulos ES exportables y comprobados en Node.
+- `assets/vortia-download.js` / `assets/app-download.js` / `assets/nodalix-releases.js`: módulos ES exportables y comprobados en Node.
 
 No hay framework ni dependencia npm de ejecución. Las páginas no contienen trackers, analítica ni cookies propios. Los iconos y capturas de los proyectos provienen de GitHub; algunos recursos externos pueden registrar solicitudes según sus propias políticas.
 
@@ -67,13 +69,21 @@ npx wrangler pages deploy dist/lienzo --project-name nodalia-lienzo --branch mai
 npx wrangler pages deploy dist/nodalix --project-name nodalia-nodalix --branch main
 ~~~
 
+**Versiones automáticas.** El workflow también se ejecuta cada tres horas y con el evento `repository_dispatch` de tipo `app-released`, así que las webs se regeneran con las últimas versiones sin tocar este repositorio. Para que una publicación aparezca al momento, el workflow de release de una app puede lanzar ese evento (necesita un token con permiso sobre `nodalia-web`):
+
+~~~bash
+gh api repos/danielmigueltejedor/nodalia-web/dispatches -f event_type=app-released
+~~~
+
+Aunque no se regeneren, las páginas consultan GitHub en el navegador y muestran la versión nueva en cuanto existe.
+
 Los despliegues automáticos se ejecutan solamente después de superar las pruebas; los pull requests se validan sin publicar. Wrangler está fijado a una versión conocida. No hace falta cambiar DNS, los subdominios privados de Cloudflare ni los registros de correo. Los secretos no deben guardarse en los archivos del repositorio.
 
 ## Vortia: descargas por sistema operativo
 
 La web `vortia.getnodalia.com` identifica de manera orientativa el sistema operativo del navegador y ofrece un botón directo con el icono de Linux (AppImage x86_64) o Apple (DMG arm64). La sección de descargas siempre muestra **ambas plataformas**, los tamaños y los checksums SHA-256 que existan en la publicación.
 
-`assets/vortia-download.js` consulta `https://api.github.com/repos/danielmigueltejedor/vortia/releases/latest` para mostrar los instaladores de la última publicación estable, sin cambiar el sitio cada vez que se publica Vortia. En caso de error de red o límite de la API, usa como respaldo los archivos oficiales verificados de `v0.1.1` y avisa de que pueden no ser los más recientes.
+`assets/vortia-download.js` consulta `https://api.github.com/repos/danielmigueltejedor/vortia/releases/latest` para mostrar los instaladores de la última publicación estable, sin cambiar el sitio cada vez que se publica Vortia. En caso de error de red o límite de la API, usa la versión con la que se generó la página y avisa de que puede no ser la más reciente.
 
 No se ofrecen DMG para Mac Intel ni AppImage para Linux ARM64 cuando no hay un paquete compatible. Los navegadores, especialmente Safari, **no siempre permiten identificar la arquitectura de un Mac**: el botón de macOS indica explícitamente que el DMG es para Apple Silicon. Los enlaces siempre apuntan a GitHub Releases y se comprueba su origen antes de usarlos.
 

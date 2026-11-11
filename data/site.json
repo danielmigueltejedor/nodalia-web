@@ -77,23 +77,27 @@
   "releases": [
     [
       "Nodalix OS",
-      "nodalix-os",
-      "0.5.0"
+      "nodalix-os"
     ],
     [
       "Vinilo",
-      "vinilo",
-      "v1.1.4"
+      "vinilo"
     ],
     [
       "Vortia",
-      "vortia",
-      "v0.5.0"
+      "vortia"
+    ],
+    [
+      "Lienzo",
+      "lienzo"
+    ],
+    [
+      "Forja",
+      "forja"
     ],
     [
       "Nodalia Cards",
-      "nodalia-cards",
-      "v3.0.5"
+      "nodalia-cards"
     ]
   ],
   "studium": {
@@ -121,7 +125,7 @@
     ]
   },
   "upcoming": {
-    "intro": "Además de lo publicado, Nodalia prepara una suite completa de aplicaciones de escritorio. Parten de motores de código abierto y todavía no tienen versión descargable.",
+    "intro": "Además de lo publicado, Nodalia prepara una suite completa de aplicaciones de escritorio. Cada una mostrará aquí su versión y su descarga en cuanto se publique.",
     "apps": [
       [
         "Luz",

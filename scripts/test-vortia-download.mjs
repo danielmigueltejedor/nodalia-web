@@ -8,7 +8,7 @@ import {
 } from '../assets/vortia-download.js';
 
 const ids = [
-  'vortia-downloads', 'vortia-release-version', 'vortia-release-source',
+  'vortia-downloads', 'vortia-release-config', 'vortia-release-version', 'vortia-release-source',
   'vortia-linux-link', 'vortia-linux-size', 'vortia-linux-sha',
   'vortia-mac-link', 'vortia-mac-size', 'vortia-mac-sha',
   'vortia-primary-download', 'vortia-primary-icon',
@@ -72,7 +72,7 @@ const latest = {
 
 assert.equal(detectPlatform({ platform: 'Linux x86_64', userAgent: 'X11' }), 'linux');
 assert.equal(detectPlatform({ platform: 'MacIntel', userAgent: 'Macintosh' }), 'mac');
-assert.equal(detectPlatform({ platform: 'Win32', userAgent: 'Windows' }), 'other');
+assert.equal(detectPlatform({ platform: 'Win32', userAgent: 'Windows' }), 'windows');
 assert.equal(isValidRelease(latest), true);
 assert.equal(isValidRelease({ ...latest, draft: true }), false);
 assert.equal(safeAsset({ name: 'x', browser_download_url: 'http://evil.example/x' }), null);
@@ -93,6 +93,7 @@ assert.equal(linux['vortia-mac-sha'].hidden, true);
 const mac = await simulate({
   platform: 'MacIntel',
   userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X)',
+  architecture: 'arm',
   release: latest,
 });
 assert.match(mac['vortia-primary-download'].href, /\.dmg$/);
@@ -130,7 +131,57 @@ const offline = await simulate({
   userAgent: 'Mozilla/5.0 (X11; Linux x86_64)',
   fail: true,
 });
-assert.match(offline['vortia-primary-download'].href, /v0\.5\.0\/Vortia-0\.5\.0-linux-x86_64\.AppImage$/);
+assert.match(offline['vortia-primary-download'].href, /v0\.6\.0\/Vortia-0\.6\.0-linux-x86_64\.AppImage$/);
 assert.match(offline['vortia-release-source'].textContent, /Referencia local/);
 
+const universalRelease = {
+  ...latest,
+  assets: [
+    ...latest.assets,
+    {
+      name: 'Vortia-0.2.0-macos-universal.dmg', size: 70000000,
+      browser_download_url: 'https://github.com/danielmigueltejedor/vortia/releases/download/v0.2.0/Vortia-0.2.0-macos-universal.dmg',
+    },
+  ],
+};
+assert.match(findPlatformAssets(universalRelease).mac.name, /universal/);
+
+// Keep the primary button on GitHub until architecture detection completes, then render the built version.
+{
+  const document = createDocument();
+  document.elements['vortia-release-config'].textContent = JSON.stringify(latest);
+  let resolveArchitecture;
+  let resolveResponse;
+  const navigator = {
+    platform: 'MacIntel',
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X)',
+    userAgentData: {
+      platform: 'macOS',
+      getHighEntropyValues: () => new Promise((resolve) => { resolveArchitecture = resolve; }),
+    },
+  };
+  const pending = bootVortiaDownloads({
+    document,
+    navigator,
+    fetch: () => new Promise((resolve) => { resolveResponse = resolve; }),
+  });
+  assert.match(document.elements['vortia-primary-download'].href, /releases\/tag\/v0\.2\.0$/);
+  resolveArchitecture({ architecture: 'x86' });
+  await new Promise(setImmediate);
+  assert.match(document.elements['vortia-primary-download'].href, /releases\/tag\/v0\.2\.0$/);
+  assert.match(document.elements['vortia-primary-detail'].textContent, /Mac Intel/);
+  resolveResponse({ ok: false });
+  await pending;
+}
+
+// The release the page was built with is the offline fallback, ahead of the one in the script.
+{
+  const { builtRelease, FALLBACK: verified } = await import('../assets/vortia-download.js');
+  const doc = (text) => ({ getElementById: (id) => (id === 'vortia-release-config' ? { textContent: text } : null) });
+  const built = { tag_name: 'v9.0.0', assets: [{ name: 'Vortia-9.0.0-linux-x86_64.AppImage', size: 1, browser_download_url: 'https://github.com/danielmigueltejedor/vortia/releases/download/v9.0.0/Vortia-9.0.0-linux-x86_64.AppImage' }] };
+  assert.equal(builtRelease(doc(JSON.stringify(built))).tag_name, 'v9.0.0');
+  assert.equal(builtRelease(doc('{broken')), verified);
+  assert.equal(builtRelease(doc(JSON.stringify({ ...built, draft: true }))), verified);
+  assert.equal(builtRelease({ getElementById: () => null }), verified);
+}
 console.log('✓ Vortia: Linux, macOS, Intel, ARM64, Windows, versiones nuevas y fallback offline.');

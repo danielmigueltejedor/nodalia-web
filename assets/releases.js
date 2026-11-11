@@ -23,6 +23,7 @@ async function latest(repo) {
   const response = await fetch(`${API}${encodeURIComponent(repo)}/releases/latest`, { headers: { Accept: 'application/vnd.github+json' } });
   if (!response.ok) throw new Error(`GitHub ${response.status}`);
   const data = await response.json();
+  if (data.draft || data.prerelease) throw new Error('not a stable release');
   const release = { tag: data.tag_name, date: data.published_at };
   try { sessionStorage.setItem(key, JSON.stringify(release)); } catch { /* sin caché */ }
   return release;
@@ -31,7 +32,11 @@ async function latest(repo) {
 if (typeof document !== 'undefined') {
   for (const element of document.querySelectorAll('[data-release]')) {
     latest(element.dataset.release).then((release) => {
-      if (isTag(release.tag)) element.textContent = release.tag;
+      if (!isTag(release.tag)) return;
+      element.textContent = release.tag;
+      // A project that had no release when the page was built appears once it has one.
+      const item = element.closest('li');
+      if (item) item.hidden = false;
       const when = relativeDate(release.date);
       const time = element.parentElement.querySelector('time');
       if (time && when) { time.dateTime = release.date; time.textContent = when; }

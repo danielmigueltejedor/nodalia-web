@@ -4,6 +4,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { apps, brand, site, repoUrl } from './data.mjs';
 import { DEFAULT_LOCALE, locales, localeCodes, localePath, localize, dictionaries, clientKeys } from './i18n.mjs';
+import { loadReleases } from './releases.mjs';
+import { choose, detail, kind, releasesUrl } from '../assets/app-download.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const target = process.argv[2];
@@ -29,7 +31,11 @@ let locale = DEFAULT_LOCALE;
 let clientStrings = null;
 const missing = {};
 const motionSrc = `/motion.js?v=${await assetVersion('motion.js')}`;
-const viniloDownloadVersion = await assetVersion('vinilo-download.js');
+const appDownloadSrc = `/app-download.js?v=${await assetVersion('app-download.js')}`;
+// Las versiones publicadas en GitHub en el momento de generar: la página ya sale con ellas.
+const releaseRepos = [...new Set([...site.releases.map(([, repo]) => repo), ...apps.map((app) => app.repoName), ...site.upcoming.apps.map(([, , , repo]) => repo).filter(Boolean)])];
+const { releases, live } = await loadReleases(releaseRepos);
+console.log(`· versiones: ${releaseRepos.map((repo) => `${repo} ${releases[repo]?.tag_name || '—'}${live.includes(repo) ? '' : ' (guardada)'}`).join(', ')}`);
 
 const e = (s) => String(s ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
 const safeUrl = (s) => {
@@ -223,14 +229,18 @@ async function home() {
           <figcaption>Vinilo · reproductor</figcaption>
         </figure>
         <figure class="shot shot-secondary" data-parallax style="--depth:-78px">
-          <img src="${previewUrl(lienzo)}" alt="Captura real de la herramienta de niveles de Lienzo" decoding="async" loading="eager" width="1280" height="800"/>
-          <figcaption>Lienzo · niveles</figcaption>
+          <img src="${previewUrl(lienzo)}" alt="Captura real de Lienzo editando una imagen por capas" decoding="async" loading="eager" width="2400" height="1500"/>
+          <figcaption>Lienzo · capas</figcaption>
         </figure>
         <p class="stage-caption"><strong>Aplicaciones reales.</strong> Capturas de los repositorios oficiales.</p>
       </div>
     </div></section>
     <div class="release-strip"><div class="container release-strip-inner"><span class="release-label">Últimas versiones</span>
-      <ul>${site.releases.map(([name, repo, tag]) => `<li><a href="${safeUrl(`${repoUrl(repo)}/releases/latest`)}" target="_blank" rel="noopener noreferrer"><span>${e(name)}</span><b data-release="${e(repo)}">${e(tag)}</b><time></time></a></li>`).join('')}</ul>
+      <ul>${site.releases.map(([name, repo]) => {
+        // Un proyecto aún sin versión se incluye oculto: releases.js lo muestra en cuanto se publique.
+        const release = releases[repo];
+        return `<li${release ? '' : ' hidden'}><a href="${safeUrl(`${repoUrl(repo)}/releases/latest`)}" target="_blank" rel="noopener noreferrer"><span>${e(name)}</span><b data-release="${e(repo)}">${e(release?.tag_name || '')}</b><time${release?.published_at ? ` datetime="${e(release.published_at)}"` : ''}></time></a></li>`;
+      }).join('')}</ul>
     </div></div>
     <section class="catalogue" id="aplicaciones"><div class="container">
       <div class="section-head"><div data-reveal><h2 data-reveal>Cuatro ideas.<br/>Una forma de hacerlas.</h2></div><p data-reveal>Un sistema operativo y tres aplicaciones, cada una con un problema concreto que resolver. Todas indican su estado real antes de que descargues nada.</p></div>
@@ -254,8 +264,11 @@ async function home() {
     <section class="section soon" id="en-camino"><div class="container">
       <div class="section-head"><div data-reveal><h2>Más en camino.</h2></div><p data-reveal>${e(site.upcoming.intro)}</p></div>
       <ul class="soon-grid">${site.upcoming.apps.map(([name, key, what, repo]) => {
-        const inner = `<img src="/app-icons/${e(key)}.png" alt="" width="64" height="64" loading="lazy" decoding="async"/><div><strong translate="no">${e(name)}</strong><span>${e(what)}</span></div>`;
-        return `<li data-reveal>${repo ? `<a class="soon-card" href="${safeUrl(repoUrl(repo))}" target="_blank" rel="noopener noreferrer">${inner}${icon.arrow}</a>` : `<div class="soon-card soon-card--plain">${inner}<em>Sin repositorio aún</em></div>`}</li>`;
+        // Con una versión publicada, la tarjeta lleva a la descarga y muestra la versión.
+        const release = repo ? releases[repo] : null;
+        const inner = `<img src="/app-icons/${e(key)}.png" alt="" width="64" height="64" loading="lazy" decoding="async"/><div><strong translate="no">${e(name)}</strong><span>${e(what)}</span>${release ? `<b class="soon-version">${e(release.tag_name)}</b>` : ''}</div>`;
+        const href = release ? `${repoUrl(repo)}/releases/latest` : repo ? repoUrl(repo) : '';
+        return `<li data-reveal>${repo ? `<a class="soon-card${release ? ' soon-card--released' : ''}" href="${safeUrl(href)}" target="_blank" rel="noopener noreferrer">${inner}${release ? icon.down : icon.arrow}</a>` : `<div class="soon-card soon-card--plain">${inner}<em>Sin repositorio aún</em></div>`}</li>`;
       }).join('')}</ul>
       <p class="small-label" data-reveal>Cada icono es un personaje histórico ligado a lo que hace la aplicación.</p>
     </div></section>
@@ -292,6 +305,24 @@ async function home() {
     </div></section>`
   });
 }
+// Botón de descarga de las apps con instaladores (Vinilo, Lienzo): la página sale con la versión
+// actual para Linux; app-download.js elige el paquete de tu sistema y comprueba si hay otra más nueva.
+const appDownloadConfig = (app) => ({ repo: app.repoName, patterns: app.downloads, release: releases[app.repoName] || null });
+function appDownloadButton(app) {
+  const choice = choose(releases[app.repoName], appDownloadConfig(app), 'linux', 'x86');
+  return `<a id="app-primary-download" class="btn btn-primary" href="${safeUrl(choice.href)}" rel="noopener noreferrer"><img id="app-primary-icon" class="vortia-platform-icon" src="${choice.icon || '/platform-linux.svg'}" alt="" width="20" height="20"${choice.icon ? '' : ' hidden'}/><span id="app-primary-title">${e(choice.title)}</span><span class="btn-icon" aria-hidden="true">↓</span></a>`;
+}
+function appDownloadHint(app) {
+  const config = appDownloadConfig(app);
+  const choice = choose(config.release, config, 'linux', 'x86');
+  const defaults = { linux: 'AppImage · x86_64', mac: 'DMG · Apple Silicon', windows: 'MSI · Windows x64' };
+  const alts = Object.keys(defaults).filter((os) => app.downloads[os]).map((os) => {
+    const asset = choice.found[os];
+    return `<a id="app-alt-${os}" class="text-link" translate="no" href="${safeUrl(asset ? asset.url : choice.page)}" rel="noopener noreferrer"${asset && os !== choice.os ? '' : ' hidden'}>${e(asset ? kind(os, asset) : defaults[os])}</a>`;
+  }).join(' ');
+  return `<p class="vortia-primary-detail app-download-detail"><span id="app-primary-detail" translate="no">${e(detail(choice, 'es'))}</span> ${alts} ${A(`${releasesUrl(app.repoName)}/latest`, e(app.otherPackages || 'Todas las descargas'), 'text-link', true)}</p><script type="application/json" id="app-download-config">${JSON.stringify(config).replaceAll('<', '\\u003c')}</script><script type="module" src="${appDownloadSrc}"></script>`;
+}
+
 function product(app) {
   const title = ({vortia:'La simulación de fluidos, a tu alcance.',vinilo:'Disfruta de toda tu música.',lienzo:'Un lugar para crear sin límites.',nodalix:'Tu ordenador. Tu sistema.'})[app.id] || app.headline;
   const hasDownloads = app.id === 'vortia' || app.id === 'nodalix';
@@ -306,8 +337,8 @@ function product(app) {
   })[app.id]();
   const primaryDownload = app.id === 'vortia'
     ? '<a id="vortia-primary-download" class="btn btn-primary" href="https://github.com/danielmigueltejedor/vortia/releases/latest" rel="noopener noreferrer"><img id="vortia-primary-icon" class="vortia-platform-icon" src="/platform-linux.svg" alt="" width="20" height="20" hidden/><span id="vortia-primary-title">Ver versiones y descargas</span><span class="btn-icon" aria-hidden="true">↓</span></a>'
-    : app.id === 'vinilo'
-      ? `<a id="vinilo-primary-download" class="btn btn-primary" href="${safeUrl('https://github.com/danielmigueltejedor/vinilo/releases/download/v1.1.5/Vinilo-1.1.5-x86_64.AppImage')}" rel="noopener noreferrer">Descargar AppImage ↓</a>`
+    : app.downloads
+      ? appDownloadButton(app)
     : app.id === 'nodalix'
       ? `<a href="#descargas" class="btn btn-primary">Descargar Nodalix OS ${icon.down}</a>`
       : app.primaryCta
@@ -315,8 +346,8 @@ function product(app) {
         : A(app.repo + '/releases', `Ver versiones y descargas ${icon.arrow}`, 'btn btn-primary', true);
   const primaryHint = app.id === 'vortia'
     ? '<p class="vortia-primary-detail" id="vortia-primary-detail" role="status" aria-live="polite">Se elegirá el instalador compatible con tu sistema operativo.</p>'
-    : app.id === 'vinilo'
-      ? `<p class="vortia-primary-detail" id="vinilo-primary-detail"><span id="vinilo-primary-kind">AppImage x86_64</span> · <span id="vinilo-primary-version">v1.1.5</span> · <span id="vinilo-mac" hidden><a id="vinilo-mac-download" class="text-link" href="${safeUrl(app.repo + '/releases/latest')}" rel="noopener noreferrer">DMG · Apple Silicon (arm64)</a> · </span>${A(app.repo + '/releases/latest', 'Otros paquetes: .deb, .rpm, Flatpak', 'text-link', true)}</p><script type="module" src="/vinilo-download.js?v=${viniloDownloadVersion}"></script>`
+    : app.downloads
+      ? appDownloadHint(app)
       : '';
   const sections = [['funciones', 'Funciones'], ['ficha', 'Ficha técnica'], ...(hasDownloads ? [['descargas', 'Descargas']] : []), ...(app.id === 'nodalix' || app.install ? [['instalacion', 'Instalación']] : []), ...(app.previews.length ? [['capturas', 'Capturas']] : []), ['faq', 'Preguntas'], ['codigo', 'Código']];
   const detail = app.sources
@@ -359,6 +390,19 @@ function product(app) {
   });
 }
 function vortiaDownloads() {
+  // La versión de Vortia publicada al generar; vortia-download.js la sustituye si GitHub tiene otra más nueva.
+  const release = releases.vortia;
+  const assets = release?.assets || [];
+  const find = (re) => assets.find((asset) => re.test(asset.name)) || null;
+  const linux = find(/^Vortia-.+-linux-(x86_64|amd64)\.AppImage$/i);
+  const macAssets = assets.filter((asset) => /^Vortia-.+-macos-(arm64|aarch64|universal)\.dmg$/i.test(asset.name));
+  const mac = macAssets.find((asset) => /universal/i.test(asset.name)) || macAssets[0] || null;
+  const sha = (asset) => (asset ? assets.find((item) => item.name === `${asset.name}.sha256`) || null : null);
+  const page = release?.html_url || 'https://github.com/danielmigueltejedor/vortia/releases';
+  const size = (asset) => (asset?.size ? `${(asset.size / 1e6).toLocaleString('es', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} MB` : '');
+  const option = (id, asset, type) => `<p class="vortia-package-size" id="vortia-${id}-size" translate="no">${e(size(asset))}</p>
+          <a class="btn btn-primary" id="vortia-${id}-link" href="${safeUrl(asset ? asset.browser_download_url : page)}">${asset ? `Descargar ${type} ↓` : 'Consultar en GitHub ↗'}</a>
+          <a class="vortia-checksum" id="vortia-${id}-sha" href="${safeUrl(sha(asset)?.browser_download_url || page)}"${sha(asset) ? '' : ' hidden'}>SHA-256 ↗</a>`;
   return `<section class="section vortia-download-section" id="descargas">
     <div class="container">
       <div class="vortia-download-head">
@@ -367,7 +411,7 @@ function vortiaDownloads() {
         </div>
         <div class="vortia-version-info" data-reveal="right">
           <span class="kicker">Última publicación estable</span>
-          <strong id="vortia-release-version">v0.5.0</strong>
+          <strong id="vortia-release-version">${e(release?.tag_name || '')}</strong>
           <span id="vortia-release-source">Consultando GitHub Releases…</span>
         </div>
       </div>
@@ -377,18 +421,14 @@ function vortiaDownloads() {
             <div><h3>Linux</h3><p>AppImage · x86_64</p></div>
           </div>
           <p class="vortia-package-desc">Para distribuciones Linux de 64 bits (x86_64) con glibc 2.31 o posterior. Incluye OpenFOAM y el mallador.</p>
-          <p class="vortia-package-size" id="vortia-linux-size">292,6 MB</p>
-          <a class="btn btn-primary" id="vortia-linux-link" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.5.0/Vortia-0.5.0-linux-x86_64.AppImage">Descargar AppImage ↓</a>
-          <a class="vortia-checksum" id="vortia-linux-sha" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.5.0/Vortia-0.5.0-linux-x86_64.AppImage.sha256">SHA-256 ↗</a>
+          ${option('linux', linux, 'AppImage')}
         </article>
         <article class="vortia-package" data-reveal data-platform="mac">
           <div class="vortia-package-head"><img src="/platform-apple.svg" alt="" width="38" height="38"/>
             <div><h3>macOS</h3><p>DMG · Apple Silicon (arm64)</p></div>
           </div>
           <p class="vortia-package-desc">Para Macs con Apple Silicon y macOS 14 o posterior. Incluye OpenFOAM y el mallador. No es compatible con Macs Intel.</p>
-          <p class="vortia-package-size" id="vortia-mac-size">414,4 MB</p>
-          <a class="btn btn-primary" id="vortia-mac-link" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.5.0/Vortia-0.5.0-macos-arm64.dmg">Descargar DMG ↓</a>
-          <a class="vortia-checksum" id="vortia-mac-sha" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.5.0/Vortia-0.5.0-macos-arm64.dmg.sha256">SHA-256 ↗</a>
+          ${option('mac', mac, 'DMG')}
         </article>
       </div>
       <div class="vortia-download-footer">
@@ -397,6 +437,7 @@ function vortiaDownloads() {
       </div>
     </div>
   </section>
+  ${release ? `<script type="application/json" id="vortia-release-config">${JSON.stringify(release).replaceAll('<', '\\u003c')}</script>` : ''}
   <script type="module" src="/vortia-download.js"></script>`;
 }
 
@@ -434,7 +475,8 @@ async function build(site) {
   await mkdir(path.join(dir, 'fonts'), { recursive: true });
   if (site === 'portal') await mkdir(path.join(dir, 'app-icons'), { recursive: true });
   const app = apps.find((item) => item.id === site);
-  const clientScripts = [...({ vortia: ['vortia-download.js'], vinilo: ['vinilo-download.js'], nodalix: ['nodalix-releases.js'] }[site] || []), ...(app?.previews.length ? ['gallery.js'] : [])];
+  if (app?.localScreens.length) await mkdir(path.join(dir, 'screens', app.id), { recursive: true });
+  const clientScripts = [...({ vortia: ['vortia-download.js'], nodalix: ['nodalix-releases.js'] }[site] || []), ...(app?.downloads ? ['app-download.js'] : []), ...(app?.previews.length ? ['gallery.js'] : [])];
   const keys = (await Promise.all(clientScripts.map((file) => readFile(path.join(root, 'assets', file), 'utf8')))).flatMap(clientKeys);
   const pages = [];
   for (const code of localeCodes) {
@@ -474,10 +516,8 @@ async function build(site) {
       copyFile(path.join(root, 'assets', 'platform-apple.svg'), path.join(dir, 'platform-apple.svg')),
       copyFile(path.join(root, 'assets', 'platform-linux.svg'), path.join(dir, 'platform-linux.svg')),
     ] : []),
-    ...(site === 'vinilo' ? [
-      copyFile(path.join(root, 'assets', 'vinilo-download.js'), path.join(dir, 'vinilo-download.js')),
-      copyFile(path.join(root, 'assets', 'platform.js'), path.join(dir, 'platform.js')),
-    ] : []),
+    ...(app?.downloads ? ['app-download.js', 'platform.js', 'platform-apple.svg', 'platform-linux.svg'].map((file) => copyFile(path.join(root, 'assets', file), path.join(dir, file))) : []),
+    ...(app?.localScreens || []).map((file) => copyFile(path.join(root, 'assets', file.slice(1)), path.join(dir, file.slice(1)))),
     ...(site === 'nodalix' ? [
       copyFile(path.join(root, 'assets', 'nodalix-releases.js'), path.join(dir, 'nodalix-releases.js')),
       copyFile(path.join(root, 'data', 'nodalix-iso-releases.json'), path.join(dir, 'releases.json')),

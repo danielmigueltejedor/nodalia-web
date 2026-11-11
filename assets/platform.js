@@ -7,6 +7,7 @@ export function detectPlatform(nav) {
     return 'other';
   }
   if (/mac/i.test(p)) return 'mac';
+  if (/win/i.test(p)) return 'windows';
   if (/linux|x11/i.test(p)) return 'linux';
   return 'other';
 }
@@ -22,5 +23,6 @@ export async function detectArchitecture(nav) {
     /* Browser architecture hints are optional. */
   }
   if (/aarch64|arm64/i.test(nav?.userAgent || '')) return 'arm';
+  if (/x86_64|amd64|x64/i.test(nav?.userAgent || '')) return 'x86';
   return 'unknown';
 }

@@ -266,73 +266,62 @@
     ],
     "limitation": "Apple Music requiere suscripción, conexión continua y Linux x86_64. YouTube Music está en beta y Tidal en alfa. Vinilo se descarga como AppImage, como DMG para Mac con Apple Silicon o como paquete para tu distribución desde GitHub.",
     "cta": "Instalar desde GitHub",
-    "accent": "violet"
+    "accent": "violet",
+    "downloads": {
+      "linux": "^Vinilo-.+-x86_64\\.AppImage$",
+      "mac": "^Vinilo-.+-macos-(arm64|universal)\\.dmg$"
+    },
+    "otherPackages": "Otros paquetes: .deb, .rpm, Flatpak"
   },
   {
     "id": "lienzo",
     "name": "Lienzo",
     "category": "Creatividad",
-    "status": "En desarrollo",
+    "status": "Primera versión · 0.1.0 para Linux",
     "statusKind": "early",
     "eyebrow": "Edición de imagen",
     "headline": "Tu espacio para crear, capa a capa.",
     "tagline": "Edición creativa con control local.",
-    "description": "Un editor de imágenes nativo en C++ y Qt para trabajo por capas, con compatibilidad PSD/PSB y automatización local. Sin cuenta, sin nube.",
-    "platforms": "Windows · macOS · Linux",
-    "technology": "C++ · Qt 6",
-    "license": "MIT",
+    "description": "Un editor de imágenes nativo, escrito en Rust y con el diseño de Nodalia, para trabajar por capas y abrir documentos PSD. Sin cuenta, sin nube.",
+    "platforms": "Linux x86_64 · macOS y Windows más adelante",
+    "technology": "Rust · Nodalia Design",
+    "license": "MIT OR Apache-2.0",
     "repo": "lienzo",
-    "icon": "src/ui/icons/lienzo-app.png",
-    "primaryCta": [
-      "Código y compilación",
-      "#building-from-source"
-    ],
+    "icon": "assets/app-icon/hicolor/512x512/apps/dev.danielmiguelt.Lienzo.png",
     "previews": [
       [
-        "docs/images/screenshots/levels.png",
-        "Herramienta de niveles en Lienzo"
+        "/screens/lienzo/lienzo-demo.jpg",
+        "Lienzo con capas de ajuste sobre «La gran ola», en el tema oscuro"
       ],
       [
-        "docs/images/screenshots/layer_styles.png",
-        "Estilos de capa en Lienzo"
+        "/screens/lienzo/lienzo-adjustments.jpg",
+        "Capa de ajuste de curvas sobre «Impresión, sol naciente»"
       ],
       [
-        "docs/images/screenshots/smart_objects.png",
-        "Objetos inteligentes en Lienzo"
-      ],
-      [
-        "docs/images/screenshots/brush_dynamics.png",
-        "Dinámica de pincel en Lienzo"
-      ],
-      [
-        "docs/images/screenshots/vector_tools.png",
-        "Herramientas vectoriales en Lienzo"
-      ],
-      [
-        "docs/images/screenshots/camera_raw.png",
-        "Revelado Camera Raw en Lienzo"
+        "/screens/lienzo/lienzo-light.jpg",
+        "Lienzo en el tema claro"
       ]
     ],
     "features": [
       [
         "Documentos por capas",
-        "Abre PSD y PSB con capas, grupos, máscaras, modos de fusión y texto editable."
+        "Capas, grupos, máscaras, modos de fusión, capas de ajuste y objetos inteligentes."
       ],
       [
-        "Edición no destructiva",
-        "Objetos inteligentes, filtros inteligentes con máscara, capas de ajuste y estilos de capa."
+        "Compatible con PSD",
+        "Abre y guarda documentos PSD y PSB, además de su propio formato y los formatos de imagen habituales."
       ],
       [
-        "Herramientas de pintura y retoque",
-        "Pinceles sensibles a la presión, tampón de clonar, correctores, selecciones y máscara rápida."
+        "Selección, trazados y texto",
+        "Selecciones, trazados con pluma, capas de texto y pinceles para pintar y retocar."
       ],
       [
-        "Vector y tipografía",
-        "Trazados con pluma, capas de forma, importación y exportación SVG y texto deformado."
+        "Diseño de Nodalia",
+        "Islas redondeadas, el color de Lienzo, controles de ventana propios o los de tu escritorio, y tema claro u oscuro según el sistema."
       ],
       [
-        "Automatización local",
-        "Scripts en JavaScript, uso por línea de comandos y un conector MCP para asistentes de IA que trabajan en tu equipo."
+        "Todo es un comando",
+        "Cada acción se puede automatizar y ejecutar desde la línea de comandos."
       ],
       [
         "Privado por diseño",
@@ -346,57 +335,56 @@
       "JPEG",
       "TIFF",
       "WebP",
-      "BMP",
-      "TGA",
       "GIF",
-      "SVG",
-      "Aseprite",
-      "Camera RAW"
+      "BMP"
     ],
     "specs": [
       [
         "Licencia",
-        "MIT"
+        "MIT OR Apache-2.0"
       ],
       [
-        "Paquetes previstos",
-        "Instalador Windows · DMG macOS · Flatpak Linux"
+        "Paquetes",
+        "AppImage · .deb · .rpm · .tar.gz (Linux x86_64)"
       ],
       [
-        "Versión publicada",
-        "Todavía ninguna: se compila desde el código"
+        "Más adelante",
+        "macOS y Windows"
       ],
       [
         "Tecnología",
-        "C++ · Qt 6"
-      ],
-      [
-        "Base",
-        "Proyecto de código abierto Patchy"
+        "Rust · Nodalia Design"
       ]
     ],
-    "credit": "Lienzo parte del código abierto de Patchy, creado por Seth A. Robinson. Añade identidad, empaquetado e interfaz propios y conserva el motor de edición y las pruebas de compatibilidad del proyecto original.",
+    "credit": "El icono de Lienzo es un retrato de Diego Velázquez, el pintor.",
     "faq": [
       [
-        "¿Sustituye a Photoshop?",
-        "No por completo. Faltan, entre otras cosas, un flujo completo en CMYK y Lab, la edición a 16 y 32 bits y la aceleración por GPU. El repositorio detalla las limitaciones actuales."
+        "¿Dónde lo descargo?",
+        "En esta página: el botón principal ofrece el paquete para tu sistema desde la última versión publicada en GitHub. La primera versión, 0.1.0, es para Linux x86_64."
       ],
       [
-        "¿Dónde lo descargo?",
-        "Aún no hay una versión de Lienzo publicada. De momento se compila desde el código fuente; los paquetes previstos son instalador para Windows, DMG para macOS y Flatpak para Linux."
+        "¿Hay versión para macOS o Windows?",
+        "Todavía no. Lienzo funciona en los tres sistemas, pero los primeros paquetes son para Linux. Esta página mostrará el DMG o el instalador de Windows en cuanto se publiquen."
       ],
       [
         "¿Mis archivos salen de mi equipo?",
         "No. La edición es local y la aplicación no necesita cuenta ni servidor."
       ],
       [
-        "¿Puedo usar plugins de Photoshop?",
-        "Los filtros clásicos .8bf funcionan solo en Windows. Las acciones de Photoshop y los paneles UXP o JSX no son compatibles."
+        "¿Sustituye a Photoshop?",
+        "No por completo. Lienzo está empezando y la compatibilidad con funciones y formatos depende de la versión."
       ]
     ],
-    "limitation": "Lienzo está en desarrollo y aún no tiene una versión publicada: se compila desde el código. No es un sustituto completo de Photoshop; la compatibilidad con funciones y formatos depende de la versión.",
-    "cta": "Ver versiones y código",
-    "accent": "rose"
+    "limitation": "Lienzo está en una fase temprana. La primera versión es para Linux x86_64; macOS y Windows llegarán más adelante. La compatibilidad con funciones y formatos PSD depende de la versión.",
+    "cta": "Descargar Lienzo",
+    "accent": "rose",
+    "branch": "nodalia",
+    "downloads": {
+      "linux": "^lienzo-.+-linux-x86_64\\.AppImage$",
+      "mac": "^lienzo-.+-macos-(arm64|universal)\\.dmg$",
+      "windows": "^lienzo-.+-windows-x64\\.msi$"
+    },
+    "otherPackages": "Otros paquetes: .deb, .rpm, .tar.gz"
   },
   {
     "id": "nodalix",

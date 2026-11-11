@@ -82,11 +82,17 @@
  "Secure Boot",
  "· macOS:",
  "· Windows PowerShell:",
- "292,6 MB",
- "414,4 MB",
+ "293,2 MB",
+ "415,0 MB",
  "Studium",
  "Studium.",
  "Instagram",
  "X",
- "AppImage x86_64"
+ "AppImage x86_64",
+ "Forja",
+ "Rust · Nodalia Design",
+ "MIT OR Apache-2.0",
+ "AppImage · .deb · .rpm · .tar.gz (Linux x86_64)",
+ "DMG · Apple Silicon",
+ "MSI · Windows x64"
 ]
