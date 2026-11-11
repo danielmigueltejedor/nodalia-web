@@ -72,7 +72,7 @@ const latest = {
 
 assert.equal(detectPlatform({ platform: 'Linux x86_64', userAgent: 'X11' }), 'linux');
 assert.equal(detectPlatform({ platform: 'MacIntel', userAgent: 'Macintosh' }), 'mac');
-assert.equal(detectPlatform({ platform: 'Win32', userAgent: 'Windows' }), 'other');
+assert.equal(detectPlatform({ platform: 'Win32', userAgent: 'Windows' }), 'windows');
 assert.equal(isValidRelease(latest), true);
 assert.equal(isValidRelease({ ...latest, draft: true }), false);
 assert.equal(safeAsset({ name: 'x', browser_download_url: 'http://evil.example/x' }), null);
@@ -133,4 +133,14 @@ const offline = await simulate({
 assert.match(offline['vortia-primary-download'].href, /v0\.6\.0\/Vortia-0\.6\.0-linux-x86_64\.AppImage$/);
 assert.match(offline['vortia-release-source'].textContent, /Referencia local/);
 
+// The release the page was built with is the offline fallback, ahead of the one in the script.
+{
+  const { builtRelease, FALLBACK: verified } = await import('../assets/vortia-download.js');
+  const doc = (text) => ({ getElementById: (id) => (id === 'vortia-release-config' ? { textContent: text } : null) });
+  const built = { tag_name: 'v9.0.0', assets: [{ name: 'Vortia-9.0.0-linux-x86_64.AppImage', size: 1, browser_download_url: 'https://github.com/danielmigueltejedor/vortia/releases/download/v9.0.0/Vortia-9.0.0-linux-x86_64.AppImage' }] };
+  assert.equal(builtRelease(doc(JSON.stringify(built))).tag_name, 'v9.0.0');
+  assert.equal(builtRelease(doc('{broken')), verified);
+  assert.equal(builtRelease(doc(JSON.stringify({ ...built, draft: true }))), verified);
+  assert.equal(builtRelease({ getElementById: () => null }), verified);
+}
 console.log('✓ Vortia: Linux, macOS, Intel, ARM64, Windows, versiones nuevas y fallback offline.');

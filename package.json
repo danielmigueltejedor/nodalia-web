@@ -5,6 +5,7 @@
   "type": "module",
   "description": "Sitios oficiales Nodalia: portal, aplicaciones y Nodalix OS",
   "scripts": {
+    "releases": "node scripts/releases.mjs",
     "build": "node scripts/build.mjs",
     "build:portal": "node scripts/build.mjs portal",
     "build:vortia": "node scripts/build.mjs vortia",

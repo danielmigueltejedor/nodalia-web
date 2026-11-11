@@ -793,4 +793,9 @@ a.soon-card:hover{border-color:var(--line-2);background:var(--surface-2,var(--su
 .soon-card span{font-size:13.5px;line-height:1.4;color:var(--text)}
 .soon-card .i{flex:none;width:16px;height:16px;color:var(--soft)}
 .soon-card em{flex:none;font-style:normal;font-size:11.5px;color:var(--soft)}
+.soon-card .soon-version{align-self:flex-start;margin-top:4px;padding:2px 8px;border-radius:999px;background:var(--surface-2,var(--line));font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ink)}
+a.soon-card--released .i{color:var(--ink)}
+.release-strip li[hidden],.app-download-detail a[hidden]{display:none}
+.app-download-detail{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline}
+#app-primary-detail:empty{display:none}
 .soon .small-label{margin-top:22px}

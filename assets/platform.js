@@ -7,6 +7,7 @@ export function detectPlatform(nav) {
     return 'other';
   }
   if (/mac/i.test(p)) return 'mac';
+  if (/win/i.test(p)) return 'windows';
   if (/linux|x11/i.test(p)) return 'linux';
   return 'other';
 }

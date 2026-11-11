@@ -170,6 +170,17 @@ export async function fetchLatestRelease(fetchImpl) {
   return response.json();
 }
 
+/** The release the page was generated with (#vortia-release-config), or the verified fallback. */
+export function builtRelease(doc) {
+  try {
+    const release = JSON.parse(doc?.getElementById?.('vortia-release-config')?.textContent || 'null');
+    if (isValidRelease(release)) return release;
+  } catch {
+    /* A broken block falls back to the verified release. */
+  }
+  return FALLBACK;
+}
+
 export async function bootVortiaDownloads({
   document: doc,
   navigator: nav,
@@ -178,14 +189,15 @@ export async function bootVortiaDownloads({
   if (!doc?.getElementById?.('vortia-downloads')) return null;
   const get = (id) => doc.getElementById(id);
   const os = detectPlatform(nav);
-  renderRelease(get, FALLBACK, os, 'unknown', true);
+  const built = builtRelease(doc);
+  renderRelease(get, built, os, 'unknown', true);
 
   const [arch, latest] = await Promise.all([
     detectArchitecture(nav),
     fetchLatestRelease(fetchImpl).catch(() => null),
   ]);
   const valid = isValidRelease(latest);
-  renderRelease(get, valid ? latest : FALLBACK, os, arch, !valid);
+  renderRelease(get, valid ? latest : built, os, arch, !valid);
   return { os, arch, valid };
 }
 

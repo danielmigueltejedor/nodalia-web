@@ -58,7 +58,7 @@ assert.match(portal,/shot-secondary/);
 assert.match(portal,/product-grid/);
 assert.match(portal,/spotlight/);
 assert.match(portal,/docs\/screenshots\/player\.webp/);
-assert.match(portal,/docs\/images\/screenshots\/levels\.png/);
+assert.match(portal,/lienzo\.getnodalia\.com\/screens\/lienzo\/lienzo-demo\.jpg/);
 assert.doesNotMatch(portal,/floating-chip|art-panel|concept-geometry|window-bar/);
 const iso=await readFile(path.join(root,'dist/nodalix/index.html'),'utf8');
 assert.match(iso,/id="descargas"/);
@@ -146,16 +146,32 @@ assert.equal(releasesModule.relativeDate('2026-01-01T00:00:00Z', Date.parse('202
 assert.equal(releasesModule.relativeDate('2026-01-01T00:00:00Z', Date.parse('2026-01-04T00:00:00Z'), 'en'), '3 days ago');
 assert.match(portal, /data-release="nodalix-os"/);
 const viniloHtml = await readFile(path.join(root, 'dist/vinilo/index.html'), 'utf8');
-assert.match(viniloHtml, /id="vinilo-primary-download" class="btn btn-primary" href="https:\/\/github\.com\/danielmigueltejedor\/vinilo\/releases\/download\/v[0-9.]+\/Vinilo-[0-9.]+-x86_64\.AppImage"/);
-assert.match(viniloHtml, /src="\/vinilo-download\.js\?v=[0-9a-f]{10}"/);
+for (const site of ['vinilo', 'lienzo']) {
+  const html = await readFile(path.join(root, 'dist', site, 'index.html'), 'utf8');
+  assert.match(html, /id="app-primary-download" class="btn btn-primary" href="https:\/\/github\.com\/danielmigueltejedor\//, `${site}: botón de descarga`);
+  assert.match(html, /id="app-primary-icon"/);
+  assert.match(html, /<script type="application\/json" id="app-download-config">\{"repo":/);
+  assert.match(html, /src="\/app-download\.js\?v=[0-9a-f]{10}"/);
+  assert.ok((await stat(path.join(root, 'dist', site, 'app-download.js'))).size > 100);
+}
+assert.match(viniloHtml, /id="app-primary-download" class="btn btn-primary" href="https:\/\/github\.com\/danielmigueltejedor\/vinilo\/releases\/download\/v[0-9.]+\/Vinilo-[0-9.]+-x86_64\.AppImage"/);
 assert.doesNotMatch(viniloHtml, /aguja/i);
-assert.ok((await stat(path.join(root, 'dist/vinilo/vinilo-download.js'))).size > 100);
+const lienzoHtml = await readFile(path.join(root, 'dist/lienzo/index.html'), 'utf8');
+for (const shot of ['lienzo-demo.jpg', 'lienzo-adjustments.jpg', 'lienzo-light.jpg']) {
+  assert.ok(lienzoHtml.includes(`https://lienzo.getnodalia.com/screens/lienzo/${shot}`), `Lienzo sin ${shot}`);
+  assert.ok((await stat(path.join(root, 'dist/lienzo/screens/lienzo', shot))).size > 10000);
+}
+// Ningún texto visible habla de proyectos de origen.
+for (const id of ['portal', 'vortia', 'vinilo', 'lienzo', 'nodalix']) {
+  const html = await readFile(path.join(root, 'dist', id, 'index.html'), 'utf8');
+  assert.doesNotMatch(html, /Patchy|PhotoCraft|CadCraft|Slipmat|\bfork/i, `${id} menciona un proyecto de origen`);
+}
 for (const icon of ['platform-apple.svg', 'platform-linux.svg']) {
   assert.ok((await stat(path.join(root, 'dist/vinilo', icon))).size > 50, `dist/vinilo/${icon}`);
 }
 assert.ok((await stat(path.join(root, 'dist/portal/releases.js'))).size > 100);
 await import('./test-vortia-download.mjs');
-await import('./test-vinilo-download.mjs');
+await import('./test-app-download.mjs');
 await import('./test-nodalix-releases.mjs');
 console.log('✓ Cinco webs, CSS con hash anti-caché, cabeceras, módulos ES y descargas ISO/Vortia validados.');
 
