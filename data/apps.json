@@ -167,8 +167,8 @@
     ],
     "features": [
       [
-        "Una aplicación nativa de verdad",
-        "Interfaz GTK4 con el diseño de Nodalia, no una web metida en una ventana."
+        "El diseño propio de Nodalia",
+        "Islas redondeadas, títulos en Sora, iconos en negrita y controles de ventana propios. GTK4 nativo, sin libadwaita ni una web metida en una ventana."
       ],
       [
         "Varias fuentes, una cola",
@@ -176,7 +176,7 @@
       ],
       [
         "Reproducción cuidada",
-        "Sin pausas entre pistas, fundido cruzado y cola de reproducción."
+        "Sin pausas entre pistas, fundido cruzado y una cola que se abre arrastrando el reproductor hacia arriba."
       ],
       [
         "Letras y karaoke",
@@ -184,7 +184,7 @@
       ],
       [
         "Integrado en el escritorio",
-        "Controles en la barra superior, la pantalla de bloqueo y las teclas multimedia. La música sigue al cerrar la ventana."
+        "En Nodalix, sus menús y controles van en la barra superior; también en la pantalla de bloqueo y las teclas multimedia. La música sigue al cerrar la ventana."
       ],
       [
         "Estadísticas en tu equipo",
@@ -413,7 +413,24 @@
     "license": "",
     "repo": "nodalix-os",
     "icon": "docs/images/nodalix-readme-logo.svg",
-    "previews": [],
+    "previews": [
+      [
+        "docs/screenshots/desktop.webp",
+        "Escritorio de Nodalix OS con el dock flotante"
+      ],
+      [
+        "docs/screenshots/quick-settings.webp",
+        "Ajustes rápidos de Nodalix OS"
+      ],
+      [
+        "docs/screenshots/updates.webp",
+        "Actualizaciones de todo el sistema desde Configuración"
+      ],
+      [
+        "docs/screenshots/appearance.webp",
+        "Apariencia: estilo, color de resaltado y fondos de Nodalix"
+      ]
+    ],
     "features": [
       [
         "Diseñado como un sistema",
