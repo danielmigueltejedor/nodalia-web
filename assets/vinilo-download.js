@@ -12,12 +12,17 @@ export const ASSET_PREFIX = `https://github.com/${OWNER}/${REPO}/releases/downlo
 
 /** Last verified release, used in the static page and when the GitHub API is unavailable. */
 export const FALLBACK = {
-  tag_name: 'v1.1.5',
+  tag_name: 'v2.0.0',
   assets: [
     {
-      name: 'Vinilo-1.1.5-x86_64.AppImage',
-      size: 317299192,
-      browser_download_url: `${ASSET_PREFIX}v1.1.5/Vinilo-1.1.5-x86_64.AppImage`,
+      name: 'Vinilo-2.0.0-x86_64.AppImage',
+      size: 310970872,
+      browser_download_url: `${ASSET_PREFIX}v2.0.0/Vinilo-2.0.0-x86_64.AppImage`,
+    },
+    {
+      name: 'Vinilo-2.0.0-macos-arm64.dmg',
+      size: 171563827,
+      browser_download_url: `${ASSET_PREFIX}v2.0.0/Vinilo-2.0.0-macos-arm64.dmg`,
     },
   ],
 };

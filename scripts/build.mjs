@@ -307,7 +307,7 @@ function product(app) {
   const primaryDownload = app.id === 'vortia'
     ? '<a id="vortia-primary-download" class="btn btn-primary" href="https://github.com/danielmigueltejedor/vortia/releases/latest" rel="noopener noreferrer"><img id="vortia-primary-icon" class="vortia-platform-icon" src="/platform-linux.svg" alt="" width="20" height="20" hidden/><span id="vortia-primary-title">Ver versiones y descargas</span><span class="btn-icon" aria-hidden="true">↓</span></a>'
     : app.id === 'vinilo'
-      ? `<a id="vinilo-primary-download" class="btn btn-primary" href="${safeUrl('https://github.com/danielmigueltejedor/vinilo/releases/download/v1.1.5/Vinilo-1.1.5-x86_64.AppImage')}" rel="noopener noreferrer">Descargar AppImage ↓</a>`
+      ? `<a id="vinilo-primary-download" class="btn btn-primary" href="${safeUrl('https://github.com/danielmigueltejedor/vinilo/releases/download/v2.0.0/Vinilo-2.0.0-x86_64.AppImage')}" rel="noopener noreferrer">Descargar AppImage ↓</a>`
     : app.id === 'nodalix'
       ? `<a href="#descargas" class="btn btn-primary">Descargar Nodalix OS ${icon.down}</a>`
       : app.primaryCta
@@ -316,7 +316,7 @@ function product(app) {
   const primaryHint = app.id === 'vortia'
     ? '<p class="vortia-primary-detail" id="vortia-primary-detail" role="status" aria-live="polite">Se elegirá el instalador compatible con tu sistema operativo.</p>'
     : app.id === 'vinilo'
-      ? `<p class="vortia-primary-detail" id="vinilo-primary-detail"><span id="vinilo-primary-kind">AppImage x86_64</span> · <span id="vinilo-primary-version">v1.1.5</span> · <span id="vinilo-mac" hidden><a id="vinilo-mac-download" class="text-link" href="${safeUrl(app.repo + '/releases/latest')}" rel="noopener noreferrer">DMG · Apple Silicon (arm64)</a> · </span>${A(app.repo + '/releases/latest', 'Otros paquetes: .deb, .rpm, Flatpak', 'text-link', true)}</p><script type="module" src="/vinilo-download.js?v=${viniloDownloadVersion}"></script>`
+      ? `<p class="vortia-primary-detail" id="vinilo-primary-detail"><span id="vinilo-primary-kind">AppImage x86_64</span> · <span id="vinilo-primary-version">v2.0.0</span> · <span id="vinilo-mac" hidden><a id="vinilo-mac-download" class="text-link" href="${safeUrl(app.repo + '/releases/latest')}" rel="noopener noreferrer">DMG · Apple Silicon (arm64)</a> · </span>${A(app.repo + '/releases/latest', 'Otros paquetes: .deb, .rpm, Flatpak', 'text-link', true)}</p><script type="module" src="/vinilo-download.js?v=${viniloDownloadVersion}"></script>`
       : '';
   const sections = [['funciones', 'Funciones'], ['ficha', 'Ficha técnica'], ...(hasDownloads ? [['descargas', 'Descargas']] : []), ...(app.id === 'nodalix' || app.install ? [['instalacion', 'Instalación']] : []), ...(app.previews.length ? [['capturas', 'Capturas']] : []), ['faq', 'Preguntas'], ['codigo', 'Código']];
   const detail = app.sources
@@ -367,7 +367,7 @@ function vortiaDownloads() {
         </div>
         <div class="vortia-version-info" data-reveal="right">
           <span class="kicker">Última publicación estable</span>
-          <strong id="vortia-release-version">v0.5.0</strong>
+          <strong id="vortia-release-version">v0.6.0</strong>
           <span id="vortia-release-source">Consultando GitHub Releases…</span>
         </div>
       </div>
@@ -378,8 +378,8 @@ function vortiaDownloads() {
           </div>
           <p class="vortia-package-desc">Para distribuciones Linux de 64 bits (x86_64) con glibc 2.31 o posterior. Incluye OpenFOAM y el mallador.</p>
           <p class="vortia-package-size" id="vortia-linux-size">292,6 MB</p>
-          <a class="btn btn-primary" id="vortia-linux-link" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.5.0/Vortia-0.5.0-linux-x86_64.AppImage">Descargar AppImage ↓</a>
-          <a class="vortia-checksum" id="vortia-linux-sha" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.5.0/Vortia-0.5.0-linux-x86_64.AppImage.sha256">SHA-256 ↗</a>
+          <a class="btn btn-primary" id="vortia-linux-link" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.6.0/Vortia-0.6.0-linux-x86_64.AppImage">Descargar AppImage ↓</a>
+          <a class="vortia-checksum" id="vortia-linux-sha" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.6.0/Vortia-0.6.0-linux-x86_64.AppImage.sha256">SHA-256 ↗</a>
         </article>
         <article class="vortia-package" data-reveal data-platform="mac">
           <div class="vortia-package-head"><img src="/platform-apple.svg" alt="" width="38" height="38"/>
@@ -387,8 +387,8 @@ function vortiaDownloads() {
           </div>
           <p class="vortia-package-desc">Para Macs con Apple Silicon y macOS 14 o posterior. Incluye OpenFOAM y el mallador. No es compatible con Macs Intel.</p>
           <p class="vortia-package-size" id="vortia-mac-size">414,4 MB</p>
-          <a class="btn btn-primary" id="vortia-mac-link" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.5.0/Vortia-0.5.0-macos-arm64.dmg">Descargar DMG ↓</a>
-          <a class="vortia-checksum" id="vortia-mac-sha" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.5.0/Vortia-0.5.0-macos-arm64.dmg.sha256">SHA-256 ↗</a>
+          <a class="btn btn-primary" id="vortia-mac-link" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.6.0/Vortia-0.6.0-macos-arm64.dmg">Descargar DMG ↓</a>
+          <a class="vortia-checksum" id="vortia-mac-sha" href="https://github.com/danielmigueltejedor/vortia/releases/download/v0.6.0/Vortia-0.6.0-macos-arm64.dmg.sha256">SHA-256 ↗</a>
         </article>
       </div>
       <div class="vortia-download-footer">
