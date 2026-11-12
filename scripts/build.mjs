@@ -322,11 +322,12 @@ function appDownloadHint(app) {
 function appDownloadsSection(app) {
   const config = appDownloadConfig(app);
   const choice = choose(config.release, config, 'linux', 'x86');
-  const systems = { linux: ['Linux', '/platform-linux.svg'], mac: ['macOS', '/platform-apple.svg'], windows: ['Windows', ''] };
+  const systems = { linux: ['Linux', '/platform-linux.svg'], mac: ['macOS', '/platform-apple.svg'], macAlt: ['macOS', '/platform-apple.svg'], windows: ['Windows', ''] };
   const cards = Object.keys(systems).filter((os) => app.downloads[os]).map((os) => {
     const asset = choice.found[os];
-    const [name, logo] = systems[os];
-    return `<article class="vortia-package" data-reveal data-platform="${os}">
+    const [defaultName, logo] = systems[os];
+    const name = app.downloadNames?.[os] || defaultName;
+    return `<article class="vortia-package" data-reveal data-platform="${os === 'macAlt' ? 'mac' : os}">
           <div class="vortia-package-head">${logo ? `<img src="${logo}" alt="" width="38" height="38"/>` : ''}<div><h3>${name}</h3></div></div>
           <p class="vortia-package-size" id="app-card-${os}-size" translate="no">${e(asset ? megabytes(asset.size, 'es') : '')}</p>
           <a class="btn btn-primary" id="app-card-${os}" href="${safeUrl(asset ? asset.url : choice.page)}" rel="noopener noreferrer">${asset ? `Descargar <span translate="no">${e(kind(os, asset))}</span>` : 'Consultar en GitHub ↗'}</a>
