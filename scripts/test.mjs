@@ -178,6 +178,7 @@ for (const icon of ['platform-apple.svg', 'platform-linux.svg']) {
 assert.ok((await stat(path.join(root, 'dist/portal/releases.js'))).size > 100);
 await import('./test-vortia-download.mjs');
 await import('./test-app-download.mjs');
+await import('./test-scroll-story.mjs');
 await import('./test-nodalix-releases.mjs');
 console.log('✓ Cinco webs, CSS con hash anti-caché, cabeceras, módulos ES y descargas ISO/Vortia validados.');
 
