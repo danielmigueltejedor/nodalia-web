@@ -24,7 +24,7 @@ concurrency:
 jobs:
   validate:
     name: Build and test all five sites
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: useblacksmith/checkout@2b9fe87d796feea153b455ec2f3125b471a7b0e7 # v1
@@ -47,7 +47,7 @@ jobs:
     name: Publish five Cloudflare Pages projects
     needs: validate
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
