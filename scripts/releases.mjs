@@ -33,14 +33,23 @@ function readSnapshot() {
   }
 }
 
+// Las últimas versiones estables, de la más nueva a la más antigua. Una versión puede salir solo para
+// una plataforma, así que las anteriores se guardan en `previous` para que cada sistema siga
+// ofreciendo su último paquete (la web elige con `combine`, de assets/app-download.js).
+const HISTORY = 5;
+
 async function fetchLatest(repo) {
   const headers = { Accept: 'application/vnd.github+json', 'User-Agent': 'nodalia-web-build' };
   if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-  const response = await fetch(`https://api.github.com/repos/${repoOwner(repo)}/${repo}/releases/latest`, { headers, signal: AbortSignal.timeout(8000) });
+  const response = await fetch(`https://api.github.com/repos/${repoOwner(repo)}/${repo}/releases?per_page=10`, { headers, signal: AbortSignal.timeout(8000) });
   // 404: el proyecto todavía no tiene ninguna versión publicada.
   if (response.status === 404) return null;
   if (!response.ok) throw new Error(`GitHub ${response.status}`);
-  return slim(repo, await response.json());
+  const list = await response.json();
+  const stable = (Array.isArray(list) ? list : []).map((release) => slim(repo, release)).filter(Boolean);
+  if (!stable.length) return null;
+  const [newest, ...older] = stable;
+  return older.length ? { ...newest, previous: older.slice(0, HISTORY) } : newest;
 }
 
 /** Devuelve { repo: release | null }. `live` dice de qué proyectos se obtuvo respuesta de GitHub. */

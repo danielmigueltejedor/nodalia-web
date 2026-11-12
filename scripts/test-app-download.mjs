@@ -1,5 +1,5 @@
 import { strict as assert } from 'node:assert';
-import { choose, detail, kind, packages, render, bootAppDownload } from '../assets/app-download.js';
+import { choose, combine, detail, kind, packages, render, bootAppDownload } from '../assets/app-download.js';
 import { slim } from './releases.mjs';
 
 // The download button shared by Vinilo, Lienzo and every app with installers.
@@ -59,6 +59,29 @@ for (const [os, arch] of [['other', 'unknown'], ['windows', 'unknown'], ['linux'
   assert.equal(c.icon, '');
   assert.equal(c.title, 'Descargar');
 }
+// A macOS-only release: Linux keeps its last package, and says which version it is.
+const v012 = {
+  tag_name: 'v0.1.2',
+  html_url: 'https://github.com/getnodalia/vinilo/releases/tag/v0.1.2',
+  assets: [dl('vinilo', 'v0.1.2', 'Vinilo-0.1.2-native-macos-arm64.dmg', 95), dl('vinilo', 'v0.1.2', 'Vinilo-0.1.2-nodalia-macos-arm64.dmg', 172)],
+};
+const v011 = { ...v01, tag_name: 'v0.1.1', html_url: 'https://github.com/getnodalia/vinilo/releases/tag/v0.1.1', assets: [dl('vinilo', 'v0.1.1', 'Vinilo-0.1.1-x86_64.AppImage', 311), dl('vinilo', 'v0.1.1', 'Vinilo-0.1.1-native-macos-arm64.dmg', 90)] };
+const merged = combine([v012, v011, v01], vinilo);
+assert.equal(merged.tag_name, 'v0.1.2');
+c = choose(merged, vinilo, 'linux', 'x86');
+assert.equal(c.asset.name, 'Vinilo-0.1.1-x86_64.AppImage');
+assert.equal(c.version, 'v0.1.1');
+c = choose(merged, vinilo, 'mac', 'arm');
+assert.equal(c.asset.name, 'Vinilo-0.1.2-native-macos-arm64.dmg');
+assert.equal(c.version, 'v0.1.2');
+assert.equal(choose(merged, vinilo, 'mac', 'arm').found.macAlt.name, 'Vinilo-0.1.2-nodalia-macos-arm64.dmg');
+// One release, or releases that carry everything, are left as they are.
+assert.equal(combine([v011], vinilo), v011);
+assert.equal(combine(v011, vinilo), v011);
+assert.equal(combine([v012, v011], { repo: 'vinilo', patterns: { mac: vinilo.patterns.mac } }).assets.length, 2);
+assert.equal(combine([], vinilo), null);
+// Drafts and pre-releases never lend a package.
+assert.equal(packages(combine([v012, { ...v011, prerelease: true }], vinilo), vinilo).linux, null);
 // Assets outside the app's own releases, drafts and pre-releases are never offered.
 assert.equal(packages({ ...v2, assets: [{ name: 'Vinilo-9-x86_64.AppImage', browser_download_url: 'https://evil.example/Vinilo-9-x86_64.AppImage' }] }, vinilo).linux, null);
 assert.equal(packages({ ...v2, prerelease: true }, vinilo).linux, null);
@@ -80,6 +103,23 @@ const page = (config, nav) => {
 const mac = { platform: 'MacIntel', userAgent: 'Macintosh', userAgentData: { platform: 'macOS', getHighEntropyValues: async () => ({ architecture: 'arm' }) } };
 const linux = { platform: 'Linux x86_64', userAgent: 'X11; Linux x86_64' };
 const v21 = { ...v2, tag_name: 'v2.1.0', html_url: 'https://github.com/getnodalia/vinilo/releases/tag/v2.1.0', assets: [dl('vinilo', 'v2.1.0', 'Vinilo-2.1.0-x86_64.AppImage'), dl('vinilo', 'v2.1.0', 'Vinilo-2.1.0-macos-arm64.dmg')] };
+// In the page, from GitHub's list of releases.
+{
+  const mac1 = { platform: 'MacIntel', userAgent: 'Macintosh', userAgentData: { platform: 'macOS', getHighEntropyValues: async () => ({ architecture: 'arm' }) } };
+  const lin1 = { platform: 'Linux x86_64', userAgent: 'X11; Linux x86_64' };
+  let listed = null;
+  const list = async (url) => { listed = url; return { ok: true, json: async () => [v012, v011] }; };
+  let q = page({ ...vinilo, release: v011 }, lin1);
+  assert.equal(await bootAppDownload({ document: q.doc, navigator: q.nav, fetch: list }), true);
+  assert.match(listed, /\/repos\/getnodalia\/vinilo\/releases\?per_page=\d+$/);
+  assert.match(q.els['app-primary-download'].href, /v0\.1\.1\/Vinilo-0\.1\.1-x86_64\.AppImage$/);
+  assert.equal(q.els['app-release-version'].textContent, 'v0.1.1');
+  assert.match(q.els['app-card-mac'].href, /v0\.1\.2\/Vinilo-0\.1\.2-native-macos-arm64\.dmg$/);
+  q = page({ ...vinilo, release: v011 }, mac1);
+  await bootAppDownload({ document: q.doc, navigator: q.nav, fetch: list });
+  assert.match(q.els['app-primary-download'].href, /v0\.1\.2\/Vinilo-0\.1\.2-native-macos-arm64\.dmg$/);
+  assert.match(q.els['app-card-linux'].href, /v0\.1\.1\/Vinilo-0\.1\.1-x86_64\.AppImage$/);
+}
 let p = page({ ...vinilo, release: v2 }, mac);
 assert.equal(await bootAppDownload({ document: p.doc, navigator: p.nav, fetch: async () => ({ ok: true, json: async () => v21 }) }), true);
 assert.match(p.els['app-primary-download'].href, /v2\.1\.0\/Vinilo-2\.1\.0-macos-arm64\.dmg$/);

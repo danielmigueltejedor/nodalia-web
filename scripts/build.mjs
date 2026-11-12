@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { apps, brand, site, repoUrl } from './data.mjs';
 import { DEFAULT_LOCALE, locales, localeCodes, localePath, localize, dictionaries, clientKeys } from './i18n.mjs';
 import { loadReleases } from './releases.mjs';
-import { choose, detail, kind, megabytes, releasesUrl } from '../assets/app-download.js';
+import { choose, combine, detail, kind, megabytes, releasesUrl } from '../assets/app-download.js';
 import { scrollStory } from './scroll-story.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -311,9 +311,15 @@ async function home() {
 }
 // Botón de descarga de las apps con instaladores (Vinilo, Lienzo): la página sale con la versión
 // actual para Linux; app-download.js elige el paquete de tu sistema y comprueba si hay otra más nueva.
-const appDownloadConfig = (app) => ({ repo: app.repoName, patterns: app.downloads, release: releases[app.repoName] || null });
+const appDownloadConfig = (app) => {
+  const latest = releases[app.repoName] || null;
+  const config = { repo: app.repoName, patterns: app.downloads };
+  // Each system's installer comes from the newest release that carries it (see `combine`).
+  return { ...config, release: latest ? combine([latest, ...(latest.previous || [])], config) : null };
+};
 function appDownloadButton(app) {
-  const choice = choose(releases[app.repoName], appDownloadConfig(app), 'linux', 'x86');
+  const config = appDownloadConfig(app);
+  const choice = choose(config.release, config, 'linux', 'x86');
   return `<a id="app-primary-download" class="btn btn-primary" href="${safeUrl(choice.href)}" rel="noopener noreferrer"><img id="app-primary-icon" class="vortia-platform-icon" src="${choice.icon || '/platform-linux.svg'}" alt="" width="20" height="20"${choice.icon ? '' : ' hidden'}/><span id="app-primary-title">${e(choice.title)}</span></a>`;
 }
 function appDownloadHint(app) {
