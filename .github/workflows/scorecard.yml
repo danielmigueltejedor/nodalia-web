@@ -17,7 +17,7 @@ jobs:
       id-token: write
     steps:
       - name: Checkout repository
-        uses: useblacksmith/checkout@v1 # v4.2.2
+        uses: useblacksmith/checkout@2b9fe87d796feea153b455ec2f3125b471a7b0e7 # v1
         with:
           persist-credentials: false
       - name: Run OpenSSF Scorecard
