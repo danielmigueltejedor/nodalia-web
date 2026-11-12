@@ -310,7 +310,7 @@ async function home() {
 const appDownloadConfig = (app) => ({ repo: app.repoName, patterns: app.downloads, release: releases[app.repoName] || null });
 function appDownloadButton(app) {
   const choice = choose(releases[app.repoName], appDownloadConfig(app), 'linux', 'x86');
-  return `<a id="app-primary-download" class="btn btn-primary" href="${safeUrl(choice.href)}" rel="noopener noreferrer"><img id="app-primary-icon" class="vortia-platform-icon" src="${choice.icon || '/platform-linux.svg'}" alt="" width="20" height="20"${choice.icon ? '' : ' hidden'}/><span id="app-primary-title">${e(choice.title)}</span><span class="btn-icon" aria-hidden="true">↓</span></a>`;
+  return `<a id="app-primary-download" class="btn btn-primary" href="${safeUrl(choice.href)}" rel="noopener noreferrer"><img id="app-primary-icon" class="vortia-platform-icon" src="${choice.icon || '/platform-linux.svg'}" alt="" width="20" height="20"${choice.icon ? '' : ' hidden'}/><span id="app-primary-title">${e(choice.title)}</span></a>`;
 }
 function appDownloadHint(app) {
   const config = appDownloadConfig(app);
