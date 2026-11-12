@@ -24,6 +24,10 @@ for (const site of ['portal', 'vortia', 'vinilo', 'lienzo', 'nodalix']) {
     assert.equal([...story.matchAll(/<li data-story-chapter="[123]"><h3>[^<]+<\/h3><p>[^<]+<\/p>/g)].length, 3);
     assert.match(story, new RegExp(`class="story-skip text-link" href="#${site === 'portal' ? 'aplicaciones' : 'funciones'}"`));
     assert.doesNotMatch(story, /story-active/);
+    if (site === 'lienzo') {
+      assert.match(story, /src="\/screens\/lienzo\/lienzo-demo\.jpg"/);
+      assert.match(story, /src="\/screens\/lienzo\/lienzo-adjustments\.jpg"/);
+    }
     assert.match(page, /type="module" src="\/scroll-story\.js\?v=[0-9a-f]{10}"/);
   }
 }

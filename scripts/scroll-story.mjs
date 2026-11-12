@@ -52,7 +52,9 @@ export function scrollStory(id, apps, { e, safeUrl }) {
   const screenshot = (index, className) => {
     const [url] = app.previews[index];
     // Reuse the product's existing images, including the local Lienzo captures.
-    return `<figure class="story-screen ${className}"><img src="${safeUrl(url)}" alt="" loading="lazy" decoding="async"/></figure>`;
+    const localPath = new URL(url).pathname;
+    const src = app.localScreens.includes(localPath) ? e(localPath) : safeUrl(url);
+    return `<figure class="story-screen ${className}"><img src="${src}" alt="" loading="lazy" decoding="async"/></figure>`;
   };
   const appNode = (name) => {
     const product = apps.find((item) => item.id === name);
