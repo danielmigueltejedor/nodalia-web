@@ -150,6 +150,9 @@ for (const site of ['vinilo', 'lienzo']) {
   const html = await readFile(path.join(root, 'dist', site, 'index.html'), 'utf8');
   assert.match(html, /id="app-primary-download" class="btn btn-primary" href="https:\/\/github\.com\/getnodalia\//, `${site}: botón de descarga`);
   assert.match(html, /id="app-primary-icon"/);
+  const downloadCards = html.match(/<article class="vortia-package"[^>]*>[\s\S]*?<\/article>/g) ?? [];
+  assert.equal(downloadCards.length, 3, `${site}: tarjetas de descarga`);
+  for (const card of downloadCards) assert.match(card, /<p class="vortia-package-desc">[^<]+<\/p>/);
   assert.match(html, /<script type="application\/json" id="app-download-config">\{"repo":/);
   assert.match(html, /src="\/app-download\.js\?v=[0-9a-f]{10}"/);
   assert.ok((await stat(path.join(root, 'dist', site, 'app-download.js'))).size > 100);

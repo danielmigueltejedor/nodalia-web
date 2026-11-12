@@ -276,6 +276,11 @@
       "mac": "macOS · Vinilo Native",
       "macAlt": "macOS · Vinilo Nodalia"
     },
+    "downloadDescriptions": {
+      "linux": "Archivo ejecutable para distribuciones Linux de 64 bits con arquitectura x86_64.",
+      "mac": "Edición con interfaz nativa de macOS. Incluye Liquid Glass en macOS 26 o posterior.",
+      "macAlt": "Edición con el diseño de Nodalia, igual que en Linux."
+    },
     "otherPackages": "Otros paquetes: .deb, .rpm, Flatpak"
   },
   {
@@ -384,6 +389,11 @@
       "linux": "^lienzo-.+-linux-x86_64\\.AppImage$",
       "mac": "^lienzo-.+-macos-(arm64|universal)\\.dmg$",
       "windows": "^lienzo-.+-windows-x64\\.msi$"
+    },
+    "downloadDescriptions": {
+      "linux": "Archivo ejecutable para distribuciones Linux de 64 bits con arquitectura x86_64.",
+      "mac": "El DMG universal funciona en Macs con Apple Silicon e Intel.",
+      "windows": "Instalador MSI para Windows de 64 bits con arquitectura x64."
     },
     "otherPackages": "Otros paquetes: .deb, .rpm, .tar.gz, zip portátil de Windows"
   },
