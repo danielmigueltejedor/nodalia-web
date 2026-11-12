@@ -148,13 +148,13 @@ assert.match(portal, /data-release="nodalix-os"/);
 const viniloHtml = await readFile(path.join(root, 'dist/vinilo/index.html'), 'utf8');
 for (const site of ['vinilo', 'lienzo']) {
   const html = await readFile(path.join(root, 'dist', site, 'index.html'), 'utf8');
-  assert.match(html, /id="app-primary-download" class="btn btn-primary" href="https:\/\/github\.com\/danielmigueltejedor\//, `${site}: botón de descarga`);
+  assert.match(html, /id="app-primary-download" class="btn btn-primary" href="https:\/\/github\.com\/getnodalia\//, `${site}: botón de descarga`);
   assert.match(html, /id="app-primary-icon"/);
   assert.match(html, /<script type="application\/json" id="app-download-config">\{"repo":/);
   assert.match(html, /src="\/app-download\.js\?v=[0-9a-f]{10}"/);
   assert.ok((await stat(path.join(root, 'dist', site, 'app-download.js'))).size > 100);
 }
-assert.match(viniloHtml, /id="app-primary-download" class="btn btn-primary" href="https:\/\/github\.com\/danielmigueltejedor\/vinilo\/releases\/download\/v[0-9.]+\/Vinilo-[0-9.]+-x86_64\.AppImage"/);
+assert.match(viniloHtml, /id="app-primary-download" class="btn btn-primary" href="https:\/\/github\.com\/getnodalia\/vinilo\/releases\/download\/v[0-9.]+\/Vinilo-[0-9.]+-x86_64\.AppImage"/);
 assert.doesNotMatch(viniloHtml, /aguja/i);
 const lienzoHtml = await readFile(path.join(root, 'dist/lienzo/index.html'), 'utf8');
 for (const shot of ['lienzo-demo.jpg', 'lienzo-adjustments.jpg', 'lienzo-light.jpg']) {
