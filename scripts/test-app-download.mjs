@@ -4,13 +4,27 @@ import { slim } from './releases.mjs';
 
 // The download button shared by Vinilo, Lienzo and every app with installers.
 const dl = (repo, tag, name, size = 1) => ({ name, size, browser_download_url: `https://github.com/getnodalia/${repo}/releases/download/${tag}/${name}` });
-const vinilo = { repo: 'vinilo', patterns: { linux: '^Vinilo-.+-x86_64\\.AppImage$', mac: '^Vinilo-.+-macos-(arm64|universal)\\.dmg$' } };
+const vinilo = { repo: 'vinilo', patterns: { linux: '^Vinilo-.+-x86_64\\.AppImage$', mac: '^Vinilo-(?!.*-nodalia-).+-macos-(arm64|universal)\\.dmg$', macAlt: '^Vinilo-.+-nodalia-macos-(arm64|universal)\\.dmg$' } };
 const lienzo = { repo: 'lienzo', patterns: { linux: '^lienzo-.+-linux-x86_64\\.AppImage$', mac: '^lienzo-.+-macos-(arm64|universal)\\.dmg$', windows: '^lienzo-.+-windows-x64\\.msi$' } };
 const v2 = {
   tag_name: 'v2.0.0',
   html_url: 'https://github.com/getnodalia/vinilo/releases/tag/v2.0.0',
   assets: [dl('vinilo', 'v2.0.0', 'vinilo_2.0.0_amd64.deb'), dl('vinilo', 'v2.0.0', 'Vinilo-2.0.0-x86_64.AppImage', 310970872), dl('vinilo', 'v2.0.0', 'Vinilo-2.0.0-macos-arm64.dmg', 171563827)],
 };
+
+// Two Mac editions: the button offers Vinilo Native, the section lists both.
+const v01 = {
+  tag_name: 'v0.1.0',
+  html_url: 'https://github.com/getnodalia/vinilo/releases/tag/v0.1.0',
+  assets: [
+    dl('vinilo', 'v0.1.0', 'Vinilo-0.1.0-x86_64.AppImage'),
+    dl('vinilo', 'v0.1.0', 'Vinilo-0.1.0-native-macos-arm64.dmg', 90),
+    dl('vinilo', 'v0.1.0', 'Vinilo-0.1.0-nodalia-macos-arm64.dmg', 170),
+  ],
+};
+assert.equal(choose(v01, vinilo, 'mac', 'arm').asset.name, 'Vinilo-0.1.0-native-macos-arm64.dmg');
+assert.equal(choose(v01, vinilo, 'mac', 'arm').found.macAlt.name, 'Vinilo-0.1.0-nodalia-macos-arm64.dmg');
+assert.equal(kind('macAlt', choose(v01, vinilo, 'mac', 'arm').found.macAlt), 'DMG · Apple Silicon');
 
 // Linux gets the penguin and the AppImage; a Mac the apple and the DMG.
 let c = choose(v2, vinilo, 'linux', 'x86');
@@ -56,7 +70,7 @@ assert.equal(choose(l, lienzo, 'windows').title, 'Descargar para Windows');
 assert.equal(choose(l, lienzo, 'windows').asset.name, 'lienzo-0.2.0-windows-x64.msi');
 
 // In the page: the built release first, then GitHub's newer one; every system's installer in the downloads section.
-const elements = () => Object.fromEntries(['app-primary-download', 'app-primary-icon', 'app-primary-title', 'app-primary-detail', 'app-release-version', 'app-card-linux', 'app-card-linux-size', 'app-card-mac', 'app-card-mac-size', 'app-card-windows', 'app-card-windows-size'].map((id) => [id, { hidden: false, href: '', textContent: '', src: '' }]));
+const elements = () => Object.fromEntries(['app-primary-download', 'app-primary-icon', 'app-primary-title', 'app-primary-detail', 'app-release-version', 'app-card-linux', 'app-card-linux-size', 'app-card-mac', 'app-card-mac-size', 'app-card-macAlt', 'app-card-macAlt-size', 'app-card-windows', 'app-card-windows-size'].map((id) => [id, { hidden: false, href: '', textContent: '', src: '' }]));
 const page = (config, nav) => {
   const els = elements();
   els['app-download-config'] = { textContent: JSON.stringify(config) };

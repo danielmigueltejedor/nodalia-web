@@ -142,7 +142,7 @@
     "headline": "Toda tu música. Un lugar propio.",
     "tagline": "Escucha sin salir de tu escritorio.",
     "description": "Un reproductor musical nativo, hecho con Rust y GTK4 en el lenguaje de diseño de Nodalia. Tus archivos y los servicios que ya pagas, en una sola cola.",
-    "platforms": "Linux · macOS Apple Silicon · Apple Music solo en Linux x86_64",
+    "platforms": "Linux · macOS Apple Silicon (Native y Nodalia) · Apple Music en Linux x86_64 y macOS",
     "technology": "Rust · GTK4 · Nodalia Design",
     "license": "GPL-3.0",
     "repo": "vinilo",
@@ -264,12 +264,17 @@
         "Sí. El botón de descarga te da la AppImage, que funciona en cualquier distribución x86_64; en GitHub también hay paquetes .deb, .rpm y Flatpak. Compilar con make install sigue siendo posible."
       ]
     ],
-    "limitation": "Apple Music requiere suscripción, conexión continua y Linux x86_64. YouTube Music está en beta y Tidal en alfa. Vinilo se descarga como AppImage, como DMG para Mac con Apple Silicon o como paquete para tu distribución desde GitHub.",
+    "limitation": "Apple Music requiere suscripción y conexión continua, y funciona en Linux x86_64 y en macOS con Apple Silicon. YouTube Music está en beta y Tidal en alfa. Vinilo se descarga como AppImage, como paquete para tu distribución o como DMG para Mac con Apple Silicon, en dos ediciones: Vinilo Native, con interfaz SwiftUI, y Vinilo Nodalia, con la interfaz de Nodalia.",
     "cta": "Instalar desde GitHub",
     "accent": "violet",
     "downloads": {
       "linux": "^Vinilo-.+-x86_64\\.AppImage$",
-      "mac": "^Vinilo-.+-macos-(arm64|universal)\\.dmg$"
+      "mac": "^Vinilo-(?!.*-nodalia-).+-macos-(arm64|universal)\\.dmg$",
+      "macAlt": "^Vinilo-.+-nodalia-macos-(arm64|universal)\\.dmg$"
+    },
+    "downloadNames": {
+      "mac": "macOS · Vinilo Native",
+      "macAlt": "macOS · Vinilo Nodalia"
     },
     "otherPackages": "Otros paquetes: .deb, .rpm, Flatpak"
   },

@@ -9,6 +9,8 @@ import { detectPlatform, detectArchitecture } from './platform.js';
 
 export const OWNER = 'getnodalia';
 const ICONS = { linux: '/platform-linux.svg', mac: '/platform-apple.svg' };
+// Systems with a second installer for the same OS (Vinilo ships two Mac editions) list it as a card only.
+const CARDS = ['linux', 'mac', 'macAlt', 'windows'];
 const TITLES = { linux: 'Descargar para Linux', mac: 'Descargar para macOS', windows: 'Descargar para Windows' };
 
 export const releasesUrl = (repo) => `https://github.com/${OWNER}/${repo}/releases`;
@@ -30,14 +32,14 @@ export function isRelease(release) {
 
 /** The installer for each system that the release carries, by the app's file-name patterns. */
 export function packages(release, config) {
-  const out = { linux: null, mac: null, windows: null };
+  const out = { linux: null, mac: null, macAlt: null, windows: null };
   if (!isRelease(release)) return out;
   const assets = release.assets.map((asset) => safe(asset, config.repo)).filter(Boolean);
   for (const os of Object.keys(out)) {
     const pattern = config.patterns?.[os];
     if (pattern) {
       const matches = assets.filter((asset) => new RegExp(pattern, 'i').test(asset.name));
-      out[os] = os === 'mac'
+      out[os] = os === 'mac' || os === 'macAlt'
         ? matches.find((asset) => /universal/i.test(asset.name)) || matches[0] || null
         : matches[0] || null;
     }
@@ -48,7 +50,7 @@ export function packages(release, config) {
 /** What a file is, in words that read the same in every language the site speaks. */
 export function kind(os, asset) {
   if (!asset) return '';
-  if (os === 'mac') return /universal/i.test(asset.name) ? 'DMG · Universal' : 'DMG · Apple Silicon';
+  if (os === 'mac' || os === 'macAlt') return /universal/i.test(asset.name) ? 'DMG · Universal' : 'DMG · Apple Silicon';
   if (os === 'windows') return /\.msi$/i.test(asset.name) ? 'MSI · Windows x64' : 'Windows x64';
   return /\.AppImage$/i.test(asset.name) ? 'AppImage · x86_64' : 'Linux x86_64';
 }
@@ -125,7 +127,7 @@ export function render(get, release, config, os, arch) {
   // The downloads section lists every system's installer, whichever one the button offers.
   const versionLabel = get('app-release-version');
   if (versionLabel) versionLabel.textContent = choice.version;
-  for (const other of ['linux', 'mac', 'windows']) {
+  for (const other of CARDS) {
     const card = get(`app-card-${other}`);
     if (!card) continue;
     const asset = choice.found[other];
