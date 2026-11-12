@@ -154,7 +154,10 @@ for (const site of ['vinilo', 'lienzo']) {
   assert.match(html, /src="\/app-download\.js\?v=[0-9a-f]{10}"/);
   assert.ok((await stat(path.join(root, 'dist', site, 'app-download.js'))).size > 100);
 }
-assert.match(viniloHtml, /id="app-primary-download" class="btn btn-primary" href="https:\/\/github\.com\/getnodalia\/vinilo\/releases\/download\/v[0-9.]+\/Vinilo-[0-9.]+-x86_64\.AppImage"/);
+// The page is built from Vinilo's live latest release. While its installers are still being
+// uploaded the button links to the release page instead; that must not block the deploy of
+// every site. Which file is chosen is checked with fixed data in test-app-download.mjs.
+assert.match(viniloHtml, /id="app-primary-download" class="btn btn-primary" href="https:\/\/github\.com\/getnodalia\/vinilo\/releases\/(?:download\/v[0-9.]+\/Vinilo-[0-9.]+-x86_64\.AppImage|tag\/v[0-9.]+|latest)"/);
 assert.doesNotMatch(viniloHtml, /aguja/i);
 const lienzoHtml = await readFile(path.join(root, 'dist/lienzo/index.html'), 'utf8');
 for (const shot of ['lienzo-demo.jpg', 'lienzo-adjustments.jpg', 'lienzo-light.jpg']) {
