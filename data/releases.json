@@ -1,16 +1,244 @@
 {
  "brujula": null,
  "celdas": null,
- "forja": null,
+ "forja": {
+  "tag_name": "v0.1.0",
+  "published_at": "2026-11-12T12:39:58Z",
+  "html_url": "https://github.com/getnodalia/forja/releases/tag/v0.1.0",
+  "assets": [
+   {
+    "name": "forja-0.1.0-freebsd-aarch64.tar.gz",
+    "size": 64126710,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-freebsd-aarch64.tar.gz"
+   },
+   {
+    "name": "forja-0.1.0-freebsd-x86_64.tar.gz",
+    "size": 75811526,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-freebsd-x86_64.tar.gz"
+   },
+   {
+    "name": "forja-0.1.0-linux-aarch64.AppImage",
+    "size": 68835848,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-linux-aarch64.AppImage"
+   },
+   {
+    "name": "forja-0.1.0-linux-aarch64.AppImage.zsync",
+    "size": 235523,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-linux-aarch64.AppImage.zsync"
+   },
+   {
+    "name": "forja-0.1.0-linux-aarch64.deb",
+    "size": 74900530,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-linux-aarch64.deb"
+   },
+   {
+    "name": "forja-0.1.0-linux-aarch64.flatpak",
+    "size": 50388048,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-linux-aarch64.flatpak"
+   },
+   {
+    "name": "forja-0.1.0-linux-aarch64.oci-manifest.json",
+    "size": 493,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-linux-aarch64.oci-manifest.json"
+   },
+   {
+    "name": "forja-0.1.0-linux-aarch64.pkg.tar.zst",
+    "size": 55339137,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-linux-aarch64.pkg.tar.zst"
+   },
+   {
+    "name": "forja-0.1.0-linux-aarch64.rpm",
+    "size": 74286708,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-linux-aarch64.rpm"
+   },
+   {
+    "name": "forja-0.1.0-linux-aarch64.tar.gz",
+    "size": 72892948,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-linux-aarch64.tar.gz"
+   },
+   {
+    "name": "forja-0.1.0-linux-riscv64.deb",
+    "size": 75594564,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-linux-riscv64.deb"
+   },
+   {
+    "name": "forja-0.1.0-linux-riscv64.rpm",
+    "size": 75305358,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-linux-riscv64.rpm"
+   },
+   {
+    "name": "forja-0.1.0-linux-riscv64.tar.gz",
+    "size": 74568054,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-linux-riscv64.tar.gz"
+   },
+   {
+    "name": "forja-0.1.0-linux-x86_64.AppImage",
+    "size": 71862776,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-linux-x86_64.AppImage"
+   },
+   {
+    "name": "forja-0.1.0-linux-x86_64.AppImage.zsync",
+    "size": 245867,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-linux-x86_64.AppImage.zsync"
+   },
+   {
+    "name": "forja-0.1.0-linux-x86_64.deb",
+    "size": 77274052,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-linux-x86_64.deb"
+   },
+   {
+    "name": "forja-0.1.0-linux-x86_64.flatpak",
+    "size": 53994904,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-linux-x86_64.flatpak"
+   },
+   {
+    "name": "forja-0.1.0-linux-x86_64.oci-manifest.json",
+    "size": 493,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-linux-x86_64.oci-manifest.json"
+   },
+   {
+    "name": "forja-0.1.0-linux-x86_64.pkg.tar.zst",
+    "size": 57396180,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-linux-x86_64.pkg.tar.zst"
+   },
+   {
+    "name": "forja-0.1.0-linux-x86_64.rpm",
+    "size": 76790012,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-linux-x86_64.rpm"
+   },
+   {
+    "name": "forja-0.1.0-linux-x86_64.tar.gz",
+    "size": 76111981,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-linux-x86_64.tar.gz"
+   },
+   {
+    "name": "forja-0.1.0-macos-universal.dmg",
+    "size": 85787499,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-macos-universal.dmg"
+   },
+   {
+    "name": "forja-0.1.0-windows-arm64-portable.zip",
+    "size": 71493507,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-windows-arm64-portable.zip"
+   },
+   {
+    "name": "forja-0.1.0-windows-arm64.msi",
+    "size": 56434688,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-windows-arm64.msi"
+   },
+   {
+    "name": "forja-0.1.0-windows-x64-portable.zip",
+    "size": 74761183,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-windows-x64-portable.zip"
+   },
+   {
+    "name": "forja-0.1.0-windows-x64.msi",
+    "size": 59883520,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-0.1.0-windows-x64.msi"
+   },
+   {
+    "name": "forja-cli-0.1.0-macos-universal.zip",
+    "size": 62358949,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-cli-0.1.0-macos-universal.zip"
+   },
+   {
+    "name": "forja-web-0.1.0.zip",
+    "size": 11514127,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/forja-web-0.1.0.zip"
+   },
+   {
+    "name": "SHA256SUMS.txt",
+    "size": 2794,
+    "browser_download_url": "https://github.com/getnodalia/forja/releases/download/v0.1.0/SHA256SUMS.txt"
+   }
+  ]
+ },
  "lamina": null,
  "letra": null,
- "lienzo": null,
+ "lienzo": {
+  "tag_name": "v0.2.0",
+  "published_at": "2026-11-12T12:41:02Z",
+  "html_url": "https://github.com/getnodalia/lienzo/releases/tag/v0.2.0",
+  "assets": [
+   {
+    "name": "lienzo-0.2.0-linux-x86_64.AppImage",
+    "size": 130689528,
+    "browser_download_url": "https://github.com/getnodalia/lienzo/releases/download/v0.2.0/lienzo-0.2.0-linux-x86_64.AppImage"
+   },
+   {
+    "name": "lienzo-0.2.0-linux-x86_64.AppImage.zsync",
+    "size": 223589,
+    "browser_download_url": "https://github.com/getnodalia/lienzo/releases/download/v0.2.0/lienzo-0.2.0-linux-x86_64.AppImage.zsync"
+   },
+   {
+    "name": "lienzo-0.2.0-linux-x86_64.deb",
+    "size": 139976430,
+    "browser_download_url": "https://github.com/getnodalia/lienzo/releases/download/v0.2.0/lienzo-0.2.0-linux-x86_64.deb"
+   },
+   {
+    "name": "lienzo-0.2.0-linux-x86_64.rpm",
+    "size": 144980221,
+    "browser_download_url": "https://github.com/getnodalia/lienzo/releases/download/v0.2.0/lienzo-0.2.0-linux-x86_64.rpm"
+   },
+   {
+    "name": "lienzo-0.2.0-linux-x86_64.tar.gz",
+    "size": 137709770,
+    "browser_download_url": "https://github.com/getnodalia/lienzo/releases/download/v0.2.0/lienzo-0.2.0-linux-x86_64.tar.gz"
+   },
+   {
+    "name": "lienzo-0.2.0-macos-universal.dmg",
+    "size": 272019989,
+    "browser_download_url": "https://github.com/getnodalia/lienzo/releases/download/v0.2.0/lienzo-0.2.0-macos-universal.dmg"
+   },
+   {
+    "name": "lienzo-0.2.0-windows-x64-portable.zip",
+    "size": 141384460,
+    "browser_download_url": "https://github.com/getnodalia/lienzo/releases/download/v0.2.0/lienzo-0.2.0-windows-x64-portable.zip"
+   },
+   {
+    "name": "lienzo-0.2.0-windows-x64-symbols.zip",
+    "size": 7220677,
+    "browser_download_url": "https://github.com/getnodalia/lienzo/releases/download/v0.2.0/lienzo-0.2.0-windows-x64-symbols.zip"
+   },
+   {
+    "name": "lienzo-0.2.0-windows-x64.msi",
+    "size": 117948416,
+    "browser_download_url": "https://github.com/getnodalia/lienzo/releases/download/v0.2.0/lienzo-0.2.0-windows-x64.msi"
+   },
+   {
+    "name": "lienzo-cli-0.2.0-macos-universal.zip",
+    "size": 120147560,
+    "browser_download_url": "https://github.com/getnodalia/lienzo/releases/download/v0.2.0/lienzo-cli-0.2.0-macos-universal.zip"
+   },
+   {
+    "name": "SHA256SUMS",
+    "size": 499,
+    "browser_download_url": "https://github.com/getnodalia/lienzo/releases/download/v0.2.0/SHA256SUMS"
+   },
+   {
+    "name": "SHA256SUMS-macos",
+    "size": 202,
+    "browser_download_url": "https://github.com/getnodalia/lienzo/releases/download/v0.2.0/SHA256SUMS-macos"
+   },
+   {
+    "name": "SHA256SUMS-windows",
+    "size": 305,
+    "browser_download_url": "https://github.com/getnodalia/lienzo/releases/download/v0.2.0/SHA256SUMS-windows"
+   }
+  ]
+ },
  "luz": null,
  "nodalia-cards": {
   "tag_name": "v3.0.5",
-  "published_at": null,
+  "published_at": "2026-11-05T16:24:53Z",
   "html_url": "https://github.com/danielmigueltejedor/nodalia-cards/releases/tag/v3.0.5",
-  "assets": []
+  "assets": [
+   {
+    "name": "nodalia-cards.js",
+    "size": 4183297,
+    "browser_download_url": "https://github.com/danielmigueltejedor/nodalia-cards/releases/download/v3.0.5/nodalia-cards.js"
+   }
+  ]
  },
  "nodalix-os": {
   "tag_name": "0.5.2",
@@ -181,49 +409,59 @@
  "toma": null,
  "torno": null,
  "vinilo": {
-  "tag_name": "v2.0.0",
-  "published_at": "2026-11-11T22:25:24Z",
-  "html_url": "https://github.com/getnodalia/vinilo/releases/tag/v2.0.0",
+  "tag_name": "v0.1.1",
+  "published_at": "2026-11-12T18:55:49Z",
+  "html_url": "https://github.com/getnodalia/vinilo/releases/tag/v0.1.1",
   "assets": [
    {
     "name": "SHA256SUMS",
-    "size": 558,
-    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/SHA256SUMS"
+    "size": 668,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/SHA256SUMS"
    },
    {
-    "name": "vinilo-2.0.0-1-x86_64.pkg.tar.zst",
-    "size": 143137465,
-    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/vinilo-2.0.0-1-x86_64.pkg.tar.zst"
+    "name": "vinilo-0.1.1-1-x86_64.pkg.tar.zst",
+    "size": 143494727,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/vinilo-0.1.1-1-x86_64.pkg.tar.zst"
    },
    {
-    "name": "vinilo-2.0.0-1.x86_64.rpm",
-    "size": 149931682,
-    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/vinilo-2.0.0-1.x86_64.rpm"
+    "name": "vinilo-0.1.1-1.x86_64.rpm",
+    "size": 150431103,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/vinilo-0.1.1-1.x86_64.rpm"
    },
    {
-    "name": "Vinilo-2.0.0-macos-arm64.dmg",
-    "size": 171563827,
-    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/Vinilo-2.0.0-macos-arm64.dmg"
+    "name": "Vinilo-0.1.1-native-macos-arm64.dmg",
+    "size": 137639765,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/Vinilo-0.1.1-native-macos-arm64.dmg"
    },
    {
-    "name": "Vinilo-2.0.0-macos-arm64.dmg.sha256",
-    "size": 95,
-    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/Vinilo-2.0.0-macos-arm64.dmg.sha256"
+    "name": "Vinilo-0.1.1-native-macos-arm64.dmg.sha256",
+    "size": 102,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/Vinilo-0.1.1-native-macos-arm64.dmg.sha256"
    },
    {
-    "name": "Vinilo-2.0.0-x86_64.AppImage",
-    "size": 310970872,
-    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/Vinilo-2.0.0-x86_64.AppImage"
+    "name": "Vinilo-0.1.1-nodalia-macos-arm64.dmg",
+    "size": 154356290,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/Vinilo-0.1.1-nodalia-macos-arm64.dmg"
    },
    {
-    "name": "Vinilo-2.0.0.flatpak",
-    "size": 101068096,
-    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/Vinilo-2.0.0.flatpak"
+    "name": "Vinilo-0.1.1-nodalia-macos-arm64.dmg.sha256",
+    "size": 103,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/Vinilo-0.1.1-nodalia-macos-arm64.dmg.sha256"
    },
    {
-    "name": "vinilo_2.0.0_amd64.deb",
-    "size": 150807192,
-    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/vinilo_2.0.0_amd64.deb"
+    "name": "Vinilo-0.1.1-x86_64.AppImage",
+    "size": 311396856,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/Vinilo-0.1.1-x86_64.AppImage"
+   },
+   {
+    "name": "Vinilo-0.1.1.flatpak",
+    "size": 101352416,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/Vinilo-0.1.1.flatpak"
+   },
+   {
+    "name": "vinilo_0.1.1_amd64.deb",
+    "size": 151314346,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/vinilo_0.1.1_amd64.deb"
    }
   ]
  },
