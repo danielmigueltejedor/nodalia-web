@@ -7,7 +7,9 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const OWNER = 'getnodalia';
+// Only these older repositories remain under the personal account until they are migrated.
+const PERSONAL_REPOS = new Set(['nodalia-cards', 'nodalia-cards-engine', 'apps-nodalia', 'nodalia-roborock-custom-map', 'studium']);
+const repoOwner = (repo) => PERSONAL_REPOS.has(repo) ? 'danielmigueltejedor' : 'getnodalia';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const snapshotPath = path.join(root, 'data', 'releases.json');
 const TAG = /^v?\d+(\.\d+){1,3}([-.][0-9A-Za-z.]+)?$/;
@@ -15,11 +17,12 @@ const TAG = /^v?\d+(\.\d+){1,3}([-.][0-9A-Za-z.]+)?$/;
 /** Reduce una respuesta de la API a lo que usan las webs, y descarta lo que no sea de fiar. */
 export function slim(repo, release) {
   if (!release || release.draft || release.prerelease || typeof release.tag_name !== 'string' || !TAG.test(release.tag_name)) return null;
-  const prefix = `https://github.com/${OWNER}/${repo}/releases/download/`;
+  const owner = repoOwner(repo);
+  const prefix = `https://github.com/${owner}/${repo}/releases/download/`;
   const assets = (Array.isArray(release.assets) ? release.assets : [])
     .filter((a) => a && typeof a.name === 'string' && typeof a.browser_download_url === 'string' && a.browser_download_url.startsWith(prefix))
     .map((a) => ({ name: a.name, size: Number(a.size) || 0, browser_download_url: a.browser_download_url }));
-  return { tag_name: release.tag_name, published_at: release.published_at || null, html_url: `https://github.com/${OWNER}/${repo}/releases/tag/${encodeURIComponent(release.tag_name)}`, assets };
+  return { tag_name: release.tag_name, published_at: release.published_at || null, html_url: `https://github.com/${owner}/${repo}/releases/tag/${encodeURIComponent(release.tag_name)}`, assets };
 }
 
 function readSnapshot() {
@@ -33,7 +36,7 @@ function readSnapshot() {
 async function fetchLatest(repo) {
   const headers = { Accept: 'application/vnd.github+json', 'User-Agent': 'nodalia-web-build' };
   if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-  const response = await fetch(`https://api.github.com/repos/${OWNER}/${repo}/releases/latest`, { headers, signal: AbortSignal.timeout(8000) });
+  const response = await fetch(`https://api.github.com/repos/${repoOwner(repo)}/${repo}/releases/latest`, { headers, signal: AbortSignal.timeout(8000) });
   // 404: el proyecto todavía no tiene ninguna versión publicada.
   if (response.status === 404) return null;
   if (!response.ok) throw new Error(`GitHub ${response.status}`);

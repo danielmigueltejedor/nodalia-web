@@ -2,11 +2,13 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const GH_USER = 'getnodalia';
+// Keep links working for repositories that have not moved into the organization yet.
+const PERSONAL_REPOS = new Set(['nodalia-cards', 'nodalia-cards-engine', 'apps-nodalia', 'nodalia-roborock-custom-map', 'studium']);
+const repoOwner = (name) => PERSONAL_REPOS.has(name) ? 'danielmigueltejedor' : 'getnodalia';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const githubRepo = (name) => `https://github.com/${GH_USER}/${name}`;
+const githubRepo = (name) => `https://github.com/${repoOwner(name)}/${name}`;
 const rawAsset = (repo, assetPath, branch = 'main') =>
-  `https://raw.githubusercontent.com/${GH_USER}/${repo}/${branch}/${assetPath}`;
+  `https://raw.githubusercontent.com/${repoOwner(repo)}/${repo}/${branch}/${assetPath}`;
 const productDomain = (subdomain) => `https://${subdomain}.getnodalia.com`;
 
 export const brand = {

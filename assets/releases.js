@@ -1,6 +1,8 @@
 import { lang } from './i18n.js';
 // Muestra la última versión publicada de cada proyecto. Si GitHub no responde se conserva el valor incluido en la página.
-const API = 'https://api.github.com/repos/getnodalia/';
+const API = 'https://api.github.com/repos/';
+const PERSONAL_REPOS = new Set(['nodalia-cards', 'nodalia-cards-engine', 'apps-nodalia', 'nodalia-roborock-custom-map', 'studium']);
+const repoOwner = (repo) => PERSONAL_REPOS.has(repo) ? 'danielmigueltejedor' : 'getnodalia';
 
 export const isTag = (value) => typeof value === 'string' && /^v?\d+(\.\d+){1,3}([-.][0-9A-Za-z.]+)?$/.test(value);
 
@@ -20,7 +22,7 @@ async function latest(repo) {
     const cached = sessionStorage.getItem(key);
     if (cached) return JSON.parse(cached);
   } catch { /* almacenamiento no disponible */ }
-  const response = await fetch(`${API}${encodeURIComponent(repo)}/releases/latest`, { headers: { Accept: 'application/vnd.github+json' } });
+  const response = await fetch(`${API}${repoOwner(repo)}/${encodeURIComponent(repo)}/releases/latest`, { headers: { Accept: 'application/vnd.github+json' } });
   if (!response.ok) throw new Error(`GitHub ${response.status}`);
   const data = await response.json();
   if (data.draft || data.prerelease) throw new Error('not a stable release');
