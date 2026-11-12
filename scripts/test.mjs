@@ -138,7 +138,7 @@ assert.equal(i18n.translateHtml('<b translate="no">Luz</b> <i>Luz</i>', 'en', { 
 const portalEn = await readFile(path.join(root, 'dist/portal/en/index.html'), 'utf8');
 assert.ok(portalEn.includes('<strong translate="no">Luz</strong>'), 'El nombre de la app Luz no debe traducirse');
 const clientI18n = await import('../assets/i18n.js');
-assert.equal(clientI18n.t('Descargar {type} ↓', { type: 'DMG' }), 'Descargar DMG ↓');
+assert.equal(clientI18n.t('Descargar {type}', { type: 'DMG' }), 'Descargar DMG');
 const releasesModule = await import('../assets/releases.js');
 assert.equal(releasesModule.isTag('v1.2.3'), true);
 assert.equal(releasesModule.isTag('<img src=x>'), false);

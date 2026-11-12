@@ -367,7 +367,7 @@ function product(app) {
     lienzo: () => `<div class="sig-select" data-identity="select" data-reveal="right"><div class="product-preview">${figure}</div>${selection}</div>`,
   })[app.id]();
   const primaryDownload = app.id === 'vortia'
-    ? '<a id="vortia-primary-download" class="btn btn-primary" href="https://github.com/getnodalia/vortia/releases/latest" rel="noopener noreferrer"><img id="vortia-primary-icon" class="vortia-platform-icon" src="/platform-linux.svg" alt="" width="20" height="20" hidden/><span id="vortia-primary-title">Ver versiones y descargas</span><span class="btn-icon" aria-hidden="true">↓</span></a>'
+    ? '<a id="vortia-primary-download" class="btn btn-primary" href="https://github.com/getnodalia/vortia/releases/latest" rel="noopener noreferrer"><img id="vortia-primary-icon" class="vortia-platform-icon" src="/platform-linux.svg" alt="" width="20" height="20" hidden/><span id="vortia-primary-title">Ver versiones y descargas</span></a>'
     : app.downloads
       ? appDownloadButton(app)
     : app.id === 'nodalix'
@@ -432,7 +432,7 @@ function vortiaDownloads() {
   const page = release?.html_url || 'https://github.com/getnodalia/vortia/releases';
   const size = (asset) => (asset?.size ? `${(asset.size / 1e6).toLocaleString('es', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} MB` : '');
   const option = (id, asset, type) => `<p class="vortia-package-size" id="vortia-${id}-size" translate="no">${e(size(asset))}</p>
-          <a class="btn btn-primary" id="vortia-${id}-link" href="${safeUrl(asset ? asset.browser_download_url : page)}">${asset ? `Descargar ${type} ↓` : 'Consultar en GitHub ↗'}</a>
+          <a class="btn btn-primary" id="vortia-${id}-link" href="${safeUrl(asset ? asset.browser_download_url : page)}">${asset ? `Descargar ${type}` : 'Consultar en GitHub ↗'}</a>
           <a class="vortia-checksum" id="vortia-${id}-sha" href="${safeUrl(sha(asset)?.browser_download_url || page)}"${sha(asset) ? '' : ' hidden'}>SHA-256 ↗</a>`;
   return `<section class="section vortia-download-section" id="descargas">
     <div class="container">

@@ -69,13 +69,12 @@ export function choose(release, config, os = 'other', arch = 'unknown') {
     : `${releasesUrl(config.repo)}/latest`;
   let target = ['linux', 'mac', 'windows'].includes(os) ? found[os] : null;
   if (target && os === 'mac' && arch === 'x86' && !/universal/i.test(target.name)) target = null;
-  if (target && os === 'mac' && arch === 'unknown') target = null;
-  if (target && os === 'linux' && arch !== 'x86') target = null;
+    if (target && os === 'linux' && arch === 'arm') target = null;
   return {
     os: target ? os : 'other',
     asset: target,
     href: target ? target.url : page,
-    icon: target ? ICONS[os] || '' : '',
+    icon: ICONS[os] || '',
     title: target ? TITLES[os] : 'Descargar',
     version: isRelease(release) ? release.tag_name : '',
     found,
