@@ -124,7 +124,7 @@ const windows = await simulate({
   release: latest,
 });
 assert.match(windows['vortia-primary-download'].href, /releases\/tag\/v0\.2\.0$/);
-assert.equal(windows['vortia-primary-title'].textContent, 'Ver versiones y descargas');
+assert.equal(windows['vortia-primary-title'].textContent, 'Descargar');
 
 const offline = await simulate({
   platform: 'Linux x86_64',

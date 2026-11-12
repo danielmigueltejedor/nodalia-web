@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { apps, brand, site, repoUrl } from './data.mjs';
 import { DEFAULT_LOCALE, locales, localeCodes, localePath, localize, dictionaries, clientKeys } from './i18n.mjs';
 import { loadReleases } from './releases.mjs';
-import { choose, detail, kind, releasesUrl } from '../assets/app-download.js';
+import { choose, detail, kind, megabytes, releasesUrl } from '../assets/app-download.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const target = process.argv[2];
@@ -315,17 +315,48 @@ function appDownloadButton(app) {
 function appDownloadHint(app) {
   const config = appDownloadConfig(app);
   const choice = choose(config.release, config, 'linux', 'x86');
-  const defaults = { linux: 'AppImage · x86_64', mac: 'DMG · Apple Silicon', windows: 'MSI · Windows x64' };
-  const alts = Object.keys(defaults).filter((os) => app.downloads[os]).map((os) => {
+  return `<p class="vortia-primary-detail app-download-detail"><span id="app-primary-detail" translate="no">${e(detail(choice, 'es'))}</span></p><script type="application/json" id="app-download-config">${JSON.stringify(config).replaceAll('<', '\\u003c')}</script><script type="module" src="${appDownloadSrc}"></script>`;
+}
+// Sección de descargas de Vinilo y Lienzo: el instalador de cada sistema de la última versión publicada.
+// El botón principal de arriba descarga directamente; "Ver todas las versiones" baja hasta aquí.
+function appDownloadsSection(app) {
+  const config = appDownloadConfig(app);
+  const choice = choose(config.release, config, 'linux', 'x86');
+  const systems = { linux: ['Linux', '/platform-linux.svg'], mac: ['macOS', '/platform-apple.svg'], windows: ['Windows', ''] };
+  const cards = Object.keys(systems).filter((os) => app.downloads[os]).map((os) => {
     const asset = choice.found[os];
-    return `<a id="app-alt-${os}" class="text-link" translate="no" href="${safeUrl(asset ? asset.url : choice.page)}" rel="noopener noreferrer"${asset && os !== choice.os ? '' : ' hidden'}>${e(asset ? kind(os, asset) : defaults[os])}</a>`;
-  }).join(' ');
-  return `<p class="vortia-primary-detail app-download-detail"><span id="app-primary-detail" translate="no">${e(detail(choice, 'es'))}</span> ${alts} ${A(`${releasesUrl(app.repoName)}/latest`, e(app.otherPackages || 'Todas las descargas'), 'text-link', true)}</p><script type="application/json" id="app-download-config">${JSON.stringify(config).replaceAll('<', '\\u003c')}</script><script type="module" src="${appDownloadSrc}"></script>`;
+    const [name, logo] = systems[os];
+    return `<article class="vortia-package" data-reveal data-platform="${os}">
+          <div class="vortia-package-head">${logo ? `<img src="${logo}" alt="" width="38" height="38"/>` : ''}<div><h3>${name}</h3></div></div>
+          <p class="vortia-package-size" id="app-card-${os}-size" translate="no">${e(asset ? megabytes(asset.size, 'es') : '')}</p>
+          <a class="btn btn-primary" id="app-card-${os}" translate="no" href="${safeUrl(asset ? asset.url : choice.page)}" rel="noopener noreferrer">${e(asset ? `Descargar ${kind(os, asset)}` : 'Consultar en GitHub ↗')}</a>
+        </article>`;
+  }).join('\n        ');
+  return `<section class="section vortia-download-section" id="descargas">
+    <div class="container">
+      <div class="vortia-download-head">
+        <div><h2>Descarga ${e(app.name)}.</h2>
+          <p>El botón superior ofrece el instalador de tu sistema. Aquí tienes los de todos los sistemas de la última versión estable publicada en GitHub.</p>
+        </div>
+        <div class="vortia-version-info" data-reveal="right">
+          <span class="kicker">Última publicación estable</span>
+          <strong id="app-release-version">${e(choice.version)}</strong>
+        </div>
+      </div>
+      <div class="vortia-download-grid app-download-grid">
+        ${cards}
+      </div>
+      <div class="vortia-download-footer">
+        <p>Los instaladores se descargan directamente de GitHub Releases.</p>
+        ${A(releasesUrl(app.repoName), 'Ver todas las versiones ↗', 'text-link', true)}
+      </div>
+    </div>
+  </section>`;
 }
 
 function product(app) {
   const title = ({vortia:'La simulación de fluidos, a tu alcance.',vinilo:'Disfruta de toda tu música.',lienzo:'Un lugar para crear sin límites.',nodalix:'Tu ordenador. Tu sistema.'})[app.id] || app.headline;
-  const hasDownloads = app.id === 'vortia' || app.id === 'nodalix';
+  const hasDownloads = app.id === 'vortia' || app.id === 'nodalix' || Boolean(app.downloads);
   const figure = app.previews.length
     ? `<figure><img src="${safeUrl(app.previews[0][0])}" alt="${e(app.previews[0][1])}" loading="eager" fetchpriority="high" decoding="async"/><figcaption>${e(app.previews[0][1])} · Captura publicada por el proyecto</figcaption></figure>`
     : '';
@@ -375,12 +406,12 @@ function product(app) {
       <nav class="crumbs" aria-label="Ruta de navegación">${A(brand.portal, 'Nodalia')}${icon.chevron}<span aria-current="page">${e(app.name)}</span></nav>
       <div class="product-heading">${iconImg(app, 'product-icon', 60)}<div><strong>${e(app.name)}</strong><span class="status-text">${e(app.status)}</span></div></div>
       <span class="eyebrow">${e(app.eyebrow)}</span><h1>${e(title)}</h1><p class="lede">${e(app.description)}</p>
-      <div class="actions">${primaryDownload}${A(app.repo, `${icon.github}Código en GitHub`, 'btn btn-secondary', true)}</div>
+      <div class="actions">${hasDownloads && app.id !== 'nodalix' ? `<div class="download-stack">${primaryDownload}<a href="#descargas" class="btn btn-secondary btn-all-versions">Ver todas las versiones <span class="btn-icon" aria-hidden="true">↓</span></a></div>` : primaryDownload}${A(app.repo, `${icon.github}Código en GitHub`, 'btn btn-secondary', true)}</div>
       ${primaryHint}<div class="product-meta"><span class="pill">${e(app.platforms)}</span><span class="pill">${e(app.technology)}</span></div></div>
       ${stage}</div></section>
       <section class="section features" id="funciones"><div class="container"><h2 data-reveal>Qué hace ${e(app.name)}.</h2><div class="feature-grid">${app.features.map(([h,d],i)=>`<article class="feature" data-reveal><h3>${e(h)}</h3><p>${e(d)}</p></article>`).join('')}</div><div class="notice" data-reveal>${icon.alert}<p><strong>Estado y requisitos:</strong> ${e(app.limitation)}</p></div></div></section>
       <section class="section" id="ficha"><div class="container"><h2 data-reveal>Ficha técnica</h2><div class="detail-grid">${specCard(app)}${detail}</div></div></section>
-      ${app.id==='vortia' ? vortiaDownloads() : ''}
+      ${app.id==='vortia' ? vortiaDownloads() : app.downloads ? appDownloadsSection(app) : ''}
       ${installBlock}
       ${app.id==='nodalix' ? nodalixDownloads(app) : ''}
       ${app.previews.length ? `<section class="section" id="capturas"><div class="container"><h2 data-reveal>Capturas</h2><div class="gallery">${app.previews.map(([url,alt])=>`<figure data-reveal="scale"><a href="${safeUrl(url)}" target="_blank" rel="noopener noreferrer" aria-label="${e(alt)} (abrir imagen completa)"><img src="${safeUrl(url)}" alt="${e(alt)}" loading="lazy" decoding="async"/></a><figcaption>${e(alt)}</figcaption></figure>`).join('')}</div></div><script type="module" src="${gallerySrc}"></script></section>` : ''}

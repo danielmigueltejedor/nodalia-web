@@ -76,7 +76,7 @@ export function choose(release, config, os = 'other', arch = 'unknown') {
     asset: target,
     href: target ? target.url : page,
     icon: target ? ICONS[os] || '' : '',
-    title: target ? TITLES[os] : 'Ver versiones y descargas',
+    title: target ? TITLES[os] : 'Descargar',
     version: isRelease(release) ? release.tag_name : '',
     found,
     page,
@@ -98,23 +98,24 @@ export function render(get, release, config, os, arch) {
   const info = get('app-primary-detail');
   if (link) link.href = choice.href;
   // Literal keys, so the build ships their translations with the page.
-  const titles = { linux: t('Descargar para Linux'), mac: t('Descargar para macOS'), windows: t('Descargar para Windows'), other: t('Ver versiones y descargas') };
+  const titles = { linux: t('Descargar para Linux'), mac: t('Descargar para macOS'), windows: t('Descargar para Windows'), other: t('Descargar') };
   if (title) title.textContent = titles[choice.os] || titles.other;
   if (info) info.textContent = detail(choice);
   if (icon) {
     icon.hidden = !choice.icon;
     if (choice.icon) icon.src = choice.icon;
   }
-  // The other systems' installers stay one click away.
+  // The downloads section lists every system's installer, whichever one the button offers.
+  const versionLabel = get('app-release-version');
+  if (versionLabel) versionLabel.textContent = choice.version;
   for (const other of ['linux', 'mac', 'windows']) {
-    const alt = get(`app-alt-${other}`);
-    if (!alt) continue;
+    const card = get(`app-card-${other}`);
+    if (!card) continue;
     const asset = choice.found[other];
-    alt.hidden = !asset || other === choice.os;
-    if (asset) {
-      alt.href = asset.url;
-      alt.textContent = kind(other, asset);
-    }
+    card.href = asset ? asset.url : choice.page;
+    card.textContent = asset ? `${t('Descargar')} ${kind(other, asset)}` : t('Consultar en GitHub ↗');
+    const size = get(`app-card-${other}-size`);
+    if (size) size.textContent = asset ? megabytes(asset.size) : '';
   }
   return true;
 }

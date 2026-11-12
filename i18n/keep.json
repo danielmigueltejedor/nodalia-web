@@ -94,5 +94,6 @@
  "MIT OR Apache-2.0",
  "AppImage · .deb · .rpm · .tar.gz (Linux x86_64)",
  "DMG · Apple Silicon",
- "MSI · Windows x64"
+ "MSI · Windows x64",
+ "Windows"
 ]

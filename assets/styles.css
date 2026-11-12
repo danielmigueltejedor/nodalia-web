@@ -274,6 +274,11 @@ html:not(.js) .scroll-progress{display:none}
 .product-placeholder .orb img{width:132px;height:132px}
 .product-placeholder .chips{position:relative;justify-content:center}
 .product-placeholder p{position:relative;font-size:13px;color:var(--soft)}
+.actions:has(>.download-stack){align-items:flex-start}
+.download-stack{display:flex;flex-direction:column;gap:10px;min-width:0}
+.btn-all-versions{min-height:40px;padding:8px 16px;font-size:13px;color:var(--muted)}
+.btn-all-versions:hover{color:var(--ink)}
+.app-download-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
 .vortia-primary-detail{margin-top:12px;font-size:13px;line-height:1.6;max-width:540px;color:var(--muted)}
 .vortia-platform-icon{width:18px;height:18px;flex:none;object-fit:contain}
 .vortia-platform-icon[hidden],.vortia-checksum[hidden]{display:none!important}
@@ -517,7 +522,7 @@ html:not(.js) .scroll-progress{display:none}
   .hero-title{font-size:clamp(38px,11vw,54px)}
   .hero-lead{margin-top:20px;font-size:17px}
   .actions{margin-top:28px}
-  .actions .btn{flex:1 1 auto}
+  .actions .btn,.actions .download-stack{flex:1 1 auto}
   .hero-products{display:grid;grid-template-columns:1fr 1fr;margin-top:32px;padding-top:22px;gap:14px 18px}
   .hero-stage{height:300px}
   .shot-main{top:10px;width:92%;height:220px}
