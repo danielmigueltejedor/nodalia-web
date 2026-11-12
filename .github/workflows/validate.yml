@@ -23,7 +23,7 @@ concurrency:
 
 jobs:
   validate:
-    name: Build and test all five sites
+    name: Build and test the site
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -44,7 +44,7 @@ jobs:
           if-no-files-found: error
 
   deploy:
-    name: Publish five Cloudflare Pages projects
+    name: Publish to Cloudflare Pages
     needs: validate
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
@@ -73,12 +73,19 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for site in portal vortia vinilo lienzo nodalix; do
-            test -f "dist/$site/index.html"
-            echo "::group::Deploy nodalia-$site"
-            npx --yes wrangler@4.158.0 pages deploy "dist/$site" \
-              --project-name="nodalia-$site" \
+          deploy() {
+            echo "::group::Deploy $2"
+            npx --yes wrangler@4.158.0 pages deploy "$1" \
+              --project-name="$2" \
               --branch=main \
               --commit-hash="$GITHUB_SHA"
             echo "::endgroup::"
+          }
+          # getnodalia.com carries the portal and every product page (getnodalia.com/<app>/).
+          test -f dist/portal/index.html
+          deploy dist/portal nodalia-portal
+          # The old subdomains' projects only redirect to getnodalia.com/<app>/, path for path.
+          for site in vortia vinilo lienzo nodalix; do
+            test -f "dist/legacy/$site/_redirects"
+            deploy "dist/legacy/$site" "nodalia-$site"
           done

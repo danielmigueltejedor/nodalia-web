@@ -1,14 +1,19 @@
 # Nodalia Web
 
-Web oficial de [Nodalia](https://getnodalia.com) y páginas independientes de producto. Cinco sitios estáticos, un generador, cero dependencias de ejecución. No modifica los repositorios de las aplicaciones.
+Web oficial de [Nodalia](https://getnodalia.com) y páginas de producto. Un sitio estático, un generador, cero dependencias de ejecución. No modifica los repositorios de las aplicaciones.
 
-| Producto | Dominio | Proyecto Cloudflare Pages | Carpeta generada |
-| --- | --- | --- | --- |
-| Nodalia | https://getnodalia.com | `nodalia-portal` | `dist/portal` |
-| Vortia | https://vortia.getnodalia.com | `nodalia-vortia` | `dist/vortia` |
-| Vinilo | https://vinilo.getnodalia.com | `nodalia-vinilo` | `dist/vinilo` |
-| Lienzo | https://lienzo.getnodalia.com | `nodalia-lienzo` | `dist/lienzo` |
-| Nodalix OS | https://nodalix.getnodalia.com | `nodalia-nodalix` | `dist/nodalix` |
+Cada producto vive en una ruta del portal, así que una app nueva solo necesita su entrada en `data/apps.json`: ni DNS ni un proyecto Cloudflare nuevos.
+
+| Producto | Dirección | Carpeta generada |
+| --- | --- | --- |
+| Nodalia | https://getnodalia.com | `dist/portal` |
+| Vortia | https://getnodalia.com/vortia/ | `dist/portal/vortia` |
+| Vinilo | https://getnodalia.com/vinilo/ | `dist/portal/vinilo` |
+| Lienzo | https://getnodalia.com/lienzo/ | `dist/portal/lienzo` |
+| Forja | https://getnodalia.com/forja/ | `dist/portal/forja` |
+| Nodalix OS | https://getnodalia.com/nodalix/ | `dist/portal/nodalix` |
+
+Todo se publica en el proyecto Cloudflare Pages `nodalia-portal`. Los subdominios antiguos (`vortia.`, `vinilo.`, `lienzo.` y `nodalix.getnodalia.com`) conservan sus proyectos (`nodalia-<app>`), que ahora solo redirigen con un 301 a la misma ruta bajo `getnodalia.com/<app>/` (`dist/legacy/<app>/_redirects`), para que los enlaces antiguos sigan funcionando.
 
 ## Diseño
 
@@ -29,7 +34,7 @@ Dirección visual editorial: colores neutros, tipografía Sora + Inter autoaloja
 - `data/site.json`: contenido del portal (autor, ecosistema Home Assistant y preguntas frecuentes).
 - `assets/favicon.svg`: favicon transparente que cambia de color con el tema del navegador; `favicon.ico` y `apple-touch-icon.png` son los respaldos.
 - `scripts/build.mjs`: páginas, metadatos, SEO, sitemap y recursos.
-- `scripts/test.mjs`: validación de los cinco sitios, módulos de descarga y manifiesto ISO.
+- `scripts/test.mjs`: validación del portal y de cada página de producto, las redirecciones, los módulos de descarga y el manifiesto ISO.
 - `assets/vortia-download.js` / `assets/app-download.js` / `assets/nodalix-releases.js`: módulos ES exportables y comprobados en Node.
 
 No hay framework ni dependencia npm de ejecución. Las páginas no contienen trackers, analítica ni cookies propios. Los iconos y capturas de los proyectos provienen de GitHub; algunos recursos externos pueden registrar solicitudes según sus propias políticas.
@@ -44,7 +49,7 @@ npm run build
 npm run preview
 ~~~
 
-`npm run preview` genera el portal y lo sirve en `http://127.0.0.1:4317/` con el servidor HTTP de Python. Otras vistas: `npm run preview:vortia`, `npm run preview:nodalix`. También puedes generar un sitio concreto con `npm run build:portal`, `npm run build:vortia`, `npm run build:vinilo`, `npm run build:lienzo` o `npm run build:nodalix`.
+`npm run preview` genera el sitio y lo sirve en `http://127.0.0.1:4317/` con el servidor HTTP de Python; las apps están en `/vinilo/`, `/forja/`, etc.
 
 ## Calidad y SonarCloud
 
@@ -54,20 +59,19 @@ Los módulos de descarga se prueban importando funciones exportadas (sin `vm.run
 
 ## Publicación en Cloudflare
 
-Los cinco proyectos Pages se crearon mediante **Direct Upload / Wrangler** y están enlazados a sus dominios. El workflow `.github/workflows/validate.yml` comprueba las cinco webs en cada push y pull request; cuando se actualiza `main`, publica automáticamente las cinco carpetas `dist/portal`, `dist/vortia`, `dist/vinilo`, `dist/lienzo` y `dist/nodalix` en sus proyectos Cloudflare Pages. También se puede ejecutar manualmente desde **Actions → Validate and deploy Nodalia sites → Run workflow**.
+Los proyectos Pages se crearon mediante **Direct Upload / Wrangler** y están enlazados a sus dominios. El workflow `.github/workflows/validate.yml` comprueba la web en cada push y pull request; cuando se actualiza `main`, publica `dist/portal` en `nodalia-portal` y las redirecciones de `dist/legacy/<app>` en los proyectos de los subdominios antiguos. También se puede ejecutar manualmente desde **Actions → Validate and deploy Nodalia sites → Run workflow**.
 
 **Configuración inicial obligatoria (una sola vez):** en **GitHub → nodalia-web → Settings → Secrets and variables → Actions**, añade el secreto `CLOUDFLARE_API_TOKEN` (token de Cloudflare con permiso **Account → Cloudflare Pages → Edit**, limitado a tu cuenta) y la variable `CLOUDFLARE_ACCOUNT_ID` (ID de cuenta Cloudflare). El ID puede configurarse como secreto del mismo nombre si lo prefieres. Los secretos de `danielmigueltejedor.com` no se comparten automáticamente con este repositorio. Si faltan, las pruebas pasan pero el job de despliegue falla deliberadamente con instrucciones; así no se anuncia una publicación que no ocurrió.
 
-Para publicar manualmente los cinco sitios desde el repositorio clonado, con Wrangler autenticado:
+Para publicar a mano desde el repositorio clonado, con Wrangler autenticado:
 
 ~~~bash
 npm test
 npm run build
 npx wrangler pages deploy dist/portal --project-name nodalia-portal --branch main
-npx wrangler pages deploy dist/vortia --project-name nodalia-vortia --branch main
-npx wrangler pages deploy dist/vinilo --project-name nodalia-vinilo --branch main
-npx wrangler pages deploy dist/lienzo --project-name nodalia-lienzo --branch main
-npx wrangler pages deploy dist/nodalix --project-name nodalia-nodalix --branch main
+for app in vortia vinilo lienzo nodalix; do
+  npx wrangler pages deploy dist/legacy/$app --project-name nodalia-$app --branch main
+done
 ~~~
 
 **Versiones automáticas.** El workflow también se ejecuta cada tres horas y con el evento `repository_dispatch` de tipo `app-released`, así que las webs se regeneran con las últimas versiones sin tocar este repositorio. Para que una publicación aparezca al momento, el workflow de release de una app puede lanzar ese evento (necesita un token con permiso sobre `nodalia-web`):
@@ -82,7 +86,7 @@ Los despliegues automáticos se ejecutan solamente después de superar las prueb
 
 ## Vortia: descargas por sistema operativo
 
-La web `vortia.getnodalia.com` identifica de manera orientativa el sistema operativo del navegador y ofrece un botón directo con el icono de Linux (AppImage x86_64) o Apple (DMG arm64). La sección de descargas siempre muestra **ambas plataformas**, los tamaños y los checksums SHA-256 que existan en la publicación.
+La web `getnodalia.com/vortia/` identifica de manera orientativa el sistema operativo del navegador y ofrece un botón directo con el icono de Linux (AppImage x86_64) o Apple (DMG arm64). La sección de descargas siempre muestra **ambas plataformas**, los tamaños y los checksums SHA-256 que existan en la publicación.
 
 `assets/vortia-download.js` consulta `https://api.github.com/repos/getnodalia/vortia/releases/latest` para mostrar los instaladores de la última publicación estable, sin cambiar el sitio cada vez que se publica Vortia. En caso de error de red o límite de la API, usa la versión con la que se generó la página y avisa de que puede no ser la más reciente.
 

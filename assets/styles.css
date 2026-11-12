@@ -33,6 +33,7 @@
 .accent-cyan{--accent:#84d9dd;--accent-rgb:132,217,221}
 .accent-violet{--accent:#b9a8ff;--accent-rgb:185,168,255}
 .accent-rose{--accent:#f2a3b8;--accent-rgb:242,163,184}
+.accent-copper{--accent:#e8a66f;--accent-rgb:232,166,111}
 .accent-blue{--accent:#8fb8ff;--accent-rgb:143,184,255}
 
 /* ---------- Base ---------- */
@@ -180,6 +181,15 @@ html:not(.js) .scroll-progress{display:none}
 .product-card--vinilo{--card-rgb:185,168,255}
 .product-card--vortia{--card-rgb:132,217,221}
 .product-card--lienzo{--card-rgb:242,163,184}
+.product-card--forja{--card-rgb:232,166,111}
+/* An odd product out spans the row, its screenshot beside the text instead of below it. */
+@media(min-width:861px){
+  .product-grid>.product-card:last-child:nth-child(odd){grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);grid-template-rows:1fr auto;min-height:440px}
+  .product-grid>.product-card:last-child:nth-child(odd) .product-card-inner{grid-area:1/1}
+  .product-grid>.product-card:last-child:nth-child(odd) .product-card-image{grid-area:1/2/3/3;margin-top:36px;padding:0 32px 0 0}
+  .product-grid>.product-card:last-child:nth-child(odd) .product-card-image img.screen{height:100%;min-height:360px}
+  .product-grid>.product-card:last-child:nth-child(odd) .product-card-bottom{grid-area:2/1}
+}
 .product-card-inner{padding:30px 32px 0}
 .product-card-top{display:flex;align-items:center;justify-content:space-between;gap:16px}
 .product-id{display:flex;align-items:center;gap:13px}
@@ -751,6 +761,13 @@ html:not(.js) .scroll-progress{display:none}
 .handle-4{left:100%;top:100%}.handle-5{left:50%;top:100%}.handle-6{left:0;top:100%}.handle-7{left:0;top:50%}
 .sel-size{position:absolute;left:0;top:100%;margin-top:10px;padding:3px 8px;border-radius:3px;background:var(--accent);font-family:var(--mono);font-size:11px;color:#1a0d12}
 .sel-size:empty{display:none}
+/* Forja: the crosshair and pickbox of a drafting canvas, resting over the screenshot. */
+.sig-crosshair{position:relative}
+.crosshair{position:absolute;left:62%;top:46%;width:0;height:0;pointer-events:none}
+.crosshair-h,.crosshair-v{position:absolute;background:var(--accent);opacity:.85}
+.crosshair-h{left:-56px;width:112px;top:0;height:1px}
+.crosshair-v{top:-56px;height:112px;left:0;width:1px}
+.crosshair-box{position:absolute;left:-6px;top:-6px;width:12px;height:12px;border:1px solid var(--accent);background:transparent}
 
 @media(max-width:1040px){.record{width:220px;right:28px;top:-110px}.sig-vinyl{margin-top:70px}.sig-boot{min-height:0}}
 @media(max-width:600px){.flow-hud{flex-direction:column;align-items:flex-start;gap:10px}.record{width:170px;top:-85px;right:20px}.sig-vinyl{margin-top:50px}.boot-log{font-size:12px}}
@@ -981,6 +998,20 @@ a.soon-card--released .i{color:var(--ink)}
 .story-active .story-curve{display:block}
 .story-lienzo-curves{inset:0;border:0;border-radius:0;clip-path:inset(0 calc((1 - var(--story-cut))*100%) 0 0)}
 .story-lienzo-curves img{object-fit:contain;background:#15131a}
+
+/* Forja: model space, then the paper layout rising over it, then the light theme wiping in. */
+.scroll-story--forja .story-stage{background:#14161c}
+.story-drafting{position:absolute;inset:0}
+.story-drafting .story-screen{inset:0;border:0;border-radius:0}
+.story-drafting .story-screen img{object-fit:cover}
+.story-forja-layout{clip-path:inset(calc((1 - var(--story-b))*100%) 0 0)}
+.story-forja-light{clip-path:inset(0 0 0 calc((1 - var(--story-cut))*100%))}
+.story-forja-cursor{
+  position:absolute;z-index:1;width:9%;aspect-ratio:1;pointer-events:none;
+  top:calc(30% + var(--story-a)*22%);left:calc(28% + var(--story-a)*30%);opacity:calc(var(--story-a)*(1 - var(--story-b)));
+  background:linear-gradient(#e8a66f,#e8a66f) center/100% 1px no-repeat,linear-gradient(#e8a66f,#e8a66f) center/1px 100% no-repeat;
+}
+.story-forja-cursor::after{content:"";position:absolute;left:50%;top:50%;width:18%;aspect-ratio:1;translate:-50% -50%;border:1px solid #e8a66f}
 
 /* Nodalix: retain the desktop as the spatial reference for both panels. */
 .scroll-story--nodalix .story-stage{background:#0d1020}

@@ -9,7 +9,6 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const githubRepo = (name) => `https://github.com/${repoOwner(name)}/${name}`;
 const rawAsset = (repo, assetPath, branch = 'main') =>
   `https://raw.githubusercontent.com/${repoOwner(repo)}/${repo}/${branch}/${assetPath}`;
-const productDomain = (subdomain) => `https://${subdomain}.getnodalia.com`;
 
 export const brand = {
   name: 'Nodalia',
@@ -22,13 +21,15 @@ export const brand = {
 
 function defineApp(entry) {
   const { id, repo, icon, branch = 'main', previews = [], ...rest } = entry;
-  const domain = productDomain(id);
-  // A preview that starts with "/" is served by the product's own site (assets/screens/<id>/).
+  // Every product lives under the portal, getnodalia.com/<id>/, so a new app needs no DNS or Pages project.
+  const domain = `${brand.portal}/${id}`;
+  // A preview that starts with "/" is served by the product's own page (assets/screens/<id>/ → /<id>/screens/<id>/).
   const asset = (assetPath) => (assetPath.startsWith('/') ? `${domain}${assetPath}` : rawAsset(repo, assetPath, branch));
   return {
     ...rest,
     id,
     domain,
+    url: `${domain}/`,
     repoName: repo,
     repo: githubRepo(repo),
     icon: asset(icon),

@@ -243,7 +243,7 @@ export async function bootNodalixReleases({
 
   try {
     const [manifestResult, githubResult] = await Promise.allSettled([
-      fetchJson('/releases.json', fetchImpl),
+      fetchJson('/nodalix/releases.json', fetchImpl),
       fetchJson(RELEASES_API, fetchImpl),
     ]);
     const manifest = manifestResult.status === 'fulfilled' ? manifestResult.value : null;
