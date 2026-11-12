@@ -329,7 +329,7 @@ function appDownloadsSection(app) {
     return `<article class="vortia-package" data-reveal data-platform="${os}">
           <div class="vortia-package-head">${logo ? `<img src="${logo}" alt="" width="38" height="38"/>` : ''}<div><h3>${name}</h3></div></div>
           <p class="vortia-package-size" id="app-card-${os}-size" translate="no">${e(asset ? megabytes(asset.size, 'es') : '')}</p>
-          <a class="btn btn-primary" id="app-card-${os}" translate="no" href="${safeUrl(asset ? asset.url : choice.page)}" rel="noopener noreferrer">${e(asset ? `Descargar ${kind(os, asset)}` : 'Consultar en GitHub ↗')}</a>
+          <a class="btn btn-primary" id="app-card-${os}" href="${safeUrl(asset ? asset.url : choice.page)}" rel="noopener noreferrer">${asset ? `Descargar <span translate="no">${e(kind(os, asset))}</span>` : 'Consultar en GitHub ↗'}</a>
         </article>`;
   }).join('\n        ');
   return `<section class="section vortia-download-section" id="descargas">
