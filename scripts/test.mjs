@@ -88,7 +88,7 @@ for (const asset of ['vortia-download.js', 'platform-apple.svg', 'platform-linux
 assert.ok((await stat(path.join(root, 'dist/portal/_headers'))).size > 40);
 assert.ok((await stat(path.join(root, 'dist/vortia/_headers'))).size > 40);
 assert.doesNotMatch(sourceCss, /fonts\.googleapis/);
-assert.match(vortiaHtml, /type="module" src="\/vortia-download\.js"/);
+assert.match(vortiaHtml, /type="module" src="\/vortia-download\.js\?v=[0-9a-f]{10}"/);
 assert.match(iso, /type="module" src="\/nodalix-releases\.js"/);
 // Firmas visuales por producto.
 const identity = await import('../assets/identity.js');

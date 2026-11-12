@@ -122,7 +122,9 @@ export function renderRelease(get, release, os, arch, isFallback) {
 
   if (os === 'linux') {
     icon = '/platform-linux.svg';
-    if (arch === 'arm') {
+    if (arch === 'pending') {
+      detail = t('Selecciona Linux o macOS en las opciones de descarga.');
+    } else if (arch === 'arm') {
       detail = t('No hay AppImage Linux ARM64 en esta versión. La descarga publicada es para x86_64.');
     } else if (packages.linux) {
       selected = packages.linux;
@@ -134,7 +136,9 @@ export function renderRelease(get, release, os, arch, isFallback) {
   } else if (os === 'mac') {
     icon = '/platform-apple.svg';
     const universal = packages.mac && /universal/i.test(packages.mac.name);
-    if (arch === 'x86' && !universal) {
+    if (arch === 'pending') {
+      detail = t('Selecciona Linux o macOS en las opciones de descarga.');
+    } else if (arch === 'x86' && !universal) {
       detail = t('No hay DMG compatible con Mac Intel en esta versión. El publicado es para Apple Silicon.');
     } else if (packages.mac) {
       selected = packages.mac;
@@ -191,7 +195,7 @@ export async function bootVortiaDownloads({
   const get = (id) => doc.getElementById(id);
   const os = detectPlatform(nav);
   const built = builtRelease(doc);
-  renderRelease(get, built, os, 'unknown', true);
+  renderRelease(get, built, os, 'pending', true);
 
   const architecturePromise = detectArchitecture(nav);
   const latestPromise = fetchLatestRelease(fetchImpl).catch(() => null);

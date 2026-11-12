@@ -2,13 +2,13 @@ import { t, lang } from './i18n.js';
 import { detectPlatform, detectArchitecture } from './platform.js';
 
 /* The main download button of an app page: it offers the installer for the visitor's system,
-   with the Apple logo on a Mac and the penguin on Linux, from the latest GitHub release.
+   with the corresponding platform icon, from the latest GitHub release.
    The page is generated with the release that was current when it was built
    (#app-download-config); this script asks GitHub again, so a release published since then
    shows up without rebuilding the site. */
 
 export const OWNER = 'getnodalia';
-const ICONS = { linux: '/platform-linux.svg', mac: '/platform-apple.svg' };
+const ICONS = { linux: '/platform-linux.svg', mac: '/platform-apple.svg', windows: '/platform-windows.svg' };
 // Systems with a second installer for the same OS (Vinilo ships two Mac editions) list it as a card only.
 const CARDS = ['linux', 'mac', 'macAlt', 'windows'];
 const TITLES = { linux: 'Descargar para Linux', mac: 'Descargar para macOS', windows: 'Descargar para Windows' };
@@ -70,13 +70,15 @@ export function choose(release, config, os = 'other', arch = 'unknown') {
     ? release.html_url
     : `${releasesUrl(config.repo)}/latest`;
   let target = ['linux', 'mac', 'windows'].includes(os) ? found[os] : null;
+  // Wait for available CPU hints. When the browser withholds them, offer the published desktop installer.
+  if (arch === 'pending' && (os === 'mac' || os === 'linux')) target = null;
   if (target && os === 'mac' && arch === 'x86' && !/universal/i.test(target.name)) target = null;
-    if (target && os === 'linux' && arch === 'arm') target = null;
+  if (target && os === 'linux' && arch === 'arm') target = null;
   return {
     os: target ? os : 'other',
     asset: target,
     href: target ? target.url : page,
-    icon: ICONS[os] || '',
+    icon: target ? ICONS[os] || '' : '',
     title: target ? TITLES[os] : 'Descargar',
     version: isRelease(release) ? release.tag_name : '',
     found,
@@ -153,7 +155,7 @@ export async function bootAppDownload({ document: doc, navigator: nav, fetch: fe
     ? detectArchitecture(nav)
     : Promise.resolve('unknown');
   // Keep the primary button safe while architecture detection is still pending.
-  if (config.release) render(get, config.release, config, os, 'unknown');
+  if (config.release) render(get, config.release, config, os, 'pending');
   const latestPromise = Promise.resolve().then(() => fetchImpl(
     `https://api.github.com/repos/${OWNER}/${encodeURIComponent(config.repo)}/releases/latest`,
     { headers: { Accept: 'application/vnd.github+json' }, cache: 'no-store' },

@@ -31,6 +31,7 @@ let locale = DEFAULT_LOCALE;
 let clientStrings = null;
 const missing = {};
 const motionSrc = `/motion.js?v=${await assetVersion('motion.js')}`;
+const vortiaDownloadSrc = `/vortia-download.js?v=${await assetVersion('vortia-download.js')}`;
 const appDownloadSrc = `/app-download.js?v=${await assetVersion('app-download.js')}`;
 // Las versiones publicadas en GitHub en el momento de generar: la página ya sale con ellas.
 const releaseRepos = [...new Set([...site.releases.map(([, repo]) => repo), ...apps.map((app) => app.repoName), ...site.upcoming.apps.map(([, , , repo]) => repo).filter(Boolean)])];
@@ -322,7 +323,7 @@ function appDownloadHint(app) {
 function appDownloadsSection(app) {
   const config = appDownloadConfig(app);
   const choice = choose(config.release, config, 'linux', 'x86');
-  const systems = { linux: ['Linux', '/platform-linux.svg'], mac: ['macOS', '/platform-apple.svg'], macAlt: ['macOS', '/platform-apple.svg'], windows: ['Windows', ''] };
+  const systems = { linux: ['Linux', '/platform-linux.svg'], mac: ['macOS', '/platform-apple.svg'], macAlt: ['macOS', '/platform-apple.svg'], windows: ['Windows', '/platform-windows.svg'] };
   const cards = Object.keys(systems).filter((os) => app.downloads[os]).map((os) => {
     const asset = choice.found[os];
     const [defaultName, logo] = systems[os];
@@ -433,7 +434,7 @@ function vortiaDownloads() {
   const page = release?.html_url || 'https://github.com/getnodalia/vortia/releases';
   const size = (asset) => (asset?.size ? `${(asset.size / 1e6).toLocaleString('es', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} MB` : '');
   const option = (id, asset, type) => `<p class="vortia-package-size" id="vortia-${id}-size" translate="no">${e(size(asset))}</p>
-          <a class="btn btn-primary" id="vortia-${id}-link" href="${safeUrl(asset ? asset.browser_download_url : page)}">${asset ? `Descargar ${type}` : 'Consultar en GitHub ↗'}</a>
+          <a class="btn btn-primary" id="vortia-${id}-link" href="${safeUrl(asset ? asset.browser_download_url : page)}">${asset ? `Descargar <span translate="no">${e(type)}</span>` : 'Consultar en GitHub ↗'}</a>
           <a class="vortia-checksum" id="vortia-${id}-sha" href="${safeUrl(sha(asset)?.browser_download_url || page)}"${sha(asset) ? '' : ' hidden'}>SHA-256 ↗</a>`;
   return `<section class="section vortia-download-section" id="descargas">
     <div class="container">
@@ -470,7 +471,7 @@ function vortiaDownloads() {
     </div>
   </section>
   ${release ? `<script type="application/json" id="vortia-release-config">${JSON.stringify(release).replaceAll('<', '\\u003c')}</script>` : ''}
-  <script type="module" src="/vortia-download.js"></script>`;
+  <script type="module" src="${vortiaDownloadSrc}"></script>`;
 }
 
 function nodalixDownloads(app) {
@@ -548,7 +549,7 @@ async function build(site) {
       copyFile(path.join(root, 'assets', 'platform-apple.svg'), path.join(dir, 'platform-apple.svg')),
       copyFile(path.join(root, 'assets', 'platform-linux.svg'), path.join(dir, 'platform-linux.svg')),
     ] : []),
-    ...(app?.downloads ? ['app-download.js', 'platform.js', 'platform-apple.svg', 'platform-linux.svg'].map((file) => copyFile(path.join(root, 'assets', file), path.join(dir, file))) : []),
+    ...(app?.downloads ? ['app-download.js', 'platform.js', 'platform-apple.svg', 'platform-linux.svg', 'platform-windows.svg'].map((file) => copyFile(path.join(root, 'assets', file), path.join(dir, file))) : []),
     ...(app?.localScreens || []).map((file) => copyFile(path.join(root, 'assets', file.slice(1)), path.join(dir, file.slice(1)))),
     ...(site === 'nodalix' ? [
       copyFile(path.join(root, 'assets', 'nodalix-releases.js'), path.join(dir, 'nodalix-releases.js')),

@@ -50,8 +50,8 @@ const armAndUniversal = {
 };
 assert.equal(packages(armAndUniversal, vinilo).mac.name, 'Vinilo-2.0.0-macos-universal.dmg');
 assert.equal(choose(armAndUniversal, vinilo, 'mac', 'x86').asset.name, 'Vinilo-2.0.0-macos-universal.dmg');
-assert.equal(choose(v2, vinilo, 'mac', 'unknown').href, v2.html_url);
-assert.equal(choose(v2, vinilo, 'linux', 'unknown').href, v2.html_url);
+assert.match(choose(v2, vinilo, 'mac', 'unknown').href, /Vinilo-2\.0\.0-macos-arm64\.dmg$/);
+assert.match(choose(v2, vinilo, 'linux', 'unknown').href, /Vinilo-2\.0\.0-x86_64\.AppImage$/);
 // Phones, Windows without an installer, ARM Linux: the release page, with no system icon.
 for (const [os, arch] of [['other', 'unknown'], ['windows', 'unknown'], ['linux', 'arm']]) {
   c = choose(v2, vinilo, os, arch);
@@ -67,6 +67,7 @@ assert.equal(choose(null, lienzo, 'linux').href, 'https://github.com/getnodalia/
 // Windows gets its installer when the release has one.
 const l = { tag_name: 'v0.2.0', assets: [dl('lienzo', 'v0.2.0', 'lienzo-0.2.0-windows-x64.msi'), dl('lienzo', 'v0.2.0', 'lienzo-0.2.0-linux-x86_64.AppImage')] };
 assert.equal(choose(l, lienzo, 'windows').title, 'Descargar para Windows');
+assert.equal(choose(l, lienzo, 'windows').icon, '/platform-windows.svg');
 assert.equal(choose(l, lienzo, 'windows').asset.name, 'lienzo-0.2.0-windows-x64.msi');
 
 // In the page: the built release first, then GitHub's newer one; every system's installer in the downloads section.
@@ -103,6 +104,16 @@ const first = { tag_name: 'v0.1.0', html_url: 'https://github.com/getnodalia/lie
 p = page({ ...lienzo, release: null }, linux);
 assert.equal(await bootAppDownload({ document: p.doc, navigator: p.nav, fetch: async () => ({ ok: true, json: async () => first }) }), true);
 assert.match(p.els['app-primary-download'].href, /lienzo-0\.1\.0-linux-x86_64\.AppImage$/);
+// Safari identifies the OS but does not supply the CPU architecture.
+p = page({ ...vinilo, release: v2 }, {
+  platform: 'MacIntel',
+  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 Version/26.1 Safari/605.1.15',
+});
+await bootAppDownload({ document: p.doc, navigator: p.nav, fetch: async () => ({ ok: false }) });
+assert.match(p.els['app-primary-download'].href, /Vinilo-2\.0\.0-macos-arm64\.dmg$/);
+assert.equal(p.els['app-primary-icon'].src, '/platform-apple.svg');
+assert.equal(p.els['app-primary-icon'].hidden, false);
+
 // A Mac visitor of a Linux-only release goes to the release page, without the apple.
 p = page({ ...lienzo, release: first }, mac);
 await bootAppDownload({ document: p.doc, navigator: p.nav, fetch: async () => ({ ok: true, json: async () => first }) });
