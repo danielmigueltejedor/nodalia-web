@@ -282,7 +282,7 @@
     "id": "lienzo",
     "name": "Lienzo",
     "category": "Creatividad",
-    "status": "Primeras versiones · 0.2.0 para Linux, macOS y Windows",
+    "status": "Primeras versiones · 0.3.0 para Linux, macOS y Windows",
     "statusKind": "early",
     "eyebrow": "Edición de imagen",
     "headline": "Tu espacio para crear, capa a capa.",
@@ -361,11 +361,11 @@
     "faq": [
       [
         "¿Dónde lo descargo?",
-        "En esta página: el botón principal ofrece el paquete para tu sistema desde la última versión publicada en GitHub. La versión 0.2.0 está disponible para Linux x86_64, macOS (Apple Silicon e Intel) y Windows x64."
+        "En esta página: el botón principal ofrece el paquete para tu sistema desde la última versión publicada en GitHub. La versión 0.3.0 está disponible para Linux x86_64, macOS (Apple Silicon e Intel) y Windows x64."
       ],
       [
         "¿Hay versión para macOS o Windows?",
-        "Sí, desde la 0.2.0. En Mac hay un DMG universal firmado; en Windows, un instalador MSI y una versión portátil. El botón principal elige el de tu sistema."
+        "Sí, desde la 0.2.0. En Mac hay un DMG universal; en Windows, un instalador MSI y una versión portátil. El botón principal elige el de tu sistema."
       ],
       [
         "¿Mis archivos salen de mi equipo?",

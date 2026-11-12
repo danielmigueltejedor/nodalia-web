@@ -530,7 +530,7 @@
  "El botón superior ofrece el instalador de tu sistema. Aquí tienes los de todos los sistemas de la última versión estable publicada en GitHub.": "The button above offers the installer for your system. Here are the installers for every system in the latest stable release published on GitHub.",
  "Los instaladores se descargan directamente de GitHub Releases.": "Installers are downloaded directly from GitHub Releases.",
  "Linux x86_64 · macOS (Universal) · Windows x64": "Linux x86_64 · macOS (Universal) · Windows x64",
- "Primeras versiones · 0.2.0 para Linux, macOS y Windows": "Early releases · 0.2.0 for Linux, macOS and Windows",
+ "Primeras versiones · 0.3.0 para Linux, macOS y Windows": "Early releases · 0.3.0 for Linux, macOS and Windows",
  "Un solo lenguaje de diseño: islas redondeadas, el color de Lienzo, controles de ventana propios en Linux y nativos en macOS y Windows, y tema claro u oscuro que se elige en Preferencias.": "One design language: rounded islands, Lienzo's colour, its own window controls on Linux and native ones on macOS and Windows, and a light or dark theme chosen in Preferences.",
  "Lienzo está en una fase temprana. Hay versiones para Linux x86_64, macOS y Windows x64. La compatibilidad con funciones y formatos PSD depende de la versión.": "Lienzo is at an early stage. There are releases for Linux x86_64, macOS and Windows x64. Support for PSD features and formats depends on the release.",
  "AppImage · .deb · .rpm · .tar.gz (Linux x86_64) · DMG (macOS) · MSI y zip portátil (Windows)": "AppImage · .deb · .rpm · .tar.gz (Linux x86_64) · DMG (macOS) · MSI and portable zip (Windows)",
@@ -538,6 +538,6 @@
  "Capa de ajuste de curvas sobre «La gran ola», con el panel de propiedades": "A Curves adjustment layer on “The Great Wave”, with the Properties panel",
  "Lienzo en el tema claro, elegido en Preferencias (abrir imagen completa)": "Lienzo in the light theme, chosen in Preferences (open full image)",
  "Lienzo en el tema claro, elegido en Preferencias": "Lienzo in the light theme, chosen in Preferences",
- "En esta página: el botón principal ofrece el paquete para tu sistema desde la última versión publicada en GitHub. La versión 0.2.0 está disponible para Linux x86_64, macOS (Apple Silicon e Intel) y Windows x64.": "On this page: the main button offers the package for your system from the latest release on GitHub. Version 0.2.0 is available for Linux x86_64, macOS (Apple Silicon and Intel) and Windows x64.",
- "Sí, desde la 0.2.0. En Mac hay un DMG universal firmado; en Windows, un instalador MSI y una versión portátil. El botón principal elige el de tu sistema.": "Yes, since 0.2.0. On a Mac there is a signed universal DMG; on Windows, an MSI installer and a portable version. The main button picks the one for your system."
+ "En esta página: el botón principal ofrece el paquete para tu sistema desde la última versión publicada en GitHub. La versión 0.3.0 está disponible para Linux x86_64, macOS (Apple Silicon e Intel) y Windows x64.": "On this page: the main button offers the package for your system from the latest release on GitHub. Version 0.3.0 is available for Linux x86_64, macOS (Apple Silicon and Intel) and Windows x64.",
+ "Sí, desde la 0.2.0. En Mac hay un DMG universal; en Windows, un instalador MSI y una versión portátil. El botón principal elige el de tu sistema.": "Yes, since 0.2.0. On a Mac there is a universal DMG; on Windows, an MSI installer and a portable version. The main button picks the one for your system."
 }
