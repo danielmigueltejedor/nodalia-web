@@ -1,6 +1,6 @@
 import { strict as assert } from 'node:assert';
 import { readFile } from 'node:fs/promises';
-import { scrollProgress, storyFrame } from '../assets/scroll-story.js';
+import { nozzleHalfHeight, scrollProgress, storyCut, storyFrame } from '../assets/scroll-story.js';
 
 assert.equal(scrollProgress(220, 1000, 120), 0);
 assert.equal(scrollProgress(120, 1000, 120), 0);
@@ -14,6 +14,12 @@ assert.equal(storyFrame(1 / 3).chapter, 2);
 assert.equal(storyFrame(2 / 3).chapter, 3);
 assert.ok(storyFrame(.5).second > 0 && storyFrame(.5).second < 1);
 assert.equal(storyFrame(.5).third, 0);
+assert.equal(nozzleHalfHeight(0), 88);
+assert.equal(nozzleHalfHeight(.54), 32);
+assert.equal(nozzleHalfHeight(1), 76);
+assert.equal(storyCut(.70, 'vortia'), 0);
+assert.equal(storyCut(.70, 'lienzo'), 0);
+assert.equal(storyCut(.9, 'vinilo'), 1);
 
 for (const site of ['portal', 'vortia', 'vinilo', 'lienzo', 'nodalix']) {
   for (const locale of ['', 'en/', 'fr/', 'de/', 'pt/']) {
@@ -24,7 +30,9 @@ for (const site of ['portal', 'vortia', 'vinilo', 'lienzo', 'nodalix']) {
     assert.equal([...story.matchAll(/<li data-story-chapter="[123]"><h3>[^<]+<\/h3><p>[^<]+<\/p>/g)].length, 3);
     assert.match(story, new RegExp(`class="story-skip text-link" href="#${site === 'portal' ? 'aplicaciones' : 'funciones'}"`));
     assert.doesNotMatch(story, /story-active/);
+    if (site === 'vortia') assert.match(story, /data-story-canvas="nozzle"/);
     if (site === 'lienzo') {
+      assert.match(story, /data-story-canvas="curve"/);
       assert.match(story, /src="\/screens\/lienzo\/lienzo-demo\.jpg"/);
       assert.match(story, /src="\/screens\/lienzo\/lienzo-adjustments\.jpg"/);
     }

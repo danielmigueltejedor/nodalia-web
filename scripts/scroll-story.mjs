@@ -49,34 +49,35 @@ const stories = {
 export function scrollStory(id, apps, { e, safeUrl }) {
   const { title, chapters, next } = stories[id];
   const app = apps.find((item) => item.id === id);
-  const screenshot = (index, className) => {
-    const [url] = app.previews[index];
-    // Reuse the product's existing images, including the local Lienzo captures.
+  const picture = (product, index) => {
+    const [url] = product.previews[index];
     const localPath = new URL(url).pathname;
-    const src = app.localScreens.includes(localPath) ? e(localPath) : safeUrl(url);
-    return `<figure class="story-screen ${className}"><img src="${src}" alt="" loading="lazy" decoding="async"/></figure>`;
+    const src = product.id === id && product.localScreens.includes(localPath) ? e(localPath) : safeUrl(url);
+    return `<img src="${src}" alt="" loading="lazy" decoding="async"/>`;
   };
-  const appNode = (name) => {
+  const screenshot = (index, className) => `<figure class="story-screen ${className}">${picture(app, index)}</figure>`;
+  const plate = (name) => {
     const product = apps.find((item) => item.id === name);
-    return `<span class="story-node story-node--${name}"><img src="${safeUrl(product.icon)}" alt="" width="60" height="60" loading="lazy" decoding="async"/><span translate="no">${e(product.name)}</span></span>`;
+    return `<figure class="story-plate story-plate--${name}">${picture(product, 0)}<figcaption translate="no">${e(product.name)}</figcaption></figure>`;
   };
   const visuals = {
-    portal: () => `<div class="story-network">
-      <div class="story-network-lines"></div><div class="story-network-ring"></div>
-      <div class="story-brand"><img src="/nodalia-mark.svg" alt="" width="76" height="76"/></div>
-      ${appNode('nodalix')}${appNode('vinilo')}${appNode('lienzo')}${appNode('vortia')}
+    portal: () => `<div class="story-contact-sheet">
+      ${plate('nodalix')}${plate('vinilo')}${plate('lienzo')}${plate('vortia')}
+      <img class="story-imprint" src="/nodalia-wordmark.svg" alt="" width="118" height="30"/>
     </div>`,
-    vortia: () => `<div class="story-nozzle"><div class="story-nozzle-shell"></div><div class="story-nozzle-mesh"></div><div class="story-nozzle-flow"></div></div>
-      ${screenshot(0, 'story-vortia-result')}`,
-    vinilo: () => `<div class="story-disc"></div><div class="story-sources">
+    vortia: () => `<canvas class="story-drawing" data-story-canvas="nozzle"></canvas>${screenshot(0, 'story-vortia-result')}`,
+    vinilo: () => `<div class="story-turntable"><div class="story-disc"></div><div class="story-arm"></div></div><div class="story-sources">
       <span>Este equipo</span><span translate="no">Apple Music</span><span translate="no">Spotify</span>
       <span translate="no">YouTube Music</span><span translate="no">Tidal</span>
-    </div>${screenshot(0, 'story-vinilo-player')}${screenshot(1, 'story-vinilo-queue')}`,
-    lienzo: () => `<div class="story-layer story-layer--base"></div><div class="story-layer story-layer--adjustment"></div>
-      ${screenshot(0, 'story-lienzo-image')}${screenshot(1, 'story-lienzo-curves')}`,
-    nodalix: () => `${screenshot(0, 'story-desktop')}${screenshot(1, 'story-settings')}${screenshot(2, 'story-updates')}`,
+    </div><div class="story-player">${screenshot(0, 'story-vinilo-player')}${screenshot(1, 'story-vinilo-queue')}</div>`,
+    lienzo: () => `<div class="story-print"><div class="story-print-paper">${picture(app, 0)}</div>
+      <div class="story-print-proof">${picture(app, 0)}</div><div class="story-print-edge"></div>
+    </div><canvas class="story-curve" data-story-canvas="curve"></canvas>
+      ${screenshot(1, 'story-lienzo-curves')}`,
+    nodalix: () => `<div class="story-monitor">${screenshot(0, 'story-desktop')}${screenshot(1, 'story-settings')}
+      <span class="story-system-cursor"></span>${screenshot(2, 'story-updates')}</div>`,
   };
-  return `<section id="demostracion" class="scroll-story scroll-story--${id}" data-scroll-story aria-labelledby="story-title">
+  return `<section id="demostracion" class="scroll-story scroll-story--${id}" data-scroll-story="${id}" aria-labelledby="story-title">
     <div class="story-pin" data-story-pin>
       <div class="container story-layout">
         <header class="story-heading">
@@ -84,7 +85,6 @@ export function scrollStory(id, apps, { e, safeUrl }) {
         </header>
         <div class="story-stage" aria-hidden="true">${visuals[id]()}</div>
         <div class="story-details">
-          <p class="story-instruction">Desplázate para ver los tres pasos.</p>
           <div class="story-progress" aria-hidden="true">${chapters.map(() => '<i></i>').join('')}</div>
           <ol class="story-chapters">${chapters.map(([name, description], i) => `
             <li data-story-chapter="${i + 1}"><h3>${e(name)}</h3><p>${e(description)}</p></li>`).join('')}
