@@ -35,6 +35,15 @@ const stories = {
     ],
     next: 'funciones',
   },
+  forja: {
+    title: 'Del primer trazo al plano impreso.',
+    chapters: [
+      ['Dibuja desde la línea de comandos', 'Escribe una orden, marca dos puntos y sigue con coordenadas relativas o polares.'],
+      ['Lleva el plano al papel', 'Una presentación coloca el dibujo a escala en la hoja y lo traza en PDF.'],
+      ['Trabaja a tu manera', 'Cambia al tema claro o a otro idioma sin cerrar el dibujo.'],
+    ],
+    next: 'funciones',
+  },
   nodalix: {
     title: 'Del escritorio a los ajustes.',
     chapters: [
@@ -52,7 +61,8 @@ export function scrollStory(id, apps, { e, safeUrl }) {
   const picture = (product, index) => {
     const [url] = product.previews[index];
     const localPath = new URL(url).pathname;
-    const src = product.id === id && product.localScreens.includes(localPath) ? e(localPath) : safeUrl(url);
+    // Screenshots the site serves itself load from the same origin; the rest come from GitHub.
+    const src = product.localScreens.some((file) => localPath === `/${product.id}${file}`) ? e(localPath) : safeUrl(url);
     return `<img src="${src}" alt="" loading="lazy" decoding="async"/>`;
   };
   const screenshot = (index, className) => `<figure class="story-screen ${className}">${picture(app, index)}</figure>`;
@@ -74,6 +84,7 @@ export function scrollStory(id, apps, { e, safeUrl }) {
       <div class="story-print-proof">${picture(app, 0)}</div><div class="story-print-edge"></div>
     </div><canvas class="story-curve" data-story-canvas="curve"></canvas>
       ${screenshot(1, 'story-lienzo-curves')}`,
+    forja: () => `<div class="story-drafting">${screenshot(0, 'story-forja-model')}<span class="story-forja-cursor"></span>${screenshot(1, 'story-forja-layout')}${screenshot(2, 'story-forja-light')}</div>`,
     nodalix: () => `<div class="story-monitor">${screenshot(0, 'story-desktop')}${screenshot(1, 'story-settings')}
       <span class="story-system-cursor"></span>${screenshot(2, 'story-updates')}</div>`,
   };

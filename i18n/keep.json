@@ -97,5 +97,10 @@
  "AppImage · .deb · .rpm · .tar.gz (Linux x86_64)",
  "DMG · Apple Silicon",
  "MSI · Windows x64",
- "Windows"
+ "Windows",
+ "DWG",
+ "DXF",
+ "PDF",
+ "Linux · macOS (Universal) · Windows · FreeBSD",
+ "x86_64 · ARM64 · RISC-V (Linux)"
 ]

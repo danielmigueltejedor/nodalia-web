@@ -21,9 +21,9 @@ assert.equal(storyCut(.70, 'vortia'), 0);
 assert.equal(storyCut(.70, 'lienzo'), 0);
 assert.equal(storyCut(.9, 'vinilo'), 1);
 
-for (const site of ['portal', 'vortia', 'vinilo', 'lienzo', 'nodalix']) {
+for (const site of ['portal', 'vortia', 'vinilo', 'lienzo', 'forja', 'nodalix']) {
   for (const locale of ['', 'en/', 'fr/', 'de/', 'pt/']) {
-    const page = await readFile(new URL(`../dist/${site}/${locale}index.html`, import.meta.url), 'utf8');
+    const page = await readFile(new URL(`../dist/portal/${site === 'portal' ? '' : `${site}/`}${locale}index.html`, import.meta.url), 'utf8');
     const story = page.match(/<section id="demostracion"[\s\S]*?<\/section>/)?.[0];
     assert.ok(story, `${site}/${locale}: demonstration missing`);
     assert.match(story, /aria-labelledby="story-title"/);
@@ -33,10 +33,10 @@ for (const site of ['portal', 'vortia', 'vinilo', 'lienzo', 'nodalix']) {
     if (site === 'vortia') assert.match(story, /data-story-canvas="nozzle"/);
     if (site === 'lienzo') {
       assert.match(story, /data-story-canvas="curve"/);
-      assert.match(story, /src="\/screens\/lienzo\/lienzo-demo\.jpg"/);
-      assert.match(story, /src="\/screens\/lienzo\/lienzo-adjustments\.jpg"/);
+      assert.match(story, /src="\/lienzo\/screens\/lienzo\/lienzo-demo\.jpg"/);
+      assert.match(story, /src="\/lienzo\/screens\/lienzo\/lienzo-adjustments\.jpg"/);
     }
     assert.match(page, /type="module" src="\/scroll-story\.js\?v=[0-9a-f]{10}"/);
   }
 }
-console.log('✓ Demostraciones: cinco sitios, cinco idiomas, tres etapas y alternativa estática.');
+console.log('✓ Demostraciones: seis páginas, cinco idiomas, tres etapas y alternativa estática.');

@@ -182,12 +182,6 @@
         "lamina"
       ],
       [
-        "Forja",
-        "forja",
-        "CAD 2D y planos DWG y DXF",
-        "forja"
-      ],
-      [
         "Torno",
         "torno",
         "CAD paramétrico 3D",
@@ -203,7 +197,7 @@
         "Buzón",
         "buzon",
         "Correo electrónico",
-        null
+        "buzon"
       ]
     ]
   }

@@ -32,7 +32,8 @@ const hasWords = (text) => /\p{L}{2,}/u.test(text);
 const TEXT_ATTRIBUTES = ['alt', 'aria-label', 'title'];
 const META_CONTENT = /(?:name="description"|property="og:(?:title|description|image:alt)")/;
 const SKIPPED_ELEMENTS = new Set(['script', 'style', 'code', 'pre']);
-const INTERNAL_ROOT = /^(https:\/\/(?:[a-z0-9-]+\.)?getnodalia\.com)\/?(#[^"]*)?$/;
+// The portal or a product page (getnodalia.com/<id>/), with an optional anchor: linked in the reader's language.
+const INTERNAL_ROOT = /^(https:\/\/getnodalia\.com(?:\/[a-z0-9-]+)?)\/?(#[^"]*)?$/;
 
 // Separa el documento en etiquetas y texto sin expresiones regulares.
 function tokenize(html) {

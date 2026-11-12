@@ -398,6 +398,119 @@
     "otherPackages": "Otros paquetes: .deb, .rpm, .tar.gz, zip portátil de Windows"
   },
   {
+    "id": "forja",
+    "name": "Forja",
+    "category": "Diseño técnico",
+    "status": "Primeras versiones · fase temprana",
+    "statusKind": "early",
+    "eyebrow": "CAD 2D y planos",
+    "headline": "El plano, trazo a trazo.",
+    "tagline": "Dibujo técnico con la línea de comandos de siempre.",
+    "description": "Una aplicación CAD nativa para dibujo 2D y planos DWG y DXF, escrita en Rust y con el diseño de Nodalia. Se dibuja desde la línea de comandos, como siempre.",
+    "platforms": "Linux · macOS (Universal) · Windows · FreeBSD",
+    "technology": "Rust · Nodalia Design",
+    "license": "MIT OR Apache-2.0",
+    "repo": "forja",
+    "icon": "assets/app-icon/hicolor/512x512/apps/dev.danielmiguelt.Forja.png",
+    "previews": [
+      [
+        "docs/images/ui-apartment.png",
+        "Plano de una vivienda en Forja, con capas, cotas y tabla de estancias"
+      ],
+      [
+        "docs/images/ui-layout.png",
+        "Presentación en espacio papel con una ventana gráfica a escala"
+      ],
+      [
+        "docs/images/ui-bracket.png",
+        "Pieza con vistas, cotas, sección sombreada y cajetín, en el tema claro"
+      ]
+    ],
+    "features": [
+      [
+        "La línea de comandos de siempre",
+        "Avisos con opciones que se pueden pulsar, autocompletado, alias, coordenadas relativas y polares, referencias a objetos, rastreo polar y pinzamientos."
+      ],
+      [
+        "Dibujo y edición",
+        "Líneas, polilíneas, círculos, arcos, splines y texto; desplazar, copiar, girar, recortar, alargar, empalmar, matrices y más."
+      ],
+      [
+        "Anotación completa",
+        "Cotas con estilos que siguen a la geometría, directrices múltiples, tablas, sombreados, bloques con atributos y una fuente de trazo propia."
+      ],
+      [
+        "DWG y DXF",
+        "Abre y guarda DWG, lee y escribe DXF y exporta a PDF, SVG y PNG."
+      ],
+      [
+        "Presentaciones y trazado",
+        "Espacio papel con ventanas gráficas a escala, configuraciones de página y trazado a PDF."
+      ],
+      [
+        "Todo es un comando",
+        "Cada menú, herramienta y orden se puede automatizar con forja-cli o con agentes de IA a través de MCP."
+      ]
+    ],
+    "formats": [
+      "DWG",
+      "DXF",
+      "PDF",
+      "SVG",
+      "PNG"
+    ],
+    "specs": [
+      [
+        "Licencia",
+        "MIT OR Apache-2.0"
+      ],
+      [
+        "Paquetes",
+        "AppImage · .deb · .rpm · Flatpak (Linux) · DMG (macOS) · MSI y zip portátil (Windows) · FreeBSD"
+      ],
+      [
+        "Arquitecturas",
+        "x86_64 · ARM64 · RISC-V (Linux)"
+      ],
+      [
+        "Tecnología",
+        "Rust · Nodalia Design"
+      ]
+    ],
+    "faq": [
+      [
+        "¿Abre archivos DWG?",
+        "Sí. Forja abre y guarda DWG y lee y escribe DXF a partir de especificaciones públicas. Está empezando: guarda una copia de los planos importantes antes de editarlos."
+      ],
+      [
+        "¿Se dibuja como en otros programas CAD?",
+        "Sí. Escribes una orden, marcas dos puntos y sigues con coordenadas relativas o polares. Hay alias, referencias a objetos, rastreo polar y pinzamientos, y Intro repite la última orden."
+      ],
+      [
+        "¿Se puede automatizar?",
+        "Sí. Todo es un comando: forja-cli convierte y exporta dibujos sin abrir la ventana y ofrece un servidor MCP para agentes de IA."
+      ],
+      [
+        "¿En qué sistemas funciona?",
+        "Hay paquetes para Linux (x86_64, ARM64 y RISC-V), un DMG universal para macOS, Windows (x64 y ARM64) y FreeBSD. En macOS la aplicación no está notarizada: la primera vez, haz clic derecho sobre ella y elige Abrir."
+      ]
+    ],
+    "limitation": "Forja está en una fase temprana. La lista de lo que funciona y lo que aún falta está en el repositorio; guarda una copia de los planos importantes.",
+    "cta": "Descargar Forja",
+    "accent": "copper",
+    "downloads": {
+      "linux": "^forja-[0-9].*-linux-x86_64\\.AppImage$",
+      "mac": "^forja-[0-9].*-macos-(arm64|universal)\\.dmg$",
+      "windows": "^forja-[0-9].*-windows-x64\\.msi$"
+    },
+    "downloadDescriptions": {
+      "linux": "Archivo ejecutable para distribuciones Linux de 64 bits con arquitectura x86_64.",
+      "mac": "El DMG universal funciona en Macs con Apple Silicon e Intel.",
+      "windows": "Instalador MSI para Windows de 64 bits con arquitectura x64."
+    },
+    "otherPackages": "Otros paquetes: .deb, .rpm, Flatpak, ARM64, RISC-V, FreeBSD y zip portátil de Windows"
+  },
+  {
     "id": "nodalix",
     "name": "Nodalix OS",
     "category": "Sistema operativo",

@@ -7,15 +7,8 @@
   "scripts": {
     "releases": "node scripts/releases.mjs",
     "build": "node scripts/build.mjs",
-    "build:portal": "node scripts/build.mjs portal",
-    "build:vortia": "node scripts/build.mjs vortia",
-    "build:vinilo": "node scripts/build.mjs vinilo",
-    "build:lienzo": "node scripts/build.mjs lienzo",
-    "build:nodalix": "node scripts/build.mjs nodalix",
     "test": "node scripts/test.mjs",
-    "preview": "node scripts/build.mjs portal && python3 -m http.server 4317 --bind 127.0.0.1 --directory dist/portal",
-    "preview:vortia": "node scripts/build.mjs vortia && python3 -m http.server 4317 --bind 127.0.0.1 --directory dist/vortia",
-    "preview:nodalix": "node scripts/build.mjs nodalix && python3 -m http.server 4317 --bind 127.0.0.1 --directory dist/nodalix"
+    "preview": "node scripts/build.mjs && python3 -m http.server 4317 --bind 127.0.0.1 --directory dist/portal"
   },
   "engines": {
     "node": ">=20"
