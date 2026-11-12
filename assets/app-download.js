@@ -2,7 +2,7 @@ import { t, lang } from './i18n.js';
 import { detectPlatform, detectArchitecture } from './platform.js';
 
 /* The main download button of an app page: it offers the installer for the visitor's system,
-   with the corresponding platform icon, from the latest GitHub release.
+   with the corresponding platform icon, from the latest GitHub release that carries it.
    The page is generated with the release that was current when it was built
    (#app-download-config); this script asks GitHub again, so a release published since then
    shows up without rebuilding the site. */
@@ -47,6 +47,35 @@ export function packages(release, config) {
   return out;
 }
 
+/** The release tag an asset belongs to, read from its download URL. */
+const tagOf = (url) => /\/releases\/download\/([^/]+)\//.exec(url || '')?.[1] || '';
+
+/**
+ * One release made from the newest ones, newest first: for each system, the installer comes from
+ * the newest release that carries it. A release may ship for one platform only (a macOS-only fix),
+ * and Linux must keep offering its own last package instead of losing the button.
+ * The result is the newest release with those assets added, so everything else reads it as one.
+ */
+export function combine(releases, config) {
+  const stable = (Array.isArray(releases) ? releases : [releases]).filter(isRelease);
+  if (stable.length < 2) return stable[0] || null;
+  const assets = [...stable[0].assets];
+  const have = new Set(assets.map((asset) => asset.name));
+  for (const os of ['linux', 'mac', 'macAlt', 'windows']) {
+    if (!config.patterns?.[os] || packages(stable[0], config)[os]) continue;
+    const older = stable.slice(1).find((release) => packages(release, config)[os]);
+    if (!older) continue;
+    const pattern = new RegExp(config.patterns[os], 'i');
+    for (const asset of older.assets) {
+      if (pattern.test(asset.name) && !have.has(asset.name)) {
+        assets.push(asset);
+        have.add(asset.name);
+      }
+    }
+  }
+  return { ...stable[0], assets };
+}
+
 /** What a file is, in words that read the same in every language the site speaks. */
 export function kind(os, asset) {
   if (!asset) return '';
@@ -80,7 +109,7 @@ export function choose(release, config, os = 'other', arch = 'unknown') {
     href: target ? target.url : page,
     icon: target ? ICONS[os] || '' : '',
     title: target ? TITLES[os] : 'Descargar',
-    version: isRelease(release) ? release.tag_name : '',
+    version: target ? tagOf(target.url) || release.tag_name : isRelease(release) ? release.tag_name : '',
     found,
     page,
   };
@@ -157,7 +186,7 @@ export async function bootAppDownload({ document: doc, navigator: nav, fetch: fe
   // Keep the primary button safe while architecture detection is still pending.
   if (config.release) render(get, config.release, config, os, 'pending');
   const latestPromise = Promise.resolve().then(() => fetchImpl(
-    `https://api.github.com/repos/${OWNER}/${encodeURIComponent(config.repo)}/releases/latest`,
+    `https://api.github.com/repos/${OWNER}/${encodeURIComponent(config.repo)}/releases?per_page=10`,
     { headers: { Accept: 'application/vnd.github+json' }, cache: 'no-store' },
   )).catch(() => null);
   const arch = await architecturePromise;
@@ -165,7 +194,8 @@ export async function bootAppDownload({ document: doc, navigator: nav, fetch: fe
   try {
     const response = await latestPromise;
     if (!response?.ok) return Boolean(config.release);
-    const latest = await response.json();
+    // The newest releases, so that a platform whose latest release has no package keeps its last one.
+    const latest = combine(await response.json(), config);
     if (render(get, latest, config, os, arch)) {
       const section = get('app-download');
       if (section) section.hidden = false;
