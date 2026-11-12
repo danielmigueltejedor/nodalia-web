@@ -367,7 +367,7 @@ function product(app) {
     lienzo: () => `<div class="sig-select" data-identity="select" data-reveal="right"><div class="product-preview">${figure}</div>${selection}</div>`,
   })[app.id]();
   const primaryDownload = app.id === 'vortia'
-    ? '<a id="vortia-primary-download" class="btn btn-primary" href="https://github.com/danielmigueltejedor/vortia/releases/latest" rel="noopener noreferrer"><img id="vortia-primary-icon" class="vortia-platform-icon" src="/platform-linux.svg" alt="" width="20" height="20" hidden/><span id="vortia-primary-title">Ver versiones y descargas</span><span class="btn-icon" aria-hidden="true">↓</span></a>'
+    ? '<a id="vortia-primary-download" class="btn btn-primary" href="https://github.com/getnodalia/vortia/releases/latest" rel="noopener noreferrer"><img id="vortia-primary-icon" class="vortia-platform-icon" src="/platform-linux.svg" alt="" width="20" height="20" hidden/><span id="vortia-primary-title">Ver versiones y descargas</span><span class="btn-icon" aria-hidden="true">↓</span></a>'
     : app.downloads
       ? appDownloadButton(app)
     : app.id === 'nodalix'
@@ -429,7 +429,7 @@ function vortiaDownloads() {
   const macAssets = assets.filter((asset) => /^Vortia-.+-macos-(arm64|aarch64|universal)\.dmg$/i.test(asset.name));
   const mac = macAssets.find((asset) => /universal/i.test(asset.name)) || macAssets[0] || null;
   const sha = (asset) => (asset ? assets.find((item) => item.name === `${asset.name}.sha256`) || null : null);
-  const page = release?.html_url || 'https://github.com/danielmigueltejedor/vortia/releases';
+  const page = release?.html_url || 'https://github.com/getnodalia/vortia/releases';
   const size = (asset) => (asset?.size ? `${(asset.size / 1e6).toLocaleString('es', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} MB` : '');
   const option = (id, asset, type) => `<p class="vortia-package-size" id="vortia-${id}-size" translate="no">${e(size(asset))}</p>
           <a class="btn btn-primary" id="vortia-${id}-link" href="${safeUrl(asset ? asset.browser_download_url : page)}">${asset ? `Descargar ${type} ↓` : 'Consultar en GitHub ↗'}</a>
@@ -464,7 +464,7 @@ function vortiaDownloads() {
       </div>
       <div class="vortia-download-footer">
         <p>Los instaladores se descargan directamente de GitHub Releases. En macOS el navegador no siempre permite identificar si el procesador es Intel o Apple Silicon.</p>
-        <a class="text-link" href="https://github.com/danielmigueltejedor/vortia/releases" target="_blank" rel="noopener noreferrer">Ver todas las versiones ↗</a>
+        <a class="text-link" href="https://github.com/getnodalia/vortia/releases" target="_blank" rel="noopener noreferrer">Ver todas las versiones ↗</a>
       </div>
     </div>
   </section>

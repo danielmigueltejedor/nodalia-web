@@ -53,19 +53,19 @@ async function simulate({ platform, userAgent, architecture, release, fail = fal
 
 const latest = {
   tag_name: 'v0.2.0', draft: false, prerelease: false,
-  html_url: 'https://github.com/danielmigueltejedor/vortia/releases/tag/v0.2.0',
+  html_url: 'https://github.com/getnodalia/vortia/releases/tag/v0.2.0',
   assets: [
     {
       name: 'Vortia-0.2.0-linux-x86_64.AppImage', size: 123000000,
-      browser_download_url: 'https://github.com/danielmigueltejedor/vortia/releases/download/v0.2.0/Vortia-0.2.0-linux-x86_64.AppImage',
+      browser_download_url: 'https://github.com/getnodalia/vortia/releases/download/v0.2.0/Vortia-0.2.0-linux-x86_64.AppImage',
     },
     {
       name: 'Vortia-0.2.0-macos-arm64.dmg', size: 63000000,
-      browser_download_url: 'https://github.com/danielmigueltejedor/vortia/releases/download/v0.2.0/Vortia-0.2.0-macos-arm64.dmg',
+      browser_download_url: 'https://github.com/getnodalia/vortia/releases/download/v0.2.0/Vortia-0.2.0-macos-arm64.dmg',
     },
     {
       name: 'Vortia-0.2.0-linux-x86_64.AppImage.sha256', size: 105,
-      browser_download_url: 'https://github.com/danielmigueltejedor/vortia/releases/download/v0.2.0/Vortia-0.2.0-linux-x86_64.AppImage.sha256',
+      browser_download_url: 'https://github.com/getnodalia/vortia/releases/download/v0.2.0/Vortia-0.2.0-linux-x86_64.AppImage.sha256',
     },
   ],
 };
@@ -140,7 +140,7 @@ const universalRelease = {
     ...latest.assets,
     {
       name: 'Vortia-0.2.0-macos-universal.dmg', size: 70000000,
-      browser_download_url: 'https://github.com/danielmigueltejedor/vortia/releases/download/v0.2.0/Vortia-0.2.0-macos-universal.dmg',
+      browser_download_url: 'https://github.com/getnodalia/vortia/releases/download/v0.2.0/Vortia-0.2.0-macos-universal.dmg',
     },
   ],
 };
@@ -178,7 +178,7 @@ assert.match(findPlatformAssets(universalRelease).mac.name, /universal/);
 {
   const { builtRelease, FALLBACK: verified } = await import('../assets/vortia-download.js');
   const doc = (text) => ({ getElementById: (id) => (id === 'vortia-release-config' ? { textContent: text } : null) });
-  const built = { tag_name: 'v9.0.0', assets: [{ name: 'Vortia-9.0.0-linux-x86_64.AppImage', size: 1, browser_download_url: 'https://github.com/danielmigueltejedor/vortia/releases/download/v9.0.0/Vortia-9.0.0-linux-x86_64.AppImage' }] };
+  const built = { tag_name: 'v9.0.0', assets: [{ name: 'Vortia-9.0.0-linux-x86_64.AppImage', size: 1, browser_download_url: 'https://github.com/getnodalia/vortia/releases/download/v9.0.0/Vortia-9.0.0-linux-x86_64.AppImage' }] };
   assert.equal(builtRelease(doc(JSON.stringify(built))).tag_name, 'v9.0.0');
   assert.equal(builtRelease(doc('{broken')), verified);
   assert.equal(builtRelease(doc(JSON.stringify({ ...built, draft: true }))), verified);

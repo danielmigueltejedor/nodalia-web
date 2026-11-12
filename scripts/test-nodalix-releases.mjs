@@ -15,7 +15,7 @@ assert.equal(isSha256('a'.repeat(64)), true);
 assert.equal(isSha256('xyz'), false);
 assert.match(formatGibibytes(2 ** 30), /1\s*GiB/);
 assert.equal(createSecureLink('http://evil.example/x.iso', 'bad'), null);
-assert.ok(createSecureLink('https://github.com/danielmigueltejedor/nodalix-os/releases', 'ok'));
+assert.ok(createSecureLink('https://github.com/getnodalia/nodalix-os/releases', 'ok'));
 
 const sha = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef';
 const stored = findStoredIso({
@@ -38,14 +38,14 @@ const candidate = findGithubCandidate([
     draft: false,
     prerelease: false,
     tag_name: 'v1.0.0',
-    html_url: 'https://github.com/danielmigueltejedor/nodalix-os/releases/tag/v1.0.0',
+    html_url: 'https://github.com/getnodalia/nodalix-os/releases/tag/v1.0.0',
     published_at: '2026-02-01T00:00:00Z',
     assets: [
       {
         name: 'nodalix-1.0.0-x86_64.iso',
         size: 4_000_000_000,
         browser_download_url:
-          'https://github.com/danielmigueltejedor/nodalix-os/releases/download/v1.0.0/nodalix-1.0.0-x86_64.iso',
+          'https://github.com/getnodalia/nodalix-os/releases/download/v1.0.0/nodalix-1.0.0-x86_64.iso',
         digest: `sha256:${sha}`,
       },
     ],
@@ -106,14 +106,14 @@ const mode = renderer.renderFromSources(
       draft: false,
       prerelease: false,
       tag_name: 'v1.0.0',
-      html_url: 'https://github.com/danielmigueltejedor/nodalix-os/releases/tag/v1.0.0',
+      html_url: 'https://github.com/getnodalia/nodalix-os/releases/tag/v1.0.0',
       published_at: '2026-02-01T00:00:00Z',
       assets: [
         {
           name: 'nodalix-1.0.0-x86_64.iso',
           size: 4_000_000_000,
           browser_download_url:
-            'https://github.com/danielmigueltejedor/nodalix-os/releases/download/v1.0.0/nodalix-1.0.0-x86_64.iso',
+            'https://github.com/getnodalia/nodalix-os/releases/download/v1.0.0/nodalix-1.0.0-x86_64.iso',
           digest: `sha256:${sha}`,
         },
       ],

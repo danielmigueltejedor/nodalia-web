@@ -15,162 +15,162 @@
  "nodalix-os": {
   "tag_name": "0.5.2",
   "published_at": "2026-11-10T18:48:57Z",
-  "html_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/tag/0.5.2",
+  "html_url": "https://github.com/getnodalia/nodalix-os/releases/tag/0.5.2",
   "assets": [
    {
     "name": "gnome-rounded-blur-1.0.0-2-x86_64.pkg.tar.zst",
     "size": 21017,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/gnome-rounded-blur-1.0.0-2-x86_64.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/gnome-rounded-blur-1.0.0-2-x86_64.pkg.tar.zst"
    },
    {
     "name": "linux-nodalix-7.3.1-1-x86_64.pkg.tar.zst",
     "size": 182448961,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/linux-nodalix-7.3.1-1-x86_64.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/linux-nodalix-7.3.1-1-x86_64.pkg.tar.zst"
    },
    {
     "name": "nodalix-0.5.2-x86_64.iso.part01",
     "size": 2000000000,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-0.5.2-x86_64.iso.part01"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-0.5.2-x86_64.iso.part01"
    },
    {
     "name": "nodalix-0.5.2-x86_64.iso.part02",
     "size": 993324032,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-0.5.2-x86_64.iso.part02"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-0.5.2-x86_64.iso.part02"
    },
    {
     "name": "nodalix-0.5.2-x86_64.iso.sha256",
     "size": 91,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-0.5.2-x86_64.iso.sha256"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-0.5.2-x86_64.iso.sha256"
    },
    {
     "name": "nodalix-apps-0.5.2-1-any.pkg.tar.zst",
     "size": 3427651,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-apps-0.5.2-1-any.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-apps-0.5.2-1-any.pkg.tar.zst"
    },
    {
     "name": "nodalix-artcraft-launcher-0.2.1-1-x86_64.pkg.tar.zst",
     "size": 11442989,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-artcraft-launcher-0.2.1-1-x86_64.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-artcraft-launcher-0.2.1-1-x86_64.pkg.tar.zst"
    },
    {
     "name": "nodalix-colloid-icons-0.5.1-2-any.pkg.tar.zst",
     "size": 2948109,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-colloid-icons-0.5.1-2-any.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-colloid-icons-0.5.1-2-any.pkg.tar.zst"
    },
    {
     "name": "nodalix-control-center-51.0.0-17-x86_64.pkg.tar.zst",
     "size": 7820798,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-control-center-51.0.0-17-x86_64.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-control-center-51.0.0-17-x86_64.pkg.tar.zst"
    },
    {
     "name": "nodalix-cursor-theme-0.5.1-2-any.pkg.tar.zst",
     "size": 1848969,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-cursor-theme-0.5.1-2-any.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-cursor-theme-0.5.1-2-any.pkg.tar.zst"
    },
    {
     "name": "nodalix-download-iso.py",
     "size": 4116,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-download-iso.py"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-download-iso.py"
    },
    {
     "name": "nodalix-fluent-emoji-0.8.5-1-any.pkg.tar.zst",
     "size": 42390813,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-fluent-emoji-0.8.5-1-any.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-fluent-emoji-0.8.5-1-any.pkg.tar.zst"
    },
    {
     "name": "nodalix-gnome-0.5.2-1-any.pkg.tar.zst",
     "size": 1070002,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-gnome-0.5.2-1-any.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-gnome-0.5.2-1-any.pkg.tar.zst"
    },
    {
     "name": "nodalix-gnome-shell-0.5.2-1-x86_64.pkg.tar.zst",
     "size": 4202310,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-gnome-shell-0.5.2-1-x86_64.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-gnome-shell-0.5.2-1-x86_64.pkg.tar.zst"
    },
    {
     "name": "nodalix-gnome-shell-debug-0.5.2-1-x86_64.pkg.tar.zst",
     "size": 4686939,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-gnome-shell-debug-0.5.2-1-x86_64.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-gnome-shell-debug-0.5.2-1-x86_64.pkg.tar.zst"
    },
    {
     "name": "nodalix-integrations-0.5.2-1-any.pkg.tar.zst",
     "size": 63394,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-integrations-0.5.2-1-any.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-integrations-0.5.2-1-any.pkg.tar.zst"
    },
    {
     "name": "nodalix-keyring-0.5.0-1-any.pkg.tar.zst",
     "size": 8271,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-keyring-0.5.0-1-any.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-keyring-0.5.0-1-any.pkg.tar.zst"
    },
    {
     "name": "nodalix-manifest.json",
     "size": 8821,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-manifest.json"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-manifest.json"
    },
    {
     "name": "nodalix-manifest.json.minisig",
     "size": 316,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-manifest.json.minisig"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-manifest.json.minisig"
    },
    {
     "name": "nodalix-migrate-gnome",
     "size": 5601,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-migrate-gnome"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-migrate-gnome"
    },
    {
     "name": "nodalix-nxpm-0.5.2-1-any.pkg.tar.zst",
     "size": 41980,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-nxpm-0.5.2-1-any.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-nxpm-0.5.2-1-any.pkg.tar.zst"
    },
    {
     "name": "nodalix-ofono-2.19.0-1-x86_64.pkg.tar.zst",
     "size": 1053131,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-ofono-2.19.0-1-x86_64.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-ofono-2.19.0-1-x86_64.pkg.tar.zst"
    },
    {
     "name": "nodalix-phone-link-0.2.5-8-any.pkg.tar.zst",
     "size": 96127,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-phone-link-0.2.5-8-any.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-phone-link-0.2.5-8-any.pkg.tar.zst"
    },
    {
     "name": "nodalix-release-0.5.2-1-any.pkg.tar.zst",
     "size": 7488,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-release-0.5.2-1-any.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-release-0.5.2-1-any.pkg.tar.zst"
    },
    {
     "name": "nodalix-settings-0.5.2-1-any.pkg.tar.zst",
     "size": 2078108,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-settings-0.5.2-1-any.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-settings-0.5.2-1-any.pkg.tar.zst"
    },
    {
     "name": "nodalix-store-0.5.0-2-x86_64.pkg.tar.zst",
     "size": 1470499,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-store-0.5.0-2-x86_64.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-store-0.5.0-2-x86_64.pkg.tar.zst"
    },
    {
     "name": "nodalix-updater-0.5.2-1-any.pkg.tar.zst",
     "size": 57518,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-updater-0.5.2-1-any.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-updater-0.5.2-1-any.pkg.tar.zst"
    },
    {
     "name": "nodalix-video-wallpapers-0.5.2-1-any.pkg.tar.zst",
     "size": 434985512,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-video-wallpapers-0.5.2-1-any.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-video-wallpapers-0.5.2-1-any.pkg.tar.zst"
    },
    {
     "name": "nodalix-wallpapers-0.5.0-1-any.pkg.tar.zst",
     "size": 24871891,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-wallpapers-0.5.0-1-any.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-wallpapers-0.5.0-1-any.pkg.tar.zst"
    },
    {
     "name": "nodalix-xpadneo-dkms-0.10.5-1-any.pkg.tar.zst",
     "size": 53784,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/nodalix-xpadneo-dkms-0.10.5-1-any.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/nodalix-xpadneo-dkms-0.10.5-1-any.pkg.tar.zst"
    },
    {
     "name": "SHA256SUMS",
     "size": 3275,
-    "browser_download_url": "https://github.com/danielmigueltejedor/nodalix-os/releases/download/0.5.2/SHA256SUMS"
+    "browser_download_url": "https://github.com/getnodalia/nodalix-os/releases/download/0.5.2/SHA256SUMS"
    }
   ]
  },
@@ -183,74 +183,74 @@
  "vinilo": {
   "tag_name": "v2.0.0",
   "published_at": "2026-11-11T22:25:24Z",
-  "html_url": "https://github.com/danielmigueltejedor/vinilo/releases/tag/v2.0.0",
+  "html_url": "https://github.com/getnodalia/vinilo/releases/tag/v2.0.0",
   "assets": [
    {
     "name": "SHA256SUMS",
     "size": 558,
-    "browser_download_url": "https://github.com/danielmigueltejedor/vinilo/releases/download/v2.0.0/SHA256SUMS"
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/SHA256SUMS"
    },
    {
     "name": "vinilo-2.0.0-1-x86_64.pkg.tar.zst",
     "size": 143137465,
-    "browser_download_url": "https://github.com/danielmigueltejedor/vinilo/releases/download/v2.0.0/vinilo-2.0.0-1-x86_64.pkg.tar.zst"
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/vinilo-2.0.0-1-x86_64.pkg.tar.zst"
    },
    {
     "name": "vinilo-2.0.0-1.x86_64.rpm",
     "size": 149931682,
-    "browser_download_url": "https://github.com/danielmigueltejedor/vinilo/releases/download/v2.0.0/vinilo-2.0.0-1.x86_64.rpm"
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/vinilo-2.0.0-1.x86_64.rpm"
    },
    {
     "name": "Vinilo-2.0.0-macos-arm64.dmg",
     "size": 171563827,
-    "browser_download_url": "https://github.com/danielmigueltejedor/vinilo/releases/download/v2.0.0/Vinilo-2.0.0-macos-arm64.dmg"
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/Vinilo-2.0.0-macos-arm64.dmg"
    },
    {
     "name": "Vinilo-2.0.0-macos-arm64.dmg.sha256",
     "size": 95,
-    "browser_download_url": "https://github.com/danielmigueltejedor/vinilo/releases/download/v2.0.0/Vinilo-2.0.0-macos-arm64.dmg.sha256"
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/Vinilo-2.0.0-macos-arm64.dmg.sha256"
    },
    {
     "name": "Vinilo-2.0.0-x86_64.AppImage",
     "size": 310970872,
-    "browser_download_url": "https://github.com/danielmigueltejedor/vinilo/releases/download/v2.0.0/Vinilo-2.0.0-x86_64.AppImage"
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/Vinilo-2.0.0-x86_64.AppImage"
    },
    {
     "name": "Vinilo-2.0.0.flatpak",
     "size": 101068096,
-    "browser_download_url": "https://github.com/danielmigueltejedor/vinilo/releases/download/v2.0.0/Vinilo-2.0.0.flatpak"
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/Vinilo-2.0.0.flatpak"
    },
    {
     "name": "vinilo_2.0.0_amd64.deb",
     "size": 150807192,
-    "browser_download_url": "https://github.com/danielmigueltejedor/vinilo/releases/download/v2.0.0/vinilo_2.0.0_amd64.deb"
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/vinilo_2.0.0_amd64.deb"
    }
   ]
  },
  "vortia": {
   "tag_name": "v0.6.0",
   "published_at": "2026-11-11T21:33:56Z",
-  "html_url": "https://github.com/danielmigueltejedor/vortia/releases/tag/v0.6.0",
+  "html_url": "https://github.com/getnodalia/vortia/releases/tag/v0.6.0",
   "assets": [
    {
     "name": "Vortia-0.6.0-linux-x86_64.AppImage",
     "size": 293227000,
-    "browser_download_url": "https://github.com/danielmigueltejedor/vortia/releases/download/v0.6.0/Vortia-0.6.0-linux-x86_64.AppImage"
+    "browser_download_url": "https://github.com/getnodalia/vortia/releases/download/v0.6.0/Vortia-0.6.0-linux-x86_64.AppImage"
    },
    {
     "name": "Vortia-0.6.0-linux-x86_64.AppImage.sha256",
     "size": 101,
-    "browser_download_url": "https://github.com/danielmigueltejedor/vortia/releases/download/v0.6.0/Vortia-0.6.0-linux-x86_64.AppImage.sha256"
+    "browser_download_url": "https://github.com/getnodalia/vortia/releases/download/v0.6.0/Vortia-0.6.0-linux-x86_64.AppImage.sha256"
    },
    {
     "name": "Vortia-0.6.0-macos-arm64.dmg",
     "size": 415036235,
-    "browser_download_url": "https://github.com/danielmigueltejedor/vortia/releases/download/v0.6.0/Vortia-0.6.0-macos-arm64.dmg"
+    "browser_download_url": "https://github.com/getnodalia/vortia/releases/download/v0.6.0/Vortia-0.6.0-macos-arm64.dmg"
    },
    {
     "name": "Vortia-0.6.0-macos-arm64.dmg.sha256",
     "size": 95,
-    "browser_download_url": "https://github.com/danielmigueltejedor/vortia/releases/download/v0.6.0/Vortia-0.6.0-macos-arm64.dmg.sha256"
+    "browser_download_url": "https://github.com/getnodalia/vortia/releases/download/v0.6.0/Vortia-0.6.0-macos-arm64.dmg.sha256"
    }
   ]
  }

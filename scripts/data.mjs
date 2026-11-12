@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const GH_USER = 'danielmigueltejedor';
+const GH_USER = 'getnodalia';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const githubRepo = (name) => `https://github.com/${GH_USER}/${name}`;
 const rawAsset = (repo, assetPath, branch = 'main') =>

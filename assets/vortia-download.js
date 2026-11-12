@@ -4,7 +4,7 @@ import { detectPlatform, detectArchitecture } from './platform.js';
 export { detectPlatform, detectArchitecture };
 /* Vortia downloads: official GitHub Releases, platform-aware with safe fallback. */
 
-export const OWNER = 'danielmigueltejedor';
+export const OWNER = 'getnodalia';
 export const REPO = 'vortia';
 export const RELEASES = `https://github.com/${OWNER}/${REPO}/releases`;
 export const LATEST = `https://api.github.com/repos/${OWNER}/${REPO}/releases/latest`;

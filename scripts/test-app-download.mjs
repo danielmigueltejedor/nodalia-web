@@ -3,12 +3,12 @@ import { choose, detail, kind, packages, render, bootAppDownload } from '../asse
 import { slim } from './releases.mjs';
 
 // The download button shared by Vinilo, Lienzo and every app with installers.
-const dl = (repo, tag, name, size = 1) => ({ name, size, browser_download_url: `https://github.com/danielmigueltejedor/${repo}/releases/download/${tag}/${name}` });
+const dl = (repo, tag, name, size = 1) => ({ name, size, browser_download_url: `https://github.com/getnodalia/${repo}/releases/download/${tag}/${name}` });
 const vinilo = { repo: 'vinilo', patterns: { linux: '^Vinilo-.+-x86_64\\.AppImage$', mac: '^Vinilo-.+-macos-(arm64|universal)\\.dmg$' } };
 const lienzo = { repo: 'lienzo', patterns: { linux: '^lienzo-.+-linux-x86_64\\.AppImage$', mac: '^lienzo-.+-macos-(arm64|universal)\\.dmg$', windows: '^lienzo-.+-windows-x64\\.msi$' } };
 const v2 = {
   tag_name: 'v2.0.0',
-  html_url: 'https://github.com/danielmigueltejedor/vinilo/releases/tag/v2.0.0',
+  html_url: 'https://github.com/getnodalia/vinilo/releases/tag/v2.0.0',
   assets: [dl('vinilo', 'v2.0.0', 'vinilo_2.0.0_amd64.deb'), dl('vinilo', 'v2.0.0', 'Vinilo-2.0.0-x86_64.AppImage', 310970872), dl('vinilo', 'v2.0.0', 'Vinilo-2.0.0-macos-arm64.dmg', 171563827)],
 };
 
@@ -49,7 +49,7 @@ for (const [os, arch] of [['other', 'unknown'], ['windows', 'unknown'], ['linux'
 assert.equal(packages({ ...v2, assets: [{ name: 'Vinilo-9-x86_64.AppImage', browser_download_url: 'https://evil.example/Vinilo-9-x86_64.AppImage' }] }, vinilo).linux, null);
 assert.equal(packages({ ...v2, prerelease: true }, vinilo).linux, null);
 assert.equal(packages({ ...v2, draft: true }, vinilo).mac, null);
-assert.equal(choose(null, lienzo, 'linux').href, 'https://github.com/danielmigueltejedor/lienzo/releases/latest');
+assert.equal(choose(null, lienzo, 'linux').href, 'https://github.com/getnodalia/lienzo/releases/latest');
 // Windows gets its installer when the release has one.
 const l = { tag_name: 'v0.2.0', assets: [dl('lienzo', 'v0.2.0', 'lienzo-0.2.0-windows-x64.msi'), dl('lienzo', 'v0.2.0', 'lienzo-0.2.0-linux-x86_64.AppImage')] };
 assert.equal(choose(l, lienzo, 'windows').title, 'Descargar para Windows');
@@ -64,7 +64,7 @@ const page = (config, nav) => {
 };
 const mac = { platform: 'MacIntel', userAgent: 'Macintosh', userAgentData: { platform: 'macOS', getHighEntropyValues: async () => ({ architecture: 'arm' }) } };
 const linux = { platform: 'Linux x86_64', userAgent: 'X11; Linux x86_64' };
-const v21 = { ...v2, tag_name: 'v2.1.0', html_url: 'https://github.com/danielmigueltejedor/vinilo/releases/tag/v2.1.0', assets: [dl('vinilo', 'v2.1.0', 'Vinilo-2.1.0-x86_64.AppImage'), dl('vinilo', 'v2.1.0', 'Vinilo-2.1.0-macos-arm64.dmg')] };
+const v21 = { ...v2, tag_name: 'v2.1.0', html_url: 'https://github.com/getnodalia/vinilo/releases/tag/v2.1.0', assets: [dl('vinilo', 'v2.1.0', 'Vinilo-2.1.0-x86_64.AppImage'), dl('vinilo', 'v2.1.0', 'Vinilo-2.1.0-macos-arm64.dmg')] };
 let p = page({ ...vinilo, release: v2 }, mac);
 assert.equal(await bootAppDownload({ document: p.doc, navigator: p.nav, fetch: async () => ({ ok: true, json: async () => v21 }) }), true);
 assert.match(p.els['app-primary-download'].href, /v2\.1\.0\/Vinilo-2\.1\.0-macos-arm64\.dmg$/);
@@ -85,7 +85,7 @@ await bootAppDownload({ document: p.doc, navigator: p.nav, fetch: async () => ({
 assert.match(p.els['app-primary-download'].href, /Vinilo-2\.0\.0-x86_64\.AppImage$/);
 assert.equal(p.els['app-primary-icon'].src, '/platform-linux.svg');
 // An app built before its first release picks it up as soon as GitHub has it.
-const first = { tag_name: 'v0.1.0', html_url: 'https://github.com/danielmigueltejedor/lienzo/releases/tag/v0.1.0', assets: [dl('lienzo', 'v0.1.0', 'lienzo-0.1.0-linux-x86_64.AppImage')] };
+const first = { tag_name: 'v0.1.0', html_url: 'https://github.com/getnodalia/lienzo/releases/tag/v0.1.0', assets: [dl('lienzo', 'v0.1.0', 'lienzo-0.1.0-linux-x86_64.AppImage')] };
 p = page({ ...lienzo, release: null }, linux);
 assert.equal(await bootAppDownload({ document: p.doc, navigator: p.nav, fetch: async () => ({ ok: true, json: async () => first }) }), true);
 assert.match(p.els['app-primary-download'].href, /lienzo-0\.1\.0-linux-x86_64\.AppImage$/);
@@ -126,6 +126,6 @@ assert.equal(slim('vinilo', { ...v2, draft: true }), null);
 assert.equal(slim('vinilo', { ...v2, tag_name: '<b>' }), null);
 const kept = slim('vinilo', { ...v2, assets: [...v2.assets, { name: 'x', browser_download_url: 'https://evil.example/x' }] });
 assert.equal(kept.assets.length, 3);
-assert.equal(kept.html_url, 'https://github.com/danielmigueltejedor/vinilo/releases/tag/v2.0.0');
+assert.equal(kept.html_url, 'https://github.com/getnodalia/vinilo/releases/tag/v2.0.0');
 
 console.log('✓ Botón de descarga: Linux, macOS (Apple Silicon, Intel, universal), Windows, móvil, versiones nuevas, primera versión y sin conexión.');

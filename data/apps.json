@@ -224,7 +224,7 @@
       "commands": [
         "sudo pacman -S --needed base-devel pkgconf rustup gtk4 librsvg nodejs npm libpulse alsa-lib yt-dlp ffmpeg webkitgtk-6.0",
         "rustup default stable",
-        "git clone https://github.com/danielmigueltejedor/vinilo.git",
+        "git clone https://github.com/getnodalia/vinilo.git",
         "cd vinilo && make install"
       ]
     },

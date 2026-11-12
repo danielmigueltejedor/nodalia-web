@@ -1,6 +1,6 @@
 import { lang } from './i18n.js';
 // Muestra la última versión publicada de cada proyecto. Si GitHub no responde se conserva el valor incluido en la página.
-const API = 'https://api.github.com/repos/danielmigueltejedor/';
+const API = 'https://api.github.com/repos/getnodalia/';
 
 export const isTag = (value) => typeof value === 'string' && /^v?\d+(\.\d+){1,3}([-.][0-9A-Za-z.]+)?$/.test(value);
 

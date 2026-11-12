@@ -6,9 +6,9 @@
  */
 import { t, lang } from './i18n.js';
 
-export const REPO_URL = 'https://github.com/danielmigueltejedor/nodalix-os';
+export const REPO_URL = 'https://github.com/getnodalia/nodalix-os';
 export const RELEASES_API =
-  'https://api.github.com/repos/danielmigueltejedor/nodalix-os/releases?per_page=30';
+  'https://api.github.com/repos/getnodalia/nodalix-os/releases?per_page=30';
 export const ALLOWED_HOSTS = new Set(['github.com', 'downloads.getnodalia.com']);
 
 export function createSecureLink(url, label, primary = false, Url = URL) {

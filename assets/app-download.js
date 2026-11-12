@@ -7,7 +7,7 @@ import { detectPlatform, detectArchitecture } from './platform.js';
    (#app-download-config); this script asks GitHub again, so a release published since then
    shows up without rebuilding the site. */
 
-export const OWNER = 'danielmigueltejedor';
+export const OWNER = 'getnodalia';
 const ICONS = { linux: '/platform-linux.svg', mac: '/platform-apple.svg' };
 const TITLES = { linux: 'Descargar para Linux', mac: 'Descargar para macOS', windows: 'Descargar para Windows' };
 

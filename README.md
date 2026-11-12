@@ -72,7 +72,7 @@ npx wrangler pages deploy dist/nodalix --project-name nodalia-nodalix --branch m
 **Versiones automáticas.** El workflow también se ejecuta cada tres horas y con el evento `repository_dispatch` de tipo `app-released`, así que las webs se regeneran con las últimas versiones sin tocar este repositorio. Para que una publicación aparezca al momento, el workflow de release de una app puede lanzar ese evento (necesita un token con permiso sobre `nodalia-web`):
 
 ~~~bash
-gh api repos/danielmigueltejedor/nodalia-web/dispatches -f event_type=app-released
+gh api repos/getnodalia/nodalia-web/dispatches -f event_type=app-released
 ~~~
 
 Aunque no se regeneren, las páginas consultan GitHub en el navegador y muestran la versión nueva en cuanto existe.
@@ -83,7 +83,7 @@ Los despliegues automáticos se ejecutan solamente después de superar las prueb
 
 La web `vortia.getnodalia.com` identifica de manera orientativa el sistema operativo del navegador y ofrece un botón directo con el icono de Linux (AppImage x86_64) o Apple (DMG arm64). La sección de descargas siempre muestra **ambas plataformas**, los tamaños y los checksums SHA-256 que existan en la publicación.
 
-`assets/vortia-download.js` consulta `https://api.github.com/repos/danielmigueltejedor/vortia/releases/latest` para mostrar los instaladores de la última publicación estable, sin cambiar el sitio cada vez que se publica Vortia. En caso de error de red o límite de la API, usa la versión con la que se generó la página y avisa de que puede no ser la más reciente.
+`assets/vortia-download.js` consulta `https://api.github.com/repos/getnodalia/vortia/releases/latest` para mostrar los instaladores de la última publicación estable, sin cambiar el sitio cada vez que se publica Vortia. En caso de error de red o límite de la API, usa la versión con la que se generó la página y avisa de que puede no ser la más reciente.
 
 No se ofrecen DMG para Mac Intel ni AppImage para Linux ARM64 cuando no hay un paquete compatible. Los navegadores, especialmente Safari, **no siempre permiten identificar la arquitectura de un Mac**: el botón de macOS indica explícitamente que el DMG es para Apple Silicon. Los enlaces siempre apuntan a GitHub Releases y se comprueba su origen antes de usarlos.
 
@@ -91,7 +91,7 @@ Los SVG de las marcas Apple y Linux proceden de [Simple Icons](https://github.co
 
 ## Nodalix OS: ISO
 
-La página Nodalix OS consulta las publicaciones oficiales de [Nodalix OS en GitHub](https://github.com/danielmigueltejedor/nodalix-os/releases). Si la versión estable contiene una ISO completa, enlaza a ella; si se distribuye en partes, enlaza al descargador oficial y a las verificaciones disponibles. Nunca muestra un botón ficticio de descarga directa.
+La página Nodalix OS consulta las publicaciones oficiales de [Nodalix OS en GitHub](https://github.com/getnodalia/nodalix-os/releases). Si la versión estable contiene una ISO completa, enlaza a ella; si se distribuye en partes, enlaza al descargador oficial y a las verificaciones disponibles. Nunca muestra un botón ficticio de descarga directa.
 
 Opcionalmente, las ISO íntegras pueden alojarse en un bucket Cloudflare R2 con un subdominio dedicado. La fuente `data/nodalix-iso-releases.json` solo debe editarse al publicar una ISO real, después de verificar nombre, tamaño, URL pública y SHA-256. `assets/nodalix-releases.js` prioriza los enlaces directos de la versión publicada únicamente cuando son verificables.
 

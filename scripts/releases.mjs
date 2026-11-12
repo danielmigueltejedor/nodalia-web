@@ -7,7 +7,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const OWNER = 'danielmigueltejedor';
+const OWNER = 'getnodalia';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const snapshotPath = path.join(root, 'data', 'releases.json');
 const TAG = /^v?\d+(\.\d+){1,3}([-.][0-9A-Za-z.]+)?$/;
