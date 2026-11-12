@@ -6,6 +6,7 @@ import { apps, brand, site, repoUrl } from './data.mjs';
 import { DEFAULT_LOCALE, locales, localeCodes, localePath, localize, dictionaries, clientKeys } from './i18n.mjs';
 import { loadReleases } from './releases.mjs';
 import { choose, detail, kind, megabytes, releasesUrl } from '../assets/app-download.js';
+import { scrollStory } from './scroll-story.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const target = process.argv[2];
@@ -31,6 +32,7 @@ let locale = DEFAULT_LOCALE;
 let clientStrings = null;
 const missing = {};
 const motionSrc = `/motion.js?v=${await assetVersion('motion.js')}`;
+const storySrc = `/scroll-story.js?v=${await assetVersion('scroll-story.js')}`;
 const vortiaDownloadSrc = `/vortia-download.js?v=${await assetVersion('vortia-download.js')}`;
 const appDownloadSrc = `/app-download.js?v=${await assetVersion('app-download.js')}`;
 // Las versiones publicadas en GitHub en el momento de generar: la página ya sale con ellas.
@@ -180,7 +182,7 @@ ${langBoot()}${motionBoot}
 ${clientStrings ? `<script type="application/json" id="i18n">${JSON.stringify(clientStrings).replaceAll('<', '\\u003c')}</script>` : ''}
 ${schema ? jsonLd({'@context':'https://schema.org','@graph':[].concat(schema)}) : ''}
 </head><body class="${e(accent ? `accent-${accent}` : '')}"><a class="visually-hidden" href="#contenido">Saltar al contenido</a>
-<div class="scroll-progress" aria-hidden="true"></div>${nav(active, canonical)}<main id="contenido">${content}</main>${footer()}<script type="module" src="${motionSrc}"></script>${identity ? `<script type="module" src="${identitySrc}"></script>` : ''}${scripts}</body></html>`;
+<div class="scroll-progress" aria-hidden="true"></div>${nav(active, canonical)}<main id="contenido">${content}</main>${footer()}<script type="module" src="${motionSrc}"></script>${content.includes('data-scroll-story') ? `<script type="module" src="${storySrc}"></script>` : ''}${identity ? `<script type="module" src="${identitySrc}"></script>` : ''}${scripts}</body></html>`;
 
 async function home() {
   const vinilo = byId.vinilo, lienzo = byId.lienzo, nodalix = byId.nodalix;
@@ -233,7 +235,7 @@ async function home() {
           <img src="${previewUrl(lienzo)}" alt="Captura real de Lienzo editando una imagen por capas" decoding="async" loading="eager" width="2400" height="1500"/>
           <figcaption>Lienzo · capas</figcaption>
         </figure>
-        <p class="stage-caption"><strong>Aplicaciones reales.</strong> Capturas de los repositorios oficiales.</p>
+        <p class="stage-caption"><strong>Aplicaciones reales.</strong> Capturas de los repositorios oficiales. <a class="text-link" href="#demostracion">Demostración <span aria-hidden="true">↓</span></a></p>
       </div>
     </div></section>
     <div class="release-strip"><div class="container release-strip-inner"><span class="release-label">Últimas versiones</span>
@@ -243,6 +245,7 @@ async function home() {
         return `<li${release ? '' : ' hidden'}><a href="${safeUrl(`${repoUrl(repo)}/releases/latest`)}" target="_blank" rel="noopener noreferrer"><span>${e(name)}</span><b data-release="${e(repo)}">${e(release?.tag_name || '')}</b><time${release?.published_at ? ` datetime="${e(release.published_at)}"` : ''}></time></a></li>`;
       }).join('')}</ul>
     </div></div>
+    ${scrollStory('portal', apps, { e, safeUrl })}
     <section class="catalogue" id="aplicaciones"><div class="container">
       <div class="section-head"><div data-reveal><h2 data-reveal>Cuatro ideas.<br/>Una forma de hacerlas.</h2></div><p data-reveal>Un sistema operativo y tres aplicaciones, cada una con un problema concreto que resolver. Todas indican su estado real antes de que descargues nada.</p></div>
       <div class="product-grid">${ordered.map(card).join('')}</div>
@@ -384,7 +387,7 @@ function product(app) {
     : app.downloads
       ? appDownloadHint(app)
       : '';
-  const sections = [['funciones', 'Funciones'], ['ficha', 'Ficha técnica'], ...(hasDownloads ? [['descargas', 'Descargas']] : []), ...(app.id === 'nodalix' || app.install ? [['instalacion', 'Instalación']] : []), ...(app.previews.length ? [['capturas', 'Capturas']] : []), ['faq', 'Preguntas'], ['codigo', 'Código']];
+  const sections = [['demostracion', 'Demostración'], ['funciones', 'Funciones'], ['ficha', 'Ficha técnica'], ...(hasDownloads ? [['descargas', 'Descargas']] : []), ...(app.id === 'nodalix' || app.install ? [['instalacion', 'Instalación']] : []), ...(app.previews.length ? [['capturas', 'Capturas']] : []), ['faq', 'Preguntas'], ['codigo', 'Código']];
   const detail = app.sources
     ? `<div><h3 class="detail-title" data-reveal>Fuentes de música</h3>${table(['Fuente', 'Canal', 'Qué necesitas'], app.sources)}</div>`
     : app.components
@@ -412,7 +415,8 @@ function product(app) {
       <span class="eyebrow">${e(app.eyebrow)}</span><h1>${e(title)}</h1><p class="lede">${e(app.description)}</p>
       <div class="actions">${hasDownloads && app.id !== 'nodalix' ? `<div class="download-stack">${primaryDownload}<a href="#descargas" class="btn btn-secondary btn-all-versions">Ver todas las versiones <span class="btn-icon" aria-hidden="true">↓</span></a></div>` : primaryDownload}${A(app.repo, `${icon.github}Código en GitHub`, 'btn btn-secondary', true)}</div>
       ${primaryHint}<div class="product-meta"><span class="pill">${e(app.platforms)}</span><span class="pill">${e(app.technology)}</span></div></div>
-      ${stage}</div></section>
+      <div class="product-hero-stage" data-parallax style="--depth:-46px">${stage}</div></div></section>
+      ${scrollStory(app.id, apps, { e, safeUrl })}
       <section class="section features" id="funciones"><div class="container"><h2 data-reveal>Qué hace ${e(app.name)}.</h2><div class="feature-grid">${app.features.map(([h,d],i)=>`<article class="feature" data-reveal><h3>${e(h)}</h3><p>${e(d)}</p></article>`).join('')}</div><div class="notice" data-reveal>${icon.alert}<p><strong>Estado y requisitos:</strong> ${e(app.limitation)}</p></div></div></section>
       <section class="section" id="ficha"><div class="container"><h2 data-reveal>Ficha técnica</h2><div class="detail-grid">${specCard(app)}${detail}</div></div></section>
       ${app.id==='vortia' ? vortiaDownloads() : app.downloads ? appDownloadsSection(app) : ''}
@@ -538,6 +542,7 @@ async function build(site) {
     copyFile(path.join(root, 'assets', 'styles.css'), path.join(dir, 'styles.css')),
     copyFile(path.join(root, 'assets', '_headers'), path.join(dir, '_headers')),
     copyFile(path.join(root, 'assets', 'motion.js'), path.join(dir, 'motion.js')),
+    copyFile(path.join(root, 'assets', 'scroll-story.js'), path.join(dir, 'scroll-story.js')),
     ...(site === 'portal' ? [] : [copyFile(path.join(root, 'assets', 'identity.js'), path.join(dir, 'identity.js'))]),
     ...(app?.previews.length ? [copyFile(path.join(root, 'assets', 'gallery.js'), path.join(dir, 'gallery.js'))] : []),
     ...['favicon.svg', 'favicon.ico', 'apple-touch-icon.png'].map((file) => copyFile(path.join(root, 'assets', file), path.join(dir, file))),
