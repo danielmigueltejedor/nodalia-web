@@ -277,13 +277,13 @@
     "id": "lienzo",
     "name": "Lienzo",
     "category": "Creatividad",
-    "status": "Primera versión · 0.1.0 para Linux",
+    "status": "Primeras versiones · 0.2.0 para Linux, macOS y Windows",
     "statusKind": "early",
     "eyebrow": "Edición de imagen",
     "headline": "Tu espacio para crear, capa a capa.",
     "tagline": "Edición creativa con control local.",
     "description": "Un editor de imágenes nativo, escrito en Rust y con el diseño de Nodalia, para trabajar por capas y abrir documentos PSD. Sin cuenta, sin nube.",
-    "platforms": "Linux x86_64 · macOS y Windows más adelante",
+    "platforms": "Linux x86_64 · macOS (Universal) · Windows x64",
     "technology": "Rust · Nodalia Design",
     "license": "MIT OR Apache-2.0",
     "repo": "lienzo",
@@ -295,11 +295,11 @@
       ],
       [
         "/screens/lienzo/lienzo-adjustments.jpg",
-        "Capa de ajuste de curvas sobre «Impresión, sol naciente»"
+        "Capa de ajuste de curvas sobre «La gran ola», con el panel de propiedades"
       ],
       [
         "/screens/lienzo/lienzo-light.jpg",
-        "Lienzo en el tema claro"
+        "Lienzo en el tema claro, elegido en Preferencias"
       ]
     ],
     "features": [
@@ -317,7 +317,7 @@
       ],
       [
         "Diseño de Nodalia",
-        "Islas redondeadas, el color de Lienzo, controles de ventana propios o los de tu escritorio, y tema claro u oscuro según el sistema."
+        "Un solo lenguaje de diseño: islas redondeadas, el color de Lienzo, controles de ventana propios en Linux y nativos en macOS y Windows, y tema claro u oscuro que se elige en Preferencias."
       ],
       [
         "Todo es un comando",
@@ -345,11 +345,7 @@
       ],
       [
         "Paquetes",
-        "AppImage · .deb · .rpm · .tar.gz (Linux x86_64)"
-      ],
-      [
-        "Más adelante",
-        "macOS y Windows"
+        "AppImage · .deb · .rpm · .tar.gz (Linux x86_64) · DMG (macOS) · MSI y zip portátil (Windows)"
       ],
       [
         "Tecnología",
@@ -360,11 +356,11 @@
     "faq": [
       [
         "¿Dónde lo descargo?",
-        "En esta página: el botón principal ofrece el paquete para tu sistema desde la última versión publicada en GitHub. La primera versión, 0.1.0, es para Linux x86_64."
+        "En esta página: el botón principal ofrece el paquete para tu sistema desde la última versión publicada en GitHub. La versión 0.2.0 está disponible para Linux x86_64, macOS (Apple Silicon e Intel) y Windows x64."
       ],
       [
         "¿Hay versión para macOS o Windows?",
-        "Todavía no. Lienzo funciona en los tres sistemas, pero los primeros paquetes son para Linux. Esta página mostrará el DMG o el instalador de Windows en cuanto se publiquen."
+        "Sí, desde la 0.2.0. En Mac hay un DMG universal firmado; en Windows, un instalador MSI y una versión portátil. El botón principal elige el de tu sistema."
       ],
       [
         "¿Mis archivos salen de mi equipo?",
@@ -375,7 +371,7 @@
         "No por completo. Lienzo está empezando y la compatibilidad con funciones y formatos depende de la versión."
       ]
     ],
-    "limitation": "Lienzo está en una fase temprana. La primera versión es para Linux x86_64; macOS y Windows llegarán más adelante. La compatibilidad con funciones y formatos PSD depende de la versión.",
+    "limitation": "Lienzo está en una fase temprana. Hay versiones para Linux x86_64, macOS y Windows x64. La compatibilidad con funciones y formatos PSD depende de la versión.",
     "cta": "Descargar Lienzo",
     "accent": "rose",
     "branch": "nodalia",
@@ -384,7 +380,7 @@
       "mac": "^lienzo-.+-macos-(arm64|universal)\\.dmg$",
       "windows": "^lienzo-.+-windows-x64\\.msi$"
     },
-    "otherPackages": "Otros paquetes: .deb, .rpm, .tar.gz"
+    "otherPackages": "Otros paquetes: .deb, .rpm, .tar.gz, zip portátil de Windows"
   },
   {
     "id": "nodalix",

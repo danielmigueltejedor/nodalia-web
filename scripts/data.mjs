@@ -14,7 +14,7 @@ const productDomain = (subdomain) => `https://${subdomain}.getnodalia.com`;
 export const brand = {
   name: 'Nodalia',
   email: 'hola@getnodalia.com',
-  github: `https://github.com/${GH_USER}`,
+  github: "https://github.com/getnodalia",
   portal: 'https://getnodalia.com',
   instagram: 'https://www.instagram.com/getnodalia/',
   x: 'https://x.com/getnodalia',
