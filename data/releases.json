@@ -181,49 +181,59 @@
  "toma": null,
  "torno": null,
  "vinilo": {
-  "tag_name": "v2.0.0",
-  "published_at": "2026-11-11T22:25:24Z",
-  "html_url": "https://github.com/getnodalia/vinilo/releases/tag/v2.0.0",
+  "tag_name": "v0.1.1",
+  "published_at": "2026-11-12T18:55:49Z",
+  "html_url": "https://github.com/getnodalia/vinilo/releases/tag/v0.1.1",
   "assets": [
    {
     "name": "SHA256SUMS",
-    "size": 558,
-    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/SHA256SUMS"
+    "size": 668,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/SHA256SUMS"
    },
    {
-    "name": "vinilo-2.0.0-1-x86_64.pkg.tar.zst",
-    "size": 143137465,
-    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/vinilo-2.0.0-1-x86_64.pkg.tar.zst"
+    "name": "vinilo-0.1.1-1-x86_64.pkg.tar.zst",
+    "size": 143494727,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/vinilo-0.1.1-1-x86_64.pkg.tar.zst"
    },
    {
-    "name": "vinilo-2.0.0-1.x86_64.rpm",
-    "size": 149931682,
-    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/vinilo-2.0.0-1.x86_64.rpm"
+    "name": "vinilo-0.1.1-1.x86_64.rpm",
+    "size": 150431103,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/vinilo-0.1.1-1.x86_64.rpm"
    },
    {
-    "name": "Vinilo-2.0.0-macos-arm64.dmg",
-    "size": 171563827,
-    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/Vinilo-2.0.0-macos-arm64.dmg"
+    "name": "Vinilo-0.1.1-native-macos-arm64.dmg",
+    "size": 137639765,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/Vinilo-0.1.1-native-macos-arm64.dmg"
    },
    {
-    "name": "Vinilo-2.0.0-macos-arm64.dmg.sha256",
-    "size": 95,
-    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/Vinilo-2.0.0-macos-arm64.dmg.sha256"
+    "name": "Vinilo-0.1.1-native-macos-arm64.dmg.sha256",
+    "size": 102,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/Vinilo-0.1.1-native-macos-arm64.dmg.sha256"
    },
    {
-    "name": "Vinilo-2.0.0-x86_64.AppImage",
-    "size": 310970872,
-    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/Vinilo-2.0.0-x86_64.AppImage"
+    "name": "Vinilo-0.1.1-nodalia-macos-arm64.dmg",
+    "size": 154356290,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/Vinilo-0.1.1-nodalia-macos-arm64.dmg"
    },
    {
-    "name": "Vinilo-2.0.0.flatpak",
-    "size": 101068096,
-    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/Vinilo-2.0.0.flatpak"
+    "name": "Vinilo-0.1.1-nodalia-macos-arm64.dmg.sha256",
+    "size": 103,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/Vinilo-0.1.1-nodalia-macos-arm64.dmg.sha256"
    },
    {
-    "name": "vinilo_2.0.0_amd64.deb",
-    "size": 150807192,
-    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v2.0.0/vinilo_2.0.0_amd64.deb"
+    "name": "Vinilo-0.1.1-x86_64.AppImage",
+    "size": 311396856,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/Vinilo-0.1.1-x86_64.AppImage"
+   },
+   {
+    "name": "Vinilo-0.1.1.flatpak",
+    "size": 101352416,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/Vinilo-0.1.1.flatpak"
+   },
+   {
+    "name": "vinilo_0.1.1_amd64.deb",
+    "size": 151314346,
+    "browser_download_url": "https://github.com/getnodalia/vinilo/releases/download/v0.1.1/vinilo_0.1.1_amd64.deb"
    }
   ]
  },
