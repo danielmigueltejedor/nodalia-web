@@ -89,6 +89,23 @@ export function detail(choice, locale) {
   return [kind(choice.os, choice.asset), megabytes(choice.asset.size, locale), choice.version].filter(Boolean).join(' · ');
 }
 
+/** The card's label: "Descargar" translates, the file kind (DMG, AppImage...) stays as it is. */
+function setCardLabel(card, fileKind) {
+  if (!fileKind) {
+    card.textContent = t('Consultar en GitHub ↗');
+    return;
+  }
+  const doc = card.ownerDocument;
+  if (!doc || typeof card.replaceChildren !== 'function') {
+    card.textContent = `${t('Descargar')} ${fileKind}`;
+    return;
+  }
+  const span = doc.createElement('span');
+  span.setAttribute('translate', 'no');
+  span.textContent = fileKind;
+  card.replaceChildren(`${t('Descargar')} `, span);
+}
+
 export function render(get, release, config, os, arch) {
   const choice = choose(release, config, os, arch);
   if (!choice.version) return false;
@@ -113,7 +130,7 @@ export function render(get, release, config, os, arch) {
     if (!card) continue;
     const asset = choice.found[other];
     card.href = asset ? asset.url : choice.page;
-    card.textContent = asset ? `${t('Descargar')} ${kind(other, asset)}` : t('Consultar en GitHub ↗');
+    setCardLabel(card, asset ? kind(other, asset) : '');
     const size = get(`app-card-${other}-size`);
     if (size) size.textContent = asset ? megabytes(asset.size) : '';
   }
