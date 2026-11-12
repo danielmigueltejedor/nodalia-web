@@ -43,7 +43,7 @@ for (const [os, arch] of [['other', 'unknown'], ['windows', 'unknown'], ['linux'
   c = choose(v2, vinilo, os, arch);
   assert.equal(c.href, v2.html_url, `${os}/${arch}`);
   assert.equal(c.icon, '');
-  assert.equal(c.title, 'Ver versiones y descargas');
+  assert.equal(c.title, 'Descargar');
 }
 // Assets outside the app's own releases, drafts and pre-releases are never offered.
 assert.equal(packages({ ...v2, assets: [{ name: 'Vinilo-9-x86_64.AppImage', browser_download_url: 'https://evil.example/Vinilo-9-x86_64.AppImage' }] }, vinilo).linux, null);
@@ -55,8 +55,8 @@ const l = { tag_name: 'v0.2.0', assets: [dl('lienzo', 'v0.2.0', 'lienzo-0.2.0-wi
 assert.equal(choose(l, lienzo, 'windows').title, 'Descargar para Windows');
 assert.equal(choose(l, lienzo, 'windows').asset.name, 'lienzo-0.2.0-windows-x64.msi');
 
-// In the page: the built release first, then GitHub's newer one; the other systems stay one click away.
-const elements = () => Object.fromEntries(['app-primary-download', 'app-primary-icon', 'app-primary-title', 'app-primary-detail', 'app-alt-linux', 'app-alt-mac', 'app-alt-windows'].map((id) => [id, { hidden: false, href: '', textContent: '', src: '' }]));
+// In the page: the built release first, then GitHub's newer one; every system's installer in the downloads section.
+const elements = () => Object.fromEntries(['app-primary-download', 'app-primary-icon', 'app-primary-title', 'app-primary-detail', 'app-release-version', 'app-card-linux', 'app-card-linux-size', 'app-card-mac', 'app-card-mac-size', 'app-card-windows', 'app-card-windows-size'].map((id) => [id, { hidden: false, href: '', textContent: '', src: '' }]));
 const page = (config, nav) => {
   const els = elements();
   els['app-download-config'] = { textContent: JSON.stringify(config) };
@@ -71,9 +71,11 @@ assert.match(p.els['app-primary-download'].href, /v2\.1\.0\/Vinilo-2\.1\.0-macos
 assert.equal(p.els['app-primary-icon'].src, '/platform-apple.svg');
 assert.equal(p.els['app-primary-icon'].hidden, false);
 assert.match(p.els['app-primary-detail'].textContent, /v2\.1\.0$/);
-assert.equal(p.els['app-alt-mac'].hidden, true);
-assert.equal(p.els['app-alt-linux'].hidden, false);
-assert.match(p.els['app-alt-linux'].href, /Vinilo-2\.1\.0-x86_64\.AppImage$/);
+assert.equal(p.els['app-release-version'].textContent, 'v2.1.0');
+assert.match(p.els['app-card-mac'].href, /Vinilo-2\.1\.0-macos-arm64\.dmg$/);
+assert.match(p.els['app-card-linux'].href, /Vinilo-2\.1\.0-x86_64\.AppImage$/);
+// A system the release has no installer for points to the release page.
+assert.equal(p.els['app-card-windows'].href, v21.html_url);
 // Offline: the release the page was built with, still picked for this system.
 p = page({ ...vinilo, release: v2 }, mac);
 await bootAppDownload({ document: p.doc, navigator: p.nav, fetch: async () => { throw new Error('offline'); } });

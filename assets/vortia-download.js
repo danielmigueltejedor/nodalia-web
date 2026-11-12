@@ -117,7 +117,7 @@ export function renderRelease(get, release, os, arch, isFallback) {
 
   let selected = null;
   let icon = '';
-  let label = t('Ver versiones y descargas');
+  let label = t('Descargar');
   let detail = t('Selecciona Linux o macOS en las opciones de descarga.');
 
   if (os === 'linux') {

@@ -521,5 +521,11 @@
  "Un editor de imágenes nativo, escrito en Rust y con el diseño de Nodalia, para trabajar por capas y abrir documentos PSD. Sin cuenta, sin nube.": "Um editor de imagens nativo, escrito em Rust e com o design da Nodalia, para trabalhar por camadas e abrir documentos PSD. Sem conta, sem nuvem.",
  "macOS y Windows": "macOS e Windows",
  "¿Hay versión para macOS o Windows?": "Há versão para macOS ou Windows?",
- "Descargar para Windows": "Transferir para Windows"
+ "Descargar para Windows": "Transferir para Windows",
+ "Ver todas las versiones": "Ver todas as versões",
+ "Descargar": "Transferir",
+ "Descarga Vinilo.": "Transfira o Vinilo.",
+ "Descarga Lienzo.": "Transfira o Lienzo.",
+ "El botón superior ofrece el instalador de tu sistema. Aquí tienes los de todos los sistemas de la última versión estable publicada en GitHub.": "O botão acima oferece o instalador do seu sistema. Aqui estão os instaladores de todos os sistemas da última versão estável publicada no GitHub.",
+ "Los instaladores se descargan directamente de GitHub Releases.": "Os instaladores são transferidos diretamente do GitHub Releases."
 }

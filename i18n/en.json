@@ -521,5 +521,11 @@
  "Un editor de imágenes nativo, escrito en Rust y con el diseño de Nodalia, para trabajar por capas y abrir documentos PSD. Sin cuenta, sin nube.": "A native image editor, written in Rust with Nodalia's design, for working in layers and opening PSD documents. No account, no cloud.",
  "macOS y Windows": "macOS and Windows",
  "¿Hay versión para macOS o Windows?": "Is there a version for macOS or Windows?",
- "Descargar para Windows": "Download for Windows"
+ "Descargar para Windows": "Download for Windows",
+ "Ver todas las versiones": "View all versions",
+ "Descargar": "Download",
+ "Descarga Vinilo.": "Download Vinilo.",
+ "Descarga Lienzo.": "Download Lienzo.",
+ "El botón superior ofrece el instalador de tu sistema. Aquí tienes los de todos los sistemas de la última versión estable publicada en GitHub.": "The button above offers the installer for your system. Here are the installers for every system in the latest stable release published on GitHub.",
+ "Los instaladores se descargan directamente de GitHub Releases.": "Installers are downloaded directly from GitHub Releases."
 }
