@@ -328,8 +328,10 @@ function appDownloadsSection(app) {
     const asset = choice.found[os];
     const [defaultName, logo] = systems[os];
     const name = app.downloadNames?.[os] || defaultName;
+    const description = app.downloadDescriptions?.[os];
     return `<article class="vortia-package" data-reveal data-platform="${os === 'macAlt' ? 'mac' : os}">
-          <div class="vortia-package-head">${logo ? `<img src="${logo}" alt="" width="38" height="38"/>` : ''}<div><h3>${name}</h3></div></div>
+          <div class="vortia-package-head">${logo ? `<img src="${logo}" alt="" width="38" height="38"/>` : ''}<div><h3>${e(name)}</h3></div></div>
+          ${description ? `<p class="vortia-package-desc">${e(description)}</p>` : ''}
           <p class="vortia-package-size" id="app-card-${os}-size" translate="no">${e(asset ? megabytes(asset.size, 'es') : '')}</p>
           <a class="btn btn-primary" id="app-card-${os}" href="${safeUrl(asset ? asset.url : choice.page)}" rel="noopener noreferrer">${asset ? `Descargar <span translate="no">${e(kind(os, asset))}</span>` : 'Consultar en GitHub ↗'}</a>
         </article>`;

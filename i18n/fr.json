@@ -1,4 +1,8 @@
 {
+ "Edición con interfaz nativa de macOS. Incluye Liquid Glass en macOS 26 o posterior.": "Édition avec une interface macOS native. Inclut Liquid Glass à partir de macOS 26.",
+ "Edición con el diseño de Nodalia, igual que en Linux.": "Édition avec le design Nodalia, comme sous Linux.",
+ "El DMG universal funciona en Macs con Apple Silicon e Intel.": "Le DMG universel fonctionne sur les Mac Apple Silicon et Intel.",
+ "Instalador MSI para Windows de 64 bits con arquitectura x64.": "Programme d’installation MSI pour Windows 64 bits sur les PC x64.",
   "Descargar DMG": "Télécharger le DMG",
  "Nodalia — Nodalix OS, aplicaciones de escritorio y Home Assistant": "Nodalia — Nodalix OS, applications de bureau et Home Assistant",
  "Nodalia crea Nodalix OS, Vinilo, Vortia, Lienzo y Nodalia Cards: software independiente para Linux, el escritorio y Home Assistant, desarrollado en público por Daniel Miguel Tejedor.": "Nodalia crée Nodalix OS, Vinilo, Vortia, Lienzo et Nodalia Cards : des logiciels indépendants pour Linux, le bureau et Home Assistant, développés en public par Daniel Miguel Tejedor.",
