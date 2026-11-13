@@ -1122,8 +1122,9 @@ h1,h2,h3{font-weight:700}
 .showcase-tab[aria-selected="true"] .showcase-progress{opacity:1}
 .showcase-tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;border-radius:14px}
 .showcase-frame{position:relative;aspect-ratio:16/10;overflow:hidden;border-radius:24px;background:var(--bg-2)}
-.showcase .shot{position:absolute;inset:0;top:0;right:0;bottom:0;left:0;width:auto;height:auto;margin:0;border:0;border-radius:0;box-shadow:none;opacity:0;transform:scale(1.035);transition:opacity .8s var(--ease),transform 1.4s var(--ease);animation:none}
-.showcase .shot.is-active{opacity:1;transform:none}
+.showcase .shot{position:absolute;inset:0;top:0;right:0;bottom:0;left:0;width:auto;height:auto;margin:0;border:0;border-radius:0;box-shadow:none;opacity:0;visibility:hidden;pointer-events:none;transform:scale(1.035);transition:opacity .8s var(--ease),transform 1.4s var(--ease),visibility 0s .8s;animation:none}
+/* Las diapositivas inactivas siguen apiladas: sin esto la última (Forja) tapa el enlace de la activa. */
+.showcase .shot.is-active{opacity:1;visibility:visible;pointer-events:auto;transform:none;transition-delay:0s}
 .showcase .shot img{width:100%;height:100%;object-fit:cover;object-position:top center}
 .showcase .shot figcaption{position:absolute;left:16px;right:16px;bottom:16px;display:flex;align-items:center;gap:14px;padding:12px 14px 12px 18px;border:0;border-radius:18px;background:rgba(10,11,16,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);font-family:var(--sans);font-size:14px;color:var(--muted);transform:translateY(12px);opacity:0;transition:opacity .6s .25s var(--ease),transform .6s .25s var(--ease)}
 .showcase .shot.is-active figcaption{opacity:1;transform:none}
