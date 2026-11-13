@@ -874,7 +874,7 @@
     "id": "brujula",
     "name": "Brújula",
     "category": "Navegador",
-    "status": "Versión 0.5 · solo Linux",
+    "status": "Versión 0.7 · solo Linux",
     "statusKind": "early",
     "eyebrow": "El navegador de Nodalix",
     "headline": "Navega rápido, seguro y a tu manera.",
@@ -888,7 +888,7 @@
     "previews": [
       [
         "docs/screenshots/newtab.webp",
-        "Nueva pestaña de Brújula con el buscador y los marcadores"
+        "Nueva pestaña de Brújula: el Spotlight con tus marcadores"
       ],
       [
         "docs/screenshots/appearance.webp",
@@ -900,7 +900,7 @@
       ],
       [
         "docs/screenshots/passwords.webp",
-        "Preferencias de contraseñas: bóveda desbloqueada con los inicios de sesión guardados"
+        "Preferencias de contraseñas: guardar contraseñas, llaves de acceso con el teléfono y contraseña maestra"
       ],
       [
         "docs/screenshots/webapps.webp",
@@ -943,6 +943,14 @@
       [
         "Contraseñas cifradas",
         "Una contraseña maestra protege la bóveda (Argon2id y XChaCha20-Poly1305). Brújula pregunta antes de guardar y solo rellena en el sitio exacto, cuando tocas el campo."
+      ],
+      [
+        "Llaves de acceso con tu teléfono",
+        "Cuando una web pide una llave de acceso (passkey), Brújula muestra un código QR: lo escaneas con el teléfono y la llave se usa desde él, por Bluetooth, sin que su clave salga del teléfono."
+      ],
+      [
+        "Notificaciones web",
+        "WhatsApp Web y otros sitios pueden avisarte en el escritorio. Brújula pregunta, recuerda la respuesta por sitio y te deja olvidarla en Preferencias."
       ],
       [
         "Aplicaciones web",
