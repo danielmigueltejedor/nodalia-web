@@ -37,6 +37,7 @@
 .accent-blue{--accent:#8fb8ff;--accent-rgb:143,184,255}
 .accent-green{--accent:#5fd9a1;--accent-rgb:95,217,161}
 .accent-orange{--accent:#ff9a57;--accent-rgb:255,154,87}
+.accent-azure{--accent:#6cb6ec;--accent-rgb:108,182,236}
 
 /* ---------- Base ---------- */
 *,*::before,*::after{box-sizing:border-box}
@@ -186,6 +187,7 @@ html:not(.js) .scroll-progress{display:none}
 .product-card--lienzo{--card-rgb:242,163,184}
 .product-card--forja{--card-rgb:232,166,111}
 .product-card--pluma{--card-rgb:255,154,87}
+.product-card--letra{--card-rgb:108,182,236}
 /* An odd product out spans the row, its screenshot beside the text instead of below it. */
 @media(min-width:861px){
   .product-grid>.product-card:last-child:nth-child(odd){grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);grid-template-rows:1fr auto;min-height:440px}
@@ -789,6 +791,18 @@ html:not(.js) .scroll-progress{display:none}
 @keyframes bezier-draw{from{stroke-dashoffset:320}to{stroke-dashoffset:0}}
 @media (prefers-reduced-motion:reduce){.js .bezier-path{animation:none}}
 
+/* Letra: a line of text being typed over the screenshot, with its caret. */
+.sig-caret{position:relative}
+.sig-caret .product-preview{z-index:0}
+.typed{position:absolute;left:-14px;bottom:-22px;z-index:1;display:flex;align-items:center;gap:2px;padding:10px 16px;border-radius:14px;background:var(--island);border:1px solid rgba(255,255,255,.08);font-family:var(--display);font-size:22px;color:var(--ink);pointer-events:none}
+.typed-text{display:inline-block;overflow:hidden;white-space:nowrap;width:14ch}
+.js .typed-text{animation:typed-in 1.6s steps(14) .6s both}
+.typed-caret{display:inline-block;width:2px;height:1.1em;background:var(--accent)}
+.js .typed-caret{animation:caret-blink 1.06s steps(1) infinite}
+@keyframes typed-in{from{width:0}to{width:14ch}}
+@keyframes caret-blink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.js .typed-text,.js .typed-caret{animation:none}}
+
 /* Forja: the crosshair and pickbox of a drafting canvas, resting over the screenshot. */
 .sig-crosshair{position:relative}
 .crosshair{position:absolute;left:62%;top:46%;width:0;height:0;pointer-events:none}
@@ -1057,6 +1071,11 @@ a.soon-card--released .i{color:var(--ink)}
 .story-pluma-shapes{clip-path:inset(calc((1 - var(--story-b))*100%) 0 0)}
 .story-pluma-shapes img{object-fit:contain;background:#1b1c22}
 .story-pluma-light{clip-path:inset(0 0 0 calc((1 - var(--story-cut))*100%))}
+
+/* Letra: the document in the dark theme, the Review tab rising over it, then the light theme wiping in. */
+.scroll-story--letra .story-stage{background:#11131a}
+.story-letra-review{clip-path:inset(calc((1 - var(--story-b))*100%) 0 0)}
+.story-letra-light{clip-path:inset(0 0 0 calc((1 - var(--story-cut))*100%))}
 
 /* Nodalix: retain the desktop as the spatial reference for both panels. */
 .scroll-story--nodalix .story-stage{background:#0d1020}

@@ -104,6 +104,10 @@
       "pluma"
     ],
     [
+      "Letra",
+      "letra"
+    ],
+    [
       "Nodalia Cards",
       "nodalia-cards"
     ]
@@ -164,12 +168,6 @@
         "papel",
         "Editor de documentos PDF",
         "papel"
-      ],
-      [
-        "Letra",
-        "letra",
-        "Procesador de textos",
-        "letra"
       ],
       [
         "Celdas",

@@ -627,6 +627,117 @@
     "otherPackages": "Otros paquetes: .deb, .rpm, .tar.gz y zip portátil de Windows"
   },
   {
+    "id": "letra",
+    "name": "Letra",
+    "category": "Productividad",
+    "status": "Primeras versiones · fase temprana",
+    "statusKind": "early",
+    "eyebrow": "Procesador de textos",
+    "headline": "Escribe sin distracciones.",
+    "tagline": "Un procesador de textos nativo, sin cuenta ni nube.",
+    "description": "Un procesador de textos nativo, escrito en Rust y con el diseño de Nodalia, para cartas, informes, trabajos y libros. Abre y guarda documentos .docx. Sin cuenta, sin nube.",
+    "platforms": "Linux x86_64 · macOS (Universal) · Windows x64",
+    "technology": "Rust · Nodalia Design",
+    "license": "MIT OR Apache-2.0",
+    "repo": "letra",
+    "icon": "assets/app-icon/hicolor/512x512/apps/dev.danielmiguelt.Letra.png",
+    "previews": [
+      [
+        "/screens/letra/letra-home-dark.jpg",
+        "Un documento abierto en Letra, en el tema oscuro, con la pestaña Inicio de la cinta"
+      ],
+      [
+        "/screens/letra/letra-home-light.jpg",
+        "El mismo documento en el tema claro, elegido en Preferencias"
+      ],
+      [
+        "/screens/letra/letra-review-dark.jpg",
+        "La pestaña Revisar: ortografía, comentarios y control de cambios"
+      ]
+    ],
+    "features": [
+      [
+        "Escritura y formato",
+        "Fuentes, estilos de párrafo y de carácter, listas, columnas, tabulaciones y una cinta con todo a mano."
+      ],
+      [
+        "Páginas de verdad",
+        "Encabezados y pies, números de página, secciones, notas al pie, índices y saltos de página, con un diseño de impresión fiel."
+      ],
+      [
+        "Tablas, imágenes y ecuaciones",
+        "Inserta tablas, imágenes, formas, gráficos y ecuaciones, y colócalos en línea o junto al texto."
+      ],
+      [
+        "Revisión",
+        "Ortografía y gramática en varios idiomas, comentarios, control de cambios y comparación de documentos."
+      ],
+      [
+        "Diseño de Nodalia",
+        "Islas redondeadas, el color de Letra, controles de ventana propios en Linux y nativos en macOS y Windows, y tema claro u oscuro que se elige en Preferencias."
+      ],
+      [
+        "Todo es un comando",
+        "Cada acción se puede automatizar con letra-cli o con agentes de IA a través de MCP."
+      ]
+    ],
+    "formats": [
+      "DOCX",
+      "ODT",
+      "RTF",
+      "PDF",
+      "HTML",
+      "Markdown",
+      "TXT"
+    ],
+    "specs": [
+      [
+        "Licencia",
+        "MIT OR Apache-2.0"
+      ],
+      [
+        "Paquetes",
+        "AppImage · .deb · .rpm · .tar.gz (Linux x86_64) · DMG (macOS) · MSI y zip portátil (Windows)"
+      ],
+      [
+        "Tecnología",
+        "Rust · Nodalia Design"
+      ]
+    ],
+    "faq": [
+      [
+        "¿Dónde lo descargo?",
+        "En esta página: el botón principal ofrece el paquete para tu sistema desde la última versión publicada en GitHub, para Linux x86_64, macOS (Apple Silicon e Intel) y Windows x64."
+      ],
+      [
+        "¿Qué archivos abre?",
+        "Trabaja con documentos .docx y también abre y guarda ODT, RTF, HTML, Markdown y texto plano. Exporta a PDF."
+      ],
+      [
+        "¿Se puede automatizar?",
+        "Sí. Todo es un comando: letra-cli convierte y edita documentos sin abrir la ventana y ofrece un servidor MCP para agentes de IA."
+      ],
+      [
+        "¿Mis archivos salen de mi equipo?",
+        "No. Todo se edita en local y la aplicación no necesita cuenta ni servidor. En macOS la aplicación no está notarizada: la primera vez, haz clic derecho sobre ella y elige Abrir."
+      ]
+    ],
+    "limitation": "Letra está en una fase temprana. La lista de lo que funciona y lo que aún falta está en el repositorio; guarda una copia de los documentos importantes.",
+    "cta": "Descargar Letra",
+    "accent": "azure",
+    "downloads": {
+      "linux": "^letra-[0-9].*-linux-x86_64\\.AppImage$",
+      "mac": "^letra-[0-9].*-macos-(arm64|universal)\\.dmg$",
+      "windows": "^letra-[0-9].*-windows-x64\\.msi$"
+    },
+    "downloadDescriptions": {
+      "linux": "Archivo ejecutable para distribuciones Linux de 64 bits con arquitectura x86_64.",
+      "mac": "El DMG universal funciona en Macs con Apple Silicon e Intel.",
+      "windows": "Instalador MSI para Windows de 64 bits con arquitectura x64."
+    },
+    "otherPackages": "Otros paquetes: .deb, .rpm, .tar.gz y zip portátil de Windows"
+  },
+  {
     "id": "nodalix",
     "name": "Nodalix OS",
     "category": "Sistema operativo",
