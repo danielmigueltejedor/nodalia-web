@@ -18,7 +18,7 @@ export const brand = {
   instagram: 'https://www.instagram.com/getnodalia/',
   x: 'https://x.com/getnodalia',
   // Donaciones. Pon aquí la página de Buy Me a Coffee; vacío oculta la sección y el enlace del pie.
-  coffee: 'https://buymeacoffee.com/getnodalia',
+  coffee: 'https://buymeacoffee.com/danielmigueltejedor',
 };
 
 function defineApp(entry) {
