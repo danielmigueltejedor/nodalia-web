@@ -182,7 +182,8 @@ const brujulaHtml = await readFile(path.join(root, 'dist/portal/brujula/index.ht
 assert.match(brujulaHtml, /<body class="accent-green">/);
 for (const shot of ['newtab', 'appearance', 'extensions']) assert.ok(brujulaHtml.includes(`getnodalia/brujula/main/docs/screenshots/${shot}.webp`), `Brújula sin ${shot}`);
 assert.match(brujulaHtml, /<pre class="code"[^>]*><code>[^<]*makepkg -si/, 'Brújula sin instrucciones de instalación');
-assert.ok(!/id="descargas"/.test(brujulaHtml), 'Brújula no publica binarios');
+assert.match(brujulaHtml, /id="descargas"/, 'Brújula sin sección de descargas');
+assert.match(brujulaHtml, /id="app-primary-download"[^>]*href="https:\/\/github\.com\/getnodalia\/brujula\/releases\/download\/v[0-9.]+\/Brujula-[0-9.]+-x86_64\.AppImage"/, 'Brújula sin botón de descarga de la AppImage');
 // The old subdomains only redirect, path for path, to the product's page under getnodalia.com.
 for (const id of ['vortia', 'vinilo', 'lienzo', 'nodalix']) {
   assert.equal(await readFile(path.join(root, 'dist/legacy', id, '_redirects'), 'utf8'), `/* https://getnodalia.com/${id}/:splat 301\n`);

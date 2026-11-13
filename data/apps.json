@@ -748,11 +748,17 @@
       ],
       [
         "¿Hay versión para Windows o macOS?",
-        "No. La 0.1.0 es solo para Linux; no hay paquetes binarios, se compila desde el código."
+        "No. La 0.1.0 es solo para Linux: hay una AppImage para x86_64 y un PKGBUILD para compilarla en Arch."
       ]
     ],
-    "limitation": "Primera versión solo para Linux, sin binarios: se compila desde el código. Sin gestor de contraseñas, historial ni modo privado. Las extensiones de Chromium son compatibles solo en parte y la instalación desde la Chrome Web Store se ha probado hasta el cliente HTTP.",
-    "cta": "Instalar desde GitHub",
+    "limitation": "Primera versión solo para Linux. La AppImage es para x86_64 y necesita una distribución con una glibc tan reciente como la de Arch (Arch, CachyOS, Nodalix…); en otras se compila desde el código. Sin gestor de contraseñas, historial ni modo privado. Las extensiones de Chromium son compatibles solo en parte y la instalación desde la Chrome Web Store se ha probado hasta el cliente HTTP.",
+    "downloads": {
+      "linux": "^Brujula-.+-x86_64\\.AppImage$"
+    },
+    "downloadDescriptions": {
+      "linux": "AppImage para Linux x86_64 con una glibc tan reciente como la de Arch (Arch, CachyOS, Nodalix…). Hazla ejecutable y ábrela; también tienes el PKGBUILD para compilarla."
+    },
+    "cta": "Descargar Brújula",
     "accent": "green",
     "parts": [
       [

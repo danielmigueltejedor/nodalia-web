@@ -674,7 +674,6 @@
  "Tema, color de acento, marco con degradados, radio de las esquinas, separación, transparencia, disposición, buscador y Boosts: CSS propio para cada sitio.": "Design, Akzentfarbe, Rahmen mit Farbverläufen, Eckenradius, Abstände, Transparenz, Anordnung, Suchmaschine und Boosts: eigenes CSS für jede Seite.",
  "Rápido y ligero": "Schnell und leicht",
  "Las pestañas que no usas se duermen y se archivan solas, con vista dividida, Peek, ventana flotante y notas por espacio.": "Tabs, die du nicht nutzt, schlafen von selbst ein und werden archiviert, dazu Splitansicht, Peek, ein schwebendes Fenster und Notizen je Bereich.",
- "Primera versión solo para Linux, sin binarios: se compila desde el código. Sin gestor de contraseñas, historial ni modo privado. Las extensiones de Chromium son compatibles solo en parte y la instalación desde la Chrome Web Store se ha probado hasta el cliente HTTP.": "Erste Version nur für Linux, ohne Binärdateien: Sie wird aus dem Quellcode gebaut. Kein Passwortmanager, kein Verlauf und kein privater Modus. Chromium-Erweiterungen werden nur teilweise unterstützt, und die Installation aus dem Chrome Web Store wurde nur bis zum HTTP-Client getestet.",
  "Motor": "Engine",
  "Arch / CachyOS (PKGBUILD) o desde el código": "Arch / CachyOS (PKGBUILD) oder aus dem Quellcode",
  "Qué hay dentro": "Was drinsteckt",
@@ -704,7 +703,6 @@
  "¿Puedo sincronizar mis marcadores y ajustes?": "Kann ich meine Lesezeichen und Einstellungen synchronisieren?",
  "Sí, mediante una carpeta de tu nube (Dropbox, Nextcloud, iCloud Drive…) o una cuenta de Nodalix.": "Ja, über einen Ordner in deiner Cloud (Dropbox, Nextcloud, iCloud Drive …) oder ein Nodalix-Konto.",
  "¿Hay versión para Windows o macOS?": "Gibt es eine Version für Windows oder macOS?",
- "No. La 0.1.0 es solo para Linux; no hay paquetes binarios, se compila desde el código.": "Nein. 0.1.0 gibt es nur für Linux; es gibt keine Binärpakete, du baust sie aus dem Quellcode.",
  "Aprender": "Lernen",
  "Aprende a usar Vortia.": "Vortia lernen.",
  "Aprende a usar Lienzo.": "Lienzo lernen.",
@@ -752,5 +750,9 @@
  "Aprender: vídeos de primeros pasos | Nodalia": "Lernen: Videos für den Einstieg | Nodalia",
  "Vídeos cortos con las aplicaciones reales de Nodalia, paso a paso: primeros pasos con Nodalix OS, Vortia, Lienzo y Forja.": "Kurze Videos mit den echten Nodalia-Apps, Schritt für Schritt: erste Schritte mit Nodalix OS, Vortia, Lienzo und Forja.",
  "Primeros pasos, en vídeo.": "Erste Schritte im Video.",
- "Cada vídeo recorre la aplicación real en alrededor de un minuto. Pulsa un paso para ir a ese momento.": "Jedes Video zeigt die echte App in etwa einer Minute. Klicke auf einen Schritt, um dorthin zu springen."
+ "Cada vídeo recorre la aplicación real en alrededor de un minuto. Pulsa un paso para ir a ese momento.": "Jedes Video zeigt die echte App in etwa einer Minute. Klicke auf einen Schritt, um dorthin zu springen.",
+ "Primera versión solo para Linux. La AppImage es para x86_64 y necesita una distribución con una glibc tan reciente como la de Arch (Arch, CachyOS, Nodalix…); en otras se compila desde el código. Sin gestor de contraseñas, historial ni modo privado. Las extensiones de Chromium son compatibles solo en parte y la instalación desde la Chrome Web Store se ha probado hasta el cliente HTTP.": "Erste Version, nur Linux. Das AppImage ist für x86_64 und braucht eine Distribution mit einer so aktuellen glibc wie die von Arch (Arch, CachyOS, Nodalix …); auf anderen baust du es aus dem Quellcode. Kein Passwortmanager, kein Verlauf, kein privater Modus. Chromium-Erweiterungen werden nur teilweise unterstützt, und die Installation aus dem Chrome Web Store wurde nur bis zum HTTP-Client getestet.",
+ "Descarga Brújula.": "Lade Brújula herunter.",
+ "AppImage para Linux x86_64 con una glibc tan reciente como la de Arch (Arch, CachyOS, Nodalix…). Hazla ejecutable y ábrela; también tienes el PKGBUILD para compilarla.": "AppImage für Linux x86_64 mit einer so aktuellen glibc wie die von Arch (Arch, CachyOS, Nodalix …). Mach sie ausführbar und öffne sie; zum Selbstbauen gibt es auch ein PKGBUILD.",
+ "No. La 0.1.0 es solo para Linux: hay una AppImage para x86_64 y un PKGBUILD para compilarla en Arch.": "Nein. 0.1.0 gibt es nur für Linux: ein AppImage für x86_64 und ein PKGBUILD zum Bauen unter Arch."
 }
