@@ -152,6 +152,24 @@ assert.equal(releasesModule.isTag('v1.2.3'), true);
 assert.equal(releasesModule.isTag('<img src=x>'), false);
 assert.equal(releasesModule.relativeDate('2026-01-01T00:00:00Z', Date.parse('2026-01-04T00:00:00Z')), 'hace 3 días');
 assert.equal(releasesModule.relativeDate('2026-01-01T00:00:00Z', Date.parse('2026-01-04T00:00:00Z'), 'en'), '3 days ago');
+{
+  // A cached reading expires: a release published after the first visit shows up (#vortia 0.8.0).
+  const memory = new Map();
+  const store = { getItem: (k) => memory.get(k) ?? null, setItem: (k, v) => memory.set(k, v) };
+  const calls = [];
+  const answer = (status, body, etag) => ({ status, ok: status >= 200 && status < 300, headers: { get: (h) => (h === 'ETag' ? etag : null) }, json: async () => body });
+  let next = answer(200, { tag_name: 'v0.7.1', published_at: '2026-11-13T10:30:40Z' }, '"a"');
+  const fetchImpl = async (url, init) => { calls.push(init.headers['If-None-Match'] || ''); return next; };
+  const t0 = Date.parse('2026-11-13T15:00:00Z');
+  assert.equal((await releasesModule.latest('vortia', { fetchImpl, store, now: t0 })).tag, 'v0.7.1');
+  assert.equal((await releasesModule.latest('vortia', { fetchImpl, store, now: t0 + 1000 })).tag, 'v0.7.1');
+  assert.equal(calls.length, 1, 'a fresh reading is reused');
+  next = answer(304, null, '"a"');
+  assert.equal((await releasesModule.latest('vortia', { fetchImpl, store, now: t0 + releasesModule.FRESH_MS + 1 })).tag, 'v0.7.1');
+  assert.equal(calls[1], '"a"', 'an expired reading is revalidated with its ETag');
+  next = answer(200, { tag_name: 'v0.8.0', published_at: '2026-11-13T15:03:16Z' }, '"b"');
+  assert.equal((await releasesModule.latest('vortia', { fetchImpl, store, now: t0 + 3 * releasesModule.FRESH_MS })).tag, 'v0.8.0');
+}
 assert.match(portal, /data-release="nodalix-os"/);
 const viniloHtml = await readFile(path.join(root, 'dist/portal/vinilo/index.html'), 'utf8');
 for (const id of ['vinilo', 'lienzo', 'forja']) {

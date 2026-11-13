@@ -16,18 +16,33 @@ export function relativeDate(iso, now = Date.now(), locale = lang()) {
   return format.format(-Math.floor(days / 365), 'year');
 }
 
-async function latest(repo) {
+// A reading is reused for a few minutes only, so a release published while the page is open (or
+// earlier in the same tab) shows on the next visit. After that GitHub is asked again with the
+// stored ETag: an unchanged answer is a 304, which does not spend the visitor's rate limit.
+export const FRESH_MS = 5 * 60 * 1000;
+
+function storage() {
+  try { return globalThis.localStorage || null; } catch { return null; }
+}
+
+export async function latest(repo, { fetchImpl = globalThis.fetch, store = storage(), now = Date.now() } = {}) {
   const key = `nodalia-release:${repo}`;
-  try {
-    const cached = sessionStorage.getItem(key);
-    if (cached) return JSON.parse(cached);
-  } catch { /* almacenamiento no disponible */ }
-  const response = await fetch(`${API}${repoOwner(repo)}/${encodeURIComponent(repo)}/releases/latest`, { headers: { Accept: 'application/vnd.github+json' } });
-  if (!response.ok) throw new Error(`GitHub ${response.status}`);
-  const data = await response.json();
-  if (data.draft || data.prerelease) throw new Error('not a stable release');
-  const release = { tag: data.tag_name, date: data.published_at };
-  try { sessionStorage.setItem(key, JSON.stringify(release)); } catch { /* sin caché */ }
+  let cached = null;
+  try { cached = JSON.parse(store?.getItem(key) || 'null'); } catch { /* lectura dañada */ }
+  if (cached && isTag(cached.tag) && now - (cached.at || 0) < FRESH_MS) return cached;
+  const headers = { Accept: 'application/vnd.github+json' };
+  if (cached?.etag && isTag(cached.tag)) headers['If-None-Match'] = cached.etag;
+  const response = await fetchImpl(`${API}${repoOwner(repo)}/${encodeURIComponent(repo)}/releases/latest`, { headers, cache: 'no-store' });
+  let release;
+  if (response.status === 304 && cached) {
+    release = { ...cached, at: now };
+  } else {
+    if (!response.ok) throw new Error(`GitHub ${response.status}`);
+    const data = await response.json();
+    if (data.draft || data.prerelease) throw new Error('not a stable release');
+    release = { tag: data.tag_name, date: data.published_at, etag: response.headers?.get?.('ETag') || '', at: now };
+  }
+  try { store?.setItem(key, JSON.stringify(release)); } catch { /* sin caché */ }
   return release;
 }
 
