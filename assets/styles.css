@@ -36,6 +36,7 @@
 .accent-copper{--accent:#e8a66f;--accent-rgb:232,166,111}
 .accent-blue{--accent:#8fb8ff;--accent-rgb:143,184,255}
 .accent-green{--accent:#5fd9a1;--accent-rgb:95,217,161}
+.accent-orange{--accent:#ff9a57;--accent-rgb:255,154,87}
 
 /* ---------- Base ---------- */
 *,*::before,*::after{box-sizing:border-box}
@@ -184,6 +185,7 @@ html:not(.js) .scroll-progress{display:none}
 .product-card--vortia{--card-rgb:132,217,221}
 .product-card--lienzo{--card-rgb:242,163,184}
 .product-card--forja{--card-rgb:232,166,111}
+.product-card--pluma{--card-rgb:255,154,87}
 /* An odd product out spans the row, its screenshot beside the text instead of below it. */
 @media(min-width:861px){
   .product-grid>.product-card:last-child:nth-child(odd){grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);grid-template-rows:1fr auto;min-height:440px}
@@ -775,6 +777,18 @@ html:not(.js) .scroll-progress{display:none}
 .handle-4{left:100%;top:100%}.handle-5{left:50%;top:100%}.handle-6{left:0;top:100%}.handle-7{left:0;top:50%}
 .sel-size{position:absolute;left:0;top:100%;margin-top:10px;padding:3px 8px;border-radius:3px;background:var(--accent);font-family:var(--mono);font-size:11px;color:#1a0d12}
 .sel-size:empty{display:none}
+/* Pluma: a Bézier curve drawing itself over the screenshot, with its anchors and handles. */
+.sig-bezier{position:relative}
+.sig-bezier .product-preview{z-index:0}
+.bezier{position:absolute;right:-12px;top:-132px;width:250px;z-index:1;overflow:visible;pointer-events:none}
+.bezier-path{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;stroke-dasharray:320;stroke-dashoffset:0}
+.js .bezier-path{animation:bezier-draw 1.8s var(--ease) .6s both}
+.bezier-handle{fill:none;stroke:rgba(255,255,255,.55);stroke-width:1}
+.bezier-knob{fill:var(--island);stroke:var(--accent);stroke-width:1.5}
+.bezier-anchor{fill:var(--accent);stroke:#fff;stroke-width:1}
+@keyframes bezier-draw{from{stroke-dashoffset:320}to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.js .bezier-path{animation:none}}
+
 /* Forja: the crosshair and pickbox of a drafting canvas, resting over the screenshot. */
 .sig-crosshair{position:relative}
 .crosshair{position:absolute;left:62%;top:46%;width:0;height:0;pointer-events:none}
@@ -1034,6 +1048,15 @@ a.soon-card--released .i{color:var(--ink)}
   background:linear-gradient(#e8a66f,#e8a66f) center/100% 1px no-repeat,linear-gradient(#e8a66f,#e8a66f) center/1px 100% no-repeat;
 }
 .story-forja-cursor::after{content:"";position:absolute;left:50%;top:50%;width:18%;aspect-ratio:1;translate:-50% -50%;border:1px solid #e8a66f}
+
+/* Pluma: the poster in the dark theme, the Pathfinder shapes rising over it, then the light theme wiping in. */
+.scroll-story--pluma .story-stage{background:#1b1c22}
+.story-artboard{position:absolute;inset:0}
+.story-artboard .story-screen{inset:0;border:0;border-radius:0}
+.story-artboard .story-screen img{object-fit:cover}
+.story-pluma-shapes{clip-path:inset(calc((1 - var(--story-b))*100%) 0 0)}
+.story-pluma-shapes img{object-fit:contain;background:#1b1c22}
+.story-pluma-light{clip-path:inset(0 0 0 calc((1 - var(--story-cut))*100%))}
 
 /* Nodalix: retain the desktop as the spatial reference for both panels. */
 .scroll-story--nodalix .story-stage{background:#0d1020}

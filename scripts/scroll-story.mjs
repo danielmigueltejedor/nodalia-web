@@ -53,6 +53,15 @@ const stories = {
     ],
     next: 'funciones',
   },
+  pluma: {
+    title: 'De la primera curva al cartel.',
+    chapters: [
+      ['Dibuja en la mesa de trabajo', 'Trazos, formas, texto y degradados sobre una o varias mesas de trabajo.'],
+      ['Combina formas', 'Une, resta e interseca formas con Buscatrazos para construir piezas nuevas.'],
+      ['Trabaja a tu manera', 'Cambia al tema claro o a otro idioma sin cerrar el documento.'],
+    ],
+    next: 'funciones',
+  },
   nodalix: {
     title: 'Del escritorio a los ajustes.',
     chapters: [
@@ -95,6 +104,7 @@ export function scrollStory(id, apps, { e, safeUrl }) {
     </div><canvas class="story-curve" data-story-canvas="curve"></canvas>
       ${screenshot(1, 'story-lienzo-curves')}`,
     forja: () => `<div class="story-drafting">${screenshot(0, 'story-forja-model')}<span class="story-forja-cursor"></span>${screenshot(1, 'story-forja-layout')}${screenshot(2, 'story-forja-light')}</div>`,
+    pluma: () => `<div class="story-artboard">${screenshot(0, 'story-pluma-dark')}${screenshot(2, 'story-pluma-shapes')}${screenshot(1, 'story-pluma-light')}</div>`,
     nodalix: () => `<div class="story-monitor">${screenshot(0, 'story-desktop')}${screenshot(1, 'story-settings')}
       <span class="story-system-cursor"></span>${screenshot(2, 'story-updates')}</div>`,
   };

@@ -11,7 +11,7 @@ const sourceCss = await readFile(path.join(root, 'assets', 'styles.css'), 'utf8'
 const hash = createHash('sha256').update(sourceCss).digest('hex').slice(0, 12);
 const versionedCss = `styles.${hash}.css`;
 // One site: the portal at the root of dist/portal and each product in dist/portal/<id>/.
-const SITES = ['portal', 'brujula', 'vortia', 'vinilo', 'lienzo', 'forja', 'nodalix'];
+const SITES = ['portal', 'brujula', 'vortia', 'vinilo', 'lienzo', 'forja', 'pluma', 'nodalix'];
 const site = path.join(root, 'dist', 'portal');
 const dirOf = (id) => (id === 'portal' ? site : path.join(site, id));
 const baseOf = (id) => (id === 'portal' ? 'https://getnodalia.com' : `https://getnodalia.com/${id}`);
@@ -45,14 +45,14 @@ for (const id of SITES) {
   }
 }
 const portal=await readFile(path.join(root,'dist/portal/index.html'),'utf8');
-for(const name of ['Brújula','Vortia','Vinilo','Lienzo','Forja','Nodalix OS'])assert.match(portal,new RegExp(name));
+for(const name of ['Brújula','Vortia','Vinilo','Lienzo','Forja','Pluma','Nodalix OS'])assert.match(portal,new RegExp(name));
 // Products are linked by path, never by the old subdomains.
-for (const id of ['brujula','vortia','vinilo','lienzo','forja','nodalix']) assert.ok(portal.includes(`href="https://getnodalia.com/${id}/"`), `Portal sin enlace a /${id}/`);
+for (const id of ['brujula','vortia','vinilo','lienzo','forja','pluma','nodalix']) assert.ok(portal.includes(`href="https://getnodalia.com/${id}/"`), `Portal sin enlace a /${id}/`);
 assert.doesNotMatch(portal, /https:\/\/(?:vortia|vinilo|lienzo|nodalix)\.getnodalia\.com/);
 assert.match(portal,/hero-stage/);
 for (const id of ['ecosistema','autor','faq']) assert.ok(portal.includes(`id="${id}"`), `Portal sin sección ${id}`);
 assert.ok(portal.includes('id="en-camino"'), 'Portal sin la sección de apps en camino');
-for (const key of ['luz','pulso','pliego','pluma','toma','papel','letra','celdas','lamina','torno','buzon']) { assert.ok(portal.includes(`/app-icons/${key}.png`), `Falta ${key} en apps en camino`); assert.ok((await stat(path.join(root, 'dist/portal/app-icons', `${key}.png`))).size > 1000, `Falta el icono de ${key}`); }
+for (const key of ['luz','pulso','pliego','toma','papel','letra','celdas','lamina','torno','buzon']) { assert.ok(portal.includes(`/app-icons/${key}.png`), `Falta ${key} en apps en camino`); assert.ok((await stat(path.join(root, 'dist/portal/app-icons', `${key}.png`))).size > 1000, `Falta el icono de ${key}`); }
 assert.ok(portal.includes('id="studium"') && portal.includes('/studium/archive/refs/tags/') && portal.includes('studium mcp'), 'Portal sin descarga o instrucciones de Studium');
 assert.match(portal,/href="\/favicon\.svg\?v=[0-9a-f]+"/);
 assert.match(portal,/"@type":"FAQPage"/);
@@ -106,7 +106,7 @@ assert.equal(identity.probe(0, 0.5), null);
 assert.ok(Math.abs(identity.probe(-1, 0).cp - 1) < 1e-9, 'Cp de remanso debe ser 1');
 assert.ok(Math.abs(identity.probe(0, 1).cp + 3) < 1e-9, 'Cp mínimo debe ser -3');
 assert.equal(identity.speedColor(2), 'rgb(255,255,255)');
-for (const [id, marker] of [['vortia', 'data-identity="flow"'], ['nodalix', 'class="boot-log"'], ['brujula', 'class="compass"'], ['vinilo', 'class="record"'], ['lienzo', 'data-identity="select"'], ['forja', 'class="crosshair"']]) {
+for (const [id, marker] of [['vortia', 'data-identity="flow"'], ['nodalix', 'class="boot-log"'], ['brujula', 'class="compass"'], ['vinilo', 'class="record"'], ['lienzo', 'data-identity="select"'], ['forja', 'class="crosshair"'], ['pluma', 'class="bezier"']]) {
   const page = await readFile(path.join(dirOf(id), 'index.html'), 'utf8');
   assert.ok(page.includes(marker), `Falta la firma visual de ${id}`);
   assert.match(page, /src="\/identity\.js\?v=[0-9a-f]+"/);
@@ -132,7 +132,7 @@ for (const id of SITES) {
     assert.ok(page.includes(`<link rel="canonical" href="${base}/${code}/"/>`), `${id}/${code} sin canonical propio`);
     for (const other of i18n.localeCodes) assert.ok(page.includes(`hreflang="${other}" href="${base}${i18n.localePath(other)}"`), `${id}/${code} sin alternate ${other}`);
     assert.ok(page.includes(`hreflang="x-default" href="${base}/"`));
-    assert.ok(!/href="https:\/\/getnodalia\.com(?:\/(?:vortia|vinilo|lienzo|forja|nodalix))?\/(?:#[^"]*)?"/.test(page.split('<').filter((tag) => !tag.includes('hreflang')).join('<')), `${id}/${code} enlaza a la versión en español`);
+    assert.ok(!/href="https:\/\/getnodalia\.com(?:\/(?:vortia|vinilo|lienzo|forja|pluma|nodalix))?\/(?:#[^"]*)?"/.test(page.split('<').filter((tag) => !tag.includes('hreflang')).join('<')), `${id}/${code} enlaza a la versión en español`);
     assert.notEqual(page.match(/<h1[^>]*>([^<]*)/)[1], spanish.match(/<h1[^>]*>([^<]*)/)[1], `${id}/${code} con titular sin traducir`);
     JSON.parse(page.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
   }
@@ -172,7 +172,7 @@ assert.equal(releasesModule.relativeDate('2026-01-01T00:00:00Z', Date.parse('202
 }
 assert.match(portal, /data-release="nodalix-os"/);
 const viniloHtml = await readFile(path.join(root, 'dist/portal/vinilo/index.html'), 'utf8');
-for (const id of ['vinilo', 'lienzo', 'forja']) {
+for (const id of ['vinilo', 'lienzo', 'forja', 'pluma']) {
   const html = await readFile(path.join(dirOf(id), 'index.html'), 'utf8');
   assert.match(html, /id="app-primary-download" class="btn btn-primary" href="https:\/\/github\.com\/getnodalia\//, `${id}: botón de descarga`);
   assert.match(html, /id="app-primary-icon"/);
@@ -196,6 +196,13 @@ for (const shot of ['lienzo-demo.jpg', 'lienzo-adjustments.jpg', 'lienzo-light.j
 const forjaHtml = await readFile(path.join(root, 'dist/portal/forja/index.html'), 'utf8');
 assert.match(forjaHtml, /raw\.githubusercontent\.com\/getnodalia\/forja\/main\/docs\/images\/ui-apartment\.png/);
 assert.match(forjaHtml, /<body class="accent-copper">/);
+const plumaHtml = await readFile(path.join(root, 'dist/portal/pluma/index.html'), 'utf8');
+assert.match(plumaHtml, /<body class="accent-orange">/);
+for (const shot of ['pluma-dark.jpg', 'pluma-light.jpg', 'pluma-pathfinder.jpg']) {
+  assert.ok(plumaHtml.includes(`https://getnodalia.com/pluma/screens/pluma/${shot}`), `Pluma sin ${shot}`);
+  assert.ok((await stat(path.join(root, 'dist/portal/pluma/screens/pluma', shot))).size > 10000);
+}
+assert.ok(portal.includes('data-release="pluma"'), 'Pluma no está en las últimas versiones');
 const brujulaHtml = await readFile(path.join(root, 'dist/portal/brujula/index.html'), 'utf8');
 assert.match(brujulaHtml, /<body class="accent-green">/);
 for (const shot of ['newtab', 'appearance', 'extensions']) assert.ok(brujulaHtml.includes(`getnodalia/brujula/main/docs/screenshots/${shot}.webp`), `Brújula sin ${shot}`);
@@ -220,7 +227,7 @@ await import('./test-vortia-download.mjs');
 await import('./test-app-download.mjs');
 await import('./test-scroll-story.mjs');
 await import('./test-nodalix-releases.mjs');
-console.log('✓ Portal y seis productos en getnodalia.com/<app>/, redirecciones de los subdominios, CSS con hash anti-caché, cabeceras, módulos ES y descargas ISO/Vortia validados.');
+console.log('✓ Portal y siete productos en getnodalia.com/<app>/, redirecciones de los subdominios, CSS con hash anti-caché, cabeceras, módulos ES y descargas ISO/Vortia validados.');
 
 // Visor de capturas: presente donde hay capturas, ausente donde no, y con sus textos traducidos.
 {
@@ -232,7 +239,7 @@ console.log('✓ Portal y seis productos en getnodalia.com/<app>/, redirecciones
   assert.equal(opensViewer({ button: 0 }), true);
   for (const modified of [{ button: 1 }, { button: 0, ctrlKey: true }, { button: 0, metaKey: true }, { button: 0, shiftKey: true }, { button: 0, altKey: true }]) assert.equal(opensViewer(modified), false);
   assert.ok((await stat(path.join(site, 'gallery.js'))).size > 1000);
-  for (const id of ['brujula', 'vortia', 'vinilo', 'lienzo', 'forja', 'nodalix']) {
+  for (const id of ['brujula', 'vortia', 'vinilo', 'lienzo', 'forja', 'pluma', 'nodalix']) {
     const html = await readFile(path.join(dirOf(id), 'index.html'), 'utf8');
     assert.match(html, /<script type="module" src="\/gallery\.js\?v=[0-9a-f]+"><\/script>/, `${id}: falta el visor de capturas`);
     // Sin JavaScript el enlace sigue llevando a la imagen.
