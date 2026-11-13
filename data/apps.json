@@ -847,6 +847,114 @@
     "otherPackages": "Otros paquetes: .deb, .rpm, .tar.gz y zip portátil de Windows"
   },
   {
+    "id": "lamina",
+    "name": "Lámina",
+    "category": "Productividad",
+    "status": "Primeras versiones · fase temprana",
+    "statusKind": "early",
+    "eyebrow": "Presentaciones",
+    "headline": "Cuenta tu historia, diapositiva a diapositiva.",
+    "tagline": "Presentaciones nativas, sin cuenta ni nube.",
+    "description": "Una aplicación de presentaciones nativa, escrita en Rust y con el diseño de Nodalia, para clases, charlas y reuniones. Abre y guarda presentaciones .pptx. Sin cuenta, sin nube.",
+    "platforms": "Linux x86_64 · macOS (Universal) · Windows x64",
+    "technology": "Rust · Nodalia Design",
+    "license": "MIT OR Apache-2.0",
+    "repo": "lamina",
+    "icon": "assets/app-icon/hicolor/512x512/apps/dev.danielmiguelt.Lamina.png",
+    "previews": [
+      [
+        "/screens/lamina/lamina-home-dark.jpg",
+        "Una presentación abierta en Lámina, en el tema oscuro, con la pestaña Inicio de la cinta"
+      ],
+      [
+        "/screens/lamina/lamina-home-light.jpg",
+        "La misma presentación en el tema claro"
+      ],
+      [
+        "/screens/lamina/lamina-preferences-light.jpg",
+        "Preferencias de Lámina: tema, controles de ventana y edición"
+      ]
+    ],
+    "features": [
+      [
+        "Diapositivas y diseños",
+        "Patrones, diseños, temas, secciones y una cinta con todo a mano para construir la presentación."
+      ],
+      [
+        "Formas, imágenes y gráficos",
+        "Inserta formas, cuadros de texto, imágenes, tablas y gráficos, y alinéalos con guías inteligentes."
+      ],
+      [
+        "Transiciones y animaciones",
+        "Transiciones entre diapositivas y animaciones de entrada, énfasis y salida."
+      ],
+      [
+        "Modo presentador",
+        "Presenta a pantalla completa con notas del orador, la diapositiva siguiente y el tiempo transcurrido."
+      ],
+      [
+        "Diseño de Nodalia",
+        "Islas redondeadas, el color de Lámina, controles de ventana propios en Linux y nativos en macOS y Windows, y tema claro u oscuro que se elige en Preferencias."
+      ],
+      [
+        "Todo es un comando",
+        "Cada acción se puede automatizar con lamina-cli o con agentes de IA a través de MCP."
+      ]
+    ],
+    "formats": [
+      "PPTX",
+      "PDF",
+      "PNG",
+      "GIF"
+    ],
+    "specs": [
+      [
+        "Licencia",
+        "MIT OR Apache-2.0"
+      ],
+      [
+        "Paquetes",
+        "AppImage · .deb · .rpm · .tar.gz (Linux x86_64) · DMG (macOS) · MSI y zip portátil (Windows)"
+      ],
+      [
+        "Tecnología",
+        "Rust · Nodalia Design"
+      ]
+    ],
+    "faq": [
+      [
+        "¿Dónde lo descargo?",
+        "En esta página: el botón principal ofrece el paquete para tu sistema desde la última versión publicada en GitHub, para Linux x86_64, macOS (Apple Silicon e Intel) y Windows x64."
+      ],
+      [
+        "¿Qué archivos abre?",
+        "Trabaja con presentaciones .pptx y con su propio formato .lamina. Exporta a PDF y a imágenes PNG o GIF."
+      ],
+      [
+        "¿Se puede automatizar?",
+        "Sí. Todo es un comando: lamina-cli crea, edita y exporta presentaciones sin abrir la ventana y ofrece un servidor MCP para agentes de IA."
+      ],
+      [
+        "¿Mis archivos salen de mi equipo?",
+        "No. Todo se edita en local y la aplicación no necesita cuenta ni servidor. En macOS la aplicación no está notarizada: la primera vez, haz clic derecho sobre ella y elige Abrir."
+      ]
+    ],
+    "limitation": "Lámina está en una fase temprana. La lista de lo que funciona y lo que aún falta está en el repositorio; guarda una copia de las presentaciones importantes.",
+    "cta": "Descargar Lámina",
+    "accent": "magenta",
+    "downloads": {
+      "linux": "^lamina-[0-9].*-linux-x86_64\\.AppImage$",
+      "mac": "^lamina-[0-9].*-macos-universal\\.dmg$",
+      "windows": "^lamina-[0-9].*-windows-x64\\.msi$"
+    },
+    "downloadDescriptions": {
+      "linux": "Archivo ejecutable para distribuciones Linux de 64 bits con arquitectura x86_64.",
+      "mac": "El DMG universal funciona en Macs con Apple Silicon e Intel.",
+      "windows": "Instalador MSI para Windows de 64 bits con arquitectura x64."
+    },
+    "otherPackages": "Otros paquetes: .deb, .rpm, .tar.gz y zip portátil de Windows"
+  },
+  {
     "id": "nodalix",
     "name": "Nodalix OS",
     "category": "Sistema operativo",

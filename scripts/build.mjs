@@ -135,6 +135,8 @@ const bezier = `<svg class="bezier" viewBox="0 0 240 140" aria-hidden="true"><pa
 const typed = `<p class="typed" aria-hidden="true"><span class="typed-text">Querida Lucía,</span><i class="typed-caret"></i></p>`;
 // Celdas: a selected cell with its fill handle, and the formula it holds.
 const cellPick = `<span class="cell-pick" aria-hidden="true"></span><p class="formula-chip" aria-hidden="true"><b>fx</b><span>=SUMA(C5:F5)</span></p>`;
+// Lámina: the slide counter and the Present button.
+const present = `<p class="present-chip" aria-hidden="true"><span class="present-count">1 / 8</span><span class="present-btn"><i></i>Presentar</span></p>`;
 // Forja: a drafting crosshair with a pickbox, the cursor of a CAD canvas.
 const crosshair = `<span class="crosshair" aria-hidden="true"><i class="crosshair-h"></i><i class="crosshair-v"></i><i class="crosshair-box"></i></span>`;
 const selection = `<span class="ants" aria-hidden="true"></span>${Array.from({ length: 8 }, (_, i) => `<i class="handle handle-${i}" aria-hidden="true"></i>`).join('')}<span class="sel-size" aria-hidden="true"></span>`;
@@ -145,11 +147,11 @@ const faqBlock = (items) => `<section class="section faq-section" id="faq"><div 
 </div></section>`;
 const table = (head, rows) => `<div class="table-wrap" data-reveal><table class="table"><thead><tr>${head.map((h) => `<th scope="col">${e(h)}</th>`).join('')}</tr></thead><tbody>${rows.map((row) => `<tr>${row.map((cell, i) => (i === 0 ? `<th scope="row">${e(cell)}</th>` : `<td>${e(cell)}</td>`)).join('')}</tr>`).join('')}</tbody></table></div>`;
 const specCard = (app) => `<div class="spec-card" data-reveal="left"><div class="spec-card-head">${iconImg(app, 'spec-icon', 60)}<div><strong>${e(app.name)}</strong><span>${e(app.category)}</span></div></div><dl class="spec-list">${app.specs.map(([k, v]) => `<div><dt>${e(k)}</dt><dd>${e(v)}</dd></div>`).join('')}</dl></div>`;
-const order = ['nodalix', 'brujula', 'vinilo', 'vortia', 'lienzo', 'forja', 'pluma', 'letra', 'celdas'];
+const order = ['nodalix', 'brujula', 'vinilo', 'vortia', 'lienzo', 'forja', 'pluma', 'letra', 'celdas', 'lamina'];
 const byId = Object.fromEntries(apps.map((app) => [app.id, app]));
 const ordered = order.map((id) => byId[id]);
 // The tint each product uses on the portal (tabs, stacked cards), the same values as .product-card--<id>.
-const cardRgb = { nodalix: '143,184,255', brujula: '95,217,161', vinilo: '185,168,255', vortia: '90,169,255', lienzo: '242,163,184', forja: '232,166,111', pluma: '255,154,87', letra: '108,182,236', celdas: '79,207,125' };
+const cardRgb = { nodalix: '143,184,255', brujula: '95,217,161', vinilo: '185,168,255', vortia: '90,169,255', lienzo: '242,163,184', forja: '232,166,111', pluma: '255,154,87', letra: '108,182,236', celdas: '79,207,125', lamina: '238,125,157' };
 
 const globe = svg('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.8 3.9 5.8 3.9 9s-1.3 6.2-3.9 9c-2.6-2.8-3.9-5.8-3.9-9S9.4 5.8 12 3z"/>');
 const langSelect = (base) => `<details class="lang"><summary aria-label="Idioma">${globe}<span>${locale.toUpperCase()}</span></summary><ul>${locales.map(({ code, name }) => `<li><a href="${safeUrl(base + localePath(code).slice(1))}" hreflang="${code}" lang="${code}" data-lang="${code}"${code === locale ? ' aria-current="true"' : ''}>${name}</a></li>`).join('')}</ul></details>`;
@@ -226,7 +228,7 @@ const support = () => brand.coffee ? `<section class="section support" id="apoya
 async function home() {
   const vinilo = byId.vinilo, lienzo = byId.lienzo, nodalix = byId.nodalix;
   const previewUrl = (app, i = 0) => safeUrl(app.previews[i][0]);
-  const headlines = {nodalix:'Tu ordenador. Con otra perspectiva.',brujula:'Tu rumbo en la web.',vortia:'Ingeniería de fluidos sin cajas negras.',vinilo:'Escucha como tú quieras.',lienzo:'Un espacio para crear.',forja:'Del primer trazo al plano.',pluma:'Cada curva, en su sitio.',letra:'Escribe sin distracciones.',celdas:'Tus números, en orden.'};
+  const headlines = {nodalix:'Tu ordenador. Con otra perspectiva.',brujula:'Tu rumbo en la web.',vortia:'Ingeniería de fluidos sin cajas negras.',vinilo:'Escucha como tú quieras.',lienzo:'Un espacio para crear.',forja:'Del primer trazo al plano.',pluma:'Cada curva, en su sitio.',letra:'Escribe sin distracciones.',celdas:'Tus números, en orden.',lamina:'Cuenta tu historia.'};
   const card = (app) => {
     const media = app.previews.length
       ? `<div class="product-card-image"><img class="screen" src="${previewUrl(app)}" alt="${e(app.previews[0][1])}" loading="lazy" decoding="async"/></div>`
@@ -250,7 +252,7 @@ async function home() {
   ];
   return shell({
     title: 'Nodalia — Nodalix OS, aplicaciones de escritorio y Home Assistant',
-    description: 'Nodalia crea Nodalix OS, Brújula, Vinilo, Vortia, Lienzo, Forja, Pluma, Letra, Celdas y Nodalia Cards: software independiente para Linux, el escritorio y Home Assistant, desarrollado en público por Daniel Miguel Tejedor.',
+    description: 'Nodalia crea Nodalix OS, Brújula, Vinilo, Vortia, Lienzo, Forja, Pluma, Letra, Celdas, Lámina y Nodalia Cards: software independiente para Linux, el escritorio y Home Assistant, desarrollado en público por Daniel Miguel Tejedor.',
     canonical: brand.portal + '/',
     preview: vinilo.previews[0][0],
     previewAlt: vinilo.previews[0][1],
@@ -275,7 +277,7 @@ async function home() {
     </div></div>
     ${scrollStory('portal', apps, { e, safeUrl })}
     <section class="catalogue" id="aplicaciones"><div class="container">
-      <div class="section-head"><div data-reveal><h2 data-reveal>Nueve ideas.<br/>Una forma de hacerlas.</h2></div><p data-reveal>Un sistema operativo y ocho aplicaciones, cada una con un problema concreto que resolver. Todas indican su estado real antes de que descargues nada.</p></div>
+      <div class="section-head"><div data-reveal><h2 data-reveal>Diez ideas.<br/>Una forma de hacerlas.</h2></div><p data-reveal>Un sistema operativo y nueve aplicaciones, cada una con un problema concreto que resolver. Todas indican su estado real antes de que descargues nada.</p></div>
       <div class="product-grid" data-stack>${ordered.map(card).join('')}</div>
     </div></section>
     <section class="spotlight"><div class="container spotlight-content">
@@ -397,7 +399,7 @@ function appDownloadsSection(app) {
 }
 
 function product(app) {
-  const title = ({brujula:'Navega rápido, seguro y a tu manera.',vortia:'La simulación de fluidos, a tu alcance.',vinilo:'Disfruta de toda tu música.',lienzo:'Un lugar para crear sin límites.',nodalix:'Tu ordenador. Tu sistema.',forja:'Dibuja planos con precisión.',pluma:'Ilustra con precisión vectorial.',letra:'Tus documentos, en tu equipo.',celdas:'Calcula, analiza y presenta.'})[app.id] || app.headline;
+  const title = ({brujula:'Navega rápido, seguro y a tu manera.',vortia:'La simulación de fluidos, a tu alcance.',vinilo:'Disfruta de toda tu música.',lienzo:'Un lugar para crear sin límites.',nodalix:'Tu ordenador. Tu sistema.',forja:'Dibuja planos con precisión.',pluma:'Ilustra con precisión vectorial.',letra:'Tus documentos, en tu equipo.',celdas:'Calcula, analiza y presenta.',lamina:'Presenta tus ideas con claridad.'})[app.id] || app.headline;
   const hasDownloads = app.id === 'vortia' || app.id === 'nodalix' || Boolean(app.downloads);
   const figure = app.previews.length
     ? `<figure><img src="${safeUrl(app.previews[0][0])}" alt="${e(app.previews[0][1])}" loading="eager" fetchpriority="high" decoding="async"/><figcaption>${e(app.previews[0][1])} · Captura publicada por el proyecto</figcaption></figure>`
@@ -412,6 +414,7 @@ function product(app) {
     pluma: () => `<div class="sig-bezier" data-reveal="right"><div class="product-preview">${figure}</div>${bezier}</div>`,
     letra: () => `<div class="sig-caret" data-reveal="right"><div class="product-preview">${figure}</div>${typed}</div>`,
     celdas: () => `<div class="sig-cell" data-reveal="right"><div class="product-preview">${figure}</div>${cellPick}</div>`,
+    lamina: () => `<div class="sig-present" data-reveal="right"><div class="product-preview">${figure}</div>${present}</div>`,
   })[app.id]?.() ?? `<div class="product-preview" data-reveal="right">${figure}</div>`;
   const primaryDownload = app.id === 'vortia'
     ? '<a id="vortia-primary-download" class="btn btn-primary" href="https://github.com/getnodalia/vortia/releases/latest" rel="noopener noreferrer"><img id="vortia-primary-icon" class="vortia-platform-icon" src="/platform-linux.svg" alt="" width="20" height="20" hidden/><span id="vortia-primary-title">Ver versiones y descargas</span></a>'

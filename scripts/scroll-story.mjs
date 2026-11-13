@@ -80,6 +80,15 @@ const stories = {
     ],
     next: 'funciones',
   },
+  lamina: {
+    title: 'De la idea a la sala.',
+    chapters: [
+      ['Construye', 'Diapositivas con diseños, temas, formas, imágenes y gráficos, ordenadas por secciones.'],
+      ['Ajusta', 'Elige el tema, los controles de ventana y cómo se comporta la edición en Preferencias.'],
+      ['Presenta', 'A pantalla completa, con notas del orador y la diapositiva siguiente a la vista.'],
+    ],
+    next: 'funciones',
+  },
   nodalix: {
     title: 'Del escritorio a los ajustes.',
     chapters: [
@@ -125,6 +134,7 @@ export function scrollStory(id, apps, { e, safeUrl }) {
     pluma: () => `<div class="story-artboard">${screenshot(0, 'story-pluma-dark')}${screenshot(2, 'story-pluma-shapes')}${screenshot(1, 'story-pluma-light')}</div>`,
     letra: () => `<div class="story-artboard">${screenshot(0, 'story-letra-dark')}${screenshot(2, 'story-letra-review')}${screenshot(1, 'story-letra-light')}</div>`,
     celdas: () => `<div class="story-artboard">${screenshot(0, 'story-celdas-dark')}${screenshot(2, 'story-celdas-formulas')}${screenshot(1, 'story-celdas-light')}</div>`,
+    lamina: () => `<div class="story-artboard">${screenshot(0, 'story-lamina-dark')}${screenshot(2, 'story-lamina-prefs')}${screenshot(1, 'story-lamina-light')}</div>`,
     nodalix: () => `<div class="story-monitor">${screenshot(0, 'story-desktop')}${screenshot(1, 'story-settings')}
       <span class="story-system-cursor"></span>${screenshot(2, 'story-updates')}</div>`,
   };

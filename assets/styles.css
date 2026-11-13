@@ -39,6 +39,7 @@
 .accent-orange{--accent:#ff9a57;--accent-rgb:255,154,87}
 .accent-azure{--accent:#6cb6ec;--accent-rgb:108,182,236}
 .accent-emerald{--accent:#4fcf7d;--accent-rgb:79,207,125}
+.accent-magenta{--accent:#ee7d9d;--accent-rgb:238,125,157}
 
 /* ---------- Base ---------- */
 *,*::before,*::after{box-sizing:border-box}
@@ -190,6 +191,7 @@ html:not(.js) .scroll-progress{display:none}
 .product-card--pluma{--card-rgb:255,154,87}
 .product-card--letra{--card-rgb:108,182,236}
 .product-card--celdas{--card-rgb:79,207,125}
+.product-card--lamina{--card-rgb:238,125,157}
 /* An odd product out spans the row, its screenshot beside the text instead of below it. */
 @media(min-width:861px){
   .product-grid>.product-card:last-child:nth-child(odd){grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);grid-template-rows:1fr auto;min-height:440px}
@@ -816,6 +818,17 @@ html:not(.js) .scroll-progress{display:none}
 @keyframes cell-pick-in{from{opacity:0;transform:scale(1.25)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.js .cell-pick{animation:none}}
 
+/* Lámina: the slide counter and Present button of the presenter, resting over the screenshot. */
+.sig-present{position:relative}
+.sig-present .product-preview{z-index:0}
+.present-chip{position:absolute;left:-14px;bottom:-22px;z-index:1;display:flex;align-items:center;gap:12px;padding:10px 12px 10px 16px;border-radius:14px;background:var(--island);border:1px solid rgba(255,255,255,.08);font-family:var(--display);font-size:18px;color:var(--ink);pointer-events:none}
+.present-count{font-variant-numeric:tabular-nums;color:var(--muted,var(--ink))}
+.present-btn{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:var(--accent);color:#1a0d12;font-weight:600}
+.present-btn i{width:0;height:0;border-left:9px solid currentColor;border-top:6px solid transparent;border-bottom:6px solid transparent}
+.js .present-chip{animation:present-in .6s cubic-bezier(.2,.8,.2,1) .5s both}
+@keyframes present-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.js .present-chip{animation:none}}
+
 /* Forja: the crosshair and pickbox of a drafting canvas, resting over the screenshot. */
 .sig-crosshair{position:relative}
 .crosshair{position:absolute;left:62%;top:46%;width:0;height:0;pointer-events:none}
@@ -1094,6 +1107,11 @@ a.soon-card--released .i{color:var(--ink)}
 .scroll-story--celdas .story-stage{background:#0f1411}
 .story-celdas-formulas{clip-path:inset(calc((1 - var(--story-b))*100%) 0 0)}
 .story-celdas-light{clip-path:inset(0 0 0 calc((1 - var(--story-cut))*100%))}
+
+/* Lámina: the deck in the dark theme, Preferences rising over it, then the light theme wiping in. */
+.scroll-story--lamina .story-stage{background:#121014}
+.story-lamina-prefs{clip-path:inset(calc((1 - var(--story-b))*100%) 0 0)}
+.story-lamina-light{clip-path:inset(0 0 0 calc((1 - var(--story-cut))*100%))}
 
 /* Nodalix: retain the desktop as the spatial reference for both panels. */
 .scroll-story--nodalix .story-stage{background:#0d1020}
