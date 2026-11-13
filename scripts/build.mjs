@@ -10,7 +10,9 @@ import { scrollStory } from './scroll-story.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 // One site: the portal at getnodalia.com and every product under getnodalia.com/<id>/.
-const sites = ['portal', ...apps.map((app) => app.id)];
+const sites = ['portal', ...apps.map((app) => app.id), 'aprender'];
+// Tutorial videos (assets/tutorials/<id>.mp4 and .jpg), served at getnodalia.com/tutoriales/.
+const tutorials = JSON.parse(await readFile(path.join(root, 'data', 'tutorials.json'), 'utf8'));
 const out = path.join(root, 'dist', 'portal');
 // Products that used to live on their own subdomain. Their old Pages projects now only redirect here.
 const legacySubdomains = ['vortia', 'vinilo', 'lienzo', 'nodalix'];
@@ -47,6 +49,7 @@ const safeUrl = (s) => {
 const svg = (body, cls = 'i') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${body}</svg>`;
 const icon = {
   arrow: svg('<path d="M7 17 17 7M8 7h9v9"/>'),
+  play: svg('<path d="M8 5.5v13l10.5-6.5z"/>'),
   down: svg('<path d="M12 4v13M6 12l6 6 6-6M5 21h14"/>'),
   chevron: svg('<path d="m9 6 6 6-6 6"/>'),
   code: svg('<path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/>'),
@@ -70,6 +73,23 @@ const fontFiles = ['sora-latin-wght.woff2', 'inter-latin-wght.woff2'];
 const motionBoot = `<script>(function(d){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('js');setTimeout(function(){if(!window.__nodaliaMotion)d.classList.remove('js')},2500)})(document.documentElement)</script>`;
 const identitySrc = `/identity.js?v=${await assetVersion('identity.js')}`;
 const gallerySrc = `/gallery.js?v=${await assetVersion('gallery.js')}`;
+const tutorialSrc = `/tutorial.js?v=${await assetVersion('tutorial.js')}`;
+const clock = (seconds) => `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
+const tutorialFile = (id, ext) => safeUrl(`${brand.portal}/tutoriales/${id}.${ext}`);
+// The video, then its steps: each step jumps the video to the moment it shows (tutorial.js).
+const tutorialLayout = (app) => {
+  const t = tutorials[app.id];
+  return `<div class="tutorial-layout" data-tutorial><figure class="tutorial-player"><video controls preload="none" playsinline poster="${tutorialFile(app.id, 'jpg')}" width="${t.width}" height="${t.height}" aria-label="Tutorial de ${e(app.name)}"><source src="${tutorialFile(app.id, 'mp4')}" type="video/mp4"/></video><figcaption><span>Vídeo en español con subtítulos integrados</span><span class="tutorial-length">${clock(t.seconds)}</span></figcaption></figure>
+    <ol class="tutorial-steps" aria-label="Pasos del vídeo">${t.steps.map(([at, text]) => `<li><button type="button" data-seek="${at}"><span class="tutorial-time">${clock(at)}</span><span>${e(text)}</span></button></li>`).join('')}</ol></div>`;
+};
+// Next to the hero's download stack, GitHub and Aprender stack the same way, so the four buttons read as two columns.
+const learnAction = (app, stacked) => {
+  const github = A(app.repo, `${icon.github}Código en GitHub`, 'btn btn-secondary', true);
+  if (!tutorials[app.id]) return github;
+  const learn = `<a href="#aprender" class="btn btn-secondary${stacked ? ' btn-all-versions' : ''}">${icon.play}Aprender</a>`;
+  return stacked ? `<div class="download-stack">${github}${learn}</div>` : `${github}${learn}`;
+};
+const tutorialBlock = (app) => (tutorials[app.id] ? `<section class="section tutorial-section" id="aprender"><div class="container"><div class="section-head"><h2 data-reveal>Aprende a usar ${e(app.name)}.</h2><p data-reveal>Un recorrido por la aplicación real, paso a paso. Pulsa un paso para ir a ese momento del vídeo.</p></div>${tutorialLayout(app)}</div><script type="module" src="${tutorialSrc}"></script></section>` : '');
 
 // Firmas visuales: un elemento propio por producto en la cabecera. Todas son legibles sin JavaScript.
 // Vortia: flujo potencial alrededor de un cilindro. Las líneas de corriente se calculan aquí; identity.js añade trazadores y sonda.
@@ -133,6 +153,7 @@ const nav = (active = '', base = brand.portal + '/') => `<header class="topbar">
   ${A(brand.portal, `<img src="${wordmarkSrc}" alt="Nodalia" width="118" height="30"/>`, 'brand')}
   <nav class="nav" aria-label="Navegación principal">
     ${A(`${brand.portal}/#aplicaciones`, 'Productos', active === 'portal' ? '' : 'optional')}
+    ${A(`${brand.portal}/aprender/`, 'Aprender', active === 'aprender' ? '' : 'optional')}
     ${A(byId.nodalix.url, 'Nodalix OS', 'optional')}
     ${A(`${brand.portal}/#studium`, 'Studium', 'optional')}
     ${A(`${brand.portal}/#ecosistema`, 'Home Assistant', 'optional')}
@@ -397,7 +418,7 @@ function product(app) {
     : app.downloads
       ? appDownloadHint(app)
       : '';
-  const sections = [['demostracion', 'Demostración'], ['funciones', 'Funciones'], ['ficha', 'Ficha técnica'], ...(hasDownloads ? [['descargas', 'Descargas']] : []), ...(app.id === 'nodalix' || app.install ? [['instalacion', 'Instalación']] : []), ...(app.previews.length ? [['capturas', 'Capturas']] : []), ['faq', 'Preguntas'], ['codigo', 'Código']];
+  const sections = [['demostracion', 'Demostración'], ...(tutorials[app.id] ? [['aprender', 'Aprender']] : []), ['funciones', 'Funciones'], ['ficha', 'Ficha técnica'], ...(hasDownloads ? [['descargas', 'Descargas']] : []), ...(app.id === 'nodalix' || app.install ? [['instalacion', 'Instalación']] : []), ...(app.previews.length ? [['capturas', 'Capturas']] : []), ['faq', 'Preguntas'], ['codigo', 'Código']];
   const detail = app.sources
     ? `<div><h3 class="detail-title" data-reveal>Fuentes de música</h3>${table(['Fuente', 'Canal', 'Qué necesitas'], app.sources)}</div>`
     : app.parts
@@ -425,10 +446,11 @@ function product(app) {
       <nav class="crumbs" aria-label="Ruta de navegación">${A(brand.portal, 'Nodalia')}${icon.chevron}<span aria-current="page">${e(app.name)}</span></nav>
       <div class="product-heading">${iconImg(app, 'product-icon', 60)}<div><strong>${e(app.name)}</strong><span class="status-text">${e(app.status)}</span></div></div>
       <span class="eyebrow">${e(app.eyebrow)}</span><h1>${e(title)}</h1><p class="lede">${e(app.description)}</p>
-      <div class="actions">${hasDownloads && app.id !== 'nodalix' ? `<div class="download-stack">${primaryDownload}<a href="#descargas" class="btn btn-secondary btn-all-versions">Ver todas las versiones <span class="btn-icon" aria-hidden="true">↓</span></a></div>` : primaryDownload}${A(app.repo, `${icon.github}Código en GitHub`, 'btn btn-secondary', true)}</div>
+      <div class="actions">${hasDownloads && app.id !== 'nodalix' ? `<div class="download-stack">${primaryDownload}<a href="#descargas" class="btn btn-secondary btn-all-versions">Ver todas las versiones <span class="btn-icon" aria-hidden="true">↓</span></a></div>` : primaryDownload}${learnAction(app, hasDownloads && app.id !== 'nodalix')}</div>
       ${primaryHint}<div class="product-meta"><span class="pill">${e(app.platforms)}</span><span class="pill">${e(app.technology)}</span></div></div>
       <div class="product-hero-stage" data-parallax style="--depth:-46px">${stage}</div></div></section>
       ${scrollStory(app.id, apps, { e, safeUrl })}
+      ${tutorialBlock(app)}
       <section class="section features" id="funciones"><div class="container"><h2 data-reveal>Qué hace ${e(app.name)}.</h2><div class="feature-grid">${app.features.map(([h,d],i)=>`<article class="feature" data-reveal><h3>${e(h)}</h3><p>${e(d)}</p></article>`).join('')}</div><div class="notice" data-reveal>${icon.alert}<p><strong>Estado y requisitos:</strong> ${e(app.limitation)}</p></div></div></section>
       <section class="section" id="ficha"><div class="container"><h2 data-reveal>Ficha técnica</h2><div class="detail-grid">${specCard(app)}${detail}</div></div></section>
       ${app.id==='vortia' ? vortiaDownloads() : app.downloads ? appDownloadsSection(app) : ''}
@@ -438,6 +460,19 @@ function product(app) {
       ${faqBlock(app.faq)}
       <section class="section product-outro" id="codigo"><div class="container"><h2 data-reveal>Forma parte del desarrollo.</h2><p>Consulta el código, los cambios y las publicaciones reales en GitHub. La disponibilidad de paquetes instalables depende del estado de cada aplicación.</p><div class="actions">${A(app.repo,`Explorar repositorio ${icon.arrow}`,'btn btn-primary',true)}${A(`${app.repo}/releases`,'Versiones publicadas','btn btn-secondary',true)}</div></div></section>
       <section class="section"><div class="container"><h2 data-reveal>Más de Nodalia</h2><div class="more-grid">${others.map((item) => `<a class="more-card" data-reveal href="${safeUrl(item.url)}">${iconImg(item, 'more-icon', 48)}<div><strong>${e(item.name)}</strong><span>${e(item.category)}</span></div>${icon.arrow}</a>`).join('')}</div></div></section>`
+  });
+}
+// getnodalia.com/aprender/: every tutorial on one page.
+function learn() {
+  const items = ordered.filter((app) => tutorials[app.id]);
+  return shell({
+    title: 'Aprender: vídeos de primeros pasos | Nodalia',
+    description: 'Vídeos cortos con las aplicaciones reales de Nodalia, paso a paso: primeros pasos con Nodalix OS, Vortia, Lienzo y Forja.',
+    canonical: `${brand.portal}/aprender/`,
+    active: 'aprender',
+    content: `<section class="hero learn-hero"><div class="container"><span class="eyebrow" data-reveal>Aprender</span><h1>Primeros pasos, en vídeo.</h1><p>Cada vídeo recorre la aplicación real en alrededor de un minuto. Pulsa un paso para ir a ese momento.</p><nav class="learn-index" aria-label="Vídeos">${items.map((app) => `<a href="#${app.id}">${iconImg(app, 'learn-index-icon', 28)}<span>${e(app.name)}</span></a>`).join('')}</nav></div></section>
+      ${items.map((app) => `<section class="section learn-item accent-${e(app.accent)}" id="${app.id}"><div class="container"><div class="learn-item-head">${iconImg(app, 'learn-item-icon', 52)}<div><h2>${e(app.name)}</h2><p>${e(app.eyebrow)}</p></div>${A(app.url, `Conocer ${e(app.name)} ${icon.arrow}`, 'btn btn-secondary')}</div>${tutorialLayout(app)}</div></section>`).join('')}
+      <script type="module" src="${tutorialSrc}"></script>`,
   });
 }
 function vortiaDownloads() {
@@ -530,7 +565,7 @@ function nodalixDownloads(app) {
 const copyAsset = (name, to = name) => copyFile(path.join(root, 'assets', name), path.join(out, to));
 // Every page of every product, in every language, in one sitemap.
 const sitemap = () => `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sites.flatMap((site) => {
-  const base = site === 'portal' ? `${brand.portal}/` : apps.find((app) => app.id === site).url;
+  const base = site === 'portal' ? `${brand.portal}/` : site === 'aprender' ? `${brand.portal}/aprender/` : apps.find((app) => app.id === site).url;
   return localeCodes.map((code) => `<url><loc>${e(base)}${localePath(code).slice(1)}</loc></url>`);
 }).join('')}</urlset>\n`;
 
@@ -544,7 +579,7 @@ async function build(site) {
   for (const code of localeCodes) {
     locale = code;
     clientStrings = code === DEFAULT_LOCALE || !keys.length ? null : Object.fromEntries(keys.filter((key) => dictionaries[code][key] !== undefined).map((key) => [key, dictionaries[code][key]]));
-    const page = localize(site === 'portal' ? await home() : product(app), code);
+    const page = localize(site === 'portal' ? await home() : site === 'aprender' ? learn() : product(app), code);
     const absent = [...page.missing, ...(code === DEFAULT_LOCALE ? [] : keys.filter((key) => dictionaries[code][key] === undefined))];
     if (absent.length) missing[code] = [...new Set([...(missing[code] || []), ...absent])];
     pages.push([code, page.html]);
@@ -563,13 +598,14 @@ async function build(site) {
 
 // Files every page shares, served once from the root of the site.
 async function shared() {
-  await Promise.all(['fonts', 'app-icons'].map((name) => mkdir(path.join(out, name), { recursive: true })));
-  const scripts = ['i18n.js', 'motion.js', 'scroll-story.js', 'identity.js', 'gallery.js', 'releases.js', 'vortia-download.js', 'app-download.js', 'nodalix-releases.js', 'platform.js'];
+  await Promise.all(['fonts', 'app-icons', 'tutoriales'].map((name) => mkdir(path.join(out, name), { recursive: true })));
+  const scripts = ['i18n.js', 'motion.js', 'scroll-story.js', 'identity.js', 'gallery.js', 'releases.js', 'vortia-download.js', 'app-download.js', 'nodalix-releases.js', 'platform.js', 'tutorial.js'];
   const images = ['logo.svg', 'nodalia-wordmark.svg', 'nodalia-mark.svg', 'favicon.svg', 'favicon.ico', 'apple-touch-icon.png', 'platform-apple.svg', 'platform-linux.svg', 'platform-windows.svg'];
   await Promise.all([
     ...[...scripts, ...images, 'styles.css', '_headers'].map((name) => copyAsset(name)),
     ...fontFiles.map((file) => copyAsset(path.join('fonts', file))),
     ...upcomingIcons.map((file) => copyAsset(path.join('app-icons', file))),
+    ...Object.keys(tutorials).flatMap((id) => ['mp4', 'jpg'].map((ext) => copyAsset(path.join('tutorials', `${id}.${ext}`), path.join('tutoriales', `${id}.${ext}`)))),
     writeFile(path.join(out, cssFileName), cssSource),
     writeFile(path.join(out, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${brand.portal}/sitemap.xml\n`, 'utf8'),
     writeFile(path.join(out, 'sitemap.xml'), sitemap(), 'utf8'),
