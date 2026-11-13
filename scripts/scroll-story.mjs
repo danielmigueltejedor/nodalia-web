@@ -62,6 +62,15 @@ const stories = {
     ],
     next: 'funciones',
   },
+  letra: {
+    title: 'De la primera línea al documento.',
+    chapters: [
+      ['Escribe', 'Texto, estilos, listas, tablas e imágenes, con la cinta siempre a mano.'],
+      ['Revisa', 'Ortografía, comentarios y control de cambios para trabajar con otras personas.'],
+      ['Trabaja a tu manera', 'Cambia al tema claro o a otro idioma sin cerrar el documento.'],
+    ],
+    next: 'funciones',
+  },
   nodalix: {
     title: 'Del escritorio a los ajustes.',
     chapters: [
@@ -105,6 +114,7 @@ export function scrollStory(id, apps, { e, safeUrl }) {
       ${screenshot(1, 'story-lienzo-curves')}`,
     forja: () => `<div class="story-drafting">${screenshot(0, 'story-forja-model')}<span class="story-forja-cursor"></span>${screenshot(1, 'story-forja-layout')}${screenshot(2, 'story-forja-light')}</div>`,
     pluma: () => `<div class="story-artboard">${screenshot(0, 'story-pluma-dark')}${screenshot(2, 'story-pluma-shapes')}${screenshot(1, 'story-pluma-light')}</div>`,
+    letra: () => `<div class="story-artboard">${screenshot(0, 'story-letra-dark')}${screenshot(2, 'story-letra-review')}${screenshot(1, 'story-letra-light')}</div>`,
     nodalix: () => `<div class="story-monitor">${screenshot(0, 'story-desktop')}${screenshot(1, 'story-settings')}
       <span class="story-system-cursor"></span>${screenshot(2, 'story-updates')}</div>`,
   };
