@@ -651,7 +651,7 @@
     "id": "brujula",
     "name": "Brújula",
     "category": "Navegador",
-    "status": "Versión 0.4 · solo Linux",
+    "status": "Versión 0.5 · solo Linux",
     "statusKind": "early",
     "eyebrow": "El navegador de Nodalix",
     "headline": "Navega rápido, seguro y a tu manera.",
@@ -754,6 +754,10 @@
         "Cada esencial es su propia pestaña, y sus enlaces a otros sitios se ven en una tarjeta encima. Las pestañas se reordenan arrastrándolas y el historial se desliza por la barra lateral con un botón (Ctrl+H)."
       ],
       [
+        "Importa tu navegador anterior",
+        "Trae marcadores, historial, cookies y contraseñas de Chrome, Chromium, Brave, Edge, Vivaldi, Opera, Firefox, Zen, LibreWolf y Floorp, todo o por partes, desde el asistente de bienvenida o Preferencias → Importar. Las contraseñas pasan a tu cámara con contraseña maestra."
+      ],
+      [
         "Texturas y tipografía de Nodalia",
         "Granulado, líneas, puntos o cuadrícula sobre el marco, y las tipografías de Nodalia Design (Inter y Sora) en las páginas del navegador."
       ]
@@ -812,14 +816,14 @@
       ],
       [
         "¿Puedo traer mis marcadores de otro navegador?",
-        "Sí. En el primer arranque, o desde un archivo, desde Chrome, Chromium, Brave, Edge, Vivaldi, Opera, Firefox, Zen, LibreWolf y Floorp. Solo se importan marcadores; las contraseñas no."
+        "Sí. Marcadores, historial, cookies y contraseñas. En el primer arranque, o después en Preferencias → Importar, desde Chrome, Chromium, Brave, Edge, Vivaldi, Opera, Firefox, Zen, LibreWolf y Floorp, o desde un archivo. Las contraseñas de Firefox se importan desde el CSV que exporta."
       ],
       [
         "¿Brújula se actualiza sola?",
         "La AppImage sí, desde dentro de Brújula (se activa o se quita en Preferencias → Acerca de). Si la instalaste con el paquete de Arch o de Nodalix, te avisa y se actualiza con el sistema."
       ]
     ],
-    "limitation": "Solo para Linux. La AppImage es para x86_64 y necesita una distribución con una glibc tan reciente como la de Arch (Arch, CachyOS, Nodalix…); en otras se compila desde el código. Las contraseñas no se rellenan dentro de iframes ni en algunas aplicaciones de una sola página, y aún no se importan de otros navegadores. Las extensiones de Chromium son compatibles solo en parte y la instalación desde la Chrome Web Store se ha probado hasta el cliente HTTP.",
+    "limitation": "Solo para Linux. La AppImage es para x86_64 y necesita una distribución con una glibc tan reciente como la de Arch (Arch, CachyOS, Nodalix…); en otras se compila desde el código. Las contraseñas no se rellenan dentro de iframes ni en algunas aplicaciones de una sola página. Las extensiones de Chromium son compatibles solo en parte y la instalación desde la Chrome Web Store se ha probado hasta el cliente HTTP.",
     "downloads": {
       "linux": "^Brujula-.+-x86_64\\.AppImage$"
     },

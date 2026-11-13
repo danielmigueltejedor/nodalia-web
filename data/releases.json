@@ -1,18 +1,18 @@
 {
  "brujula": {
-  "tag_name": "v0.2.0",
-  "published_at": "2026-11-13T08:03:41Z",
-  "html_url": "https://github.com/getnodalia/brujula/releases/tag/v0.2.0",
+  "tag_name": "v0.5.0",
+  "published_at": "2026-11-13T17:49:40Z",
+  "html_url": "https://github.com/getnodalia/brujula/releases/tag/v0.5.0",
   "assets": [
    {
-    "name": "Brujula-0.2.0-x86_64.AppImage",
-    "size": 108349944,
-    "browser_download_url": "https://github.com/getnodalia/brujula/releases/download/v0.2.0/Brujula-0.2.0-x86_64.AppImage"
+    "name": "Brujula-0.5.0-x86_64.AppImage",
+    "size": 110615032,
+    "browser_download_url": "https://github.com/getnodalia/brujula/releases/download/v0.5.0/Brujula-0.5.0-x86_64.AppImage"
    },
    {
     "name": "SHA256SUMS",
     "size": 96,
-    "browser_download_url": "https://github.com/getnodalia/brujula/releases/download/v0.2.0/SHA256SUMS"
+    "browser_download_url": "https://github.com/getnodalia/brujula/releases/download/v0.5.0/SHA256SUMS"
    }
   ]
  },
