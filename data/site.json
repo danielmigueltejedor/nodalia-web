@@ -80,6 +80,10 @@
       "nodalix-os"
     ],
     [
+      "Brújula",
+      "brujula"
+    ],
+    [
       "Vinilo",
       "vinilo"
     ],
@@ -186,12 +190,6 @@
         "torno",
         "CAD paramétrico 3D",
         "torno"
-      ],
-      [
-        "Brújula",
-        "brujula",
-        "Navegador web de Nodalix con extensiones de Chromium",
-        "brujula"
       ],
       [
         "Buzón",

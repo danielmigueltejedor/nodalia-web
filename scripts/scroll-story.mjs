@@ -17,6 +17,15 @@ const stories = {
     ],
     next: 'funciones',
   },
+  brujula: {
+    title: 'Un navegador que se adapta a ti.',
+    chapters: [
+      ['Empieza en blanco', 'Una nueva pestaña con tu buscador y tus marcadores, sin ruido.'],
+      ['Hazlo tuyo', 'Cambia el tema, el color de acento y el marco desde las preferencias. Los cambios se ven al momento.'],
+      ['Añade extensiones', 'Instala extensiones de Chromium y revisa lo que podrán hacer antes de aceptarlas.'],
+    ],
+    next: 'funciones',
+  },
   vinilo: {
     title: 'Así empieza una sesión de escucha.',
     chapters: [
@@ -76,6 +85,7 @@ export function scrollStory(id, apps, { e, safeUrl }) {
       <img class="story-imprint" src="/nodalia-wordmark.svg" alt="" width="118" height="30"/>
     </div>`,
     vortia: () => `<canvas class="story-drawing" data-story-canvas="nozzle"></canvas>${screenshot(0, 'story-vortia-result')}`,
+    brujula: () => `<div class="story-browser">${screenshot(0, 'story-brujula-newtab')}${screenshot(1, 'story-brujula-looks')}${screenshot(2, 'story-brujula-extensions')}</div>`,
     vinilo: () => `<div class="story-turntable"><div class="story-disc"></div><div class="story-arm"></div></div><div class="story-sources">
       <span>Este equipo</span><span translate="no">Apple Music</span><span translate="no">Spotify</span>
       <span translate="no">YouTube Music</span><span translate="no">Tidal</span>
