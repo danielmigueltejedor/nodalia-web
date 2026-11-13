@@ -774,5 +774,18 @@
  "¿Puedo convertir una web en una aplicación?": "Kann ich eine Website in eine App verwandeln?",
  "Sí. Desde el menú, «Instalar como aplicación web…», o desde las preferencias. Se abre en su propia ventana, con icono en el lanzador y perfil aparte.": "Ja. Über das Menü, „Als Web-App installieren …“, oder die Einstellungen. Sie öffnet sich in einem eigenen Fenster, mit Symbol im Starter und eigenem Profil.",
  "Preferencias de contraseñas: bóveda desbloqueada con los inicios de sesión guardados (abrir imagen completa)": "Passwort-Einstellungen: entsperrter Tresor mit den gespeicherten Anmeldungen (Bild in voller Größe öffnen)",
- "Aplicaciones web: crear un sitio como aplicación desde las preferencias (abrir imagen completa)": "Web-Apps: eine Website in den Einstellungen als App anlegen (Bild in voller Größe öffnen)"
+ "Aplicaciones web: crear un sitio como aplicación desde las preferencias (abrir imagen completa)": "Web-Apps: eine Website in den Einstellungen als App anlegen (Bild in voller Größe öffnen)",
+ "Versión 0.3 · solo Linux": "Version 0.3 · nur Linux",
+ "Bienvenida y perfiles": "Willkommen und Profile",
+ "La primera vez trae tus marcadores de otro navegador y te deja crear tu usuario. Cada perfil tiene sus propios marcadores, historial, contraseñas y extensiones; la contraseña de un perfil solo protege el selector, no cifra los datos.": "Beim ersten Start holt er deine Lesezeichen aus einem anderen Browser und lässt dich deinen Benutzer anlegen. Jedes Profil hat eigene Lesezeichen, einen eigenen Verlauf, eigene Passwörter und Erweiterungen; das Passwort eines Profils schützt nur die Auswahl und verschlüsselt die Daten nicht.",
+ "Esenciales": "Essentials",
+ "Tus sitios de siempre a un clic en la barra lateral, cada uno con el icono real de su app.": "Deine üblichen Seiten einen Klick entfernt in der Seitenleiste, jede mit dem echten Symbol ihrer App.",
+ "Botón de página": "Seitenschaltfläche",
+ "Al abrir la ficha de una extensión en la Chrome Web Store, o un sitio que se puede instalar, aparece un botón arriba para añadir la extensión o instalarlo como aplicación web.": "Öffnest du die Seite einer Erweiterung im Chrome Web Store oder eine installierbare Website, erscheint oben eine Schaltfläche, um die Erweiterung hinzuzufügen oder die Seite als Web-App zu installieren.",
+ "Asistente de bienvenida: trae tus marcadores, elige esenciales y crea tu usuario": "Willkommensassistent: Lesezeichen mitbringen, Essentials wählen und Benutzer anlegen",
+ "Asistente de bienvenida: trae tus marcadores, elige esenciales y crea tu usuario (abrir imagen completa)": "Willkommensassistent: Lesezeichen mitbringen, Essentials wählen und Benutzer anlegen (Bild in voller Größe öffnen)",
+ "Preferencias de perfiles: añadir, abrir y proteger cada perfil con contraseña": "Profileinstellungen: Profile hinzufügen, öffnen und mit Passwort schützen",
+ "Preferencias de perfiles: añadir, abrir y proteger cada perfil con contraseña (abrir imagen completa)": "Profileinstellungen: Profile hinzufügen, öffnen und mit Passwort schützen (Bild in voller Größe öffnen)",
+ "¿Puedo traer mis marcadores de otro navegador?": "Kann ich meine Lesezeichen aus einem anderen Browser mitbringen?",
+ "Sí. En el primer arranque, o desde un archivo, desde Chrome, Chromium, Brave, Edge, Vivaldi, Opera, Firefox, Zen, LibreWolf y Floorp. Solo se importan marcadores; las contraseñas no.": "Ja. Beim ersten Start oder aus einer Datei, aus Chrome, Chromium, Brave, Edge, Vivaldi, Opera, Firefox, Zen, LibreWolf und Floorp. Importiert werden nur Lesezeichen, keine Passwörter."
 }
