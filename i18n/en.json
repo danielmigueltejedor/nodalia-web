@@ -674,7 +674,6 @@
  "Tema, color de acento, marco con degradados, radio de las esquinas, separación, transparencia, disposición, buscador y Boosts: CSS propio para cada sitio.": "Theme, accent colour, a frame with gradients, corner radius, spacing, transparency, layout, search engine and Boosts: your own CSS for each site.",
  "Rápido y ligero": "Fast and light",
  "Las pestañas que no usas se duermen y se archivan solas, con vista dividida, Peek, ventana flotante y notas por espacio.": "Tabs you don't use go to sleep and are archived on their own, with split view, Peek, a floating window and notes for each space.",
- "Primera versión solo para Linux, sin binarios: se compila desde el código. Sin gestor de contraseñas, historial ni modo privado. Las extensiones de Chromium son compatibles solo en parte y la instalación desde la Chrome Web Store se ha probado hasta el cliente HTTP.": "First release for Linux only, with no binaries: it is built from source. No password manager, history or private mode. Chromium extensions are only partly supported, and installing from the Chrome Web Store has been tested only as far as the HTTP client.",
  "Motor": "Engine",
  "Arch / CachyOS (PKGBUILD) o desde el código": "Arch / CachyOS (PKGBUILD) or from source",
  "Qué hay dentro": "What's inside",
@@ -704,7 +703,6 @@
  "¿Puedo sincronizar mis marcadores y ajustes?": "Can I sync my bookmarks and settings?",
  "Sí, mediante una carpeta de tu nube (Dropbox, Nextcloud, iCloud Drive…) o una cuenta de Nodalix.": "Yes, through a folder in your cloud storage (Dropbox, Nextcloud, iCloud Drive…) or a Nodalix account.",
  "¿Hay versión para Windows o macOS?": "Is there a Windows or macOS version?",
- "No. La 0.1.0 es solo para Linux; no hay paquetes binarios, se compila desde el código.": "No. 0.1.0 is for Linux only; there are no binary packages, so you build it from source.",
  "Aprender": "Learn",
  "Aprende a usar Vortia.": "Learn to use Vortia.",
  "Aprende a usar Lienzo.": "Learn to use Lienzo.",
@@ -752,5 +750,9 @@
  "Aprender: vídeos de primeros pasos | Nodalia": "Learn: getting-started videos | Nodalia",
  "Vídeos cortos con las aplicaciones reales de Nodalia, paso a paso: primeros pasos con Nodalix OS, Vortia, Lienzo y Forja.": "Short videos of the real Nodalia apps, step by step: getting started with Nodalix OS, Vortia, Lienzo and Forja.",
  "Primeros pasos, en vídeo.": "Getting started, on video.",
- "Cada vídeo recorre la aplicación real en alrededor de un minuto. Pulsa un paso para ir a ese momento.": "Each video tours the real app in about a minute. Click a step to jump to that moment."
+ "Cada vídeo recorre la aplicación real en alrededor de un minuto. Pulsa un paso para ir a ese momento.": "Each video tours the real app in about a minute. Click a step to jump to that moment.",
+ "Primera versión solo para Linux. La AppImage es para x86_64 y necesita una distribución con una glibc tan reciente como la de Arch (Arch, CachyOS, Nodalix…); en otras se compila desde el código. Sin gestor de contraseñas, historial ni modo privado. Las extensiones de Chromium son compatibles solo en parte y la instalación desde la Chrome Web Store se ha probado hasta el cliente HTTP.": "First release, Linux only. The AppImage is for x86_64 and needs a distribution with a glibc as recent as Arch's (Arch, CachyOS, Nodalix…); on others you build it from source. No password manager, history or private mode. Chromium extensions are only partly supported, and installing from the Chrome Web Store has been tested only as far as the HTTP client.",
+ "Descarga Brújula.": "Download Brújula.",
+ "AppImage para Linux x86_64 con una glibc tan reciente como la de Arch (Arch, CachyOS, Nodalix…). Hazla ejecutable y ábrela; también tienes el PKGBUILD para compilarla.": "AppImage for Linux x86_64 with a glibc as recent as Arch's (Arch, CachyOS, Nodalix…). Make it executable and open it; there is also a PKGBUILD to build it.",
+ "No. La 0.1.0 es solo para Linux: hay una AppImage para x86_64 y un PKGBUILD para compilarla en Arch.": "No. 0.1.0 is for Linux only: there is an AppImage for x86_64 and a PKGBUILD to build it on Arch."
 }

@@ -3,7 +3,18 @@
   "tag_name": "v0.1.0",
   "published_at": "2026-11-13T05:44:57Z",
   "html_url": "https://github.com/getnodalia/brujula/releases/tag/v0.1.0",
-  "assets": []
+  "assets": [
+   {
+    "name": "Brujula-0.1.0-x86_64.AppImage",
+    "size": 108190200,
+    "browser_download_url": "https://github.com/getnodalia/brujula/releases/download/v0.1.0/Brujula-0.1.0-x86_64.AppImage"
+   },
+   {
+    "name": "SHA256SUMS",
+    "size": 96,
+    "browser_download_url": "https://github.com/getnodalia/brujula/releases/download/v0.1.0/SHA256SUMS"
+   }
+  ]
  },
  "buzon": null,
  "celdas": null,
