@@ -55,7 +55,7 @@
       ],
       [
         "Instaladores que abren a la primera",
-        "AppImage probada en nueve distribuciones Linux y DMG para macOS, cada uno con su suma SHA-256."
+        "AppImage probada en nueve distribuciones Linux y dos DMG para macOS, la aplicación Qt y Vortia Native, cada uno con su suma SHA-256."
       ]
     ],
     "flow": [
@@ -87,7 +87,7 @@
       ],
       [
         "Instaladores",
-        "AppImage (Linux x86_64) · DMG (macOS arm64)"
+        "AppImage (Linux x86_64) · DMG Qt y DMG Vortia Native (macOS arm64)"
       ],
       [
         "Motor de cálculo",
@@ -118,6 +118,10 @@
       [
         "¿Qué queda fuera?",
         "LES y DES, transferencia de calor, multifase, combustión, mallas móviles y geometría 3D general con mallado automático de volumen. El flujo compresible para toberas es experimental y no está disponible en la AppImage de Linux."
+      ],
+      [
+        "¿Qué es Vortia Native?",
+        "Una segunda edición para macOS, escrita en SwiftUI, que usa el motor de casos de Vortia sin interfaz. Añade el resultado en 3D, el flujo compresible con contorno y toberas, y el informe de ingeniería. Se instala con su propio DMG, junto al de la aplicación Qt."
       ],
       [
         "¿Funciona en Windows o en Mac con Intel?",
