@@ -1235,3 +1235,27 @@ h1,h2,h3{font-weight:700}
 .section.support{border-top:0}
 .home-hero{padding-bottom:96px}
 @media(max-width:860px){.home-hero{padding-bottom:56px}}
+
+/* ---------- Tutoriales (getnodalia.com/aprender/ y la sección Aprender de cada app) ---------- */
+.tutorial-layout{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:28px;align-items:start}
+.tutorial-player{margin:0}
+.tutorial-player video{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:18px;background:#15171b}
+.tutorial-player figcaption{display:flex;justify-content:space-between;gap:12px;margin-top:12px;color:var(--muted);font-size:14px}
+.tutorial-length{font-variant-numeric:tabular-nums}
+.tutorial-steps{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.tutorial-steps button{display:flex;gap:14px;width:100%;padding:11px 14px;border:1px solid transparent;border-radius:14px;background:none;color:var(--text);font:inherit;font-size:15px;line-height:1.45;text-align:left;cursor:pointer;transition:background .2s,border-color .2s}
+.tutorial-steps button:hover{background:rgba(255,255,255,.05)}
+.tutorial-steps button[aria-current]{border-color:rgba(var(--accent-rgb),.45);background:rgba(var(--accent-rgb),.08);color:var(--ink)}
+.tutorial-time{flex:none;min-width:36px;color:var(--accent);font-weight:600;font-variant-numeric:tabular-nums}
+.learn-hero{padding:120px 0 72px}
+.learn-index{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:32px}
+.learn-index a{display:inline-flex;align-items:center;gap:10px;padding:7px 16px 7px 7px;border:1px solid var(--line-2);border-radius:999px;color:var(--ink);font-weight:600;font-size:15px;transition:background .2s}
+.learn-index a:hover{background:rgba(255,255,255,.06)}
+.learn-index-icon{width:28px;height:28px;border-radius:8px}
+.learn-item-head{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.learn-item-head h2{margin:0}
+.learn-item-head p{margin:4px 0 0;color:var(--muted)}
+.learn-item-icon{width:52px;height:52px;border-radius:13px}
+.learn-item-head .btn{margin-left:auto}
+@media(max-width:900px){.tutorial-layout{grid-template-columns:1fr}}
+@media(max-width:600px){.learn-item-head{flex-wrap:wrap}.learn-item-head .btn{margin-left:0}.learn-hero{padding:96px 0 48px}}
