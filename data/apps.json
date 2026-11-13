@@ -651,7 +651,7 @@
     "id": "brujula",
     "name": "Brújula",
     "category": "Navegador",
-    "status": "Versión 0.3 · solo Linux",
+    "status": "Versión 0.4 · solo Linux",
     "statusKind": "early",
     "eyebrow": "El navegador de Nodalix",
     "headline": "Navega rápido, seguro y a tu manera.",
@@ -740,6 +740,22 @@
       [
         "Botón de página",
         "Al abrir la ficha de una extensión en la Chrome Web Store, o un sitio que se puede instalar, aparece un botón arriba para añadir la extensión o instalarlo como aplicación web."
+      ],
+      [
+        "Actualizaciones dentro de Brújula",
+        "La AppImage se actualiza sola: descarga la versión nueva, comprueba su suma SHA-256 y se reinicia con tus pestañas. En Nodalix, donde la instala el sistema, solo te avisa. Tras actualizar, una pestaña te enseña las novedades."
+      ],
+      [
+        "Descargas seguras",
+        "Cada archivo se analiza al llegar, sin frenar la descarga: si dice ser un documento, una imagen o un vídeo y por dentro es un programa, o si ClamAV está instalado y lo reconoce, te pregunta si lo borras. Los programas y scripts piden confirmación y se guardan sin permiso de ejecución."
+      ],
+      [
+        "Pestañas a tu manera",
+        "Cada esencial es su propia pestaña, y sus enlaces a otros sitios se ven en una tarjeta encima. Las pestañas se reordenan arrastrándolas y el historial se desliza por la barra lateral con un botón (Ctrl+H)."
+      ],
+      [
+        "Texturas y tipografía de Nodalia",
+        "Granulado, líneas, puntos o cuadrícula sobre el marco, y las tipografías de Nodalia Design (Inter y Sora) en las páginas del navegador."
       ]
     ],
     "specs": [
@@ -797,6 +813,10 @@
       [
         "¿Puedo traer mis marcadores de otro navegador?",
         "Sí. En el primer arranque, o desde un archivo, desde Chrome, Chromium, Brave, Edge, Vivaldi, Opera, Firefox, Zen, LibreWolf y Floorp. Solo se importan marcadores; las contraseñas no."
+      ],
+      [
+        "¿Brújula se actualiza sola?",
+        "La AppImage sí, desde dentro de Brújula (se activa o se quita en Preferencias → Acerca de). Si la instalaste con el paquete de Arch o de Nodalix, te avisa y se actualiza con el sistema."
       ]
     ],
     "limitation": "Solo para Linux. La AppImage es para x86_64 y necesita una distribución con una glibc tan reciente como la de Arch (Arch, CachyOS, Nodalix…); en otras se compila desde el código. Las contraseñas no se rellenan dentro de iframes ni en algunas aplicaciones de una sola página, y aún no se importan de otros navegadores. Las extensiones de Chromium son compatibles solo en parte y la instalación desde la Chrome Web Store se ha probado hasta el cliente HTTP.",
