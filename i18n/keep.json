@@ -104,5 +104,8 @@
  "Linux · macOS (Universal) · Windows · FreeBSD",
  "x86_64 · ARM64 · RISC-V (Linux)",
  "macOS · Qt",
- "macOS · Vortia Native"
+ "macOS · Vortia Native",
+ "Rust · GTK4 · WebKitGTK · Nodalia Design",
+ "WebKitGTK 6.0",
+ "Brújula"
 ]

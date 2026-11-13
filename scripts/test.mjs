@@ -11,7 +11,7 @@ const sourceCss = await readFile(path.join(root, 'assets', 'styles.css'), 'utf8'
 const hash = createHash('sha256').update(sourceCss).digest('hex').slice(0, 12);
 const versionedCss = `styles.${hash}.css`;
 // One site: the portal at the root of dist/portal and each product in dist/portal/<id>/.
-const SITES = ['portal', 'vortia', 'vinilo', 'lienzo', 'forja', 'nodalix'];
+const SITES = ['portal', 'brujula', 'vortia', 'vinilo', 'lienzo', 'forja', 'nodalix'];
 const site = path.join(root, 'dist', 'portal');
 const dirOf = (id) => (id === 'portal' ? site : path.join(site, id));
 const baseOf = (id) => (id === 'portal' ? 'https://getnodalia.com' : `https://getnodalia.com/${id}`);
@@ -45,14 +45,14 @@ for (const id of SITES) {
   }
 }
 const portal=await readFile(path.join(root,'dist/portal/index.html'),'utf8');
-for(const name of ['Vortia','Vinilo','Lienzo','Forja','Nodalix OS'])assert.match(portal,new RegExp(name));
+for(const name of ['Brújula','Vortia','Vinilo','Lienzo','Forja','Nodalix OS'])assert.match(portal,new RegExp(name));
 // Products are linked by path, never by the old subdomains.
-for (const id of ['vortia','vinilo','lienzo','forja','nodalix']) assert.ok(portal.includes(`href="https://getnodalia.com/${id}/"`), `Portal sin enlace a /${id}/`);
+for (const id of ['brujula','vortia','vinilo','lienzo','forja','nodalix']) assert.ok(portal.includes(`href="https://getnodalia.com/${id}/"`), `Portal sin enlace a /${id}/`);
 assert.doesNotMatch(portal, /https:\/\/(?:vortia|vinilo|lienzo|nodalix)\.getnodalia\.com/);
 assert.match(portal,/hero-stage/);
 for (const id of ['ecosistema','autor','faq']) assert.ok(portal.includes(`id="${id}"`), `Portal sin sección ${id}`);
 assert.ok(portal.includes('id="en-camino"'), 'Portal sin la sección de apps en camino');
-for (const key of ['luz','pulso','pliego','pluma','toma','papel','letra','celdas','lamina','torno','brujula','buzon']) { assert.ok(portal.includes(`/app-icons/${key}.png`), `Falta ${key} en apps en camino`); assert.ok((await stat(path.join(root, 'dist/portal/app-icons', `${key}.png`))).size > 1000, `Falta el icono de ${key}`); }
+for (const key of ['luz','pulso','pliego','pluma','toma','papel','letra','celdas','lamina','torno','buzon']) { assert.ok(portal.includes(`/app-icons/${key}.png`), `Falta ${key} en apps en camino`); assert.ok((await stat(path.join(root, 'dist/portal/app-icons', `${key}.png`))).size > 1000, `Falta el icono de ${key}`); }
 assert.ok(portal.includes('id="studium"') && portal.includes('/studium/archive/refs/tags/') && portal.includes('studium mcp'), 'Portal sin descarga o instrucciones de Studium');
 assert.match(portal,/href="\/favicon\.svg\?v=[0-9a-f]+"/);
 assert.match(portal,/"@type":"FAQPage"/);
@@ -106,7 +106,7 @@ assert.equal(identity.probe(0, 0.5), null);
 assert.ok(Math.abs(identity.probe(-1, 0).cp - 1) < 1e-9, 'Cp de remanso debe ser 1');
 assert.ok(Math.abs(identity.probe(0, 1).cp + 3) < 1e-9, 'Cp mínimo debe ser -3');
 assert.equal(identity.speedColor(2), 'rgb(255,255,255)');
-for (const [id, marker] of [['vortia', 'data-identity="flow"'], ['nodalix', 'class="boot-log"'], ['vinilo', 'class="record"'], ['lienzo', 'data-identity="select"'], ['forja', 'class="crosshair"']]) {
+for (const [id, marker] of [['vortia', 'data-identity="flow"'], ['nodalix', 'class="boot-log"'], ['brujula', 'class="compass"'], ['vinilo', 'class="record"'], ['lienzo', 'data-identity="select"'], ['forja', 'class="crosshair"']]) {
   const page = await readFile(path.join(dirOf(id), 'index.html'), 'utf8');
   assert.ok(page.includes(marker), `Falta la firma visual de ${id}`);
   assert.match(page, /src="\/identity\.js\?v=[0-9a-f]+"/);
@@ -178,6 +178,11 @@ for (const shot of ['lienzo-demo.jpg', 'lienzo-adjustments.jpg', 'lienzo-light.j
 const forjaHtml = await readFile(path.join(root, 'dist/portal/forja/index.html'), 'utf8');
 assert.match(forjaHtml, /raw\.githubusercontent\.com\/getnodalia\/forja\/main\/docs\/images\/ui-apartment\.png/);
 assert.match(forjaHtml, /<body class="accent-copper">/);
+const brujulaHtml = await readFile(path.join(root, 'dist/portal/brujula/index.html'), 'utf8');
+assert.match(brujulaHtml, /<body class="accent-green">/);
+for (const shot of ['newtab', 'appearance', 'extensions']) assert.ok(brujulaHtml.includes(`getnodalia/brujula/main/docs/screenshots/${shot}.webp`), `Brújula sin ${shot}`);
+assert.match(brujulaHtml, /<pre class="code"[^>]*><code>[^<]*makepkg -si/, 'Brújula sin instrucciones de instalación');
+assert.ok(!/id="descargas"/.test(brujulaHtml), 'Brújula no publica binarios');
 // The old subdomains only redirect, path for path, to the product's page under getnodalia.com.
 for (const id of ['vortia', 'vinilo', 'lienzo', 'nodalix']) {
   assert.equal(await readFile(path.join(root, 'dist/legacy', id, '_redirects'), 'utf8'), `/* https://getnodalia.com/${id}/:splat 301\n`);
@@ -196,7 +201,7 @@ await import('./test-vortia-download.mjs');
 await import('./test-app-download.mjs');
 await import('./test-scroll-story.mjs');
 await import('./test-nodalix-releases.mjs');
-console.log('✓ Portal y cinco productos en getnodalia.com/<app>/, redirecciones de los subdominios, CSS con hash anti-caché, cabeceras, módulos ES y descargas ISO/Vortia validados.');
+console.log('✓ Portal y seis productos en getnodalia.com/<app>/, redirecciones de los subdominios, CSS con hash anti-caché, cabeceras, módulos ES y descargas ISO/Vortia validados.');
 
 // Visor de capturas: presente donde hay capturas, ausente donde no, y con sus textos traducidos.
 {
@@ -208,7 +213,7 @@ console.log('✓ Portal y cinco productos en getnodalia.com/<app>/, redireccione
   assert.equal(opensViewer({ button: 0 }), true);
   for (const modified of [{ button: 1 }, { button: 0, ctrlKey: true }, { button: 0, metaKey: true }, { button: 0, shiftKey: true }, { button: 0, altKey: true }]) assert.equal(opensViewer(modified), false);
   assert.ok((await stat(path.join(site, 'gallery.js'))).size > 1000);
-  for (const id of ['vortia', 'vinilo', 'lienzo', 'forja', 'nodalix']) {
+  for (const id of ['brujula', 'vortia', 'vinilo', 'lienzo', 'forja', 'nodalix']) {
     const html = await readFile(path.join(dirOf(id), 'index.html'), 'utf8');
     assert.match(html, /<script type="module" src="\/gallery\.js\?v=[0-9a-f]+"><\/script>/, `${id}: falta el visor de capturas`);
     // Sin JavaScript el enlace sigue llevando a la imagen.

@@ -1,5 +1,11 @@
 {
- "brujula": null,
+ "brujula": {
+  "tag_name": "v0.1.0",
+  "published_at": "2026-11-13T05:44:57Z",
+  "html_url": "https://github.com/getnodalia/brujula/releases/tag/v0.1.0",
+  "assets": []
+ },
+ "buzon": null,
  "celdas": null,
  "forja": {
   "tag_name": "v0.1.0",

@@ -7,6 +7,7 @@ Cada producto vive en una ruta del portal, así que una app nueva solo necesita 
 | Producto | Dirección | Carpeta generada |
 | --- | --- | --- |
 | Nodalia | https://getnodalia.com | `dist/portal` |
+| Brújula | https://getnodalia.com/brujula/ | `dist/portal/brujula` |
 | Vortia | https://getnodalia.com/vortia/ | `dist/portal/vortia` |
 | Vinilo | https://getnodalia.com/vinilo/ | `dist/portal/vinilo` |
 | Lienzo | https://getnodalia.com/lienzo/ | `dist/portal/lienzo` |
@@ -27,7 +28,7 @@ Dirección visual editorial: colores neutros, tipografía Sora + Inter autoaloja
 - `assets/motion.js`: animaciones de scroll (aparición, parallax, barra de progreso, sección activa), el escaparate de capturas de la portada (pestañas que avanzan solas e inclinación que se endereza al hacer scroll), las tarjetas de productos que se apilan, los principios que se iluminan al pasar por el centro y las cifras que cuentan. Se desactivan con `prefers-reduced-motion` y el contenido es visible sin JavaScript.
 - Donaciones: `brand.coffee` en `scripts/data.mjs` es la página de Buy Me a Coffee; muestra la sección «Apoya Nodalia» de la portada y el enlace del pie. Vacío, no aparece ninguno de los dos.
 - `scripts/scroll-story.mjs` y `assets/scroll-story.js`: una demostración de tres pasos por sitio. El panel fijo usa el scroll nativo como línea de tiempo y ofrece un salto al contenido siguiente. Sin JavaScript, con movimiento reducido o en ventanas bajas, los tres pasos aparecen juntos.
-- `assets/identity.js`: firma visual de cada producto en la cabecera. Vortia: flujo potencial alrededor de un cilindro con trazadores y sonda (las líneas de corriente se generan en `build.mjs`). Lienzo: dimensiones reales de la captura en la selección. Nodalix OS (arranque) y Vinilo (disco a 33⅓ rpm) son solo HTML y CSS.
+- `assets/identity.js`: firma visual de cada producto en la cabecera. Vortia: flujo potencial alrededor de un cilindro con trazadores y sonda (las líneas de corriente se generan en `build.mjs`). Lienzo: dimensiones reales de la captura en la selección. Brújula (rosa de los vientos con la aguja que se asienta al norte), Nodalix OS (arranque) y Vinilo (disco a 33⅓ rpm) son solo HTML y CSS.
 - Idiomas: español (origen), inglés, francés, alemán y portugués. La plantilla y los datos se escriben en español; `scripts/i18n.mjs` traduce el HTML generado con `i18n/<idioma>.json` (clave = texto en español) y publica cada idioma en `/<idioma>/`. Los textos que no cambian (nombres, tecnologías) van en `i18n/keep.json`. Si falta una traducción, `npm test` falla y `dist/i18n-missing.json` dice cuál. Los scripts del navegador usan `t()` de `assets/i18n.js`. La portada en español redirige al idioma del navegador solo si no se ha elegido otro en el selector; la elección se guarda en `localStorage`.
 - `assets/_headers`: cabeceras de seguridad y caché para Cloudflare Pages.
 - `assets/nodalia-wordmark.svg` / `assets/nodalia-mark.svg`: identidad compartida.
