@@ -629,5 +629,9 @@
  "¿Se puede automatizar?": "Pode ser automatizado?",
  "Sí. Todo es un comando: forja-cli convierte y exporta dibujos sin abrir la ventana y ofrece un servidor MCP para agentes de IA.": "Sim. Tudo é um comando: o forja-cli converte e exporta desenhos sem abrir a janela e oferece um servidor MCP para agentes de IA.",
  "¿En qué sistemas funciona?": "Em que sistemas funciona?",
- "Hay paquetes para Linux (x86_64, ARM64 y RISC-V), un DMG universal para macOS, Windows (x64 y ARM64) y FreeBSD. En macOS la aplicación no está notarizada: la primera vez, haz clic derecho sobre ella y elige Abrir.": "Há pacotes para Linux (x86_64, ARM64 e RISC-V), um DMG universal para macOS, Windows (x64 e ARM64) e FreeBSD. No macOS a aplicação não está notarizada: na primeira vez, clique nela com o botão direito e escolha Abrir."
+ "Hay paquetes para Linux (x86_64, ARM64 y RISC-V), un DMG universal para macOS, Windows (x64 y ARM64) y FreeBSD. En macOS la aplicación no está notarizada: la primera vez, haz clic derecho sobre ella y elige Abrir.": "Há pacotes para Linux (x86_64, ARM64 e RISC-V), um DMG universal para macOS, Windows (x64 e ARM64) e FreeBSD. No macOS a aplicação não está notarizada: na primeira vez, clique nela com o botão direito e escolha Abrir.",
+ "Capturas de las aplicaciones de Nodalia": "Capturas das aplicações Nodalia",
+ "Apoya Nodalia.": "Apoia a Nodalia.",
+ "Todo lo que ves aquí es gratuito y de código abierto. Si alguna de estas aplicaciones te resulta útil, puedes invitarme a un café: ayuda a dedicarle más horas.": "Tudo o que vês aqui é gratuito e de código aberto. Se alguma destas aplicações te for útil, podes pagar-me um café: ajuda-me a dedicar-lhes mais horas.",
+ "Invitar a un café": "Pagar-me um café"
 }

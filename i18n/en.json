@@ -629,5 +629,9 @@
  "¿Se puede automatizar?": "Can it be automated?",
  "Sí. Todo es un comando: forja-cli convierte y exporta dibujos sin abrir la ventana y ofrece un servidor MCP para agentes de IA.": "Yes. Everything is a command: forja-cli converts and exports drawings without opening the window and offers an MCP server for AI agents.",
  "¿En qué sistemas funciona?": "Which systems does it run on?",
- "Hay paquetes para Linux (x86_64, ARM64 y RISC-V), un DMG universal para macOS, Windows (x64 y ARM64) y FreeBSD. En macOS la aplicación no está notarizada: la primera vez, haz clic derecho sobre ella y elige Abrir.": "There are packages for Linux (x86_64, ARM64 and RISC-V), a universal DMG for macOS, Windows (x64 and ARM64) and FreeBSD. On macOS the app is not notarised: the first time, right-click it and choose Open."
+ "Hay paquetes para Linux (x86_64, ARM64 y RISC-V), un DMG universal para macOS, Windows (x64 y ARM64) y FreeBSD. En macOS la aplicación no está notarizada: la primera vez, haz clic derecho sobre ella y elige Abrir.": "There are packages for Linux (x86_64, ARM64 and RISC-V), a universal DMG for macOS, Windows (x64 and ARM64) and FreeBSD. On macOS the app is not notarised: the first time, right-click it and choose Open.",
+ "Capturas de las aplicaciones de Nodalia": "Screenshots of Nodalia's apps",
+ "Apoya Nodalia.": "Support Nodalia.",
+ "Todo lo que ves aquí es gratuito y de código abierto. Si alguna de estas aplicaciones te resulta útil, puedes invitarme a un café: ayuda a dedicarle más horas.": "Everything you see here is free and open source. If any of these apps is useful to you, you can buy me a coffee: it helps me put more hours into them.",
+ "Invitar a un café": "Buy me a coffee"
 }
