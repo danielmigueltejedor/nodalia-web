@@ -1212,12 +1212,17 @@ h1,h2,h3{font-weight:700}
 
 .hero-stage.showcase{height:auto;max-width:none}
 .showcase{--tilt:0;margin:72px 0 0;padding:10px;border:1px solid var(--island-line);border-radius:32px;background:var(--island);transform:perspective(1800px) rotateX(calc(var(--tilt)*16deg)) scale(calc(1 - var(--tilt)*.07));transform-origin:50% 0;will-change:transform}
-.showcase-tabs{display:flex;justify-content:center;gap:4px;padding:4px 4px 12px;overflow-x:auto;scrollbar-width:none}
+.showcase-tabs{position:relative;display:flex;justify-content:safe center;gap:4px;padding:4px 4px 12px;overflow-x:auto;scrollbar-width:none;scroll-behavior:smooth}
 .showcase-tabs::-webkit-scrollbar{display:none}
-.showcase-tab{position:relative;display:inline-flex;align-items:center;gap:10px;flex:none;padding:10px 16px 12px;border:0;border-radius:14px;background:none;color:var(--muted);font:inherit;font-size:14px;font-weight:650;cursor:pointer;transition:background .25s,color .25s}
+.showcase-tab{position:relative;display:inline-flex;align-items:center;gap:0;flex:none;padding:10px 14px 12px;border:0;border-radius:14px;background:none;color:var(--muted);font:inherit;font-size:14px;font-weight:650;cursor:pointer;transition:background .25s,color .25s}
 .showcase-tab:hover{color:var(--ink);background:rgba(255,255,255,.04)}
 .showcase-tab[aria-selected="true"]{color:var(--ink);background:var(--surface-2)}
 .showcase-tab img{width:24px;height:24px;object-fit:contain}
+/* Ten products no longer fit as labelled tabs: the others show their icon and the one on screen
+   unfolds its name, so the strip stays one calm row at every width. The name stays in the DOM, so
+   every tab keeps its accessible name. */
+.showcase-tab span{max-width:0;margin-left:0;overflow:hidden;white-space:nowrap;opacity:0;transition:max-width .45s var(--ease),margin-left .45s var(--ease),opacity .3s}
+.showcase-tab[aria-selected="true"] span,.showcase-tab:focus-visible span{max-width:12ch;margin-left:10px;opacity:1}
 .showcase-progress{position:absolute;left:16px;right:16px;bottom:5px;height:2px;border-radius:2px;background:rgb(var(--tab-rgb));transform:scaleX(var(--p,0));transform-origin:left;opacity:0;transition:opacity .25s}
 .showcase-tab[aria-selected="true"] .showcase-progress{opacity:1}
 .showcase-tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;border-radius:14px}
@@ -1283,7 +1288,6 @@ h1,h2,h3{font-weight:700}
 @media(max-width:860px){
   .home-hero{padding-top:64px}
   .showcase{margin-top:48px;padding:8px;border-radius:24px}
-  .showcase-tabs{justify-content:flex-start}
   .showcase-frame{aspect-ratio:4/3;border-radius:18px}
   .showcase .shot figcaption{left:10px;right:10px;bottom:10px;padding:10px 10px 10px 14px;font-size:13px}
   .showcase .shot figcaption{display:flex}
@@ -1298,9 +1302,7 @@ h1,h2,h3{font-weight:700}
 }
 @media(max-width:600px){
   .hero-center .hero-title{font-size:clamp(40px,12vw,60px)}
-  .showcase-tab{padding:9px 12px 11px}
-  .showcase-tab span{display:none}
-  .showcase-tab[aria-selected="true"] span{display:inline}
+  .showcase-tab{padding:9px 11px 11px}
   .showcase .shot figcaption{font-size:0;gap:0}
   .showcase .shot figcaption>span{font-size:14px}
   .showcase-link{font-size:13px}

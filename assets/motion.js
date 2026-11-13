@@ -86,6 +86,9 @@ function setupShowcase(autoplay) {
       current = (index + slides.length) % slides.length;
       started = performance.now();
       tabs.forEach((tab, i) => { tab.setAttribute('aria-selected', String(i === current)); tab.style.setProperty('--p', '0'); });
+      // On a narrow screen the strip scrolls: keep the tab on screen in view, without moving the page.
+      const strip = tabs[current].parentElement, tab = tabs[current];
+      if (strip && strip.scrollWidth > strip.clientWidth) strip.scrollTo({ left: tab.offsetLeft - (strip.clientWidth - tab.offsetWidth) / 2 });
       slides.forEach((slide, i) => {
         slide.classList.toggle('is-active', i === current);
         slide.toggleAttribute('aria-hidden', i !== current);
