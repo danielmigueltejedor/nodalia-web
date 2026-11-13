@@ -117,5 +117,11 @@
  "RTF",
  "Markdown",
  "TXT",
- "HTML"
+ "HTML",
+ "Celdas",
+ "XLSX",
+ "CSV",
+ "fx",
+ "Lámina",
+ "PPTX"
 ]

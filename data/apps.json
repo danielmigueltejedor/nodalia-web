@@ -738,6 +738,223 @@
     "otherPackages": "Otros paquetes: .deb, .rpm, .tar.gz y zip portátil de Windows"
   },
   {
+    "id": "celdas",
+    "name": "Celdas",
+    "category": "Productividad",
+    "status": "Primeras versiones · 0.1.0 para Linux, macOS y Windows",
+    "statusKind": "early",
+    "eyebrow": "Hoja de cálculo",
+    "headline": "Tus números, en orden.",
+    "tagline": "Una hoja de cálculo nativa, sin cuenta ni nube.",
+    "description": "Una hoja de cálculo nativa, escrita en Rust y con el diseño de Nodalia, para presupuestos, informes y análisis. Abre y guarda libros .xlsx. Sin cuenta, sin nube.",
+    "platforms": "Linux x86_64 · macOS (Universal) · Windows x64",
+    "technology": "Rust · Nodalia Design",
+    "license": "MIT OR Apache-2.0",
+    "repo": "celdas",
+    "icon": "assets/app-icon/hicolor/512x512/apps/dev.danielmiguelt.Celdas.png",
+    "previews": [
+      [
+        "/screens/celdas/celdas-insert-dark.jpg",
+        "Un panel de ventas trimestrales en Celdas, en el tema oscuro, con la pestaña Insertar de la cinta"
+      ],
+      [
+        "/screens/celdas/celdas-home-light.jpg",
+        "El mismo libro en el tema claro, elegido en Preferencias"
+      ],
+      [
+        "/screens/celdas/celdas-formulas-light.jpg",
+        "La pestaña Fórmulas sobre un libro de notas con promedios y calificaciones"
+      ]
+    ],
+    "features": [
+      [
+        "Fórmulas",
+        "Cientos de funciones, matrices dinámicas, LET y LAMBDA, referencias estructuradas a tablas y auditoría de fórmulas."
+      ],
+      [
+        "Tablas y datos",
+        "Tablas con estilo, ordenar y filtrar, validación de datos, relleno rápido y tablas dinámicas."
+      ],
+      [
+        "Formato y gráficos",
+        "Estilos de celda, formato condicional, minigráficos y diecisiete tipos de gráfico con su panel de formato."
+      ],
+      [
+        "Impresión",
+        "Vista de saltos de página, configuración de página, exportación a PDF e impresión."
+      ],
+      [
+        "Diseño de Nodalia",
+        "Islas redondeadas, el color de Celdas, controles de ventana propios en Linux y nativos en macOS y Windows, y tema claro u oscuro que se elige en Preferencias."
+      ],
+      [
+        "Todo es un comando",
+        "Cada acción se puede automatizar con celdas-cli o con agentes de IA a través de MCP."
+      ]
+    ],
+    "formats": [
+      "XLSX",
+      "CSV",
+      "PDF",
+      "HTML"
+    ],
+    "specs": [
+      [
+        "Licencia",
+        "MIT OR Apache-2.0"
+      ],
+      [
+        "Paquetes",
+        "AppImage · .deb · .rpm · .tar.gz (Linux x86_64) · DMG (macOS) · MSI y zip portátil (Windows)"
+      ],
+      [
+        "Tecnología",
+        "Rust · Nodalia Design"
+      ]
+    ],
+    "credit": "El icono de Celdas es un retrato de Blaise Pascal, que construyó la primera calculadora mecánica.",
+    "faq": [
+      [
+        "¿Dónde lo descargo?",
+        "En esta página: el botón principal ofrece el paquete para tu sistema desde la última versión publicada en GitHub, para Linux x86_64, macOS (Apple Silicon e Intel) y Windows x64."
+      ],
+      [
+        "¿Abre mis libros de Excel?",
+        "Sí. Celdas trabaja con libros .xlsx: fórmulas, formatos, tablas, gráficos y tablas dinámicas. También importa y exporta CSV, y exporta a PDF."
+      ],
+      [
+        "¿Se puede automatizar?",
+        "Sí. Todo es un comando: celdas-cli calcula y edita libros sin abrir la ventana y ofrece un servidor MCP para agentes de IA."
+      ],
+      [
+        "¿Mis archivos salen de mi equipo?",
+        "No. Todo se calcula en local y la aplicación no necesita cuenta ni servidor. En macOS la aplicación no está notarizada: la primera vez, haz clic derecho sobre ella y elige Abrir."
+      ]
+    ],
+    "limitation": "Celdas está en una fase temprana. La lista de lo que funciona y lo que aún falta está en el repositorio; guarda una copia de los libros importantes.",
+    "cta": "Descargar Celdas",
+    "accent": "emerald",
+    "downloads": {
+      "linux": "^celdas-[0-9].*-linux-x86_64\\.AppImage$",
+      "mac": "^celdas-[0-9].*-macos-(arm64|universal)\\.dmg$",
+      "windows": "^celdas-[0-9].*-windows-x64\\.msi$"
+    },
+    "downloadDescriptions": {
+      "linux": "Archivo ejecutable para distribuciones Linux de 64 bits con arquitectura x86_64.",
+      "mac": "El DMG universal funciona en Macs con Apple Silicon e Intel.",
+      "windows": "Instalador MSI para Windows de 64 bits con arquitectura x64."
+    },
+    "otherPackages": "Otros paquetes: .deb, .rpm, .tar.gz y zip portátil de Windows"
+  },
+  {
+    "id": "lamina",
+    "name": "Lámina",
+    "category": "Productividad",
+    "status": "Primeras versiones · fase temprana",
+    "statusKind": "early",
+    "eyebrow": "Presentaciones",
+    "headline": "Cuenta tu historia, diapositiva a diapositiva.",
+    "tagline": "Presentaciones nativas, sin cuenta ni nube.",
+    "description": "Una aplicación de presentaciones nativa, escrita en Rust y con el diseño de Nodalia, para clases, charlas y reuniones. Abre y guarda presentaciones .pptx. Sin cuenta, sin nube.",
+    "platforms": "Linux x86_64 · macOS (Universal) · Windows x64",
+    "technology": "Rust · Nodalia Design",
+    "license": "MIT OR Apache-2.0",
+    "repo": "lamina",
+    "icon": "assets/app-icon/hicolor/512x512/apps/dev.danielmiguelt.Lamina.png",
+    "previews": [
+      [
+        "/screens/lamina/lamina-home-dark.jpg",
+        "Una presentación abierta en Lámina, en el tema oscuro, con la pestaña Inicio de la cinta"
+      ],
+      [
+        "/screens/lamina/lamina-home-light.jpg",
+        "La misma presentación en el tema claro"
+      ],
+      [
+        "/screens/lamina/lamina-preferences-light.jpg",
+        "Preferencias de Lámina: tema, controles de ventana y edición"
+      ]
+    ],
+    "features": [
+      [
+        "Diapositivas y diseños",
+        "Patrones, diseños, temas, secciones y una cinta con todo a mano para construir la presentación."
+      ],
+      [
+        "Formas, imágenes y gráficos",
+        "Inserta formas, cuadros de texto, imágenes, tablas y gráficos, y alinéalos con guías inteligentes."
+      ],
+      [
+        "Transiciones y animaciones",
+        "Transiciones entre diapositivas y animaciones de entrada, énfasis y salida."
+      ],
+      [
+        "Modo presentador",
+        "Presenta a pantalla completa con notas del orador, la diapositiva siguiente y el tiempo transcurrido."
+      ],
+      [
+        "Diseño de Nodalia",
+        "Islas redondeadas, el color de Lámina, controles de ventana propios en Linux y nativos en macOS y Windows, y tema claro u oscuro que se elige en Preferencias."
+      ],
+      [
+        "Todo es un comando",
+        "Cada acción se puede automatizar con lamina-cli o con agentes de IA a través de MCP."
+      ]
+    ],
+    "formats": [
+      "PPTX",
+      "PDF",
+      "PNG",
+      "GIF"
+    ],
+    "specs": [
+      [
+        "Licencia",
+        "MIT OR Apache-2.0"
+      ],
+      [
+        "Paquetes",
+        "AppImage · .deb · .rpm · .tar.gz (Linux x86_64) · DMG (macOS) · MSI y zip portátil (Windows)"
+      ],
+      [
+        "Tecnología",
+        "Rust · Nodalia Design"
+      ]
+    ],
+    "faq": [
+      [
+        "¿Dónde lo descargo?",
+        "En esta página: el botón principal ofrece el paquete para tu sistema desde la última versión publicada en GitHub, para Linux x86_64, macOS (Apple Silicon e Intel) y Windows x64."
+      ],
+      [
+        "¿Qué archivos abre?",
+        "Trabaja con presentaciones .pptx y con su propio formato .lamina. Exporta a PDF y a imágenes PNG o GIF."
+      ],
+      [
+        "¿Se puede automatizar?",
+        "Sí. Todo es un comando: lamina-cli crea, edita y exporta presentaciones sin abrir la ventana y ofrece un servidor MCP para agentes de IA."
+      ],
+      [
+        "¿Mis archivos salen de mi equipo?",
+        "No. Todo se edita en local y la aplicación no necesita cuenta ni servidor. En macOS la aplicación no está notarizada: la primera vez, haz clic derecho sobre ella y elige Abrir."
+      ]
+    ],
+    "limitation": "Lámina está en una fase temprana. La lista de lo que funciona y lo que aún falta está en el repositorio; guarda una copia de las presentaciones importantes.",
+    "cta": "Descargar Lámina",
+    "accent": "magenta",
+    "downloads": {
+      "linux": "^lamina-[0-9].*-linux-x86_64\\.AppImage$",
+      "mac": "^lamina-[0-9].*-macos-universal\\.dmg$",
+      "windows": "^lamina-[0-9].*-windows-x64\\.msi$"
+    },
+    "downloadDescriptions": {
+      "linux": "Archivo ejecutable para distribuciones Linux de 64 bits con arquitectura x86_64.",
+      "mac": "El DMG universal funciona en Macs con Apple Silicon e Intel.",
+      "windows": "Instalador MSI para Windows de 64 bits con arquitectura x64."
+    },
+    "otherPackages": "Otros paquetes: .deb, .rpm, .tar.gz y zip portátil de Windows"
+  },
+  {
     "id": "nodalix",
     "name": "Nodalix OS",
     "category": "Sistema operativo",

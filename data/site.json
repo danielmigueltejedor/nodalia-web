@@ -108,6 +108,14 @@
       "letra"
     ],
     [
+      "Celdas",
+      "celdas"
+    ],
+    [
+      "Lámina",
+      "lamina"
+    ],
+    [
       "Nodalia Cards",
       "nodalia-cards"
     ]
@@ -168,18 +176,6 @@
         "papel",
         "Editor de documentos PDF",
         "papel"
-      ],
-      [
-        "Celdas",
-        "celdas",
-        "Hojas de cálculo",
-        "celdas"
-      ],
-      [
-        "Lámina",
-        "lamina",
-        "Presentaciones",
-        "lamina"
       ],
       [
         "Torno",
