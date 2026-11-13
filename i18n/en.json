@@ -774,5 +774,18 @@
  "¿Puedo convertir una web en una aplicación?": "Can I turn a website into an app?",
  "Sí. Desde el menú, «Instalar como aplicación web…», o desde las preferencias. Se abre en su propia ventana, con icono en el lanzador y perfil aparte.": "Yes. From the menu, “Install as web app…”, or from the preferences. It opens in its own window, with an icon in the launcher and a separate profile.",
  "Preferencias de contraseñas: bóveda desbloqueada con los inicios de sesión guardados (abrir imagen completa)": "Password preferences: unlocked vault with the saved logins (open full image)",
- "Aplicaciones web: crear un sitio como aplicación desde las preferencias (abrir imagen completa)": "Web apps: making a site into an app from the preferences (open full image)"
+ "Aplicaciones web: crear un sitio como aplicación desde las preferencias (abrir imagen completa)": "Web apps: making a site into an app from the preferences (open full image)",
+ "Versión 0.3 · solo Linux": "Version 0.3 · Linux only",
+ "Bienvenida y perfiles": "Welcome and profiles",
+ "La primera vez trae tus marcadores de otro navegador y te deja crear tu usuario. Cada perfil tiene sus propios marcadores, historial, contraseñas y extensiones; la contraseña de un perfil solo protege el selector, no cifra los datos.": "The first time, it brings your bookmarks from another browser and lets you create your user. Each profile has its own bookmarks, history, passwords and extensions; a profile's password only guards the picker and does not encrypt the data.",
+ "Esenciales": "Essentials",
+ "Tus sitios de siempre a un clic en la barra lateral, cada uno con el icono real de su app.": "Your usual sites one click away in the sidebar, each with its app's real icon.",
+ "Botón de página": "Page button",
+ "Al abrir la ficha de una extensión en la Chrome Web Store, o un sitio que se puede instalar, aparece un botón arriba para añadir la extensión o instalarlo como aplicación web.": "When you open an extension's page in the Chrome Web Store, or a site that can be installed, a button appears at the top to add the extension or install it as a web app.",
+ "Asistente de bienvenida: trae tus marcadores, elige esenciales y crea tu usuario": "Welcome wizard: bring your bookmarks, pick essentials and create your user",
+ "Asistente de bienvenida: trae tus marcadores, elige esenciales y crea tu usuario (abrir imagen completa)": "Welcome wizard: bring your bookmarks, pick essentials and create your user (open full image)",
+ "Preferencias de perfiles: añadir, abrir y proteger cada perfil con contraseña": "Profile preferences: add, open and protect each profile with a password",
+ "Preferencias de perfiles: añadir, abrir y proteger cada perfil con contraseña (abrir imagen completa)": "Profile preferences: add, open and protect each profile with a password (open full image)",
+ "¿Puedo traer mis marcadores de otro navegador?": "Can I bring my bookmarks from another browser?",
+ "Sí. En el primer arranque, o desde un archivo, desde Chrome, Chromium, Brave, Edge, Vivaldi, Opera, Firefox, Zen, LibreWolf y Floorp. Solo se importan marcadores; las contraseñas no.": "Yes. On first run, or from a file, from Chrome, Chromium, Brave, Edge, Vivaldi, Opera, Firefox, Zen, LibreWolf and Floorp. Only bookmarks are imported, not passwords."
 }
