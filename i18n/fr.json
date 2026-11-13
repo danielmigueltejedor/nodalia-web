@@ -210,7 +210,6 @@
  "Posproceso": "Post-traitement",
  "Explora los resultados en 3D.": "Explorez les résultats en 3D.",
  "Descarga Vortia.": "Téléchargez Vortia.",
- "El botón superior selecciona automáticamente Linux o macOS. También puedes elegir un paquete manualmente y comprobar su integridad con SHA-256.": "Le bouton du haut sélectionne automatiquement Linux ou macOS. Vous pouvez aussi choisir un paquet manuellement et vérifier son intégrité avec SHA-256.",
  "Última publicación estable": "Dernière version stable",
  "Consultando GitHub Releases…": "Consultation de GitHub Releases…",
  "Archivo ejecutable para distribuciones Linux de 64 bits con arquitectura x86_64.": "Fichier exécutable pour les distributions Linux 64 bits d'architecture x86_64.",
@@ -431,7 +430,6 @@
  "Verificación a la vista": "Vérification transparente",
  "Tres casos se ejecutan con OpenFOAM real y se comparan con su referencia: Poiseuille, cavidad de Ghia y placa plana turbulenta.": "Trois cas sont exécutés avec le vrai OpenFOAM et comparés à leur référence : Poiseuille, la cavité de Ghia et une plaque plane turbulente.",
  "Instaladores que abren a la primera": "Des installateurs qui s'ouvrent du premier coup",
- "AppImage probada en nueve distribuciones Linux y DMG para macOS, cada uno con su suma SHA-256.": "AppImage testée sur neuf distributions Linux et DMG pour macOS, chacun avec sa somme SHA-256.",
  "Vortia es experimental. Sus capacidades evolucionan en cada versión y los resultados requieren validación antes de cualquier uso de ingeniería crítico. Los casos verificados son comprobación numérica, no validación de un diseño.": "Vortia est expérimental. Ses capacités évoluent à chaque version et les résultats doivent être validés avant tout usage d'ingénierie critique. Les cas vérifiés sont des contrôles numériques, pas la validation d'une conception.",
  "OpenFOAM integrado: v2606 en macOS, v2412 en Linux": "OpenFOAM intégré : v2606 sur macOS, v2412 sur Linux",
  "Requisitos": "Prérequis",
@@ -629,5 +627,11 @@
  "¿Se puede automatizar?": "Peut-on l'automatiser ?",
  "Sí. Todo es un comando: forja-cli convierte y exporta dibujos sin abrir la ventana y ofrece un servidor MCP para agentes de IA.": "Oui. Tout est une commande : forja-cli convertit et exporte des dessins sans ouvrir la fenêtre et propose un serveur MCP pour les agents d'IA.",
  "¿En qué sistemas funciona?": "Sur quels systèmes fonctionne-t-il ?",
- "Hay paquetes para Linux (x86_64, ARM64 y RISC-V), un DMG universal para macOS, Windows (x64 y ARM64) y FreeBSD. En macOS la aplicación no está notarizada: la primera vez, haz clic derecho sobre ella y elige Abrir.": "Il existe des paquets pour Linux (x86_64, ARM64 et RISC-V), un DMG universel pour macOS, Windows (x64 et ARM64) et FreeBSD. Sur macOS, l'application n'est pas notarisée : la première fois, faites un clic droit dessus et choisissez Ouvrir."
+ "Hay paquetes para Linux (x86_64, ARM64 y RISC-V), un DMG universal para macOS, Windows (x64 y ARM64) y FreeBSD. En macOS la aplicación no está notarizada: la primera vez, haz clic derecho sobre ella y elige Abrir.": "Il existe des paquets pour Linux (x86_64, ARM64 et RISC-V), un DMG universel pour macOS, Windows (x64 et ARM64) et FreeBSD. Sur macOS, l'application n'est pas notarisée : la première fois, faites un clic droit dessus et choisissez Ouvrir.",
+ "AppImage probada en nueve distribuciones Linux y dos DMG para macOS, la aplicación Qt y Vortia Native, cada uno con su suma SHA-256.": "AppImage testée sur neuf distributions Linux et deux DMG pour macOS, l'application Qt et Vortia Native, chacun avec sa somme SHA-256.",
+ "AppImage (Linux x86_64) · DMG Qt y DMG Vortia Native (macOS arm64)": "AppImage (Linux x86_64) · DMG Qt et DMG Vortia Native (macOS arm64)",
+ "El botón superior selecciona automáticamente Linux o macOS. También puedes elegir un paquete manualmente, incluida la edición Vortia Native para macOS, y comprobar su integridad con SHA-256.": "Le bouton du haut sélectionne automatiquement Linux ou macOS. Vous pouvez aussi choisir un paquet manuellement, y compris l'édition Vortia Native pour macOS, et vérifier son intégrité avec SHA-256.",
+ "Edición con interfaz nativa de macOS en SwiftUI: resultado en 3D, flujo compresible con contorno e informe de ingeniería. Incluye Liquid Glass en macOS 26 o posterior.": "Édition à interface native macOS en SwiftUI : résultat en 3D, écoulement compressible avec contour et rapport d'ingénierie. Inclut Liquid Glass sous macOS 26 ou version ultérieure.",
+ "¿Qué es Vortia Native?": "Qu'est-ce que Vortia Native ?",
+ "Una segunda edición para macOS, escrita en SwiftUI, que usa el motor de casos de Vortia sin interfaz. Añade el resultado en 3D, el flujo compresible con contorno y toberas, y el informe de ingeniería. Se instala con su propio DMG, junto al de la aplicación Qt.": "Une seconde édition pour macOS, écrite en SwiftUI, qui utilise le moteur de cas sans interface de Vortia. Elle ajoute le résultat en 3D, l'écoulement compressible avec contour et tuyères, et le rapport d'ingénierie. Elle s'installe avec son propre DMG, à côté de celui de l'application Qt."
 }

@@ -466,29 +466,68 @@
   ]
  },
  "vortia": {
-  "tag_name": "v0.6.0",
-  "published_at": "2026-11-11T21:33:56Z",
-  "html_url": "https://github.com/getnodalia/vortia/releases/tag/v0.6.0",
+  "tag_name": "v0.7.0",
+  "published_at": "2026-11-13T04:16:02Z",
+  "html_url": "https://github.com/getnodalia/vortia/releases/tag/v0.7.0",
   "assets": [
    {
-    "name": "Vortia-0.6.0-linux-x86_64.AppImage",
-    "size": 293227000,
-    "browser_download_url": "https://github.com/getnodalia/vortia/releases/download/v0.6.0/Vortia-0.6.0-linux-x86_64.AppImage"
+    "name": "Vortia-0.7.0-linux-x86_64.AppImage",
+    "size": 293247480,
+    "browser_download_url": "https://github.com/getnodalia/vortia/releases/download/v0.7.0/Vortia-0.7.0-linux-x86_64.AppImage"
    },
    {
-    "name": "Vortia-0.6.0-linux-x86_64.AppImage.sha256",
+    "name": "Vortia-0.7.0-linux-x86_64.AppImage.sha256",
     "size": 101,
-    "browser_download_url": "https://github.com/getnodalia/vortia/releases/download/v0.6.0/Vortia-0.6.0-linux-x86_64.AppImage.sha256"
+    "browser_download_url": "https://github.com/getnodalia/vortia/releases/download/v0.7.0/Vortia-0.7.0-linux-x86_64.AppImage.sha256"
    },
    {
-    "name": "Vortia-0.6.0-macos-arm64.dmg",
-    "size": 415036235,
-    "browser_download_url": "https://github.com/getnodalia/vortia/releases/download/v0.6.0/Vortia-0.6.0-macos-arm64.dmg"
+    "name": "Vortia-0.7.0-macos-arm64.dmg",
+    "size": 408183098,
+    "browser_download_url": "https://github.com/getnodalia/vortia/releases/download/v0.7.0/Vortia-0.7.0-macos-arm64.dmg"
    },
    {
-    "name": "Vortia-0.6.0-macos-arm64.dmg.sha256",
+    "name": "Vortia-0.7.0-macos-arm64.dmg.sha256",
     "size": 95,
-    "browser_download_url": "https://github.com/getnodalia/vortia/releases/download/v0.6.0/Vortia-0.6.0-macos-arm64.dmg.sha256"
+    "browser_download_url": "https://github.com/getnodalia/vortia/releases/download/v0.7.0/Vortia-0.7.0-macos-arm64.dmg.sha256"
+   },
+   {
+    "name": "Vortia-0.7.0-native-macos-arm64.dmg",
+    "size": 407107408,
+    "browser_download_url": "https://github.com/getnodalia/vortia/releases/download/v0.7.0/Vortia-0.7.0-native-macos-arm64.dmg"
+   },
+   {
+    "name": "Vortia-0.7.0-native-macos-arm64.dmg.sha256",
+    "size": 102,
+    "browser_download_url": "https://github.com/getnodalia/vortia/releases/download/v0.7.0/Vortia-0.7.0-native-macos-arm64.dmg.sha256"
+   }
+  ],
+  "previous": [
+   {
+    "tag_name": "v0.6.0",
+    "published_at": "2026-11-11T21:33:56Z",
+    "html_url": "https://github.com/getnodalia/vortia/releases/tag/v0.6.0",
+    "assets": [
+     {
+      "name": "Vortia-0.6.0-linux-x86_64.AppImage",
+      "size": 293227000,
+      "browser_download_url": "https://github.com/getnodalia/vortia/releases/download/v0.6.0/Vortia-0.6.0-linux-x86_64.AppImage"
+     },
+     {
+      "name": "Vortia-0.6.0-linux-x86_64.AppImage.sha256",
+      "size": 101,
+      "browser_download_url": "https://github.com/getnodalia/vortia/releases/download/v0.6.0/Vortia-0.6.0-linux-x86_64.AppImage.sha256"
+     },
+     {
+      "name": "Vortia-0.6.0-macos-arm64.dmg",
+      "size": 415036235,
+      "browser_download_url": "https://github.com/getnodalia/vortia/releases/download/v0.6.0/Vortia-0.6.0-macos-arm64.dmg"
+     },
+     {
+      "name": "Vortia-0.6.0-macos-arm64.dmg.sha256",
+      "size": 95,
+      "browser_download_url": "https://github.com/getnodalia/vortia/releases/download/v0.6.0/Vortia-0.6.0-macos-arm64.dmg.sha256"
+     }
+    ]
    }
   ]
  }
