@@ -38,6 +38,7 @@
 .accent-green{--accent:#5fd9a1;--accent-rgb:95,217,161}
 .accent-orange{--accent:#ff9a57;--accent-rgb:255,154,87}
 .accent-azure{--accent:#6cb6ec;--accent-rgb:108,182,236}
+.accent-emerald{--accent:#4fcf7d;--accent-rgb:79,207,125}
 
 /* ---------- Base ---------- */
 *,*::before,*::after{box-sizing:border-box}
@@ -188,6 +189,7 @@ html:not(.js) .scroll-progress{display:none}
 .product-card--forja{--card-rgb:232,166,111}
 .product-card--pluma{--card-rgb:255,154,87}
 .product-card--letra{--card-rgb:108,182,236}
+.product-card--celdas{--card-rgb:79,207,125}
 /* An odd product out spans the row, its screenshot beside the text instead of below it. */
 @media(min-width:861px){
   .product-grid>.product-card:last-child:nth-child(odd){grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);grid-template-rows:1fr auto;min-height:440px}
@@ -803,6 +805,17 @@ html:not(.js) .scroll-progress{display:none}
 @keyframes caret-blink{50%{opacity:0}}
 @media (prefers-reduced-motion:reduce){.js .typed-text,.js .typed-caret{animation:none}}
 
+/* Celdas: a selected cell with its fill handle, and the formula that fills it. */
+.sig-cell{position:relative}
+.sig-cell .product-preview{z-index:0}
+.cell-pick{position:absolute;left:58%;top:38%;width:96px;height:30px;border:2px solid var(--accent);border-radius:3px;pointer-events:none;z-index:1}
+.cell-pick::after{content:"";position:absolute;right:-5px;bottom:-5px;width:8px;height:8px;background:var(--accent);border:2px solid var(--island)}
+.js .cell-pick{animation:cell-pick-in .6s cubic-bezier(.2,.8,.2,1) .5s both}
+.formula-chip{position:absolute;left:-14px;bottom:-22px;z-index:1;display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:14px;background:var(--island);border:1px solid rgba(255,255,255,.08);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:19px;color:var(--ink);pointer-events:none}
+.formula-chip b{font-family:var(--display);font-style:italic;color:var(--accent)}
+@keyframes cell-pick-in{from{opacity:0;transform:scale(1.25)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.js .cell-pick{animation:none}}
+
 /* Forja: the crosshair and pickbox of a drafting canvas, resting over the screenshot. */
 .sig-crosshair{position:relative}
 .crosshair{position:absolute;left:62%;top:46%;width:0;height:0;pointer-events:none}
@@ -1076,6 +1089,11 @@ a.soon-card--released .i{color:var(--ink)}
 .scroll-story--letra .story-stage{background:#11131a}
 .story-letra-review{clip-path:inset(calc((1 - var(--story-b))*100%) 0 0)}
 .story-letra-light{clip-path:inset(0 0 0 calc((1 - var(--story-cut))*100%))}
+
+/* Celdas: the dashboard in the dark theme, the Formulas tab rising over it, then the light theme wiping in. */
+.scroll-story--celdas .story-stage{background:#0f1411}
+.story-celdas-formulas{clip-path:inset(calc((1 - var(--story-b))*100%) 0 0)}
+.story-celdas-light{clip-path:inset(0 0 0 calc((1 - var(--story-cut))*100%))}
 
 /* Nodalix: retain the desktop as the spatial reference for both panels. */
 .scroll-story--nodalix .story-stage{background:#0d1020}

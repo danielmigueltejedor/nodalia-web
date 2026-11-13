@@ -71,6 +71,15 @@ const stories = {
     ],
     next: 'funciones',
   },
+  celdas: {
+    title: 'De los datos a la respuesta.',
+    chapters: [
+      ['Organiza', 'Tablas con estilo, filtros, formato condicional y gráficos que siguen a los datos.'],
+      ['Calcula', 'Cientos de funciones, matrices dinámicas y tablas dinámicas para responder preguntas.'],
+      ['Trabaja a tu manera', 'Cambia al tema claro o a otro idioma sin cerrar el libro.'],
+    ],
+    next: 'funciones',
+  },
   nodalix: {
     title: 'Del escritorio a los ajustes.',
     chapters: [
@@ -115,6 +124,7 @@ export function scrollStory(id, apps, { e, safeUrl }) {
     forja: () => `<div class="story-drafting">${screenshot(0, 'story-forja-model')}<span class="story-forja-cursor"></span>${screenshot(1, 'story-forja-layout')}${screenshot(2, 'story-forja-light')}</div>`,
     pluma: () => `<div class="story-artboard">${screenshot(0, 'story-pluma-dark')}${screenshot(2, 'story-pluma-shapes')}${screenshot(1, 'story-pluma-light')}</div>`,
     letra: () => `<div class="story-artboard">${screenshot(0, 'story-letra-dark')}${screenshot(2, 'story-letra-review')}${screenshot(1, 'story-letra-light')}</div>`,
+    celdas: () => `<div class="story-artboard">${screenshot(0, 'story-celdas-dark')}${screenshot(2, 'story-celdas-formulas')}${screenshot(1, 'story-celdas-light')}</div>`,
     nodalix: () => `<div class="story-monitor">${screenshot(0, 'story-desktop')}${screenshot(1, 'story-settings')}
       <span class="story-system-cursor"></span>${screenshot(2, 'story-updates')}</div>`,
   };
