@@ -102,5 +102,7 @@
  "DXF",
  "PDF",
  "Linux · macOS (Universal) · Windows · FreeBSD",
- "x86_64 · ARM64 · RISC-V (Linux)"
+ "x86_64 · ARM64 · RISC-V (Linux)",
+ "macOS · Qt",
+ "macOS · Vortia Native"
 ]

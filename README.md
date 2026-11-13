@@ -87,7 +87,7 @@ Los despliegues automáticos se ejecutan solamente después de superar las prueb
 
 ## Vortia: descargas por sistema operativo
 
-La web `getnodalia.com/vortia/` identifica de manera orientativa el sistema operativo del navegador y ofrece un botón directo con el icono de Linux (AppImage x86_64) o Apple (DMG arm64). La sección de descargas siempre muestra **ambas plataformas**, los tamaños y los checksums SHA-256 que existan en la publicación.
+La web `getnodalia.com/vortia/` identifica de manera orientativa el sistema operativo del navegador y ofrece un botón directo con el icono de Linux (AppImage x86_64) o Apple (DMG arm64 de la aplicación Qt). La sección de descargas siempre muestra **Linux y las dos ediciones de macOS** (la aplicación Qt y Vortia Native, cuyo archivo lleva `-native-` en el nombre), los tamaños y los checksums SHA-256 que existan en la publicación.
 
 `assets/vortia-download.js` consulta `https://api.github.com/repos/getnodalia/vortia/releases/latest` para mostrar los instaladores de la última publicación estable, sin cambiar el sitio cada vez que se publica Vortia. En caso de error de red o límite de la API, usa la versión con la que se generó la página y avisa de que puede no ser la más reciente.
 

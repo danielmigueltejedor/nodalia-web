@@ -55,7 +55,7 @@
       ],
       [
         "Instaladores que abren a la primera",
-        "AppImage probada en nueve distribuciones Linux y DMG para macOS, cada uno con su suma SHA-256."
+        "AppImage probada en nueve distribuciones Linux y dos DMG para macOS, la aplicación Qt y Vortia Native, cada uno con su suma SHA-256."
       ]
     ],
     "flow": [
@@ -87,7 +87,7 @@
       ],
       [
         "Instaladores",
-        "AppImage (Linux x86_64) · DMG (macOS arm64)"
+        "AppImage (Linux x86_64) · DMG Qt y DMG Vortia Native (macOS arm64)"
       ],
       [
         "Motor de cálculo",
@@ -118,6 +118,10 @@
       [
         "¿Qué queda fuera?",
         "LES y DES, transferencia de calor, multifase, combustión, mallas móviles y geometría 3D general con mallado automático de volumen. El flujo compresible para toberas es experimental y no está disponible en la AppImage de Linux."
+      ],
+      [
+        "¿Qué es Vortia Native?",
+        "Una segunda edición para macOS, escrita en SwiftUI, que usa el motor de casos de Vortia sin interfaz. Añade el resultado en 3D, el flujo compresible con contorno y toberas, y el informe de ingeniería. Se instala con su propio DMG, junto al de la aplicación Qt."
       ],
       [
         "¿Funciona en Windows o en Mac con Intel?",
@@ -287,7 +291,7 @@
     "id": "lienzo",
     "name": "Lienzo",
     "category": "Creatividad",
-    "status": "Primeras versiones · 0.3.0 para Linux, macOS y Windows",
+    "status": "Primeras versiones · 0.3.1 para Linux, macOS y Windows",
     "statusKind": "early",
     "eyebrow": "Edición de imagen",
     "headline": "Tu espacio para crear, capa a capa.",
@@ -366,7 +370,7 @@
     "faq": [
       [
         "¿Dónde lo descargo?",
-        "En esta página: el botón principal ofrece el paquete para tu sistema desde la última versión publicada en GitHub. La versión 0.3.0 está disponible para Linux x86_64, macOS (Apple Silicon e Intel) y Windows x64."
+        "En esta página: el botón principal ofrece el paquete para tu sistema desde la última versión publicada en GitHub. La versión 0.3.1 está disponible para Linux x86_64, macOS (Apple Silicon e Intel) y Windows x64."
       ],
       [
         "¿Hay versión para macOS o Windows?",

@@ -430,7 +430,7 @@ html:not(.js) .scroll-progress{display:none}
 .vortia-version-info .kicker{font-size:11px}
 .vortia-version-info strong{font-family:var(--display);font-size:30px;font-weight:620;letter-spacing:-.03em}
 .vortia-version-info>span:last-child{font-size:13px;line-height:1.55;color:var(--muted)}
-.vortia-download-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.vortia-download-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
 .vortia-package{display:flex;flex-direction:column;min-width:0;padding:30px;border:1px solid var(--line);border-radius:22px;background:var(--surface);transition:border-color .25s}
 .vortia-package:hover{border-color:rgba(var(--accent-rgb),.4)}
 .vortia-package-head{display:flex;align-items:center;gap:16px;margin-bottom:18px}

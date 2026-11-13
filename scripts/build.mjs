@@ -441,8 +441,9 @@ function vortiaDownloads() {
   const assets = release?.assets || [];
   const find = (re) => assets.find((asset) => re.test(asset.name)) || null;
   const linux = find(/^Vortia-.+-linux-(x86_64|amd64)\.AppImage$/i);
-  const macAssets = assets.filter((asset) => /^Vortia-.+-macos-(arm64|aarch64|universal)\.dmg$/i.test(asset.name));
+  const macAssets = assets.filter((asset) => /^Vortia-(?!.*-native-).+-macos-(arm64|aarch64|universal)\.dmg$/i.test(asset.name));
   const mac = macAssets.find((asset) => /universal/i.test(asset.name)) || macAssets[0] || null;
+  const macNative = find(/^Vortia-.+-native-macos-(arm64|aarch64|universal)\.dmg$/i);
   const sha = (asset) => (asset ? assets.find((item) => item.name === `${asset.name}.sha256`) || null : null);
   const page = release?.html_url || 'https://github.com/getnodalia/vortia/releases';
   const size = (asset) => (asset?.size ? `${(asset.size / 1e6).toLocaleString('es', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} MB` : '');
@@ -453,7 +454,7 @@ function vortiaDownloads() {
     <div class="container">
       <div class="vortia-download-head">
         <div><h2>Descarga Vortia.</h2>
-          <p>El botón superior selecciona automáticamente Linux o macOS. También puedes elegir un paquete manualmente y comprobar su integridad con SHA-256.</p>
+          <p>El botón superior selecciona automáticamente Linux o macOS. También puedes elegir un paquete manualmente, incluida la edición Vortia Native para macOS, y comprobar su integridad con SHA-256.</p>
         </div>
         <div class="vortia-version-info" data-reveal="right">
           <span class="kicker">Última publicación estable</span>
@@ -471,10 +472,17 @@ function vortiaDownloads() {
         </article>
         <article class="vortia-package" data-reveal data-platform="mac">
           <div class="vortia-package-head"><img src="/platform-apple.svg" alt="" width="38" height="38"/>
-            <div><h3>macOS</h3><p>DMG · Apple Silicon (arm64)</p></div>
+            <div><h3>macOS · Qt</h3><p>DMG · Apple Silicon (arm64)</p></div>
           </div>
           <p class="vortia-package-desc">Para Macs con Apple Silicon y macOS 14 o posterior. Incluye OpenFOAM y el mallador. No es compatible con Macs Intel.</p>
           ${option('mac', mac, 'DMG')}
+        </article>
+        <article class="vortia-package" data-reveal data-platform="mac">
+          <div class="vortia-package-head"><img src="/platform-apple.svg" alt="" width="38" height="38"/>
+            <div><h3>macOS · Vortia Native</h3><p>DMG · Apple Silicon (arm64)</p></div>
+          </div>
+          <p class="vortia-package-desc">Edición con interfaz nativa de macOS en SwiftUI: resultado en 3D, flujo compresible con contorno e informe de ingeniería. Incluye Liquid Glass en macOS 26 o posterior.</p>
+          ${option('macnative', macNative, 'DMG')}
         </article>
       </div>
       <div class="vortia-download-footer">
