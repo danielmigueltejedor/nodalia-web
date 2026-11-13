@@ -651,12 +651,12 @@
     "id": "brujula",
     "name": "Brújula",
     "category": "Navegador",
-    "status": "Primera versión · solo Linux",
+    "status": "Versión 0.2 · solo Linux",
     "statusKind": "early",
     "eyebrow": "El navegador de Nodalix",
     "headline": "Navega rápido, seguro y a tu manera.",
     "tagline": "Tu rumbo en la web.",
-    "description": "Un navegador nativo hecho con Rust, GTK4 y WebKit en el lenguaje de diseño de Nodalia. Pestañas verticales, bloqueador de anuncios propio y compatible con extensiones de Chromium.",
+    "description": "Un navegador nativo hecho con Rust, GTK4 y WebKit en el lenguaje de diseño de Nodalia. Pestañas verticales, bloqueador de anuncios propio, contraseñas cifradas y compatible con extensiones de Chromium.",
     "platforms": "Linux · GTK 4.20 o más · WebKitGTK 6.0",
     "technology": "Rust · GTK4 · WebKitGTK · Nodalia Design",
     "license": "GPL-3.0",
@@ -674,6 +674,14 @@
       [
         "docs/screenshots/extensions.webp",
         "Extensiones de Chromium instaladas, con los permisos que piden"
+      ],
+      [
+        "docs/screenshots/passwords.webp",
+        "Preferencias de contraseñas: bóveda desbloqueada con los inicios de sesión guardados"
+      ],
+      [
+        "docs/screenshots/webapps.webp",
+        "Aplicaciones web: crear un sitio como aplicación desde las preferencias"
       ]
     ],
     "features": [
@@ -700,6 +708,18 @@
       [
         "Rápido y ligero",
         "Las pestañas que no usas se duermen y se archivan solas, con vista dividida, Peek, ventana flotante y notas por espacio."
+      ],
+      [
+        "Contraseñas cifradas",
+        "Una contraseña maestra protege la bóveda (Argon2id y XChaCha20-Poly1305). Brújula pregunta antes de guardar y solo rellena en el sitio exacto, cuando tocas el campo."
+      ],
+      [
+        "Aplicaciones web",
+        "Cualquier sitio en su propia ventana, con su icono en el lanzador, el bloqueador y un perfil aparte. Desde el menú o las preferencias."
+      ],
+      [
+        "Historial y ventana privada",
+        "Historial local que borras por horas o entero. La ventana privada (Ctrl+Mayús+N) no guarda historial, cookies, pestañas ni contraseñas."
       ]
     ],
     "specs": [
@@ -740,7 +760,7 @@
       ],
       [
         "¿Tiene gestor de contraseñas, historial o modo privado?",
-        "Todavía no. Es la primera versión: esas funciones están previstas, pero hoy no existen."
+        "Sí, desde la 0.2. Las contraseñas se guardan cifradas con una contraseña maestra que solo tú conoces (si la olvidas no se puede recuperar) y no se sincronizan. El historial es local y se borra cuando quieras, y la ventana privada no guarda nada."
       ],
       [
         "¿Puedo sincronizar mis marcadores y ajustes?",
@@ -748,10 +768,14 @@
       ],
       [
         "¿Hay versión para Windows o macOS?",
-        "No. La 0.1.0 es solo para Linux: hay una AppImage para x86_64 y un PKGBUILD para compilarla en Arch."
+        "No. Es solo para Linux: hay una AppImage para x86_64 y un PKGBUILD para compilarla en Arch."
+      ],
+      [
+        "¿Puedo convertir una web en una aplicación?",
+        "Sí. Desde el menú, «Instalar como aplicación web…», o desde las preferencias. Se abre en su propia ventana, con icono en el lanzador y perfil aparte."
       ]
     ],
-    "limitation": "Primera versión solo para Linux. La AppImage es para x86_64 y necesita una distribución con una glibc tan reciente como la de Arch (Arch, CachyOS, Nodalix…); en otras se compila desde el código. Sin gestor de contraseñas, historial ni modo privado. Las extensiones de Chromium son compatibles solo en parte y la instalación desde la Chrome Web Store se ha probado hasta el cliente HTTP.",
+    "limitation": "Solo para Linux. La AppImage es para x86_64 y necesita una distribución con una glibc tan reciente como la de Arch (Arch, CachyOS, Nodalix…); en otras se compila desde el código. Las contraseñas no se rellenan dentro de iframes ni en algunas aplicaciones de una sola página, y aún no se importan de otros navegadores. Las extensiones de Chromium son compatibles solo en parte y la instalación desde la Chrome Web Store se ha probado hasta el cliente HTTP.",
     "downloads": {
       "linux": "^Brujula-.+-x86_64\\.AppImage$"
     },
@@ -780,6 +804,14 @@
       [
         "Archivo y sueño",
         "Pestañas sin usar archivadas o dormidas para ahorrar memoria"
+      ],
+      [
+        "Contraseñas",
+        "Bóveda cifrada con Argon2id y XChaCha20-Poly1305; solo se rellena en el sitio exacto"
+      ],
+      [
+        "Aplicaciones web",
+        "Cada sitio en su ventana, con su lanzador y un perfil aparte"
       ]
     ]
   }
