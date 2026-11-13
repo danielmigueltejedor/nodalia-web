@@ -1082,3 +1082,133 @@ a.soon-card--released .i{color:var(--ink)}
   .story-active .story-stage{max-height:34svh}
   .story-active .story-pin{padding-block:14px}
 }
+
+/* ==========================================================================
+   Nodalia Design: islas redondeadas, tipografía en negrita, movimiento ligado al scroll.
+   Superficies planas y tintes sólidos; sin degradados ni halos.
+   ========================================================================== */
+:root{--radius:20px;--radius-sm:12px;--island:var(--surface);--island-line:rgba(255,255,255,.07)}
+h1,h2,h3{font-weight:700}
+.section h2,.section-head h2{font-size:clamp(34px,4.4vw,60px);letter-spacing:-.045em}
+.btn{border-radius:14px;font-weight:650;min-height:48px;padding:12px 22px}
+.btn-secondary{background:var(--surface-2);border-color:transparent}
+.btn-secondary:hover{background:#1f2330;border-color:transparent}
+.tag{border-radius:999px}
+
+/* Islas */
+.eco-card,.author-card,.spec-card,.download-panel,.vortia-package,.product-preview,.table-wrap,.cta-box{border-radius:28px;border-color:var(--island-line);background:var(--island)}
+.more-card,.soon-card{border-radius:20px;border-color:var(--island-line);background:var(--island);transition:background .25s,transform .35s var(--ease)}
+.more-card:hover,.soon-card:hover{background:var(--surface-2)}
+.faq-item{border-radius:18px;border-color:var(--island-line);background:var(--island)}
+.chip,.pill{border-radius:999px;border-color:transparent;background:var(--surface-2)}
+.code{border-radius:18px}
+
+/* Portada: titular centrado y escaparate de capturas */
+.home-hero{padding-top:104px;overflow:visible}
+.hero-center{display:flex;flex-direction:column;align-items:center;text-align:center}
+.hero-center .hero-title{max-width:980px;font-size:clamp(46px,7.6vw,108px);font-weight:700;line-height:.98;letter-spacing:-.055em}
+.hero-center .hero-lead{max-width:640px;margin-top:30px;font-size:clamp(17px,1.5vw,20px)}
+.hero-center .actions{justify-content:center;margin-top:38px}
+
+.hero-stage.showcase{height:auto;max-width:none}
+.showcase{--tilt:0;margin:72px 0 0;padding:10px;border:1px solid var(--island-line);border-radius:32px;background:var(--island);transform:perspective(1800px) rotateX(calc(var(--tilt)*16deg)) scale(calc(1 - var(--tilt)*.07));transform-origin:50% 0;will-change:transform}
+.showcase-tabs{display:flex;justify-content:center;gap:4px;padding:4px 4px 12px;overflow-x:auto;scrollbar-width:none}
+.showcase-tabs::-webkit-scrollbar{display:none}
+.showcase-tab{position:relative;display:inline-flex;align-items:center;gap:10px;flex:none;padding:10px 16px 12px;border:0;border-radius:14px;background:none;color:var(--muted);font:inherit;font-size:14px;font-weight:650;cursor:pointer;transition:background .25s,color .25s}
+.showcase-tab:hover{color:var(--ink);background:rgba(255,255,255,.04)}
+.showcase-tab[aria-selected="true"]{color:var(--ink);background:var(--surface-2)}
+.showcase-tab img{width:24px;height:24px;object-fit:contain}
+.showcase-progress{position:absolute;left:16px;right:16px;bottom:5px;height:2px;border-radius:2px;background:rgb(var(--tab-rgb));transform:scaleX(var(--p,0));transform-origin:left;opacity:0;transition:opacity .25s}
+.showcase-tab[aria-selected="true"] .showcase-progress{opacity:1}
+.showcase-tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;border-radius:14px}
+.showcase-frame{position:relative;aspect-ratio:16/10;overflow:hidden;border-radius:24px;background:var(--bg-2)}
+.showcase .shot{position:absolute;inset:0;top:0;right:0;bottom:0;left:0;width:auto;height:auto;margin:0;border:0;border-radius:0;box-shadow:none;opacity:0;transform:scale(1.035);transition:opacity .8s var(--ease),transform 1.4s var(--ease);animation:none}
+.showcase .shot.is-active{opacity:1;transform:none}
+.showcase .shot img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.showcase .shot figcaption{position:absolute;left:16px;right:16px;bottom:16px;display:flex;align-items:center;gap:14px;padding:12px 14px 12px 18px;border:0;border-radius:18px;background:rgba(10,11,16,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);font-family:var(--sans);font-size:14px;color:var(--muted);transform:translateY(12px);opacity:0;transition:opacity .6s .25s var(--ease),transform .6s .25s var(--ease)}
+.showcase .shot.is-active figcaption{opacity:1;transform:none}
+.showcase .shot figcaption>span{font-weight:700;color:var(--ink)}
+.showcase-link{display:inline-flex;align-items:center;gap:6px;margin-left:auto;padding:8px 14px;border-radius:12px;background:var(--ink);color:#0c0d13;font-weight:650;white-space:nowrap;transition:background .2s}
+.showcase-link:hover{background:#fff}
+.showcase-link .i{width:15px;height:15px}
+
+/* Productos: tarjetas que se apilan al hacer scroll */
+.product-card--vortia{--card-rgb:90,169,255}
+.product-grid[data-stack]{display:flex;flex-direction:column;gap:32px}
+.product-grid[data-stack]>.product-card{--under:0;position:sticky;top:calc(var(--bar) + 32px);display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);grid-template-rows:1fr auto;min-height:540px;border:0;border-radius:32px;background:color-mix(in srgb,rgb(var(--card-rgb)) 10%,var(--surface));transform:scale(calc(1 - var(--under)*.05));transform-origin:50% 0;filter:brightness(calc(1 - var(--under)*.45));will-change:transform}
+.product-grid[data-stack]>.product-card:hover{border:0}
+.product-grid[data-stack] .product-card-inner{grid-area:1/1;padding:44px 44px 0}
+.product-grid[data-stack] .product-card h3{margin:40px 0 16px;font-size:clamp(30px,3.2vw,46px);letter-spacing:-.045em}
+.product-grid[data-stack] .product-card p{font-size:16px}
+.product-grid[data-stack] .product-card-image{grid-area:1/2/3/3;align-items:stretch;min-height:0;margin:0;padding:40px 0 0 8px}
+.product-grid[data-stack] .product-card-image img.screen{width:100%;height:100%;min-height:420px;border:0;border-radius:20px 0 0 0;object-position:top left;transform:none;box-shadow:none}
+.product-grid[data-stack] .product-card-bottom{grid-area:2/1;padding:22px 44px 36px;border:0;background:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.product-grid[data-stack] .product-card-bottom>span:first-child{font-size:13px;color:var(--soft)}
+.product-grid[data-stack] .product-card-bottom .view{padding:10px 16px;border-radius:12px;background:var(--ink);color:#0c0d13}
+.product-grid[data-stack] .card-icon{width:52px;height:52px}
+.product-grid[data-stack] .product-id strong{font-size:18px}
+.product-grid[data-stack] .cover-link:focus-visible{border-radius:32px}
+
+/* Principios: la fila que está en el centro de la ventana se ilumina */
+.js .principles li[data-focus]{opacity:calc(.28 + var(--focus,1)*.72);transition:opacity .2s linear}
+.principles h3{font-size:clamp(30px,4vw,56px)}
+
+/* Home Assistant: la cifra, en grande */
+.eco-art b{font-variant-numeric:tabular-nums;font-weight:700}
+
+/* Funciones de cada app: islas en cuadrícula */
+.feature-grid{gap:16px}
+.feature,.feature:hover{padding:30px 28px;border:1px solid var(--island-line);border-radius:24px;background:var(--island)}
+.feature{transition:background .25s,transform .35s var(--ease)}
+.feature:hover{background:var(--surface-2);transform:translateY(-3px)}
+.feature h3{font-size:21px;margin-bottom:10px}
+.gallery figure{border-radius:24px;overflow:hidden}
+.gallery img{border-radius:20px}
+
+/* Apoyar Nodalia */
+.support-card{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:32px;padding:40px 44px;border-radius:32px;background:color-mix(in srgb,#ffd84d 8%,var(--surface))}
+.support-icon{display:grid;place-items:center;width:76px;height:76px;border-radius:22px;background:#ffd84d;color:#1a1408}
+.support-icon .i{width:40px;height:40px}
+.support-copy h2{font-size:clamp(28px,3vw,40px)}
+.support-copy p{margin-top:10px;font-size:17px;max-width:620px}
+.btn-coffee{background:#ffd84d;color:#1a1408}
+.btn-coffee:hover{background:#ffe27a}
+.btn-coffee .i{width:18px;height:18px}
+.section.support{padding-top:24px}
+
+/* Entradas: un poco más de recorrido, sin desenfoque */
+.js [data-reveal]{transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+
+@media(max-width:860px){
+  .home-hero{padding-top:64px}
+  .showcase{margin-top:48px;padding:8px;border-radius:24px}
+  .showcase-tabs{justify-content:flex-start}
+  .showcase-frame{aspect-ratio:4/3;border-radius:18px}
+  .showcase .shot figcaption{left:10px;right:10px;bottom:10px;padding:10px 10px 10px 14px;font-size:13px}
+  .showcase .shot figcaption{display:flex}
+  .product-grid[data-stack]{gap:16px}
+  .product-grid[data-stack]>.product-card{position:relative;top:auto;grid-template-columns:1fr;grid-template-rows:auto auto auto;min-height:0;transform:none;filter:none;border-radius:26px}
+  .product-grid[data-stack] .product-card-inner{grid-area:auto;padding:28px 26px 0}
+  .product-grid[data-stack] .product-card h3{margin-top:24px;font-size:28px}
+  .product-grid[data-stack] .product-card-image{grid-area:auto;padding:28px 0 0 26px}
+  .product-grid[data-stack] .product-card-image img.screen{min-height:0;height:240px}
+  .product-grid[data-stack] .product-card-bottom{grid-area:auto;padding:18px 26px 24px}
+  .support-card{grid-template-columns:1fr;gap:20px;padding:30px 26px}
+}
+@media(max-width:600px){
+  .hero-center .hero-title{font-size:clamp(40px,12vw,60px)}
+  .showcase-tab{padding:9px 12px 11px}
+  .showcase-tab span{display:none}
+  .showcase-tab[aria-selected="true"] span{display:inline}
+  .showcase .shot figcaption{font-size:0;gap:0}
+  .showcase .shot figcaption>span{font-size:14px}
+  .showcase-link{font-size:13px}
+  .product-grid[data-stack] .product-card-bottom>span:first-child{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .showcase,.product-grid[data-stack]>.product-card{transform:none!important;filter:none!important}
+  .product-grid[data-stack]>.product-card{position:relative;top:auto}
+}
+.section.support{border-top:0}
+.home-hero{padding-bottom:96px}
+@media(max-width:860px){.home-hero{padding-bottom:56px}}
