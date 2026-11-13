@@ -9,7 +9,7 @@ on:
   # Rebuild so the static pages carry the latest releases of every app. The pages also ask
   # GitHub in the browser, so a new release shows at once; this keeps the HTML itself current.
   schedule:
-    - cron: '17 */3 * * *'
+    - cron: '7,37 * * * *'
   # An app's release workflow can trigger it straight away (event type: app-released).
   repository_dispatch:
     types: [app-released]
@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-      - uses: useblacksmith/checkout@2b9fe87d796feea153b455ec2f3125b471a7b0e7 # v1
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
