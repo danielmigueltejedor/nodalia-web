@@ -48,8 +48,17 @@ const stories = {
     title: 'Del primer trazo al plano impreso.',
     chapters: [
       ['Dibuja desde la línea de comandos', 'Escribe una orden, marca dos puntos y sigue con coordenadas relativas o polares.'],
-      ['Lleva el plano al papel', 'Una presentación coloca el dibujo a escala en la hoja y lo traza en PDF.'],
+      ['Empieza desde Inicio', 'Dibujos nuevos en pulgadas o milímetros, un ejemplo y los recientes, en el Inicio que comparten las aplicaciones de ingeniería.'],
       ['Trabaja a tu manera', 'Cambia al tema claro o a otro idioma sin cerrar el dibujo.'],
+    ],
+    next: 'funciones',
+  },
+  torno: {
+    title: 'Del boceto a la pieza.',
+    chapters: [
+      ['Modela', 'Boceta con restricciones, extruye y revoluciona; cada paso queda en la línea de tiempo.'],
+      ['Empieza con un ejemplo', 'Inicio reúne los diseños nuevos, los recientes y piezas de ejemplo listas para abrir.'],
+      ['Trabaja a tu manera', 'Cambia al tema claro o a otro idioma sin cerrar el diseño.'],
     ],
     next: 'funciones',
   },
@@ -57,7 +66,7 @@ const stories = {
     title: 'De la primera curva al cartel.',
     chapters: [
       ['Dibuja en la mesa de trabajo', 'Trazos, formas, texto y degradados sobre una o varias mesas de trabajo.'],
-      ['Combina formas', 'Une, resta e interseca formas con Buscatrazos para construir piezas nuevas.'],
+      ['Empieza desde Inicio', 'Tus archivos recientes y los tamaños más habituales para empezar uno nuevo.'],
       ['Trabaja a tu manera', 'Cambia al tema claro o a otro idioma sin cerrar el documento.'],
     ],
     next: 'funciones',
@@ -66,7 +75,7 @@ const stories = {
     title: 'De la primera línea al documento.',
     chapters: [
       ['Escribe', 'Texto, estilos, listas, tablas e imágenes, con la cinta siempre a mano.'],
-      ['Revisa', 'Ortografía, comentarios y control de cambios para trabajar con otras personas.'],
+      ['Ajusta', 'Elige el tema, los controles de ventana, el idioma y el tamaño de la interfaz en Preferencias.'],
       ['Trabaja a tu manera', 'Cambia al tema claro o a otro idioma sin cerrar el documento.'],
     ],
     next: 'funciones',
@@ -75,7 +84,7 @@ const stories = {
     title: 'De los datos a la respuesta.',
     chapters: [
       ['Organiza', 'Tablas con estilo, filtros, formato condicional y gráficos que siguen a los datos.'],
-      ['Calcula', 'Cientos de funciones, matrices dinámicas y tablas dinámicas para responder preguntas.'],
+      ['Empieza desde Inicio', 'Un libro en blanco, plantillas listas para usar y tus libros recientes.'],
       ['Trabaja a tu manera', 'Cambia al tema claro o a otro idioma sin cerrar el libro.'],
     ],
     next: 'funciones',
@@ -130,10 +139,11 @@ export function scrollStory(id, apps, { e, safeUrl }) {
       <div class="story-print-proof">${picture(app, 0)}</div><div class="story-print-edge"></div>
     </div><canvas class="story-curve" data-story-canvas="curve"></canvas>
       ${screenshot(1, 'story-lienzo-curves')}`,
-    forja: () => `<div class="story-drafting">${screenshot(0, 'story-forja-model')}<span class="story-forja-cursor"></span>${screenshot(1, 'story-forja-layout')}${screenshot(2, 'story-forja-light')}</div>`,
-    pluma: () => `<div class="story-artboard">${screenshot(0, 'story-pluma-dark')}${screenshot(2, 'story-pluma-shapes')}${screenshot(1, 'story-pluma-light')}</div>`,
-    letra: () => `<div class="story-artboard">${screenshot(0, 'story-letra-dark')}${screenshot(2, 'story-letra-review')}${screenshot(1, 'story-letra-light')}</div>`,
-    celdas: () => `<div class="story-artboard">${screenshot(0, 'story-celdas-dark')}${screenshot(2, 'story-celdas-formulas')}${screenshot(1, 'story-celdas-light')}</div>`,
+    forja: () => `<div class="story-drafting">${screenshot(0, 'story-forja-model')}<span class="story-forja-cursor"></span>${screenshot(1, 'story-forja-home')}${screenshot(2, 'story-forja-light')}</div>`,
+    torno: () => `<div class="story-artboard">${screenshot(0, 'story-torno-dark')}${screenshot(2, 'story-torno-home')}${screenshot(1, 'story-torno-light')}</div>`,
+    pluma: () => `<div class="story-artboard">${screenshot(0, 'story-pluma-dark')}${screenshot(2, 'story-pluma-home')}${screenshot(1, 'story-pluma-light')}</div>`,
+    letra: () => `<div class="story-artboard">${screenshot(0, 'story-letra-dark')}${screenshot(2, 'story-letra-prefs')}${screenshot(1, 'story-letra-light')}</div>`,
+    celdas: () => `<div class="story-artboard">${screenshot(0, 'story-celdas-dark')}${screenshot(2, 'story-celdas-home')}${screenshot(1, 'story-celdas-light')}</div>`,
     lamina: () => `<div class="story-artboard">${screenshot(0, 'story-lamina-dark')}${screenshot(2, 'story-lamina-prefs')}${screenshot(1, 'story-lamina-light')}</div>`,
     nodalix: () => `<div class="story-monitor">${screenshot(0, 'story-desktop')}${screenshot(1, 'story-settings')}
       <span class="story-system-cursor"></span>${screenshot(2, 'story-updates')}</div>`,

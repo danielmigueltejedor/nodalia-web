@@ -100,6 +100,10 @@
       "forja"
     ],
     [
+      "Torno",
+      "torno"
+    ],
+    [
       "Pluma",
       "pluma"
     ],
@@ -176,12 +180,6 @@
         "papel",
         "Editor de documentos PDF",
         "papel"
-      ],
-      [
-        "Torno",
-        "torno",
-        "CAD paramétrico 3D",
-        "torno"
       ],
       [
         "Buzón",

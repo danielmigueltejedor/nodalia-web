@@ -304,16 +304,16 @@
     "icon": "assets/app-icon/hicolor/512x512/apps/dev.danielmiguelt.Lienzo.png",
     "previews": [
       [
-        "/screens/lienzo/lienzo-demo.jpg",
-        "Lienzo con capas de ajuste sobre «La gran ola», en el tema oscuro"
+        "/screens/lienzo/lienzo-editor-dark.jpg",
+        "Lienzo con capas de ajuste de intensidad y curvas sobre «La gran ola», en el tema oscuro"
       ],
       [
-        "/screens/lienzo/lienzo-adjustments.jpg",
-        "Capa de ajuste de curvas sobre «La gran ola», con el panel de propiedades"
+        "/screens/lienzo/lienzo-editor-light.jpg",
+        "La misma imagen en el tema claro, con el panel de propiedades de curvas"
       ],
       [
-        "/screens/lienzo/lienzo-light.jpg",
-        "Lienzo en el tema claro, elegido en Preferencias"
+        "/screens/lienzo/lienzo-home-dark.jpg",
+        "Inicio de Lienzo, compartido con las aplicaciones creativas de Nodalia"
       ]
     ],
     "features": [
@@ -418,16 +418,16 @@
     "icon": "assets/app-icon/hicolor/512x512/apps/dev.danielmiguelt.Forja.png",
     "previews": [
       [
-        "docs/images/ui-apartment.png",
-        "Plano de una vivienda en Forja, con capas, cotas y tabla de estancias"
+        "/screens/forja/forja-dark.jpg",
+        "Plano de una pieza en Forja, en el tema oscuro, con la barra de título compartida de las aplicaciones de ingeniería de Nodalia"
       ],
       [
-        "docs/images/ui-layout.png",
-        "Presentación en espacio papel con una ventana gráfica a escala"
+        "/screens/forja/forja-home-light.jpg",
+        "Inicio de Forja: dibujos nuevos en pulgadas o milímetros, un ejemplo y los recientes"
       ],
       [
-        "docs/images/ui-bracket.png",
-        "Pieza con vistas, cotas, sección sombreada y cajetín, en el tema claro"
+        "/screens/forja/forja-light.jpg",
+        "El mismo plano en el tema claro, elegido en Preferencias"
       ]
     ],
     "features": [
@@ -539,8 +539,8 @@
         "El mismo cartel en el tema claro, elegido en Preferencias"
       ],
       [
-        "/screens/pluma/pluma-pathfinder.jpg",
-        "Formas combinadas con Buscatrazos, dibujadas en Pluma"
+        "/screens/pluma/pluma-home-light.jpg",
+        "Inicio de Pluma: archivos recientes y tamaños para empezar un archivo nuevo"
       ]
     ],
     "features": [
@@ -643,16 +643,16 @@
     "icon": "assets/app-icon/hicolor/512x512/apps/dev.danielmiguelt.Letra.png",
     "previews": [
       [
-        "/screens/letra/letra-home-dark.jpg",
+        "/screens/letra/letra-document-dark.jpg",
         "Un documento abierto en Letra, en el tema oscuro, con la pestaña Inicio de la cinta"
       ],
       [
-        "/screens/letra/letra-home-light.jpg",
+        "/screens/letra/letra-document-light.jpg",
         "El mismo documento en el tema claro, elegido en Preferencias"
       ],
       [
-        "/screens/letra/letra-review-dark.jpg",
-        "La pestaña Revisar: ortografía, comentarios y control de cambios"
+        "/screens/letra/letra-preferences-dark.jpg",
+        "Preferencias de Letra: tema, controles de ventana, idioma y tamaño de la interfaz"
       ]
     ],
     "features": [
@@ -754,16 +754,16 @@
     "icon": "assets/app-icon/hicolor/512x512/apps/dev.danielmiguelt.Celdas.png",
     "previews": [
       [
-        "/screens/celdas/celdas-insert-dark.jpg",
-        "Un panel de ventas trimestrales en Celdas, en el tema oscuro, con la pestaña Insertar de la cinta"
+        "/screens/celdas/celdas-dashboard-dark.jpg",
+        "Un panel de ventas trimestrales en Celdas, en el tema oscuro, con gráficos de barras y de sectores"
       ],
       [
-        "/screens/celdas/celdas-home-light.jpg",
+        "/screens/celdas/celdas-dashboard-light.jpg",
         "El mismo libro en el tema claro, elegido en Preferencias"
       ],
       [
-        "/screens/celdas/celdas-formulas-light.jpg",
-        "La pestaña Fórmulas sobre un libro de notas con promedios y calificaciones"
+        "/screens/celdas/celdas-home-light.jpg",
+        "Inicio de Celdas: un libro en blanco, plantillas y libros recientes"
       ]
     ],
     "features": [
@@ -863,12 +863,12 @@
     "icon": "assets/app-icon/hicolor/512x512/apps/dev.danielmiguelt.Lamina.png",
     "previews": [
       [
-        "/screens/lamina/lamina-home-dark.jpg",
-        "Una presentación abierta en Lámina, en el tema oscuro, con la pestaña Inicio de la cinta"
+        "/screens/lamina/lamina-editor-dark.jpg",
+        "Una presentación abierta en Lámina, en el tema oscuro, con un gráfico de barras en la diapositiva"
       ],
       [
-        "/screens/lamina/lamina-home-light.jpg",
-        "La misma presentación en el tema claro"
+        "/screens/lamina/lamina-editor-light.jpg",
+        "La misma presentación en el tema claro, con un diagrama de formas"
       ],
       [
         "/screens/lamina/lamina-preferences-light.jpg",
@@ -953,6 +953,120 @@
       "windows": "Instalador MSI para Windows de 64 bits con arquitectura x64."
     },
     "otherPackages": "Otros paquetes: .deb, .rpm, .tar.gz y zip portátil de Windows"
+  },
+  {
+    "id": "torno",
+    "name": "Torno",
+    "category": "Diseño técnico",
+    "status": "Primera versión · fase temprana",
+    "statusKind": "early",
+    "eyebrow": "CAD 3D paramétrico",
+    "headline": "Cada pieza, paso a paso.",
+    "tagline": "Modelado 3D paramétrico con una historia que siempre se puede editar.",
+    "description": "Una aplicación CAD 3D paramétrica nativa, escrita en Rust con su propio núcleo de sólidos y el diseño de Nodalia. Bocetas, restringes, extruyes y revolucionas, y cada paso sigue siendo editable en la línea de tiempo.",
+    "platforms": "Linux · macOS (Universal) · Windows",
+    "technology": "Rust · Nodalia Design",
+    "license": "MIT OR Apache-2.0",
+    "repo": "torno",
+    "icon": "docs/nodalia/torno-icon.png",
+    "previews": [
+      [
+        "/screens/torno/torno-dark.jpg",
+        "Una placa con un saliente taladrado en Torno, en el tema oscuro, con el árbol del diseño y la línea de tiempo"
+      ],
+      [
+        "/screens/torno/torno-light.jpg",
+        "La misma pieza en el tema claro, elegido en Preferencias"
+      ],
+      [
+        "/screens/torno/torno-home-dark.jpg",
+        "Inicio de Torno: diseños nuevos en milímetros o pulgadas, recientes y ejemplos para empezar"
+      ]
+    ],
+    "features": [
+      [
+        "Bocetos con restricciones",
+        "Líneas, arcos, splines y texto resueltos por un solucionador de restricciones propio, con cotas que dependen de parámetros."
+      ],
+      [
+        "Operaciones en una línea de tiempo",
+        "Extruir, revolucionar, barrer, solevar, redondear, achaflanar, vaciar, taladrar y repetir en patrón; todo se puede editar después."
+      ],
+      [
+        "Parámetros y configuraciones",
+        "Expresiones con unidades y tablas de configuración para variantes de una misma pieza."
+      ],
+      [
+        "Ensamblajes y chapa",
+        "Uniones, estudios de movimiento, interferencias y propiedades físicas; pestañas, dobladillos y desarrollos de chapa."
+      ],
+      [
+        "Formatos abiertos",
+        "Importa y exporta STEP, IGES, STL, 3MF, OBJ y glTF donde está disponible."
+      ],
+      [
+        "Todo es un comando",
+        "Cada operación se puede automatizar desde la línea de comandos, un canal de control o herramientas MCP para agentes de IA."
+      ]
+    ],
+    "formats": [
+      "STEP",
+      "IGES",
+      "STL",
+      "3MF",
+      "OBJ",
+      "glTF"
+    ],
+    "specs": [
+      [
+        "Licencia",
+        "MIT OR Apache-2.0"
+      ],
+      [
+        "Paquetes",
+        "AppImage · .deb · .rpm (Linux) · DMG universal (macOS) · MSI (Windows)"
+      ],
+      [
+        "Núcleo",
+        "B-rep propio en Rust"
+      ],
+      [
+        "Tecnología",
+        "Rust · Nodalia Design"
+      ]
+    ],
+    "faq": [
+      [
+        "¿Qué tipo de CAD es Torno?",
+        "Un modelador 3D paramétrico: dibujas un boceto con restricciones, lo conviertes en sólido con operaciones y cada paso queda en una línea de tiempo que puedes volver a editar."
+      ],
+      [
+        "¿Puedo abrir piezas de otros programas?",
+        "Sí, a través de formatos de intercambio como STEP e IGES. Torno está empezando: guarda una copia de los diseños importantes."
+      ],
+      [
+        "¿Se puede automatizar?",
+        "Sí. Todo es un comando: la herramienta de línea de comandos, el canal de control y las herramientas MCP hacen lo mismo que la interfaz."
+      ],
+      [
+        "¿En qué sistemas funciona?",
+        "Hay paquetes para Linux (AppImage, .deb y .rpm), un DMG universal para macOS y un instalador MSI para Windows. En macOS la aplicación no está notarizada: la primera vez, haz clic derecho sobre ella y elige Abrir."
+      ]
+    ],
+    "limitation": "Torno está en una fase temprana. Guarda a menudo, conserva una copia de los diseños que importan y cuéntanos lo que falle en el repositorio.",
+    "cta": "Descargar Torno",
+    "accent": "gold",
+    "downloads": {
+      "linux": "^torno-[0-9].*-linux-x86_64\\.AppImage$",
+      "mac": "^torno-[0-9].*-macos-(universal|arm64)\\.dmg$",
+      "windows": "^torno-[0-9].*-windows-x64\\.msi$"
+    },
+    "downloadDescriptions": {
+      "linux": "Archivo ejecutable para distribuciones Linux de 64 bits con arquitectura x86_64.",
+      "mac": "El DMG universal funciona en Macs con Apple Silicon e Intel.",
+      "windows": "Instalador MSI para Windows de 64 bits con arquitectura x64."
+    },
+    "otherPackages": "Otros paquetes: .deb y .rpm para Linux"
   },
   {
     "id": "nodalix",
