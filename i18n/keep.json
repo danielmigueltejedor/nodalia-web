@@ -123,5 +123,12 @@
  "CSV",
  "fx",
  "Lámina",
- "PPTX"
+ "PPTX",
+ "Torno",
+ "STEP",
+ "IGES",
+ "STL",
+ "3MF",
+ "OBJ",
+ "glTF"
 ]
