@@ -304,16 +304,16 @@
     "icon": "assets/app-icon/hicolor/512x512/apps/dev.danielmiguelt.Lienzo.png",
     "previews": [
       [
-        "/screens/lienzo/lienzo-demo.jpg",
-        "Lienzo con capas de ajuste sobre «La gran ola», en el tema oscuro"
+        "/screens/lienzo/lienzo-editor-dark.jpg",
+        "Lienzo con capas de ajuste de intensidad y curvas sobre «La gran ola», en el tema oscuro"
       ],
       [
-        "/screens/lienzo/lienzo-adjustments.jpg",
-        "Capa de ajuste de curvas sobre «La gran ola», con el panel de propiedades"
+        "/screens/lienzo/lienzo-editor-light.jpg",
+        "La misma imagen en el tema claro, con el panel de propiedades de curvas"
       ],
       [
-        "/screens/lienzo/lienzo-light.jpg",
-        "Lienzo en el tema claro, elegido en Preferencias"
+        "/screens/lienzo/lienzo-home-dark.jpg",
+        "Inicio de Lienzo, compartido con las aplicaciones creativas de Nodalia"
       ]
     ],
     "features": [

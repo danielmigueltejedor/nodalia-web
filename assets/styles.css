@@ -1068,7 +1068,7 @@ a.soon-card--released .i{color:var(--ink)}
   box-shadow:0 10px 38px #3b2e2645;
 }
 .story-print-paper,.story-print-proof{position:absolute;inset:0;overflow:hidden;background:#dfd1b6}
-.story-print img{position:absolute;max-width:none;width:219%;height:137.4%;left:-13%;top:-25.6%;object-fit:fill}
+.story-print img{position:absolute;max-width:none;width:265.2%;height:165.7%;left:-15.8%;top:-41.1%;object-fit:fill}
 .story-print-proof{clip-path:inset(0 calc(100% - var(--split)) 0 0)}
 .story-print-proof img{filter:contrast(1.16) saturate(.76) sepia(.18)}
 .story-print-edge{

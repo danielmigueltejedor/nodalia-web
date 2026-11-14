@@ -66,7 +66,7 @@ assert.match(portal,/shot-secondary/);
 assert.match(portal,/product-grid/);
 assert.match(portal,/spotlight/);
 assert.match(portal,/docs\/screenshots\/player\.webp/);
-assert.match(portal,/getnodalia\.com\/lienzo\/screens\/lienzo\/lienzo-demo\.jpg/);
+assert.match(portal,/getnodalia\.com\/lienzo\/screens\/lienzo\/lienzo-editor-dark\.jpg/);
 assert.ok(portal.includes('href="https://github.com/getnodalia/buzon"'), 'Buzón sin enlace a su repositorio');
 assert.doesNotMatch(portal,/floating-chip|art-panel|concept-geometry|window-bar/);
 const iso=await readFile(path.join(root,'dist/portal/nodalix/index.html'),'utf8');
@@ -204,7 +204,7 @@ for (const [id, shots] of [
   }
 }
 const lienzoHtml = await readFile(path.join(root, 'dist/portal/lienzo/index.html'), 'utf8');
-for (const shot of ['lienzo-demo.jpg', 'lienzo-adjustments.jpg', 'lienzo-light.jpg']) {
+for (const shot of ['lienzo-editor-dark.jpg', 'lienzo-editor-light.jpg', 'lienzo-home-dark.jpg']) {
   assert.ok(lienzoHtml.includes(`https://getnodalia.com/lienzo/screens/lienzo/${shot}`), `Lienzo sin ${shot}`);
   assert.ok((await stat(path.join(root, 'dist/portal/lienzo/screens/lienzo', shot))).size > 10000);
 }

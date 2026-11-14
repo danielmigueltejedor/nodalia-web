@@ -33,8 +33,8 @@ for (const site of ['portal', 'brujula', 'vortia', 'vinilo', 'lienzo', 'forja', 
     if (site === 'vortia') assert.match(story, /data-story-canvas="nozzle"/);
     if (site === 'lienzo') {
       assert.match(story, /data-story-canvas="curve"/);
-      assert.match(story, /src="\/lienzo\/screens\/lienzo\/lienzo-demo\.jpg"/);
-      assert.match(story, /src="\/lienzo\/screens\/lienzo\/lienzo-adjustments\.jpg"/);
+      assert.match(story, /src="\/lienzo\/screens\/lienzo\/lienzo-editor-dark\.jpg"/);
+      assert.match(story, /src="\/lienzo\/screens\/lienzo\/lienzo-editor-light\.jpg"/);
     }
     assert.match(page, /type="module" src="\/scroll-story\.js\?v=[0-9a-f]{10}"/);
   }
